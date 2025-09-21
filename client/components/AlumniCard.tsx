@@ -60,7 +60,7 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
             View Profile
           </Button>
           <button onClick={handleToggle} aria-label="Toggle favourite" className="p-2">
-            {isFavourite ? <HeartFill className="h-5 w-5 text-red-600" /> : <Heart className="h-5 w-5 text-slate-500" />}
+            <Heart className={isFavourite ? "h-5 w-5 text-red-600" : "h-5 w-5 text-slate-500"} />
           </button>
         </div>
       </CardContent>
