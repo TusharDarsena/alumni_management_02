@@ -4,6 +4,8 @@ import { Search, ChevronDown } from "lucide-react";
 import { alumniList } from "@/data/mockAlumni";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
+import AlumniCard from "@/components/AlumniCard";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface AlumniFilters {
   searchTerm: string;
@@ -24,16 +26,18 @@ interface AlumniItem {
 
 export default function SearchAlumniPage() {
   const navigate = useNavigate();
-  const [filters, setFilters] = useState<AlumniFilters>({ 
-    searchTerm: "", 
-    batch: "", 
-    degree: "", 
-    branch: "" 
+  const [filters, setFilters] = useState<AlumniFilters>({
+    searchTerm: "",
+    batch: "",
+    degree: "",
+    branch: ""
   });
   const [filteredAlumni, setFilteredAlumni] = useState<AlumniItem[]>(alumniList as any);
   const [batchOpen, setBatchOpen] = useState(false);
   const [degreeOpen, setDegreeOpen] = useState(false);
   const [branchOpen, setBranchOpen] = useState(false);
+
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const [user] = useState<UserInfo>({
     name: "Merna",
