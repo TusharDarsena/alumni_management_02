@@ -1,0 +1,47 @@
+import * as React from "react";
+import "./global.css";
+
+import { Toaster } from "@/components/ui/toaster";
+import { createRoot } from "react-dom/client";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import DashboardPage from "./pages/DashboardPage";
+import SearchAlumniPage from "./pages/SearchAlumniPage";
+import AdminControlsPage from "./pages/AdminControlsPage";
+import AlumniProfilePage from "./pages/AlumniProfilePage";
+import SearchFavouritesPage from "./pages/SearchFavouritesPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/search-alumni" element={<SearchAlumniPage />} />
+          <Route path="/admin" element={<AdminControlsPage />} />
+          <Route path="/search-favourites" element={<SearchFavouritesPage />} />
+          <Route path="/alumni/:username" element={<AlumniProfilePage />} />
+          <Route path="/user-profile" element={<UserProfilePage alumnus={{ username: 'john-doe', name: 'John Doe', graduationYear: '2020', major: 'CSE', company: 'Acme Corp', bio: 'Passionate engineer', skills: ['React','Node.js'], experience: [{ company: 'Acme Corp', title: 'Engineer', from: '2021' }] }} />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+createRoot(document.getElementById("root")!).render(<App />);
