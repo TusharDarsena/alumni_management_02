@@ -5,6 +5,7 @@ import Header, { type UserInfo } from "@/components/Header";
 import UserProfile, { type UserProfileData } from "@/components/UserProfile";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { alumniList } from "@/data/mockAlumni";
+import { useFavorites } from "@/hooks/useFavorites";
 
 export default function AlumniProfilePage() {
   const { username } = useParams<{ username: string }>();
