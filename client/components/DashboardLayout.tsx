@@ -9,6 +9,8 @@ export interface UserSummary {
   email?: string;
   avatarUrl?: string;
   notificationCount?: number;
+  mobile?: string;
+  location?: string;
 }
 
 interface DashboardLayoutProps {
@@ -133,7 +135,7 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
         {/* Content area */}
         <div className="flex-1 overflow-auto px-6 pb-6 mx-auto max-w-7xl">{children}</div>
 
-        <ProfileSettingsModal isOpen={isModalOpen} initialTab={modalInitialTab} onClose={() => setIsModalOpen(false)} />
+        <ProfileSettingsModal isOpen={isModalOpen} initialTab={modalInitialTab} onClose={() => setIsModalOpen(false)} user={{ name: user.name, email: user.email, avatarUrl: user.avatarUrl, mobile: user.mobile, location: user.location }} />
       </div>
     </div>
   );
