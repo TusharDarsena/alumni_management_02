@@ -40,7 +40,7 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="flex-1 ml-[275px] flex flex-col bg-white min-h-screen">
+      <div className="flex-1 flex flex-col bg-white min-h-screen">
         {/* TopBar */}
         <div className="sticky top-0 z-20 bg-white border-b">
           <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
