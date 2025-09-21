@@ -4,6 +4,8 @@ import { Search, ChevronDown } from "lucide-react";
 import { alumniList } from "@/data/mockAlumni";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
+import AlumniCard from "@/components/AlumniCard";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface AlumniFilters {
   searchTerm: string;
@@ -24,16 +26,18 @@ interface AlumniItem {
 
 export default function SearchAlumniPage() {
   const navigate = useNavigate();
-  const [filters, setFilters] = useState<AlumniFilters>({ 
-    searchTerm: "", 
-    batch: "", 
-    degree: "", 
-    branch: "" 
+  const [filters, setFilters] = useState<AlumniFilters>({
+    searchTerm: "",
+    batch: "",
+    degree: "",
+    branch: ""
   });
   const [filteredAlumni, setFilteredAlumni] = useState<AlumniItem[]>(alumniList as any);
   const [batchOpen, setBatchOpen] = useState(false);
   const [degreeOpen, setDegreeOpen] = useState(false);
   const [branchOpen, setBranchOpen] = useState(false);
+
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const [user] = useState<UserInfo>({
     name: "Merna",
@@ -164,33 +168,14 @@ export default function SearchAlumniPage() {
 
       {/* Alumni Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredAlumni.slice(0, 8).map((alumni, index) => (
-          <div 
-            key={alumni.username} 
-            className="bg-white rounded-lg p-6 flex flex-col items-center text-center cursor-pointer hover:shadow-lg transition-shadow"
-            onClick={() => handleViewProfile(alumni.username)}
-          >
-            <div className="w-[100px] h-[100px] rounded-full mb-5 overflow-hidden">
-              {alumni.avatarUrl ? (
-                <img 
-                  src={alumni.avatarUrl} 
-                  alt={alumni.name} 
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-200 rounded-full flex items-center justify-center text-2xl font-bold text-gray-600">
-                  {alumni.name.split(' ').map(n => n[0]).join('')}
-                </div>
-              )}
-            </div>
-            <h3 className="text-[#333] text-2xl font-bold mb-5">{alumni.name || "Username"}</h3>
-            <div className="space-y-1 text-[#333]">
-              <div className="text-base font-medium">Engineer Manager</div>
-              <div className="text-base font-medium">@{alumni.company || "company"}</div>
-              <div className="text-base font-medium">{alumni.graduationYear || "year of graduation"}</div>
-              <div className="text-base font-medium">{alumni.email || "username@email.com"}</div>
-            </div>
-          </div>
+        {filteredAlumni.slice(0, 24).map((alumni) => (
+          <AlumniCard
+            key={alumni.username}
+            alumnus={{ username: alumni.username, name: alumni.name, profilePictureUrl: alumni.avatarUrl, graduationYear: alumni.graduationYear, major: alumni.major, company: alumni.company }}
+            isFavourite={isFavorite(alumni.username)}
+            onViewProfile={handleViewProfile}
+            onToggleFavourite={() => toggleFavorite(alumni.username)}
+          />
         ))}
       </div>
     </DashboardLayout>

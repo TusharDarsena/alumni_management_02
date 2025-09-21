@@ -1,18 +1,43 @@
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 export type ModalInitialTab = "profile" | "settings";
+
+export interface ProfileUser {
+  name: string;
+  email?: string;
+  mobile?: string;
+  location?: string;
+  avatarUrl?: string;
+}
 
 interface ProfileSettingsModalProps {
   isOpen: boolean;
   initialTab: ModalInitialTab;
   onClose: () => void;
+  user: ProfileUser;
+  onSave?: (updated: ProfileUser) => void;
 }
 
-export default function ProfileSettingsModal({ isOpen, initialTab, onClose }: ProfileSettingsModalProps) {
+export default function ProfileSettingsModal({ isOpen, initialTab, onClose, user, onSave }: ProfileSettingsModalProps) {
+  const [form, setForm] = useState<ProfileUser>(user);
+
+  useEffect(() => {
+    if (isOpen) setForm(user);
+  }, [isOpen, user]);
+
+  const handleSave = () => {
+    onSave?.(form);
+    onClose();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[640px]">
         <DialogHeader>
           <DialogTitle>Account</DialogTitle>
         </DialogHeader>
@@ -21,13 +46,55 @@ export default function ProfileSettingsModal({ isOpen, initialTab, onClose }: Pr
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
-          <TabsContent value="profile" className="mt-4 space-y-2">
-            <p className="text-sm text-slate-600">Update your personal details, avatar, and bio.</p>
-            <div className="rounded-md border p-4 text-sm">Profile form elements would go here.</div>
+
+          <TabsContent value="profile" className="mt-4">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-slate-200 overflow-hidden">
+                  {form.avatarUrl ? (
+                    <img src={form.avatarUrl} alt={form.name} className="h-full w-full object-cover" />
+                  ) : null}
+                </div>
+                <div className="text-sm text-slate-700">{form.name}</div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input id="name" value={form.name ?? ""} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} placeholder="your name" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email account</Label>
+                  <Input id="email" type="email" value={form.email ?? ""} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} placeholder="yourname@gmail.com" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mobile">Mobile number</Label>
+                  <Input id="mobile" value={form.mobile ?? ""} onChange={(e) => setForm((f) => ({ ...f, mobile: e.target.value }))} placeholder="Add number" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="location">Location</Label>
+                  <Input id="location" value={form.location ?? ""} onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))} placeholder="City, Country" />
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Button onClick={handleSave}>Save Changes</Button>
+              </div>
+            </div>
           </TabsContent>
-          <TabsContent value="settings" className="mt-4 space-y-2">
-            <p className="text-sm text-slate-600">Manage account preferences and notifications.</p>
-            <div className="rounded-md border p-4 text-sm">Settings form elements would go here.</div>
+
+          <TabsContent value="settings" className="mt-4 space-y-4">
+            <div className="text-sm text-slate-600">Manage account preferences and notifications.</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="language">Language</Label>
+                <Input id="language" placeholder="English" disabled />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="theme">Theme</Label>
+                <Input id="theme" placeholder="Light" disabled />
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </DialogContent>

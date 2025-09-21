@@ -9,6 +9,8 @@ export interface UserSummary {
   email?: string;
   avatarUrl?: string;
   notificationCount?: number;
+  mobile?: string;
+  location?: string;
 }
 
 interface DashboardLayoutProps {
@@ -16,9 +18,10 @@ interface DashboardLayoutProps {
   activePage: string;
   onNavigate?: (path: string) => void;
   user: UserSummary;
+  fullWidth?: boolean;
 }
 
-export default function DashboardLayout({ children, activePage, onNavigate, user }: DashboardLayoutProps) {
+export default function DashboardLayout({ children, activePage, onNavigate, user, fullWidth = false }: DashboardLayoutProps) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,10 +40,10 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="flex-1 ml-[275px] flex flex-col bg-white min-h-screen">
+      <div className="flex-1 flex flex-col bg-white min-h-screen">
         {/* TopBar */}
         <div className="sticky top-0 z-20 bg-white border-b">
-          <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+          <div className="px-6 h-16 flex items-center justify-between pl-[70px]">
             <div className="text-lg font-semibold text-slate-800">{activePage}</div>
             <div className="flex items-center gap-4 relative">
               <button
@@ -122,7 +125,7 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
         </div>
 
         {/* Welcome Section */}
-        <div className="px-6 py-6">
+        <div className="px-6 py-6 pl-[70px]">
           <div className="flex items-center gap-2 mb-6">
             <span className="text-xl">👋</span>
             <span className="text-[#0C1E33] text-xl font-normal">Welcome, {user.name}!</span>
@@ -131,9 +134,9 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
         </div>
 
         {/* Content area */}
-        <div className="flex-1 overflow-auto px-6 pb-6 mx-auto max-w-7xl">{children}</div>
+        <div className={fullWidth ? "flex-1 overflow-auto px-6 pb-6 pl-[70px]" : "flex-1 overflow-auto px-6 pb-6 pl-[70px]"}>{children}</div>
 
-        <ProfileSettingsModal isOpen={isModalOpen} initialTab={modalInitialTab} onClose={() => setIsModalOpen(false)} />
+        <ProfileSettingsModal isOpen={isModalOpen} initialTab={modalInitialTab} onClose={() => setIsModalOpen(false)} user={{ name: user.name, email: user.email, avatarUrl: user.avatarUrl, mobile: user.mobile, location: user.location }} />
       </div>
     </div>
   );

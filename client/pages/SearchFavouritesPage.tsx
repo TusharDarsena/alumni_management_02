@@ -1,20 +1,30 @@
 import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import AlumniCard, { type AlumniItem } from "@/components/AlumniCard";
 import { Input } from "@/components/ui/input";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface Props {
   favouriteAlumni?: AlumniItem[];
 }
 
 export default function SearchFavouritesPage({ favouriteAlumni = [] }: Props) {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const { favoriteAlumni, isFavorite, toggleFavorite } = useFavorites();
+
+  const list = favoriteAlumni as any;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return favouriteAlumni;
-    return favouriteAlumni.filter((a) => a.name.toLowerCase().includes(q));
-  }, [query, favouriteAlumni]);
+    if (!q) return list;
+    return list.filter((a: any) => a.name.toLowerCase().includes(q));
+  }, [query, list]);
+
+  const handleView = (username: string) => {
+    navigate(`/alumni/${username}`);
+  };
 
   return (
     <DashboardLayout activePage="My Favourites" onNavigate={() => {}} user={{ name: "Merna" }}>
@@ -27,8 +37,8 @@ export default function SearchFavouritesPage({ favouriteAlumni = [] }: Props) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filtered.map((al) => (
-          <AlumniCard key={al.username} alumnus={al} isFavourite onViewProfile={() => {}} onToggleFavourite={() => {}} />
+        {filtered.map((al: any) => (
+          <AlumniCard key={al.username} alumnus={{ username: al.username, name: al.name, profilePictureUrl: al.avatarUrl, graduationYear: al.graduationYear, major: al.major, company: al.company }} isFavourite={isFavorite(al.username)} onViewProfile={handleView} onToggleFavourite={() => toggleFavorite(al.username)} />
         ))}
       </div>
     </DashboardLayout>
