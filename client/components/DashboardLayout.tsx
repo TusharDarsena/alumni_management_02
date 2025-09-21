@@ -18,9 +18,10 @@ interface DashboardLayoutProps {
   activePage: string;
   onNavigate?: (path: string) => void;
   user: UserSummary;
+  fullWidth?: boolean;
 }
 
-export default function DashboardLayout({ children, activePage, onNavigate, user }: DashboardLayoutProps) {
+export default function DashboardLayout({ children, activePage, onNavigate, user, fullWidth = false }: DashboardLayoutProps) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -133,7 +134,7 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
         </div>
 
         {/* Content area */}
-        <div className="flex-1 overflow-auto px-6 pb-6 mx-auto max-w-7xl">{children}</div>
+        <div className={fullWidth ? "flex-1 overflow-auto px-6 pb-6" : "flex-1 overflow-auto px-6 pb-6 mx-auto max-w-7xl"}>{children}</div>
 
         <ProfileSettingsModal isOpen={isModalOpen} initialTab={modalInitialTab} onClose={() => setIsModalOpen(false)} user={{ name: user.name, email: user.email, avatarUrl: user.avatarUrl, mobile: user.mobile, location: user.location }} />
       </div>
