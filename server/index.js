@@ -7,26 +7,42 @@ import authRoute from './routes/AuthRoute.js';
 
 dotenv.config();
 
-const app = express();
+export function createServer() {
+  const app = express();
 
-// Middlewares
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
-  credentials: true
-}));
+  // Middlewares
+  app.use(express.json());
+  app.use(cookieParser());
+  app.use(
+    cors({
+      origin: process.env.CLIENT_ORIGIN || true,
+      credentials: true,
+    })
+  );
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(()=> console.log('MongoDB connected'))
-.catch(err=> console.error(err));
+  // Optional MongoDB connection (skipped if MONGO_URI not set)
+  const uri = process.env.MONGO_URI;
+  if (uri && mongoose.connection.readyState === 0) {
+    mongoose
+      .connect(uri)
+      .then(() => console.log('MongoDB connected'))
+      .catch((err) => console.error('MongoDB connection error:', err));
+  }
 
-// Routes
-app.use('/api/auth', authRoute);
+  // Health check
+  app.get('/api/ping', (_req, res) => {
+    res.json({ message: 'pong' });
+  });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`));
+  // Routes
+  app.use('/api/auth', authRoute);
+
+  return app;
+}
+
+// Standalone mode (only when executed directly)
+if (process.argv[1] && process.argv[1].includes('server/index.js')) {
+  const PORT = process.env.PORT || 5000;
+  const app = createServer();
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
