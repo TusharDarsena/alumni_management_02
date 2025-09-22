@@ -39,9 +39,34 @@ const App = () => (
             <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/search-alumni" element={<SearchAlumniPage />} />
-              <Route path="/search-favourites" element={<SearchFavouritesPage />} />
+              <Route
+                path="/search-favourites"
+                element={<SearchFavouritesPage />}
+              />
               <Route path="/alumni/:username" element={<AlumniProfilePage />} />
-              <Route path="/user-profile" element={<UserProfilePage alumnus={{ username: 'john-doe', name: 'John Doe', graduationYear: '2020', major: 'CSE', company: 'Acme Corp', bio: 'Passionate engineer', skills: ['React','Node.js'], experience: [{ company: 'Acme Corp', title: 'Engineer', from: '2021' }] }} />} />
+              <Route
+                path="/user-profile"
+                element={
+                  <UserProfilePage
+                    alumnus={{
+                      username: "john-doe",
+                      name: "John Doe",
+                      graduationYear: "2020",
+                      major: "CSE",
+                      company: "Acme Corp",
+                      bio: "Passionate engineer",
+                      skills: ["React", "Node.js"],
+                      experience: [
+                        {
+                          company: "Acme Corp",
+                          title: "Engineer",
+                          from: "2021",
+                        },
+                      ],
+                    }}
+                  />
+                }
+              />
             </Route>
 
             {/* Admin-only routes */}
