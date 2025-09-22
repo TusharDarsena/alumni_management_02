@@ -52,6 +52,7 @@ export default function LoginPage() {
               <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
               Remember me
             </label>
+            {error && <div className="text-destructive text-sm">{error}</div>}
             <Button type="submit" className="w-full">Login</Button>
           </form>
           <p className="mt-6 text-center text-sm text-slate-600">
