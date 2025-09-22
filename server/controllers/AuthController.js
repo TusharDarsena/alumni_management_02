@@ -1,7 +1,9 @@
+
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import { createToken } from "../utils/jwt.js";
+
 
 export const signup = async (req, res) => {
   try {
