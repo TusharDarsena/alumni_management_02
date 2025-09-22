@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const refresh = async () => {
     try {
       setLoading(true);
-      const res = await fetch("/api/auth/verify");
+      const res = await fetch("/api/auth/verify", { credentials: "include" });
       const data = await res.json();
       if (data.status) {
         setUser({ username: data.user, role: data.role });
@@ -54,6 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        credentials: "include",
       });
       if (!res.ok) {
         const err = await res.json();
@@ -69,7 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     } catch (err) {
       // ignore
     }

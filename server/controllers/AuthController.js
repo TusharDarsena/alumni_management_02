@@ -1,14 +1,13 @@
 
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import jwt from "jsonwebtoken";
 import { createToken } from "../utils/jwt.js";
 
 
 export const signup = async (req, res) => {
   try {
     const { email, username, password, role } = req.body;
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -17,7 +16,7 @@ export const signup = async (req, res) => {
     const defaultPassword = role === "student";
 
     const user = await User.create({
-      email,
+      email: email.toLowerCase(),
       username,
       password,
       role,
@@ -47,7 +46,8 @@ export const login = async (req, res) => {
     if (!email || !password)
       return res.status(400).json({ message: "All fields required" });
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
+    console.log("User found in DB:", user);
     if (!user)
       return res.status(400).json({ message: "Incorrect email or password" });
 

@@ -39,6 +39,21 @@ export function createServer() {
     res.json({ message: "pong" });
   });
 
+  // Detailed health diagnostics
+  app.get("/api/health", (_req, res) => {
+    const uriPresent = Boolean(process.env.MONGO_URI);
+    const mongoState = mongoose.connection.readyState; // 0=disconnected, 1=connected, 2=connecting, 3=disconnecting
+    res.json({
+      mongo: {
+        uriPresent,
+        readyState: mongoState,
+      },
+      jwtSecretPresent: Boolean(process.env.JWT_SECRET),
+      clientOrigin: process.env.CLIENT_ORIGIN ?? null,
+      portDefault: process.env.PORT ?? 8080,
+    });
+  });
+
   // Routes
   app.use("/api/auth", authRoute);
 
@@ -53,7 +68,7 @@ export function createServer() {
 
 // Standalone mode (only when executed directly)
 if (process.argv[1] && process.argv[1].includes("server/index.js")) {
-  const PORT = process.env.PORT || 5000;
+  const PORT = process.env.PORT || 8080;
   const app = createServer();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
