@@ -71,6 +71,11 @@ export const login = async (req, res) => {
   }
 };
 
+export const logout = (req, res) => {
+  res.clearCookie('token');
+  res.json({ success: true });
+};
+
 // Verify token
 export const verifyUser = async (req, res) => {
   const token = req.cookies.token;
