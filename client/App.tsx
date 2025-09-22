@@ -17,6 +17,9 @@ import AlumniProfilePage from "./pages/AlumniProfilePage";
 import SearchFavouritesPage from "./pages/SearchFavouritesPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import NotFound from "./pages/NotFound";
+import Unauthorized from "./pages/Unauthorized";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -25,21 +28,34 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/search-alumni" element={<SearchAlumniPage />} />
-          <Route path="/admin" element={<AdminControlsPage />} />
-          <Route path="/search-favourites" element={<SearchFavouritesPage />} />
-          <Route path="/alumni/:username" element={<AlumniProfilePage />} />
-          <Route path="/user-profile" element={<UserProfilePage alumnus={{ username: 'john-doe', name: 'John Doe', graduationYear: '2020', major: 'CSE', company: 'Acme Corp', bio: 'Passionate engineer', skills: ['React','Node.js'], experience: [{ company: 'Acme Corp', title: 'Engineer', from: '2021' }] }} />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+
+            {/* Routes that require authentication */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/search-alumni" element={<SearchAlumniPage />} />
+              <Route path="/search-favourites" element={<SearchFavouritesPage />} />
+              <Route path="/alumni/:username" element={<AlumniProfilePage />} />
+              <Route path="/user-profile" element={<UserProfilePage alumnus={{ username: 'john-doe', name: 'John Doe', graduationYear: '2020', major: 'CSE', company: 'Acme Corp', bio: 'Passionate engineer', skills: ['React','Node.js'], experience: [{ company: 'Acme Corp', title: 'Engineer', from: '2021' }] }} />} />
+            </Route>
+
+            {/* Admin-only routes */}
+            <Route element={<ProtectedRoute roles={["admin"]} />}>
+              <Route path="/admin" element={<AdminControlsPage />} />
+            </Route>
+
+            <Route path="/unauthorized" element={<Unauthorized />} />
+
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
