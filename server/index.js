@@ -39,6 +39,10 @@ export function createServer() {
   // Routes
   app.use('/api/auth', authRoute);
 
+  // Protected portal and admin routes
+  app.use('/api/portal', portalRoutes);
+  app.use('/api/admin', adminRoutes);
+
   return app;
 }
 
