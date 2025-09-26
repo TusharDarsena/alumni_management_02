@@ -33,7 +33,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const res = await fetch("/api/auth/verify", { credentials: "include" });
       const data = await res.json();
       if (data.status) {
-        setUser({ username: data.user, role: data.role });
+        setUser({ username: data.user, role: data.role, mustChangePassword: data.mustChangePassword, defaultPassword: data.defaultPassword });
       } else {
         setUser(null);
       }
