@@ -9,6 +9,8 @@ export default function SignupPage() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    password: "",
+    role: "student",
     dob: "",
     graduationYear: "",
     branch: "",
@@ -17,13 +19,33 @@ export default function SignupPage() {
     phone: "",
     country: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(form);
-    navigate("/dashboard");
+    setError(null);
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          username: form.name,
+          password: form.password,
+          role: form.role,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        setError(data.message || "Signup failed");
+        return;
+      }
+      navigate("/login");
+    } catch (err) {
+      setError("Network error");
+    }
   };
 
   return (
@@ -51,6 +73,25 @@ export default function SignupPage() {
             <div className="col-span-2">
               <Label>Email</Label>
               <Input type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
+            </div>
+
+            <div className="col-span-2">
+              <Label>Password</Label>
+              <Input type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)} />
+            </div>
+
+            <div className="col-span-2">
+              <Label>Role</Label>
+              <select
+                value={form.role}
+                onChange={(e) => handleChange("role", e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              >
+                <option value="student">Student</option>
+                <option value="faculty">Faculty</option>
+                <option value="alumni">Alumni</option>
+                <option value="admin">Admin</option>
+              </select>
             </div>
 
             <div>
@@ -87,6 +128,8 @@ export default function SignupPage() {
               <Label>Country Of Residence</Label>
               <Input value={form.country} onChange={(e) => handleChange("country", e.target.value)} />
             </div>
+
+            {error && <div className="col-span-2 text-sm text-destructive">{error}</div>}
 
             <div className="col-span-2 mt-4">
               <Button type="submit" className="bg-black text-white">Register</Button>

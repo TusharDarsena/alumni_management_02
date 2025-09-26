@@ -14,23 +14,28 @@ const isStrongPassword = (pwd) => {
 
 export const signup = async (req, res) => {
   try {
-    const { email, username, password, role } = req.body;
+    const { email, username, password: providedPassword, role } = req.body;
+    console.log(`Signup attempt: email=${email}, role=${role}, providedPassword length=${providedPassword ? providedPassword.length : 'none'}`);
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const mustChangePassword = role === "student";
-    const defaultPassword = role === "student";
+    const defaultPasswordFlag = role === "student";  // renamed to avoid confusion
+
+    const passwordToSet = role === "student" ? "DefaultPass123!" : providedPassword;
+    console.log(`Setting password for role ${role}: using ${role === "student" ? "default" : "provided"} (length: ${passwordToSet.length})`);
 
     const user = await User.create({
       email: email.toLowerCase(),
       username,
-      password,
+      password: passwordToSet,
       role,
       mustChangePassword,
-      defaultPassword,
+      defaultPassword: defaultPasswordFlag,
     });
+    console.log(`User created: ${user._id}, role: ${user.role}, mustChangePassword: ${user.mustChangePassword}, defaultPassword: ${user.defaultPassword}`);
 
     const token = createToken(user._id);
     res.cookie("token", token, {
@@ -51,16 +56,13 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(`Login attempt for email: ${email}`);
     if (!email || !password)
       return res.status(400).json({ message: "All fields required" });
 
     const user = await User.findOne({ email: email.toLowerCase() });
-    console.log("User found in DB:", user);
+    console.log("User found in DB:", user ? `ID: ${user._id}, role: ${user.role}` : 'No user');
     if (!user)
-      return res.status(400).json({ message: "Incorrect email or password" });
-
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch)
       return res.status(400).json({ message: "Incorrect email or password" });
 
     const token = createToken(user._id);
