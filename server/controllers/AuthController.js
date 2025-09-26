@@ -107,25 +107,43 @@ export const verifyUser = async (req, res) => {
 export const changePasswordFirst = async (req, res) => {
   try {
     const token = req.cookies?.token;
-    if (!token) return res.status(401).json({ success: false, message: "Not authenticated" });
+    if (!token)
+      return res
+        .status(401)
+        .json({ success: false, message: "Not authenticated" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
-    if (!user) return res.status(401).json({ success: false, message: "Invalid session" });
+    if (!user)
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid session" });
 
     if (!user.mustChangePassword || user.defaultPassword === false) {
-      return res.status(400).json({ success: false, message: "Password change on first login not required" });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Password change on first login not required",
+        });
     }
 
     const { newPassword } = req.body || {};
     if (!newPassword) {
-      return res.status(400).json({ success: false, message: "New password is required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "New password is required" });
     }
 
     // Reject if new password equals current (default) password
     const sameAsOld = await user.comparePassword(newPassword);
     if (sameAsOld) {
-      return res.status(400).json({ success: false, message: "New password cannot be the same as the default password" });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "New password cannot be the same as the default password",
+        });
     }
 
     if (!isStrongPassword(newPassword)) {
@@ -148,11 +166,16 @@ export const changePasswordFirst = async (req, res) => {
       maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
-    return res.json({ success: true, message: "Password updated successfully" });
+    return res.json({
+      success: true,
+      message: "Password updated successfully",
+    });
   } catch (err) {
     console.error(err);
     if (err?.name === "JsonWebTokenError") {
-      return res.status(401).json({ success: false, message: "Invalid session" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid session" });
     }
     return res.status(500).json({ success: false, message: "Server error" });
   }

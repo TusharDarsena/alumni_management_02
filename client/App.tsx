@@ -39,7 +39,10 @@ const App = () => (
 
             {/* Routes that require authentication */}
             <Route element={<ProtectedRoute />}>
-              <Route path="/first-login-change" element={<FirstLoginPasswordChange />} />
+              <Route
+                path="/first-login-change"
+                element={<FirstLoginPasswordChange />}
+              />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/search-alumni" element={<SearchAlumniPage />} />
               <Route

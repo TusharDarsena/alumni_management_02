@@ -11,7 +11,10 @@ export const ProtectedRoute: React.FC<{ roles?: string[] }> = ({ roles }) => {
   if (!user) return <Navigate to="/login" replace />;
 
   const allowedWhileForced = ["/first-login-change", "/help"];
-  if (user.mustChangePassword && !allowedWhileForced.includes(location.pathname)) {
+  if (
+    user.mustChangePassword &&
+    !allowedWhileForced.includes(location.pathname)
+  ) {
     return <Navigate to="/first-login-change" replace />;
   }
 

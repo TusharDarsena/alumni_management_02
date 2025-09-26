@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type User = { username: string; role: string; mustChangePassword?: boolean; defaultPassword?: boolean } | null;
+type User = {
+  username: string;
+  role: string;
+  mustChangePassword?: boolean;
+  defaultPassword?: boolean;
+} | null;
 
 type AuthContextType = {
   user: User;
@@ -33,7 +38,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const res = await fetch("/api/auth/verify", { credentials: "include" });
       const data = await res.json();
       if (data.status) {
-        setUser({ username: data.user, role: data.role, mustChangePassword: data.mustChangePassword, defaultPassword: data.defaultPassword });
+        setUser({
+          username: data.user,
+          role: data.role,
+          mustChangePassword: data.mustChangePassword,
+          defaultPassword: data.defaultPassword,
+        });
       } else {
         setUser(null);
       }
@@ -70,7 +80,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logout = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
     } catch (err) {
       // ignore
     }
