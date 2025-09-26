@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type User = { username: string; role: string } | null;
+type User = { username: string; role: string; mustChangePassword?: boolean; defaultPassword?: boolean } | null;
 
 type AuthContextType = {
   user: User;
