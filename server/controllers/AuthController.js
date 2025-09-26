@@ -21,19 +21,29 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const mustChangePassword = role === "student";
-    const defaultPasswordFlag = role === "student";  // renamed to avoid confusion
+    const isDefaultPassword = role === "student";
 
-    const passwordToSet = role === "student" ? "DefaultPass123!" : providedPassword;
-    console.log(`Setting password for role ${role}: using ${role === "student" ? "default" : "provided"} (length: ${passwordToSet.length})`);
+    if (!isDefaultPassword) {
+      if (!providedPassword) {
+        return res.status(400).json({ message: "Password is required for this role" });
+      }
+      if (!isStrongPassword(providedPassword)) {
+        return res.status(400).json({
+          message: "Password too weak. Use at least 8 characters with upper, lower, number, and special character."
+        });
+      }
+    }
+
+    const passwordToSet = isDefaultPassword ? "DefaultPass123!" : providedPassword;
+    console.log(`Setting password for role ${role}: using ${isDefaultPassword ? "default" : "provided"} (length: ${passwordToSet.length})`);
 
     const user = await User.create({
       email: email.toLowerCase(),
       username,
       password: passwordToSet,
       role,
-      mustChangePassword,
-      defaultPassword: defaultPasswordFlag,
+      mustChangePassword: isDefaultPassword,
+      defaultPassword: isDefaultPassword,
     });
     console.log(`User created: ${user._id}, role: ${user.role}, mustChangePassword: ${user.mustChangePassword}, defaultPassword: ${user.defaultPassword}`);
 
@@ -65,6 +75,10 @@ export const login = async (req, res) => {
     if (!user)
       return res.status(400).json({ message: "Incorrect email or password" });
 
+    const isPasswordValid = await user.comparePassword(password);
+    if (!isPasswordValid)
+      return res.status(400).json({ message: "Incorrect email or password" });
+
     const token = createToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
@@ -86,40 +100,19 @@ export const logout = (req, res) => {
 
 // Verify token
 export const verifyUser = async (req, res) => {
-  const token = req.cookies.token;
-  if (!token) return res.json({ status: false });
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
-    if (user)
-      return res.json({
-        status: true,
-        user: user.username,
-        role: user.role,
-        mustChangePassword: Boolean(user.mustChangePassword),
-        defaultPassword: Boolean(user.defaultPassword),
-      });
-    else return res.json({ status: false });
-  } catch (err) {
-    return res.json({ status: false });
-  }
+  const user = req.user;
+  return res.json({
+    status: true,
+    user: user.username,
+    role: user.role,
+    mustChangePassword: Boolean(user.mustChangePassword),
+    defaultPassword: Boolean(user.defaultPassword),
+  });
 };
 
 export const changePasswordFirst = async (req, res) => {
   try {
-    const token = req.cookies?.token;
-    if (!token)
-      return res
-        .status(401)
-        .json({ success: false, message: "Not authenticated" });
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
-    if (!user)
-      return res
-        .status(401)
-        .json({ success: false, message: "Invalid session" });
+    const user = await User.findById(req.user._id);
 
     if (!user.mustChangePassword || user.defaultPassword === false) {
       return res
@@ -174,11 +167,6 @@ export const changePasswordFirst = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    if (err?.name === "JsonWebTokenError") {
-      return res
-        .status(401)
-        .json({ success: false, message: "Invalid session" });
-    }
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
