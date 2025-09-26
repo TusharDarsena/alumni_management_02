@@ -123,8 +123,7 @@ export const changePasswordFirst = async (req, res) => {
     }
 
     // Reject if new password equals current (default) password
-    const bcrypt = await import("bcryptjs");
-    const sameAsOld = await bcrypt.compare(newPassword, user.password);
+    const sameAsOld = await user.comparePassword(newPassword);
     if (sameAsOld) {
       return res.status(400).json({ success: false, message: "New password cannot be the same as the default password" });
     }
