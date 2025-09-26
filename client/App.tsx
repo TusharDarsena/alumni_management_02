@@ -18,6 +18,8 @@ import SearchFavouritesPage from "./pages/SearchFavouritesPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
+import FirstLoginPasswordChange from "./pages/FirstLoginPasswordChange";
+import HelpPage from "./pages/HelpPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -37,6 +39,7 @@ const App = () => (
 
             {/* Routes that require authentication */}
             <Route element={<ProtectedRoute />}>
+              <Route path="/first-login-change" element={<FirstLoginPasswordChange />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/search-alumni" element={<SearchAlumniPage />} />
               <Route
@@ -74,6 +77,7 @@ const App = () => (
               <Route path="/admin" element={<AdminControlsPage />} />
             </Route>
 
+            <Route path="/help" element={<HelpPage />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
