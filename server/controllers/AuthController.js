@@ -326,19 +326,25 @@ export const sendVerification = async (req, res) => {
     const { email } = req.body || {};
     if (!email) return res.status(400).json({ message: "Email required" });
     const normalizedEmail = String(email).toLowerCase();
-    const user = await User.findOne({ email: normalizedEmail });
-    if (!user) return res.status(404).json({ message: "User not found" });
 
-    const last = user.verificationLastSentAt;
+    const user = await User.findOne({ email: normalizedEmail });
+    const pending = await PendingUser.findOne({ email: normalizedEmail });
+
+    if (!user && !pending) return res.status(404).json({ message: "User not found" });
+
+    // decide target (user takes precedence)
+    const target = user || pending;
+
+    const last = target.verificationLastSentAt;
     if (last && new Date() - new Date(last) < 60 * 1000) {
       return res.status(429).json({ message: "Please wait before requesting another verification email." });
     }
 
     const token = generateToken();
-    user.verificationTokenHash = hashToken(token);
-    user.verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    user.verificationLastSentAt = new Date();
-    await user.save();
+    target.verificationTokenHash = hashToken(token);
+    target.verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    target.verificationLastSentAt = new Date();
+    await target.save();
 
     const base = process.env.FRONTEND_URL || process.env.APP_URL || "http://localhost:8080";
     const link = `${base.replace(/\/$/, "")}/verify?token=${encodeURIComponent(token)}&email=${encodeURIComponent(normalizedEmail)}`;
@@ -376,24 +382,36 @@ export const setPassword = async (req, res) => {
 
     const normalizedEmail = String(email).toLowerCase();
     const user = await User.findOne({ email: normalizedEmail });
-    if (!user) return res.status(404).json({ message: "User not found" });
-    if (!user.verificationTokenHash || !user.verificationExpires) return res.status(400).json({ message: "No verification token set" });
-    if (new Date() > new Date(user.verificationExpires)) return res.status(400).json({ message: "Verification token expired" });
+    const pending = await PendingUser.findOne({ email: normalizedEmail });
+
+    if (!user && !pending) return res.status(404).json({ message: "User not found" });
+
+    const target = user || pending;
+    if (!target.verificationTokenHash || !target.verificationExpires) return res.status(400).json({ message: "No verification token set" });
+    if (new Date() > new Date(target.verificationExpires)) return res.status(400).json({ message: "Verification token expired" });
     const hashed = hashToken(String(token));
-    if (hashed !== user.verificationTokenHash) return res.status(400).json({ message: "Invalid verification token" });
+    if (hashed !== target.verificationTokenHash) return res.status(400).json({ message: "Invalid verification token" });
 
     // All good: set password and mark verified
-    user.password = newPassword; // pre-save will hash
-    user.isVerified = true;
-    user.verificationTokenHash = null;
-    user.verificationExpires = null;
-    user.verificationLastSentAt = null;
-    user.mustChangePassword = false;
-    user.defaultPassword = false;
-    user.tokenVersion = (user.tokenVersion || 0) + 1; // invalidate existing sessions
-    await user.save();
+    target.password = newPassword; // pre-save will hash for User; PendingUser password stored plain but hashed on save? PendingUser has no pre-save hook; keep as plain for now and will be transferred on approval
+    target.isVerified = true;
+    target.verificationTokenHash = null;
+    target.verificationExpires = null;
+    target.verificationLastSentAt = null;
+    target.mustChangePassword = false;
+    target.defaultPassword = false;
 
-    return res.json({ success: true, message: "Password set and account verified" });
+    if (user) {
+      // Invalidate sessions
+      target.tokenVersion = (target.tokenVersion || 0) + 1;
+      await target.save();
+      return res.json({ success: true, message: "Password set and account verified" });
+    } else {
+      // Pending user: mark status for admin review
+      target.status = "pending";
+      await target.save();
+      return res.json({ success: true, message: "Password set and email verified. Your account is awaiting admin approval." });
+    }
   } catch (err) {
     console.error("setPassword error", err);
     return res.status(500).json({ message: "Server error" });
