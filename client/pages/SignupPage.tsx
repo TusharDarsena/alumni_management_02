@@ -84,10 +84,6 @@ export default function SignupPage() {
               <Input type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
             </div>
 
-            <div className="col-span-2">
-              <Label>Password</Label>
-              <Input type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)} />
-            </div>
 
             <div className="col-span-2">
               <Label>Role</Label>
