@@ -38,14 +38,18 @@ router.post(
       const { id } = req.params;
       const pending = await PendingUser.findById(id);
       if (!pending || pending.status !== "pending") {
-        return res.status(404).json({ success: false, message: "Pending user not found" });
+        return res
+          .status(404)
+          .json({ success: false, message: "Pending user not found" });
       }
 
       const exists = await User.findOne({ email: pending.email });
       if (exists) {
         // Cleanup duplicate pending
         await PendingUser.findByIdAndDelete(id);
-        return res.status(400).json({ success: false, message: "User already exists" });
+        return res
+          .status(400)
+          .json({ success: false, message: "User already exists" });
       }
 
       // generate OTP
@@ -78,17 +82,36 @@ router.post(
         if (!mailRes.ok) {
           // rollback created user
           await User.findByIdAndDelete(user._id);
-          return res.status(400).json({ success: false, message: "Failed to send welcome email; user not created" });
+          return res
+            .status(400)
+            .json({
+              success: false,
+              message: "Failed to send welcome email; user not created",
+            });
         }
       } catch (e) {
         console.warn("Failed to send approval email", e);
         await User.findByIdAndDelete(user._id);
-        return res.status(400).json({ success: false, message: "Failed to send welcome email; user not created" });
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Failed to send welcome email; user not created",
+          });
       }
 
       await PendingUser.findByIdAndDelete(id);
 
-      return res.json({ success: true, message: "User approved", user: { id: user._id, email: user.email, username: user.username, role: user.role } });
+      return res.json({
+        success: true,
+        message: "User approved",
+        user: {
+          id: user._id,
+          email: user.email,
+          username: user.username,
+          role: user.role,
+        },
+      });
     } catch (err) {
       console.error("Approve user error", err);
       return res.status(500).json({ success: false, message: "Server error" });
@@ -106,7 +129,9 @@ router.post(
       const { id } = req.params;
       const removed = await PendingUser.findByIdAndDelete(id);
       if (!removed) {
-        return res.status(404).json({ success: false, message: "Pending user not found" });
+        return res
+          .status(404)
+          .json({ success: false, message: "Pending user not found" });
       }
       return res.json({ success: true, message: "User request rejected" });
     } catch (err) {
@@ -125,18 +150,30 @@ router.post(
     try {
       const { email, username, password, role, phone, branch } = req.body || {};
       if (!email || !username || !password || !role || !phone || !branch) {
-        return res.status(400).json({ success: false, message: "Missing required fields" });
+        return res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
       }
       if (!["CSE", "DSAI", "ECE"].includes(branch)) {
-        return res.status(400).json({ success: false, message: "Invalid branch" });
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid branch" });
       }
 
       const normalizedEmail = email.toLowerCase();
       const exists = await User.findOne({ email: normalizedEmail });
-      if (exists) return res.status(400).json({ success: false, message: "User already exists" });
+      if (exists)
+        return res
+          .status(400)
+          .json({ success: false, message: "User already exists" });
 
-      const phoneExists = await User.findOne({ phone }) || await PendingUser.findOne({ phone });
-      if (phoneExists) return res.status(400).json({ success: false, message: "Phone number already in use" });
+      const phoneExists =
+        (await User.findOne({ phone })) ||
+        (await PendingUser.findOne({ phone }));
+      if (phoneExists)
+        return res
+          .status(400)
+          .json({ success: false, message: "Phone number already in use" });
 
       // send welcome email first to verify deliverability
       const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
@@ -148,11 +185,21 @@ router.post(
           text: `Your account has been created. Email: ${normalizedEmail}, Default Password: ${DEFAULT_PASS}. Please log in and set a new password.`,
         });
         if (!mailRes.ok) {
-          return res.status(400).json({ success: false, message: "Invalid email entered. User not created." });
+          return res
+            .status(400)
+            .json({
+              success: false,
+              message: "Invalid email entered. User not created.",
+            });
         }
       } catch (e) {
         console.warn("Failed to send account creation email", e);
-        return res.status(400).json({ success: false, message: "Invalid email entered. User not created." });
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Invalid email entered. User not created.",
+          });
       }
 
       const user = await User.create({
@@ -167,7 +214,11 @@ router.post(
         defaultPassword: true,
       });
 
-      return res.json({ success: true, message: "User created", user: { id: user._id, email: user.email } });
+      return res.json({
+        success: true,
+        message: "User created",
+        user: { id: user._id, email: user.email },
+      });
     } catch (err) {
       console.error("Add user error", err);
       return res.status(500).json({ success: false, message: "Server error" });
