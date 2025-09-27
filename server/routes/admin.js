@@ -128,7 +128,7 @@ router.post(
 
       return res.json({
         success: true,
-        message: "User approved",
+        message: "User approved — verification email sent",
         user: {
           id: user._id,
           email: user.email,
