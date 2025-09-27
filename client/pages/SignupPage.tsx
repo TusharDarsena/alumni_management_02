@@ -35,7 +35,6 @@ export default function SignupPage() {
         body: JSON.stringify({
           email: form.email,
           username: form.name,
-          password: form.password,
           role: form.role,
           phone: form.phone,
           branch: form.branch,
