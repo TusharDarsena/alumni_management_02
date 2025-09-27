@@ -27,6 +27,7 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
   const [notifOpen, setNotifOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalInitialTab, setModalInitialTab] = useState<ModalInitialTab>("profile");
+  const { logout } = useAuth();
 
   function handleOpenProfile() {
     setModalInitialTab("profile");
