@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import User from "../models/User.js";
 
@@ -12,6 +13,15 @@ export const requireAuth = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select("-password");
     if (!user) return res.status(401).json({ message: "Invalid token" });
+
+    // check token version for invalidation
+    const tokenVersion = decoded.v ?? 0;
+    if ((user.tokenVersion || 0) !== tokenVersion) {
+      return res.status(401).json({ message: "Token invalidated" });
+    }
+
+    // prevent caching of protected responses
+    res.setHeader("Cache-Control", "no-store");
 
     req.user = user;
     next();
