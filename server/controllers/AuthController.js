@@ -304,3 +304,43 @@ export const verifyOtp = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+export const resendOtp = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ message: "Email required" });
+    const normalizedEmail = email.toLowerCase();
+
+    let target = await PendingUser.findOne({ email: normalizedEmail }) || await User.findOne({ email: normalizedEmail });
+    if (!target) return res.status(404).json({ message: "User not found" });
+
+    if (target.otpLockedUntil && target.otpLockedUntil > new Date()) {
+      return res.status(429).json({ message: "Too many attempts. Try again later." });
+    }
+
+    const lastSent = target.lastOtpSentAt;
+    if (lastSent && (new Date() - new Date(lastSent)) < 60 * 1000) {
+      return res.status(429).json({ message: "Please wait before requesting another OTP." });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+    target.otp = otp;
+    target.otpExpiresAt = otpExpiry;
+    target.otpAttempts = 0;
+    target.lastOtpSentAt = new Date();
+    await target.save();
+
+    try {
+      await sendMail({ to: normalizedEmail, subject: "Your OTP", text: `Your OTP is ${otp}. It expires in 10 minutes.` });
+    } catch (e) {
+      console.warn("Failed to send OTP email", e);
+    }
+
+    return res.json({ success: true, message: "OTP resent" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
