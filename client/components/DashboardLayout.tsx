@@ -110,9 +110,27 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
                       Notification
                     </button>
                     <button
-                      onClick={() => {
-                        onNavigate?.("/logout");
+                      onClick={async () => {
                         setProfileOpen(false);
+                        try {
+                          const { logout } = await import("@/context/AuthContext");
+                        } catch (e) {
+                          // fallback
+                        }
+                        // call auth logout via hook
+                        try {
+                          // eslint-disable-next-line react-hooks/rules-of-hooks
+                          const auth = (await import("@/context/AuthContext")).useAuth?.();
+                          if (auth?.logout) {
+                            await auth.logout();
+                            // hard redirect to avoid bfcache
+                            window.location.replace("/login");
+                            return;
+                          }
+                        } catch (e) {
+                          // fallback redirect
+                        }
+                        window.location.replace("/login");
                       }}
                       className={cn("w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-slate-50")}
                     >
