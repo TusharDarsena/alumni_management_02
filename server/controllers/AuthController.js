@@ -16,9 +16,21 @@ const isStrongPassword = (pwd) => {
 
 export const signup = async (req, res) => {
   try {
-    const { email, username, password: providedPassword, role } = req.body;
-    if (!email || !username || !role) {
+    const { email, username, password: providedPassword, role, phone, branch } = req.body;
+    if (!email || !username) {
       return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Only allow alumni self-registration
+    if (role && role !== "alumni") {
+      return res.status(400).json({ message: "Self-registration allowed only for alumni" });
+    }
+
+    if (!phone || !branch) {
+      return res.status(400).json({ message: "Phone and branch are required" });
+    }
+    if (!["CSE", "DSAI", "ECE"].includes(branch)) {
+      return res.status(400).json({ message: "Invalid branch" });
     }
 
     const normalizedEmail = email.toLowerCase();
@@ -28,41 +40,60 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    const existingPhoneUser = await User.findOne({ phone }) || await PendingUser.findOne({ phone });
+    if (existingPhoneUser) {
+      return res.status(400).json({ message: "Phone number already in use" });
+    }
+
     const existingPending = await PendingUser.findOne({ email: normalizedEmail, status: "pending" });
     if (existingPending) {
       return res.status(400).json({ message: "A request for this email is already pending" });
     }
 
-    const isDefaultPassword = role === "student";
+    const isDefaultPassword = false; // alumni must provide password
 
-    let passwordToSet = providedPassword;
-    if (isDefaultPassword) {
-      passwordToSet = "DefaultPass123!";
-    } else {
-      if (!providedPassword) {
-        return res.status(400).json({ message: "Password is required for this role" });
-      }
-      if (!isStrongPassword(providedPassword)) {
-        return res.status(400).json({
-          message:
-            "Password too weak. Use at least 8 characters with upper, lower, number, and special character.",
-        });
-      }
+    if (!providedPassword) {
+      return res.status(400).json({ message: "Password is required" });
     }
+    if (!isStrongPassword(providedPassword)) {
+      return res.status(400).json({
+        message:
+          "Password too weak. Use at least 8 characters with upper, lower, number, and special character.",
+      });
+    }
+
+    // generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
     const pending = await PendingUser.create({
       email: normalizedEmail,
       username,
-      password: passwordToSet,
-      role,
+      password: providedPassword,
+      role: "alumni",
       status: "pending",
-      mustChangePassword: Boolean(isDefaultPassword),
-      defaultPassword: Boolean(isDefaultPassword),
+      mustChangePassword: false,
+      defaultPassword: false,
+      phone,
+      branch,
+      otp,
+      otpExpiresAt: otpExpiry,
     });
+
+    // send OTP email (best-effort)
+    try {
+      await sendMail({
+        to: normalizedEmail,
+        subject: "Verify your email",
+        text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
+      });
+    } catch (e) {
+      console.warn("Failed to send OTP email", e);
+    }
 
     return res.status(201).json({
       success: true,
-      message: "Your request has been submitted for admin approval.",
+      message: "Your request has been submitted for admin approval. An OTP has been sent to your email to verify ownership.",
       pendingId: pending._id,
     });
   } catch (err) {
