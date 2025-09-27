@@ -26,6 +26,7 @@ const pendingUserSchema = new mongoose.Schema({
   otpExpiresAt: Date,
   otpAttempts: { type: Number, default: 0 },
   otpLockedUntil: Date,
+  lastOtpSentAt: Date,
   phone: { type: String, unique: true, sparse: true, trim: true },
   branch: { type: String, enum: ["CSE", "DSAI", "ECE"], required: false },
   mustChangePassword: { type: Boolean, default: false },
