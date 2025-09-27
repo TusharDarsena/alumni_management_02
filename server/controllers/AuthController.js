@@ -190,19 +190,27 @@ export const verifyHandler = async (req, res) => {
   try {
     const { token, email } = req.query || {};
     if (token && email) {
-      // Public verification of email token
+      // Public verification of email token; check both User and PendingUser
       const normalizedEmail = String(email).toLowerCase();
       const user = await User.findOne({ email: normalizedEmail });
-      if (!user) return res.status(404).json({ success: false, message: "User not found" });
-      if (!user.verificationTokenHash || !user.verificationExpires)
-        return res.status(400).json({ success: false, message: "No verification token set" });
-      if (new Date() > new Date(user.verificationExpires))
-        return res.status(400).json({ success: false, message: "Verification token expired" });
-      const hashed = hashToken(String(token));
-      if (hashed !== user.verificationTokenHash)
-        return res.status(400).json({ success: false, message: "Invalid verification token" });
-      // token valid
-      return res.json({ success: true });
+      if (user && user.verificationTokenHash && user.verificationExpires) {
+        if (new Date() > new Date(user.verificationExpires))
+          return res.status(400).json({ success: false, message: "Verification token expired" });
+        const hashed = hashToken(String(token));
+        if (hashed !== user.verificationTokenHash) return res.status(400).json({ success: false, message: "Invalid verification token" });
+        return res.json({ success: true });
+      }
+
+      const pending = await PendingUser.findOne({ email: normalizedEmail });
+      if (pending && pending.verificationTokenHash && pending.verificationExpires) {
+        if (new Date() > new Date(pending.verificationExpires))
+          return res.status(400).json({ success: false, message: "Verification token expired" });
+        const hashed = hashToken(String(token));
+        if (hashed !== pending.verificationTokenHash) return res.status(400).json({ success: false, message: "Invalid verification token" });
+        return res.json({ success: true });
+      }
+
+      return res.status(404).json({ success: false, message: "User not found" });
     }
 
     // Otherwise behave like verifyUser that requires authentication
@@ -210,6 +218,47 @@ export const verifyHandler = async (req, res) => {
   } catch (err) {
     console.error("Verification handler error", err);
     return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+export const sendVerification = async (req, res) => {
+  try {
+    const { email } = req.body || {};
+    if (!email) return res.status(400).json({ message: "Email required" });
+    const normalizedEmail = String(email).toLowerCase();
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const last = user.verificationLastSentAt;
+    if (last && new Date() - new Date(last) < 60 * 1000) {
+      return res.status(429).json({ message: "Please wait before requesting another verification email." });
+    }
+
+    const token = generateToken();
+    user.verificationTokenHash = hashToken(token);
+    user.verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    user.verificationLastSentAt = new Date();
+    await user.save();
+
+    const base = process.env.FRONTEND_URL || process.env.APP_URL || "http://localhost:8080";
+    const link = `${base.replace(/\/$/, "")}/verify?token=${encodeURIComponent(token)}&email=${encodeURIComponent(normalizedEmail)}`;
+
+    try {
+      await sendMail({
+        to: normalizedEmail,
+        subject: "Complete your account setup",
+        text: `Click the following link to verify your email and set a password: ${link}`,
+        html: `<p>Click the link below to verify your email and set your password:</p><p><a href=\"${link}\">Verify email</a></p>`,
+      });
+    } catch (e) {
+      console.warn("Failed to send verification email", e);
+      return res.status(500).json({ message: "Failed to send verification email" });
+    }
+
+    return res.json({ success: true, message: "Verification email sent" });
+  } catch (err) {
+    console.error("sendVerification error", err);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
