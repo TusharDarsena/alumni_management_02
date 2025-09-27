@@ -48,6 +48,10 @@ router.post(
         return res.status(400).json({ success: false, message: "User already exists" });
       }
 
+      // generate OTP
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
       const user = await User.create({
         email: pending.email,
         username: pending.username,
@@ -56,7 +60,22 @@ router.post(
         isApproved: true,
         mustChangePassword: Boolean(pending.mustChangePassword),
         defaultPassword: Boolean(pending.defaultPassword),
+        otp,
+        otpExpiresAt: otpExpiry,
+        phone: pending.phone,
+        branch: pending.branch,
       });
+
+      // send OTP email
+      try {
+        await import("../utils/mailer.js").then((m) => m.sendMail({
+          to: user.email,
+          subject: "Your account has been approved",
+          text: `Your account has been approved. Please verify your email using OTP: ${otp}`,
+        }));
+      } catch (e) {
+        console.warn("Failed to send approval email", e);
+      }
 
       await PendingUser.findByIdAndDelete(id);
 
