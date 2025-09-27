@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import PendingUsersTable from "@/components/PendingUsersTable";
 
 interface NewUser {
   name: string;
@@ -114,11 +115,7 @@ export default function AdminControlsPage() {
           </CardContent>
         </Card>
       ) : (
-        <Card className="mt-6 w-full">
-          <CardContent className="p-6">
-            <div className="text-sm text-slate-600">No pending requests.</div>
-          </CardContent>
-        </Card>
+        <PendingUsersTable />
       )}
     </DashboardLayout>
   );
