@@ -50,17 +50,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "A request for this email is already pending" });
     }
 
-    const isDefaultPassword = false; // alumni must provide password
-
-    if (!providedPassword) {
-      return res.status(400).json({ message: "Password is required" });
-    }
-    if (!isStrongPassword(providedPassword)) {
-      return res.status(400).json({
-        message:
-          "Password too weak. Use at least 8 characters with upper, lower, number, and special character.",
-      });
-    }
+    // No password required for self-registration (alumni). They will be added to PendingUsers after verification and admin approval.
 
     // generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
