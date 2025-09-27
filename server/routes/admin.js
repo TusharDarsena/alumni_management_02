@@ -52,29 +52,38 @@ router.post(
       const otp = Math.floor(100000 + Math.random() * 900000).toString();
       const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
+      // create user with default password
+      const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
       const user = await User.create({
         email: pending.email,
         username: pending.username,
-        password: pending.password, // will be hashed by User pre-save hook
+        password: DEFAULT_PASS, // will be hashed by User pre-save hook
         role: pending.role,
         isApproved: true,
-        mustChangePassword: Boolean(pending.mustChangePassword),
-        defaultPassword: Boolean(pending.defaultPassword),
-        otp,
-        otpExpiresAt: otpExpiry,
+        isVerified: Boolean(pending.isVerified),
+        mustChangePassword: true,
+        defaultPassword: true,
         phone: pending.phone,
         branch: pending.branch,
       });
 
-      // send OTP email
+      // send welcome email
       try {
-        await import("../utils/mailer.js").then((m) => m.sendMail({
+        const { sendMail } = await import("../utils/mailer.js");
+        const mailRes = await sendMail({
           to: user.email,
-          subject: "Your account has been approved",
-          text: `Your account has been approved. Please verify your email using OTP: ${otp}`,
-        }));
+          subject: "Your account has been created",
+          text: `Your account has been created. Email: ${user.email}, Default Password: ${DEFAULT_PASS}. Please log in and set a new password.`,
+        });
+        if (!mailRes.ok) {
+          // rollback created user
+          await User.findByIdAndDelete(user._id);
+          return res.status(400).json({ success: false, message: "Failed to send welcome email; user not created" });
+        }
       } catch (e) {
         console.warn("Failed to send approval email", e);
+        await User.findByIdAndDelete(user._id);
+        return res.status(400).json({ success: false, message: "Failed to send welcome email; user not created" });
       }
 
       await PendingUser.findByIdAndDelete(id);
