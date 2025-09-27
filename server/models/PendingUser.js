@@ -21,9 +21,19 @@ const pendingUserSchema = new mongoose.Schema({
     default: "pending",
     index: true,
   },
+  isVerified: { type: Boolean, default: false },
+  otp: String,
+  otpExpiresAt: Date,
+  otpAttempts: { type: Number, default: 0 },
+  otpLockedUntil: Date,
+  phone: { type: String, unique: true, sparse: true, trim: true },
+  branch: { type: String, enum: ["CSE", "DSAI", "ECE"], required: false },
   mustChangePassword: { type: Boolean, default: false },
   defaultPassword: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 });
+
+// TTL index
+pendingUserSchema.index({ otpExpiresAt: 1 }, { expireAfterSeconds: 0 });
 
 export default mongoose.model("PendingUser", pendingUserSchema);
