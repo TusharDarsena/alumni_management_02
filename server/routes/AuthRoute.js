@@ -5,6 +5,7 @@ import {
   logout,
   verifyUser,
   changePasswordFirst,
+  verifyOtp,
 } from "../controllers/AuthController.js";
 import { requireAuth } from "../middleware/auth.js";
 
