@@ -219,7 +219,7 @@ export const changePasswordFirst = async (req, res) => {
     user.defaultPassword = false;
     await user.save();
 
-    const refreshed = createToken(user._id);
+    const refreshed = createToken(user._id, user.tokenVersion || 0);
     res.cookie("token", refreshed, {
       httpOnly: true,
       sameSite: "lax",
