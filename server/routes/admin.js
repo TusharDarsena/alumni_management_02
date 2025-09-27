@@ -88,4 +88,61 @@ router.post(
   },
 );
 
+// Admin: add user directly
+router.post(
+  "/add-user",
+  requireAuth,
+  requireRole("admin"),
+  async (req, res) => {
+    try {
+      const { email, username, password, role, phone, branch } = req.body || {};
+      if (!email || !username || !password || !role || !phone || !branch) {
+        return res.status(400).json({ success: false, message: "Missing required fields" });
+      }
+      if (!["CSE", "DSAI", "ECE"].includes(branch)) {
+        return res.status(400).json({ success: false, message: "Invalid branch" });
+      }
+
+      const normalizedEmail = email.toLowerCase();
+      const exists = await User.findOne({ email: normalizedEmail });
+      if (exists) return res.status(400).json({ success: false, message: "User already exists" });
+
+      const phoneExists = await User.findOne({ phone }) || await PendingUser.findOne({ phone });
+      if (phoneExists) return res.status(400).json({ success: false, message: "Phone number already in use" });
+
+      // generate OTP for verification
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+      const user = await User.create({
+        email: normalizedEmail,
+        username,
+        password,
+        role,
+        phone,
+        branch,
+        isApproved: true,
+        otp,
+        otpExpiresAt: otpExpiry,
+      });
+
+      // send notification email with OTP
+      try {
+        await import("../utils/mailer.js").then((m) => m.sendMail({
+          to: normalizedEmail,
+          subject: "Your account has been created",
+          text: `A user account has been created for you with email ${normalizedEmail}. Please verify your account by logging in. Your OTP is ${otp}`,
+        }));
+      } catch (e) {
+        console.warn("Failed to send account creation email", e);
+      }
+
+      return res.json({ success: true, message: "User created", user: { id: user._id, email: user.email } });
+    } catch (err) {
+      console.error("Add user error", err);
+      return res.status(500).json({ success: false, message: "Server error" });
+    }
+  },
+);
+
 export default router;
