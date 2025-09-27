@@ -138,32 +138,34 @@ router.post(
       const phoneExists = await User.findOne({ phone }) || await PendingUser.findOne({ phone });
       if (phoneExists) return res.status(400).json({ success: false, message: "Phone number already in use" });
 
-      // generate OTP for verification
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-      const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+      // send welcome email first to verify deliverability
+      const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
+      try {
+        const { sendMail } = await import("../utils/mailer.js");
+        const mailRes = await sendMail({
+          to: normalizedEmail,
+          subject: "Your account has been created",
+          text: `Your account has been created. Email: ${normalizedEmail}, Default Password: ${DEFAULT_PASS}. Please log in and set a new password.`,
+        });
+        if (!mailRes.ok) {
+          return res.status(400).json({ success: false, message: "Invalid email entered. User not created." });
+        }
+      } catch (e) {
+        console.warn("Failed to send account creation email", e);
+        return res.status(400).json({ success: false, message: "Invalid email entered. User not created." });
+      }
 
       const user = await User.create({
         email: normalizedEmail,
         username,
-        password,
+        password: DEFAULT_PASS,
         role,
         phone,
         branch,
         isApproved: true,
-        otp,
-        otpExpiresAt: otpExpiry,
+        mustChangePassword: true,
+        defaultPassword: true,
       });
-
-      // send notification email with OTP
-      try {
-        await import("../utils/mailer.js").then((m) => m.sendMail({
-          to: normalizedEmail,
-          subject: "Your account has been created",
-          text: `A user account has been created for you with email ${normalizedEmail}. Please verify your account by logging in. Your OTP is ${otp}`,
-        }));
-      } catch (e) {
-        console.warn("Failed to send account creation email", e);
-      }
 
       return res.json({ success: true, message: "User created", user: { id: user._id, email: user.email } });
     } catch (err) {
