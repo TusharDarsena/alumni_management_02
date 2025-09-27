@@ -164,12 +164,14 @@ export const logout = async (req, res) => {
 // Verify token
 export const verifyUser = async (req, res) => {
   const user = req.user;
+  res.setHeader("Cache-Control", "no-store");
   return res.json({
     status: true,
     user: user.username,
     role: user.role,
     mustChangePassword: Boolean(user.mustChangePassword),
     defaultPassword: Boolean(user.defaultPassword),
+    isVerified: Boolean(user.isVerified),
   });
 };
 
