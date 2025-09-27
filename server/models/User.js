@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     trim: true,
   },
-  username: { type: String, required: true },
+  username: { type: String, required: true, trim: true },
   password: { type: String, required: true },
   role: {
     type: String,
@@ -17,12 +17,26 @@ const userSchema = new mongoose.Schema({
     default: "student",
   },
   isApproved: { type: Boolean, default: true },
+  isVerified: { type: Boolean, default: false },
   mustChangePassword: { type: Boolean, default: false },
   defaultPassword: { type: Boolean, default: false },
   resetOtpHash: String,
   resetOtpExpiry: Date,
+  // OTP fields
+  otp: String,
+  otpExpiresAt: Date,
+  otpAttempts: { type: Number, default: 0 },
+  otpLockedUntil: Date,
+  // Phone and branch
+  phone: { type: String, unique: true, required: true, trim: true },
+  branch: { type: String, enum: ["CSE", "DSAI", "ECE"], required: true },
+  // Token invalidation
+  tokenVersion: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
 });
+
+// TTL index for otpExpiresAt to allow automatic expiry
+userSchema.index({ otpExpiresAt: 1 }, { expireAfterSeconds: 0 });
 
 // Hash password before save
 userSchema.pre("save", async function (next) {
