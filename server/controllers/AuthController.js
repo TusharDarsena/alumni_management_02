@@ -235,3 +235,72 @@ export const changePasswordFirst = async (req, res) => {
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+// Verify OTP endpoint used for both PendingUser and User
+export const verifyOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) return res.status(400).json({ message: "Email and OTP required" });
+
+    const normalizedEmail = email.toLowerCase();
+
+    // check pending users first
+    let pending = await PendingUser.findOne({ email: normalizedEmail });
+    if (pending) {
+      if (pending.otpLockedUntil && pending.otpLockedUntil > new Date()) {
+        return res.status(429).json({ message: "Too many attempts. Try again later." });
+      }
+      if (!pending.otp || !pending.otpExpiresAt || new Date() > pending.otpExpiresAt) {
+        return res.status(400).json({ message: "OTP expired or not set" });
+      }
+      if (pending.otp !== String(otp)) {
+        pending.otpAttempts = (pending.otpAttempts || 0) + 1;
+        if (pending.otpAttempts >= 6) {
+          pending.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        }
+        await pending.save();
+        return res.status(400).json({ message: "Invalid OTP" });
+      }
+      pending.isVerified = true;
+      pending.otp = undefined;
+      pending.otpExpiresAt = undefined;
+      pending.otpAttempts = 0;
+      pending.otpLockedUntil = undefined;
+      await pending.save();
+      return res.json({ message: "Email verified successfully." });
+    }
+
+    // check real users
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (user.otpLockedUntil && user.otpLockedUntil > new Date()) {
+      return res.status(429).json({ message: "Too many attempts. Try again later." });
+    }
+
+    if (!user.otp || !user.otpExpiresAt || new Date() > user.otpExpiresAt) {
+      return res.status(400).json({ message: "OTP expired or not set" });
+    }
+
+    if (user.otp !== String(otp)) {
+      user.otpAttempts = (user.otpAttempts || 0) + 1;
+      if (user.otpAttempts >= 6) {
+        user.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      }
+      await user.save();
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    user.isVerified = true;
+    user.otp = undefined;
+    user.otpExpiresAt = undefined;
+    user.otpAttempts = 0;
+    user.otpLockedUntil = undefined;
+    await user.save();
+
+    return res.json({ message: "Email verified successfully." });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
