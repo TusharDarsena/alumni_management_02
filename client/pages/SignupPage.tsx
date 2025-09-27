@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function SignupPage() {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -21,7 +22,6 @@ export default function SignupPage() {
     country: "",
   });
   const [error, setError] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const handleChange = (k: string, v: string) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -46,24 +46,11 @@ export default function SignupPage() {
         setError(data.message || "Signup failed");
         return;
       }
-      setSubmitted(true);
       toast({
-        title: "Request sent for approval",
-        description: "Please wait for admin confirmation.",
+        title: "OTP sent",
+        description: "Please verify your email to complete registration.",
       });
-      setForm({
-        name: "",
-        email: "",
-        password: "",
-        role: "student",
-        dob: "",
-        graduationYear: "",
-        branch: "",
-        company: "",
-        job: "",
-        phone: "",
-        country: "",
-      });
+      navigate(`/verify-otp?email=${encodeURIComponent(form.email)}`);
     } catch (err) {
       setError("Network error");
     }
@@ -177,11 +164,6 @@ export default function SignupPage() {
               />
             </div>
 
-            {submitted && (
-              <div className="col-span-2 text-sm text-green-600">
-                Request sent for approval. Please wait for admin confirmation.
-              </div>
-            )}
             {error && (
               <div className="col-span-2 text-sm text-destructive">{error}</div>
             )}

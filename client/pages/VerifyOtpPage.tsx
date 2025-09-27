@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -6,7 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function VerifyOtpPage() {
   const { toast } = useToast();
-  const [email, setEmail] = useState("");
+  const [searchParams] = useSearchParams();
+  const [email, setEmail] = useState(searchParams.get("email") || "");
   const [otp, setOtp] = useState("");
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
   const [countdown, setCountdown] = useState(0);
