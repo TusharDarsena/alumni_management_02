@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import PendingUser from "../models/PendingUser.js";
 import { createToken } from "../utils/jwt.js";
+import { sendMail } from "../utils/mailer.js";
 
 const isStrongPassword = (pwd) => {
   if (typeof pwd !== "string") return false;
