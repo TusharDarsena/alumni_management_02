@@ -11,7 +11,7 @@ export default function SignupPage() {
     name: "",
     email: "",
     password: "",
-    role: "student",
+    role: "alumni",
     dob: "",
     graduationYear: "",
     branch: "",
@@ -37,6 +37,8 @@ export default function SignupPage() {
           username: form.name,
           password: form.password,
           role: form.role,
+          phone: form.phone,
+          branch: form.branch,
         }),
       });
       const data = await res.json();
@@ -89,16 +91,7 @@ export default function SignupPage() {
 
             <div className="col-span-2">
               <Label>Role</Label>
-              <select
-                value={form.role}
-                onChange={(e) => handleChange("role", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              >
-                <option value="student">Student</option>
-                <option value="faculty">Faculty</option>
-                <option value="alumni">Alumni</option>
-                <option value="admin">Admin</option>
-              </select>
+              <div className="w-full px-3 py-2 border border-gray-100 rounded-md text-sm text-slate-600">Alumni (self-registration)</div>
             </div>
 
             <div>
@@ -113,7 +106,12 @@ export default function SignupPage() {
 
             <div className="col-span-2">
               <Label>Branch</Label>
-              <Input value={form.branch} onChange={(e) => handleChange("branch", e.target.value)} />
+              <select value={form.branch} onChange={(e) => handleChange("branch", e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md">
+                <option value="">Select branch</option>
+                <option value="CSE">CSE</option>
+                <option value="DSAI">DSAI</option>
+                <option value="ECE">ECE</option>
+              </select>
             </div>
 
             <div>
