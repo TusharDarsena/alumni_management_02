@@ -69,15 +69,15 @@ export const signup = async (req, res) => {
     const pending = await PendingUser.create({
       email: normalizedEmail,
       username,
-      password: providedPassword,
       role: "alumni",
-      status: "pending",
+      status: "otp_sent",
       mustChangePassword: false,
       defaultPassword: false,
       phone,
       branch,
       otp,
       otpExpiresAt: otpExpiry,
+      lastOtpSentAt: new Date(),
     });
 
     // send OTP email (best-effort)
