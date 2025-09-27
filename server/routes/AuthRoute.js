@@ -12,8 +12,9 @@ const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/login", login);
-router.post("/logout", logout);
+router.post("/logout", requireAuth, logout);
 router.get("/verify", requireAuth, verifyUser);
 router.post("/change-password-first", requireAuth, changePasswordFirst);
+router.post("/verify-otp", verifyOtp);
 
 export default router;
