@@ -128,10 +128,6 @@ export default function AdminControlsPage() {
               <Input id="phone" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)} />
-            </div>
-            <div className="space-y-2">
               <Label htmlFor="dob">Date Of Birth</Label>
               <Input id="dob" type="date" value={form.dob} onChange={(e) => handleChange("dob", e.target.value)} />
             </div>
