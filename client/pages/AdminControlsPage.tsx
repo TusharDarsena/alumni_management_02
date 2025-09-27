@@ -67,8 +67,7 @@ export default function AdminControlsPage() {
         body: JSON.stringify({
           email: form.email,
           username: form.name,
-          password: form.password,
-          role: form.job === "admin" ? "admin" : form.job === "faculty" ? "faculty" : "student",
+          role: form.job === "admin" ? "admin" : form.job === "faculty" ? "faculty" : form.job === "alumni" ? "alumni" : "student",
           phone: form.phone,
           branch: form.branch,
         }),
