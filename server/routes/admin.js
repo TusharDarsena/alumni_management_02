@@ -202,7 +202,7 @@ router.post(
         branch,
       });
 
-      return res.json({ success: true, message: "User created", user: { id: user._id, email: user.email } });
+      return res.json({ success: true, message: "User created inactive — verification email sent", user: { id: user._id, email: user.email } });
     } catch (err) {
       console.error("Add user error", err);
       if (err.message === "Failed to send welcome email") {
