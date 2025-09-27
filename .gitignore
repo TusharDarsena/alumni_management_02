@@ -26,3 +26,7 @@ dist-ssr
 .config/
 !.env
 .env
+TODO.md
+notes.md
+README.md
+improvements.md

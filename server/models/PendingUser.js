@@ -29,7 +29,7 @@ const pendingUserSchema = new mongoose.Schema({
   otpLockedUntil: Date,
   lastOtpSentAt: Date,
   phone: { type: String, unique: true, sparse: true, trim: true },
-  branch: { type: String, enum: allowedBranches, required: false },
+  branch: { type: String, enum: allowedBranches, required: true },
   mustChangePassword: { type: Boolean, default: false },
   defaultPassword: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },

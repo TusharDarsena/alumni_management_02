@@ -1,9 +1,15 @@
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import User from "../models/User.js";
 import PendingUser from "../models/PendingUser.js";
 import { createToken } from "../utils/jwt.js";
 import { sendMail } from "../utils/mailer.js";
 import allowedBranches from "../config/branches.js";
+
+const hashOTP = (otp) => {
+  const salt = "otp-salt"; // Fixed salt for simplicity; use unique per user in production
+  return crypto.pbkdf2Sync(otp, salt, 10000, 64, "sha512").toString("hex");
+};
 
 const findOtpUser = async (email) => {
   const normalizedEmail = email.toLowerCase();
@@ -60,8 +66,11 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const existingPhoneUser =
-      (await User.findOne({ phone })) || (await PendingUser.findOne({ phone }));
+    const [existingUserPhone, existingPendingPhone] = await Promise.all([
+      User.findOne({ phone }),
+      PendingUser.findOne({ phone })
+    ]);
+    const existingPhoneUser = existingUserPhone || existingPendingPhone;
     if (existingPhoneUser) {
       return res.status(400).json({ message: "Phone number already in use" });
     }
@@ -80,6 +89,7 @@ export const signup = async (req, res) => {
     // generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    const hashedOtp = hashOTP(otp);
 
     const pending = await PendingUser.create({
       email: normalizedEmail,
@@ -90,12 +100,12 @@ export const signup = async (req, res) => {
       defaultPassword: false,
       phone,
       branch,
-      otp,
+      otp: hashedOtp,
       otpExpiresAt: otpExpiry,
       lastOtpSentAt: new Date(),
     });
 
-    // send OTP email (best-effort)
+    // send OTP email
     try {
       await sendMail({
         to: normalizedEmail,
@@ -103,7 +113,8 @@ export const signup = async (req, res) => {
         text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
       });
     } catch (e) {
-      console.warn("Failed to send OTP email", e);
+      console.error("Failed to send OTP email", e);
+      // Optionally delete pending if email fails, but keep for now as user can resend
     }
 
     return res.status(201).json({
@@ -157,7 +168,7 @@ export const logout = async (req, res) => {
     const token = req.cookies?.token;
     if (token) {
       try {
-        const decoded = jwt.decode(token);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded?.id;
         if (userId) {
           const user = await User.findById(userId);
@@ -167,12 +178,11 @@ export const logout = async (req, res) => {
           }
         }
       } catch (e) {
-        console.warn("Could not decode token during logout", e);
+        console.warn("Could not verify token during logout", e);
       }
     }
 
     res.clearCookie("token");
-    res.setHeader("Cache-Control", "no-store");
     res.json({ success: true });
   } catch (err) {
     console.error("Logout error", err);
@@ -183,14 +193,15 @@ export const logout = async (req, res) => {
 // Verify token
 export const verifyUser = async (req, res) => {
   const user = req.user;
-  res.setHeader("Cache-Control", "no-store");
   return res.json({
     status: true,
-    user: user.username,
-    role: user.role,
-    mustChangePassword: Boolean(user.mustChangePassword),
-    defaultPassword: Boolean(user.defaultPassword),
-    isVerified: Boolean(user.isVerified),
+    user: {
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      isVerified: Boolean(user.isVerified),
+      mustChangePassword: Boolean(user.mustChangePassword),
+    },
   });
 };
 
@@ -232,8 +243,6 @@ export const changePasswordFirst = async (req, res) => {
     user.password = newPassword; // pre-save hook will hash
     user.mustChangePassword = false;
     user.defaultPassword = false;
-    await user.save();
-
     // Invalidate other sessions by incrementing tokenVersion
     user.tokenVersion = (user.tokenVersion || 0) + 1;
     await user.save();
@@ -272,7 +281,8 @@ export const verifyOtp = async (req, res) => {
       return res.status(400).json({ message: "OTP expired or not set" });
     }
 
-    if (target.otp !== String(otp)) {
+    const hashedOtp = hashOTP(otp);
+    if (target.otp !== hashedOtp) {
       target.otpAttempts = (target.otpAttempts || 0) + 1;
       if (target.otpAttempts >= 6) {
         target.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -322,15 +332,11 @@ export const resendOtp = async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
-    target.otp = otp;
-    target.otpExpiresAt = otpExpiry;
-    target.otpAttempts = 0;
-    target.lastOtpSentAt = new Date();
-    await target.save();
+    const hashedOtp = hashOTP(otp);
 
     const normalizedEmail = email.toLowerCase();
 
+    // Send email first
     try {
       await sendMail({
         to: normalizedEmail,
@@ -338,8 +344,16 @@ export const resendOtp = async (req, res) => {
         text: `Your OTP is ${otp}. It expires in 10 minutes.`,
       });
     } catch (e) {
-      console.warn("Failed to send OTP email", e);
+      console.error("Failed to send OTP email", e);
+      return res.status(500).json({ message: "Failed to send OTP email. Please try again later." });
     }
+
+    // Save only after successful email send
+    target.otp = hashedOtp;
+    target.otpExpiresAt = otpExpiry;
+    target.otpAttempts = 0;
+    target.lastOtpSentAt = new Date();
+    await target.save();
 
     return res.json({ success: true, message: "OTP resent" });
   } catch (err) {

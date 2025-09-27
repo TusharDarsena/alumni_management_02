@@ -6,15 +6,12 @@ import allowedBranches from "../config/branches.js";
 import { sendMail } from "../utils/mailer.js";
 import { isStrongPassword } from "../controllers/AuthController.js";
 
-const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
+const DEFAULT_PASS = process.env.DEFAULT_PASSWORD;
 
 const createUserWithEmail = async (userData) => {
   const { email, username, password, role, phone, branch, isVerified = false } = userData;
-
   const isDefaultPassword = !password;
   const finalPassword = password || DEFAULT_PASS;
-
-  // Send welcome email first to verify deliverability
   const mailRes = await sendMail({
     to: email,
     subject: "Your account has been created",
@@ -43,10 +40,7 @@ const createUserWithEmail = async (userData) => {
 
 const router = express.Router();
 
-// Example admin-only route
-router.get("/stats", requireAuth, requireRole("admin"), (req, res) => {
-  res.json({ message: "Admin stats", stats: { users: 123, active: 42 } });
-});
+
 
 // Fetch all pending user requests
 router.get(
@@ -99,12 +93,6 @@ router.post(
             .status(400)
             .json({ success: false, message: "Phone number already in use" });
         }
-      }
-
-      if (pending.branch && !allowedBranches.includes(pending.branch)) {
-        return res
-          .status(400)
-          .json({ success: false, message: "Invalid branch" });
       }
 
       // Create user with email validation
@@ -179,11 +167,7 @@ router.post(
           .status(400)
           .json({ success: false, message: "Missing required fields" });
       }
-      if (!allowedBranches.includes(branch)) {
-        return res
-          .status(400)
-          .json({ success: false, message: "Invalid branch" });
-      }
+      
 
       if (password && !isStrongPassword(password)) {
         return res
