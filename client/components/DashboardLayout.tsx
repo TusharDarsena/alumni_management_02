@@ -3,6 +3,7 @@ import Sidebar from "@/components/Sidebar";
 import { Bell, User as UserIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ProfileSettingsModal, { type ModalInitialTab } from "@/components/ProfileSettingsModal";
+import { useAuth } from "@/context/AuthContext";
 
 export interface UserSummary {
   name: string;
