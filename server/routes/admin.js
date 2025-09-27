@@ -118,6 +118,7 @@ router.post(
       const user = await createUserWithEmail({
         email: pending.email,
         username: pending.username,
+        password: pending.password || undefined,
         role: pending.role,
         phone: pending.phone,
         branch: pending.branch,
