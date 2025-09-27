@@ -262,12 +262,13 @@ export const verifyOtp = async (req, res) => {
         return res.status(400).json({ message: "Invalid OTP" });
       }
       pending.isVerified = true;
+      pending.status = "pending"; // move into admin review queue
       pending.otp = undefined;
       pending.otpExpiresAt = undefined;
       pending.otpAttempts = 0;
       pending.otpLockedUntil = undefined;
       await pending.save();
-      return res.json({ message: "Email verified successfully." });
+      return res.json({ message: "Email verified successfully. Your request is queued for admin approval." });
     }
 
     // check real users
