@@ -74,38 +74,44 @@ export const signup = async (req, res) => {
 
     // No password required for self-registration (alumni). They will be added to PendingUsers after verification and admin approval.
 
-    // generate OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    // generate verification token for PendingUser
+    const token = generateToken();
+    const tokenHash = hashToken(token);
+    const expiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
     const pending = await PendingUser.create({
       email: normalizedEmail,
       username,
       role: "alumni",
-      status: "otp_sent",
+      status: "verification_sent",
+      isVerified: false,
       mustChangePassword: false,
       defaultPassword: false,
       phone,
       branch,
-      otp,
-      otpExpiresAt: otpExpiry,
-      lastOtpSentAt: new Date(),
+      verificationTokenHash: tokenHash,
+      verificationExpires: expiry,
+      verificationLastSentAt: new Date(),
     });
 
-    // send OTP email (best-effort)
+    const base = process.env.FRONTEND_URL || process.env.APP_URL || "http://localhost:8080";
+    const link = `${base.replace(/\/$/, "")}/verify?token=${encodeURIComponent(token)}&email=${encodeURIComponent(normalizedEmail)}`;
+
+    // send verification link
     try {
       await sendMail({
         to: normalizedEmail,
-        subject: "Verify your email",
-        text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
+        subject: "Complete your registration",
+        text: `Click the following link to verify your email and set your password: ${link}`,
+        html: `<p>Click the link below to verify your email and set your password:</p><p><a href=\"${link}\">Verify email</a></p>`,
       });
     } catch (e) {
-      console.warn("Failed to send OTP email", e);
+      console.warn("Failed to send verification email to pending user", e);
     }
 
     return res.status(201).json({
       success: true,
-      message: "Your request has been submitted for admin approval. An OTP has been sent to your email to verify ownership.",
+      message: "Your request has been submitted for admin approval. A verification link has been sent to your email to verify ownership.",
       pendingId: pending._id,
     });
   } catch (err) {
