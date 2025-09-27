@@ -88,6 +88,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       // ignore
     }
     setUser(null);
+    // prevent forward-button access to protected pages
+    try {
+      window.history.replaceState(null, '', window.location.href);
+      window.location.href = '/login';
+    } catch (e) {
+      // ignore in non-browser env
+    }
   };
 
   return (

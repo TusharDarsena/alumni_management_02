@@ -24,7 +24,7 @@
 
     "bcryptjs": "^2.4.3",
 
-    
+    "nodemailer": "^6.9.3",
 
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.2",

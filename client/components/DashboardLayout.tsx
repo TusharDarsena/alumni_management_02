@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import { Bell, User as UserIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ProfileSettingsModal, { type ModalInitialTab } from "@/components/ProfileSettingsModal";
+import ProfileSettingsModal, {
+  type ModalInitialTab,
+} from "@/components/ProfileSettingsModal";
+import { useAuth } from "@/context/AuthContext";
 
 export interface UserSummary {
   name: string;
@@ -21,11 +24,19 @@ interface DashboardLayoutProps {
   fullWidth?: boolean;
 }
 
-export default function DashboardLayout({ children, activePage, onNavigate, user, fullWidth = false }: DashboardLayoutProps) {
+export default function DashboardLayout({
+  children,
+  activePage,
+  onNavigate,
+  user,
+  fullWidth = false,
+}: DashboardLayoutProps) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalInitialTab, setModalInitialTab] = useState<ModalInitialTab>("profile");
+  const [modalInitialTab, setModalInitialTab] =
+    useState<ModalInitialTab>("profile");
+  const { logout } = useAuth();
 
   function handleOpenProfile() {
     setModalInitialTab("profile");
@@ -44,7 +55,9 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
         {/* TopBar */}
         <div className="sticky top-0 z-20 bg-white border-b">
           <div className="px-6 h-16 flex items-center justify-between pl-[70px]">
-            <div className="text-lg font-semibold text-slate-800">{activePage}</div>
+            <div className="text-lg font-semibold text-slate-800">
+              {activePage}
+            </div>
             <div className="flex items-center gap-4 relative">
               <button
                 aria-label="Notifications"
@@ -59,9 +72,13 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
 
               {notifOpen && (
                 <div className="absolute right-14 mt-2 w-80 rounded-md border bg-white shadow-lg">
-                  <div className="p-3 text-sm font-medium border-b">Notifications</div>
+                  <div className="p-3 text-sm font-medium border-b">
+                    Notifications
+                  </div>
                   <div className="max-h-56 overflow-auto">
-                    <div className="p-3 text-sm text-slate-600">No new notifications</div>
+                    <div className="p-3 text-sm text-slate-600">
+                      No new notifications
+                    </div>
                   </div>
                 </div>
               )}
@@ -72,9 +89,19 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
                   onClick={() => setProfileOpen((v) => !v)}
                 >
                   <div className="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
-                    {user.avatarUrl ? <img src={user.avatarUrl} alt={user.name} className="h-full w-full object-cover" /> : <UserIcon className="h-4 w-4 text-slate-600" />}
+                    {user.avatarUrl ? (
+                      <img
+                        src={user.avatarUrl}
+                        alt={user.name}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <UserIcon className="h-4 w-4 text-slate-600" />
+                    )}
                   </div>
-                  <div className="hidden sm:block text-sm text-slate-700">{user.name}</div>
+                  <div className="hidden sm:block text-sm text-slate-700">
+                    {user.name}
+                  </div>
                 </button>
 
                 {profileOpen && (
@@ -85,7 +112,9 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
                         setProfileOpen(false);
                         onNavigate?.("/profile");
                       }}
-                      className={cn("w-full text-left px-3 py-2 text-sm hover:bg-slate-50")}
+                      className={cn(
+                        "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
+                      )}
                     >
                       My Profile
                     </button>
@@ -95,7 +124,9 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
                         setProfileOpen(false);
                         onNavigate?.("/settings");
                       }}
-                      className={cn("w-full text-left px-3 py-2 text-sm hover:bg-slate-50")}
+                      className={cn(
+                        "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
+                      )}
                     >
                       Settings
                     </button>
@@ -104,16 +135,26 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
                         setNotifOpen((v) => !v);
                         setProfileOpen(false);
                       }}
-                      className={cn("w-full text-left px-3 py-2 text-sm hover:bg-slate-50")}
+                      className={cn(
+                        "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
+                      )}
                     >
                       Notification
                     </button>
                     <button
-                      onClick={() => {
-                        onNavigate?.("/logout");
+                      onClick={async () => {
                         setProfileOpen(false);
+                        try {
+                          await logout();
+                        } catch (e) {
+                          // ignore
+                        }
+                        // hard redirect to avoid bfcache
+                        window.location.replace("/login");
                       }}
-                      className={cn("w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-slate-50")}
+                      className={cn(
+                        "w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-slate-50",
+                      )}
                     >
                       Log Out
                     </button>
@@ -128,15 +169,36 @@ export default function DashboardLayout({ children, activePage, onNavigate, user
         <div className="px-6 py-6 pl-[70px]">
           <div className="flex items-center gap-2 mb-6">
             <span className="text-xl">👋</span>
-            <span className="text-[#0C1E33] text-xl font-normal">Welcome, {user.name}!</span>
+            <span className="text-[#0C1E33] text-xl font-normal">
+              Welcome, {user.name}!
+            </span>
           </div>
           <div className="h-px bg-[#CED8E5] mb-6" />
         </div>
 
         {/* Content area */}
-        <div className={fullWidth ? "flex-1 overflow-auto px-6 pb-6 pl-[70px]" : "flex-1 overflow-auto px-6 pb-6 pl-[70px]"}>{children}</div>
+        <div
+          className={
+            fullWidth
+              ? "flex-1 overflow-auto px-6 pb-6 pl-[70px]"
+              : "flex-1 overflow-auto px-6 pb-6 pl-[70px]"
+          }
+        >
+          {children}
+        </div>
 
-        <ProfileSettingsModal isOpen={isModalOpen} initialTab={modalInitialTab} onClose={() => setIsModalOpen(false)} user={{ name: user.name, email: user.email, avatarUrl: user.avatarUrl, mobile: user.mobile, location: user.location }} />
+        <ProfileSettingsModal
+          isOpen={isModalOpen}
+          initialTab={modalInitialTab}
+          onClose={() => setIsModalOpen(false)}
+          user={{
+            name: user.name,
+            email: user.email,
+            avatarUrl: user.avatarUrl,
+            mobile: user.mobile,
+            location: user.location,
+          }}
+        />
       </div>
     </div>
   );

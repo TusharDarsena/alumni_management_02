@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
 import FirstLoginPasswordChange from "./pages/FirstLoginPasswordChange";
 import HelpPage from "./pages/HelpPage";
+import VerifyOtpPage from "./pages/VerifyOtpPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -81,6 +82,7 @@ const App = () => (
             </Route>
 
             <Route path="/help" element={<HelpPage />} />
+            <Route path="/verify-otp" element={<VerifyOtpPage />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

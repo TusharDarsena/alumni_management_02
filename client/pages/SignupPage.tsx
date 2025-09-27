@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SignupPage() {
-  const navigate = useNavigate();
+  const { toast } = useToast();
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    role: "student",
+    role: "alumni",
     dob: "",
     graduationYear: "",
     branch: "",
@@ -20,8 +21,10 @@ export default function SignupPage() {
     country: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const handleChange = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+  const handleChange = (k: string, v: string) =>
+    setForm((f) => ({ ...f, [k]: v }));
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,8 +36,9 @@ export default function SignupPage() {
         body: JSON.stringify({
           email: form.email,
           username: form.name,
-          password: form.password,
           role: form.role,
+          phone: form.phone,
+          branch: form.branch,
         }),
       });
       const data = await res.json();
@@ -42,7 +46,24 @@ export default function SignupPage() {
         setError(data.message || "Signup failed");
         return;
       }
-      navigate("/login");
+      setSubmitted(true);
+      toast({
+        title: "Request sent for approval",
+        description: "Please wait for admin confirmation.",
+      });
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        role: "student",
+        dob: "",
+        graduationYear: "",
+        branch: "",
+        company: "",
+        job: "",
+        phone: "",
+        country: "",
+      });
     } catch (err) {
       setError("Network error");
     }
@@ -53,9 +74,13 @@ export default function SignupPage() {
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <div className="px-6">
           <div className="h-12 w-12 rounded-full bg-slate-100 mb-6" />
-          <h1 className="text-4xl font-serif font-bold">Let\'s Get you registered</h1>
+          <h1 className="text-4xl font-serif font-bold">
+            Let\'s Get you registered
+          </h1>
           <p className="mt-4 text-slate-600 max-w-lg">
-            The Alumni Management Cell is here to stay connected. Reach out with your queries, updates, or collaborations, and we'll get back to you promptly.
+            The Alumni Management Cell is here to stay connected. Reach out with
+            your queries, updates, or collaborations, and we'll get back to you
+            promptly.
           </p>
 
           <div className="mt-8 text-sm text-slate-600">
@@ -67,76 +92,111 @@ export default function SignupPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="col-span-2">
               <Label>Name</Label>
-              <Input value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
+              <Input
+                value={form.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+              />
             </div>
 
             <div className="col-span-2">
               <Label>Email</Label>
-              <Input type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
-            </div>
-
-            <div className="col-span-2">
-              <Label>Password</Label>
-              <Input type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)} />
+              <Input
+                type="email"
+                value={form.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+              />
             </div>
 
             <div className="col-span-2">
               <Label>Role</Label>
-              <select
-                value={form.role}
-                onChange={(e) => handleChange("role", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              >
-                <option value="student">Student</option>
-                <option value="faculty">Faculty</option>
-                <option value="alumni">Alumni</option>
-                <option value="admin">Admin</option>
-              </select>
+              <div className="w-full px-3 py-2 border border-gray-100 rounded-md text-sm text-slate-600">
+                Alumni (self-registration)
+              </div>
             </div>
 
             <div>
               <Label>Date Of Birth</Label>
-              <Input type="date" value={form.dob} onChange={(e) => handleChange("dob", e.target.value)} />
+              <Input
+                type="date"
+                value={form.dob}
+                onChange={(e) => handleChange("dob", e.target.value)}
+              />
             </div>
 
             <div>
               <Label>Year Of Graduation</Label>
-              <Input value={form.graduationYear} onChange={(e) => handleChange("graduationYear", e.target.value)} />
+              <Input
+                value={form.graduationYear}
+                onChange={(e) => handleChange("graduationYear", e.target.value)}
+              />
             </div>
 
             <div className="col-span-2">
               <Label>Branch</Label>
-              <Input value={form.branch} onChange={(e) => handleChange("branch", e.target.value)} />
+              <select
+                value={form.branch}
+                onChange={(e) => handleChange("branch", e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+              >
+                <option value="">Select branch</option>
+                <option value="CSE">CSE</option>
+                <option value="DSAI">DSAI</option>
+                <option value="ECE">ECE</option>
+              </select>
             </div>
 
             <div>
               <Label>Current Company</Label>
-              <Input value={form.company} onChange={(e) => handleChange("company", e.target.value)} />
+              <Input
+                value={form.company}
+                onChange={(e) => handleChange("company", e.target.value)}
+              />
             </div>
 
             <div>
               <Label>Current job</Label>
-              <Input value={form.job} onChange={(e) => handleChange("job", e.target.value)} />
+              <Input
+                value={form.job}
+                onChange={(e) => handleChange("job", e.target.value)}
+              />
             </div>
 
             <div>
               <Label>Phone Number</Label>
-              <Input value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} />
+              <Input
+                value={form.phone}
+                onChange={(e) => handleChange("phone", e.target.value)}
+              />
             </div>
 
             <div>
               <Label>Country Of Residence</Label>
-              <Input value={form.country} onChange={(e) => handleChange("country", e.target.value)} />
+              <Input
+                value={form.country}
+                onChange={(e) => handleChange("country", e.target.value)}
+              />
             </div>
 
-            {error && <div className="col-span-2 text-sm text-destructive">{error}</div>}
+            {submitted && (
+              <div className="col-span-2 text-sm text-green-600">
+                Request sent for approval. Please wait for admin confirmation.
+              </div>
+            )}
+            {error && (
+              <div className="col-span-2 text-sm text-destructive">{error}</div>
+            )}
 
             <div className="col-span-2 mt-4">
-              <Button type="submit" className="bg-black text-white">Register</Button>
+              <Button type="submit" className="bg-black text-white">
+                Register
+              </Button>
             </div>
 
             <div className="col-span-2 text-sm text-center text-slate-600">
-              Already registered? <Link to="/login" className="text-primary underline">Sign in</Link>
+              Already registered?{" "}
+              <Link to="/login" className="text-primary underline">
+                Sign in
+              </Link>
             </div>
           </div>
         </form>
