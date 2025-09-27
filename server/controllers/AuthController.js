@@ -132,9 +132,33 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = (req, res) => {
-  res.clearCookie("token");
-  res.json({ success: true });
+export const logout = async (req, res) => {
+  try {
+    // If user is authenticated, increment tokenVersion to invalidate existing tokens
+    const token = req.cookies?.token;
+    if (token) {
+      try {
+        const decoded = jwt.decode(token);
+        const userId = decoded?.id;
+        if (userId) {
+          const user = await User.findById(userId);
+          if (user) {
+            user.tokenVersion = (user.tokenVersion || 0) + 1;
+            await user.save();
+          }
+        }
+      } catch (e) {
+        console.warn("Could not decode token during logout", e);
+      }
+    }
+
+    res.clearCookie("token");
+    res.setHeader("Cache-Control", "no-store");
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Logout error", err);
+    res.status(500).json({ success: false });
+  }
 };
 
 // Verify token
