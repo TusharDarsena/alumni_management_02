@@ -45,9 +45,9 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Phone number already in use" });
     }
 
-    const existingPending = await PendingUser.findOne({ email: normalizedEmail, status: "pending" });
+    const existingPending = await PendingUser.findOne({ email: normalizedEmail });
     if (existingPending) {
-      return res.status(400).json({ message: "A request for this email is already pending" });
+      return res.status(400).json({ message: "A request for this email is already in progress" });
     }
 
     // No password required for self-registration (alumni). They will be added to PendingUsers after verification and admin approval.
