@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import PendingUser from "../models/PendingUser.js";
 import { createToken } from "../utils/jwt.js";
 
 const isStrongPassword = (pwd) => {
@@ -15,51 +16,57 @@ const isStrongPassword = (pwd) => {
 export const signup = async (req, res) => {
   try {
     const { email, username, password: providedPassword, role } = req.body;
-    console.log(`Signup attempt: email=${email}, role=${role}, providedPassword length=${providedPassword ? providedPassword.length : 'none'}`);
-    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    if (!email || !username || !role) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
+    const existingPending = await PendingUser.findOne({ email: normalizedEmail, status: "pending" });
+    if (existingPending) {
+      return res.status(400).json({ message: "A request for this email is already pending" });
+    }
+
     const isDefaultPassword = role === "student";
 
-    if (!isDefaultPassword) {
+    let passwordToSet = providedPassword;
+    if (isDefaultPassword) {
+      passwordToSet = "DefaultPass123!";
+    } else {
       if (!providedPassword) {
         return res.status(400).json({ message: "Password is required for this role" });
       }
       if (!isStrongPassword(providedPassword)) {
         return res.status(400).json({
-          message: "Password too weak. Use at least 8 characters with upper, lower, number, and special character."
+          message:
+            "Password too weak. Use at least 8 characters with upper, lower, number, and special character.",
         });
       }
     }
 
-    const passwordToSet = isDefaultPassword ? "DefaultPass123!" : providedPassword;
-    console.log(`Setting password for role ${role}: using ${isDefaultPassword ? "default" : "provided"} (length: ${passwordToSet.length})`);
-
-    const user = await User.create({
-      email: email.toLowerCase(),
+    const pending = await PendingUser.create({
+      email: normalizedEmail,
       username,
       password: passwordToSet,
       role,
-      mustChangePassword: isDefaultPassword,
-      defaultPassword: isDefaultPassword,
-    });
-    console.log(`User created: ${user._id}, role: ${user.role}, mustChangePassword: ${user.mustChangePassword}, defaultPassword: ${user.defaultPassword}`);
-
-    const token = createToken(user._id);
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "lax",
-      maxAge: 3 * 24 * 60 * 60 * 1000,
+      status: "pending",
+      mustChangePassword: Boolean(isDefaultPassword),
+      defaultPassword: Boolean(isDefaultPassword),
     });
 
-    res
-      .status(201)
-      .json({ message: "User signed up successfully", success: true, user });
+    return res.status(201).json({
+      success: true,
+      message: "Your request has been submitted for admin approval.",
+      pendingId: pending._id,
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
