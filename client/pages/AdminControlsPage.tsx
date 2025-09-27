@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import React, { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
@@ -55,12 +55,11 @@ export default function AdminControlsPage() {
       !form.name ||
       !form.email ||
       !form.phone ||
-      !form.branch ||
-      !form.password
+      !form.branch
     ) {
       toast({
         title: "Missing fields",
-        description: "Please fill name, email, phone, password and branch.",
+        description: "Please fill name, email, phone and branch.",
       });
       return;
     }

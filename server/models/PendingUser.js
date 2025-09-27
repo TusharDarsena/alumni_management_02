@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import allowedBranches from "../config/branches.js";
 
 const pendingUserSchema = new mongoose.Schema({
   email: {
@@ -9,7 +10,7 @@ const pendingUserSchema = new mongoose.Schema({
     index: true,
   },
   username: { type: String, required: true, trim: true },
-  password: { type: String, required: true }, // hashed on approval in User model
+  password: { type: String }, // optional, set on approval
   role: {
     type: String,
     enum: ["student", "faculty", "alumni", "admin"],
@@ -17,8 +18,8 @@ const pendingUserSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "approved", "rejected"],
-    default: "pending",
+    enum: ["otp_sent", "pending", "approved", "rejected"],
+    default: "otp_sent",
     index: true,
   },
   isVerified: { type: Boolean, default: false },
@@ -28,7 +29,7 @@ const pendingUserSchema = new mongoose.Schema({
   otpLockedUntil: Date,
   lastOtpSentAt: Date,
   phone: { type: String, unique: true, sparse: true, trim: true },
-  branch: { type: String, enum: ["CSE", "DSAI", "ECE"], required: false },
+  branch: { type: String, enum: allowedBranches, required: false },
   mustChangePassword: { type: Boolean, default: false },
   defaultPassword: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },

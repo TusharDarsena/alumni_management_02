@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import allowedBranches from "../config/branches.js";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -30,7 +31,7 @@ const userSchema = new mongoose.Schema({
   lastOtpSentAt: Date,
   // Phone and branch
   phone: { type: String, unique: true, required: true, trim: true },
-  branch: { type: String, enum: ["CSE", "DSAI", "ECE"], required: true },
+  branch: { type: String, enum: allowedBranches, required: true },
   // Token invalidation
   tokenVersion: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },

@@ -3,8 +3,19 @@ import User from "../models/User.js";
 import PendingUser from "../models/PendingUser.js";
 import { createToken } from "../utils/jwt.js";
 import { sendMail } from "../utils/mailer.js";
+import allowedBranches from "../config/branches.js";
 
-const isStrongPassword = (pwd) => {
+const findOtpUser = async (email) => {
+  const normalizedEmail = email.toLowerCase();
+  let target = await PendingUser.findOne({ email: normalizedEmail }) || await User.findOne({ email: normalizedEmail });
+  if (!target) return { target: null, error: 'User not found' };
+  if (target.otpLockedUntil && target.otpLockedUntil > new Date()) {
+    return { target: null, error: 'Too many attempts. Try again later.' };
+  }
+  return { target, error: null };
+};
+
+export const isStrongPassword = (pwd) => {
   if (typeof pwd !== "string") return false;
   if (pwd.length < 8) return false;
   const hasUpper = /[A-Z]/.test(pwd);
@@ -38,7 +49,7 @@ export const signup = async (req, res) => {
     if (!phone || !branch) {
       return res.status(400).json({ message: "Phone and branch are required" });
     }
-    if (!["CSE", "DSAI", "ECE"].includes(branch)) {
+    if (!allowedBranches.includes(branch)) {
       return res.status(400).json({ message: "Invalid branch" });
     }
 
@@ -133,7 +144,7 @@ export const login = async (req, res) => {
       maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ message: "User logged in", success: true, user });
+    res.status(200).json({ message: "User logged in", success: true, user: { username: user.username, email: user.email, role: user.role, isVerified: user.isVerified, mustChangePassword: user.mustChangePassword } });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
@@ -223,7 +234,11 @@ export const changePasswordFirst = async (req, res) => {
     user.defaultPassword = false;
     await user.save();
 
-    const refreshed = createToken(user._id, user.tokenVersion || 0);
+    // Invalidate other sessions by incrementing tokenVersion
+    user.tokenVersion = (user.tokenVersion || 0) + 1;
+    await user.save();
+
+    const refreshed = createToken(user._id, user.tokenVersion);
     res.cookie("token", refreshed, {
       httpOnly: true,
       sameSite: "lax",
@@ -247,75 +262,40 @@ export const verifyOtp = async (req, res) => {
     if (!email || !otp)
       return res.status(400).json({ message: "Email and OTP required" });
 
-    const normalizedEmail = email.toLowerCase();
-
-    // check pending users first
-    let pending = await PendingUser.findOne({ email: normalizedEmail });
-    if (pending) {
-      if (pending.otpLockedUntil && pending.otpLockedUntil > new Date()) {
-        return res
-          .status(429)
-          .json({ message: "Too many attempts. Try again later." });
-      }
-      if (
-        !pending.otp ||
-        !pending.otpExpiresAt ||
-        new Date() > pending.otpExpiresAt
-      ) {
-        return res.status(400).json({ message: "OTP expired or not set" });
-      }
-      if (pending.otp !== String(otp)) {
-        pending.otpAttempts = (pending.otpAttempts || 0) + 1;
-        if (pending.otpAttempts >= 6) {
-          pending.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
-        }
-        await pending.save();
-        return res.status(400).json({ message: "Invalid OTP" });
-      }
-      pending.isVerified = true;
-      pending.status = "pending"; // move into admin review queue
-      pending.otp = undefined;
-      pending.otpExpiresAt = undefined;
-      pending.otpAttempts = 0;
-      pending.otpLockedUntil = undefined;
-      await pending.save();
-      return res.json({
-        message:
-          "Email verified successfully. Your request is queued for admin approval.",
-      });
+    const { target, error } = await findOtpUser(email);
+    if (error) {
+      const status = error === 'Too many attempts. Try again later.' ? 429 : 404;
+      return res.status(status).json({ message: error });
     }
 
-    // check real users
-    const user = await User.findOne({ email: normalizedEmail });
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    if (user.otpLockedUntil && user.otpLockedUntil > new Date()) {
-      return res
-        .status(429)
-        .json({ message: "Too many attempts. Try again later." });
-    }
-
-    if (!user.otp || !user.otpExpiresAt || new Date() > user.otpExpiresAt) {
+    if (!target.otp || !target.otpExpiresAt || new Date() > target.otpExpiresAt) {
       return res.status(400).json({ message: "OTP expired or not set" });
     }
 
-    if (user.otp !== String(otp)) {
-      user.otpAttempts = (user.otpAttempts || 0) + 1;
-      if (user.otpAttempts >= 6) {
-        user.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    if (target.otp !== String(otp)) {
+      target.otpAttempts = (target.otpAttempts || 0) + 1;
+      if (target.otpAttempts >= 6) {
+        target.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
       }
-      await user.save();
+      await target.save();
       return res.status(400).json({ message: "Invalid OTP" });
     }
 
-    user.isVerified = true;
-    user.otp = undefined;
-    user.otpExpiresAt = undefined;
-    user.otpAttempts = 0;
-    user.otpLockedUntil = undefined;
-    await user.save();
+    const isPending = !!target.status;
+    target.isVerified = true;
+    if (isPending) {
+      target.status = "pending"; // move into admin review queue
+    }
+    target.otp = undefined;
+    target.otpExpiresAt = undefined;
+    target.otpAttempts = 0;
+    target.otpLockedUntil = undefined;
+    await target.save();
 
-    return res.json({ message: "Email verified successfully." });
+    const message = isPending
+      ? "Email verified successfully. Your request is queued for admin approval."
+      : "Email verified successfully.";
+    return res.json({ message });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });
@@ -326,17 +306,11 @@ export const resendOtp = async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) return res.status(400).json({ message: "Email required" });
-    const normalizedEmail = email.toLowerCase();
 
-    let target =
-      (await PendingUser.findOne({ email: normalizedEmail })) ||
-      (await User.findOne({ email: normalizedEmail }));
-    if (!target) return res.status(404).json({ message: "User not found" });
-
-    if (target.otpLockedUntil && target.otpLockedUntil > new Date()) {
-      return res
-        .status(429)
-        .json({ message: "Too many attempts. Try again later." });
+    const { target, error } = await findOtpUser(email);
+    if (error) {
+      const status = error === 'Too many attempts. Try again later.' ? 429 : 404;
+      return res.status(status).json({ message: error });
     }
 
     const lastSent = target.lastOtpSentAt;
@@ -354,6 +328,8 @@ export const resendOtp = async (req, res) => {
     target.otpAttempts = 0;
     target.lastOtpSentAt = new Date();
     await target.save();
+
+    const normalizedEmail = email.toLowerCase();
 
     try {
       await sendMail({

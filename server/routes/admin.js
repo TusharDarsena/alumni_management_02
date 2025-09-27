@@ -2,6 +2,44 @@ import express from "express";
 import { requireAuth, requireRole } from "../middleware/auth.js";
 import PendingUser from "../models/PendingUser.js";
 import User from "../models/User.js";
+import allowedBranches from "../config/branches.js";
+import { sendMail } from "../utils/mailer.js";
+import { isStrongPassword } from "../controllers/AuthController.js";
+
+const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
+
+const createUserWithEmail = async (userData) => {
+  const { email, username, password, role, phone, branch, isVerified = false } = userData;
+
+  const isDefaultPassword = !password;
+  const finalPassword = password || DEFAULT_PASS;
+
+  // Send welcome email first to verify deliverability
+  const mailRes = await sendMail({
+    to: email,
+    subject: "Your account has been created",
+    text: `Your account has been created. Email: ${email}, Password: ${finalPassword}. ${isDefaultPassword ? 'Please log in and set a new password.' : 'Your password has been set by an admin.'}`,
+  });
+  if (!mailRes.ok) {
+    throw new Error("Failed to send welcome email");
+  }
+
+  // Create user
+  const user = await User.create({
+    email,
+    username,
+    password: finalPassword,
+    role,
+    phone,
+    branch,
+    isApproved: true,
+    isVerified,
+    mustChangePassword: isDefaultPassword,
+    defaultPassword: isDefaultPassword,
+  });
+
+  return user;
+};
 
 const router = express.Router();
 
@@ -52,53 +90,32 @@ router.post(
           .json({ success: false, message: "User already exists" });
       }
 
-      // generate OTP
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-      const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
-      // create user with default password
-      const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
-      const user = await User.create({
-        email: pending.email,
-        username: pending.username,
-        password: DEFAULT_PASS, // will be hashed by User pre-save hook
-        role: pending.role,
-        isApproved: true,
-        isVerified: Boolean(pending.isVerified),
-        mustChangePassword: true,
-        defaultPassword: true,
-        phone: pending.phone,
-        branch: pending.branch,
-      });
-
-      // send welcome email
-      try {
-        const { sendMail } = await import("../utils/mailer.js");
-        const mailRes = await sendMail({
-          to: user.email,
-          subject: "Your account has been created",
-          text: `Your account has been created. Email: ${user.email}, Default Password: ${DEFAULT_PASS}. Please log in and set a new password.`,
-        });
-        if (!mailRes.ok) {
-          // rollback created user
-          await User.findByIdAndDelete(user._id);
+      if (pending.phone) {
+        const phoneExists =
+          (await User.findOne({ phone: pending.phone })) ||
+          (await PendingUser.findOne({ phone: pending.phone, _id: { $ne: id } }));
+        if (phoneExists) {
           return res
             .status(400)
-            .json({
-              success: false,
-              message: "Failed to send welcome email; user not created",
-            });
+            .json({ success: false, message: "Phone number already in use" });
         }
-      } catch (e) {
-        console.warn("Failed to send approval email", e);
-        await User.findByIdAndDelete(user._id);
+      }
+
+      if (pending.branch && !allowedBranches.includes(pending.branch)) {
         return res
           .status(400)
-          .json({
-            success: false,
-            message: "Failed to send welcome email; user not created",
-          });
+          .json({ success: false, message: "Invalid branch" });
       }
+
+      // Create user with email validation
+      const user = await createUserWithEmail({
+        email: pending.email,
+        username: pending.username,
+        role: pending.role,
+        phone: pending.phone,
+        branch: pending.branch,
+        isVerified: Boolean(pending.isVerified),
+      });
 
       await PendingUser.findByIdAndDelete(id);
 
@@ -114,6 +131,14 @@ router.post(
       });
     } catch (err) {
       console.error("Approve user error", err);
+      if (err.message === "Failed to send welcome email") {
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Failed to send welcome email; user not created",
+          });
+      }
       return res.status(500).json({ success: false, message: "Server error" });
     }
   },
@@ -149,15 +174,21 @@ router.post(
   async (req, res) => {
     try {
       const { email, username, password, role, phone, branch } = req.body || {};
-      if (!email || !username || !password || !role || !phone || !branch) {
+      if (!email || !username || !role || !phone || !branch) {
         return res
           .status(400)
           .json({ success: false, message: "Missing required fields" });
       }
-      if (!["CSE", "DSAI", "ECE"].includes(branch)) {
+      if (!allowedBranches.includes(branch)) {
         return res
           .status(400)
           .json({ success: false, message: "Invalid branch" });
+      }
+
+      if (password && !isStrongPassword(password)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Password must be strong (8+ chars, upper, lower, digit, special)" });
       }
 
       const normalizedEmail = email.toLowerCase();
@@ -175,43 +206,14 @@ router.post(
           .status(400)
           .json({ success: false, message: "Phone number already in use" });
 
-      // send welcome email first to verify deliverability
-      const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
-      try {
-        const { sendMail } = await import("../utils/mailer.js");
-        const mailRes = await sendMail({
-          to: normalizedEmail,
-          subject: "Your account has been created",
-          text: `Your account has been created. Email: ${normalizedEmail}, Default Password: ${DEFAULT_PASS}. Please log in and set a new password.`,
-        });
-        if (!mailRes.ok) {
-          return res
-            .status(400)
-            .json({
-              success: false,
-              message: "Invalid email entered. User not created.",
-            });
-        }
-      } catch (e) {
-        console.warn("Failed to send account creation email", e);
-        return res
-          .status(400)
-          .json({
-            success: false,
-            message: "Invalid email entered. User not created.",
-          });
-      }
-
-      const user = await User.create({
+      // Create user with email validation
+      const user = await createUserWithEmail({
         email: normalizedEmail,
         username,
-        password: DEFAULT_PASS,
+        password,
         role,
         phone,
         branch,
-        isApproved: true,
-        mustChangePassword: true,
-        defaultPassword: true,
       });
 
       return res.json({
@@ -221,6 +223,14 @@ router.post(
       });
     } catch (err) {
       console.error("Add user error", err);
+      if (err.message === "Failed to send welcome email") {
+        return res
+          .status(400)
+          .json({
+            success: false,
+            message: "Invalid email entered. User not created.",
+          });
+      }
       return res.status(500).json({ success: false, message: "Server error" });
     }
   },
