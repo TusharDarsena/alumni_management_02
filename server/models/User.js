@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
   otpExpiresAt: Date,
   otpAttempts: { type: Number, default: 0 },
   otpLockedUntil: Date,
+  lastOtpSentAt: Date,
   // Phone and branch
   phone: { type: String, unique: true, required: true, trim: true },
   branch: { type: String, enum: ["CSE", "DSAI", "ECE"], required: true },
