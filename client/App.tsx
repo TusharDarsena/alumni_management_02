@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound";
 import Unauthorized from "./pages/Unauthorized";
 import FirstLoginPasswordChange from "./pages/FirstLoginPasswordChange";
 import HelpPage from "./pages/HelpPage";
+import VerifyOtpPage from "./pages/VerifyOtpPage";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
