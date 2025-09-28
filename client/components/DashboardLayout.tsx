@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Sidebar from "@/components/Sidebar";
-import { Bell, User as UserIcon } from "lucide-react";
+import { Bell, User as UserIcon, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ProfileSettingsModal, {
   type ModalInitialTab,
+  type ProfileUser,
 } from "@/components/ProfileSettingsModal";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 
 export interface UserSummary {
   name: string;
@@ -36,7 +38,8 @@ export default function DashboardLayout({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalInitialTab, setModalInitialTab] =
     useState<ModalInitialTab>("profile");
-  const { logout } = useAuth();
+  const { logout, refresh } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   function handleOpenProfile() {
     setModalInitialTab("profile");
@@ -46,6 +49,31 @@ export default function DashboardLayout({
     setModalInitialTab("settings");
     setIsModalOpen(true);
   }
+
+  const handleSaveProfile = async (updated: ProfileUser) => {
+    try {
+      const res = await fetch("/api/auth/update-profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: updated.name,
+          email: updated.email,
+          phone: updated.mobile,
+          location: updated.location,
+        }),
+        credentials: "include",
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || "Failed to update profile");
+      }
+      // Refresh user data
+      await refresh();
+    } catch (err) {
+      console.error("Profile update error:", err);
+      alert("Failed to update profile. Please try again.");
+    }
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -83,6 +111,18 @@ export default function DashboardLayout({
                 </div>
               )}
 
+              <button
+                aria-label="Toggle theme"
+                className="p-2 rounded-md hover:bg-slate-50"
+                onClick={toggleTheme}
+              >
+                {theme === "light" ? (
+                  <Moon className="h-5 w-5 text-slate-600" />
+                ) : (
+                  <Sun className="h-5 w-5 text-slate-600" />
+                )}
+              </button>
+
               <div className="relative">
                 <button
                   className="flex items-center gap-3 rounded-md p-1 hover:bg-slate-50"
@@ -110,7 +150,6 @@ export default function DashboardLayout({
                       onClick={() => {
                         handleOpenProfile();
                         setProfileOpen(false);
-                        onNavigate?.("/profile");
                       }}
                       className={cn(
                         "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
@@ -122,7 +161,6 @@ export default function DashboardLayout({
                       onClick={() => {
                         handleOpenSettings();
                         setProfileOpen(false);
-                        onNavigate?.("/settings");
                       }}
                       className={cn(
                         "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
@@ -191,6 +229,7 @@ export default function DashboardLayout({
           isOpen={isModalOpen}
           initialTab={modalInitialTab}
           onClose={() => setIsModalOpen(false)}
+          onSave={handleSaveProfile}
           user={{
             name: user.name,
             email: user.email,

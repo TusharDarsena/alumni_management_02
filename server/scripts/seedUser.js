@@ -12,7 +12,15 @@ const students = [
   'student3@iiitnr.edu.in'
 ];
 
-const admin = { email: 'admin@iiitnr.edu.in', username:'admin', password:DEFAULT_PASS, role:'admin', isApproved:true };
+const admin = {
+  email: 'admin@iiitnr.edu.in',
+  username:'admin',
+  password:DEFAULT_PASS,
+  role:'admin',
+  isApproved:true,
+  phone: '9876543210',
+  branch: 'CSE'
+};
 
 const seedUsers = async () => {
   try{
@@ -29,7 +37,9 @@ const seedUsers = async () => {
           password: DEFAULT_PASS,
           role: 'student',
           mustChangePassword:true,
-          defaultPassword:true
+          defaultPassword:true,
+          phone: `987654321${students.indexOf(email) + 1}`,
+          branch: 'CSE'
         });
         console.log(`Seeded student: ${email}`);
       }

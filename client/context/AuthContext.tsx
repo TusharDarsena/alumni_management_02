@@ -2,6 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
   username: string;
+  email?: string;
+  phone?: string;
+  location?: string;
   role: string;
   mustChangePassword?: boolean;
   defaultPassword?: boolean;
@@ -39,10 +42,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await res.json();
       if (data.status) {
         setUser({
-          username: data.user,
-          role: data.role,
-          mustChangePassword: data.mustChangePassword,
-          defaultPassword: data.defaultPassword,
+          username: data.user.username,
+          email: data.user.email,
+          phone: data.user.phone,
+          location: data.user.location,
+          role: data.user.role,
+          mustChangePassword: data.user.mustChangePassword,
+          defaultPassword: data.user.defaultPassword,
         });
       } else {
         setUser(null);

@@ -4,6 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useTheme } from "@/context/ThemeContext";
 
 export type ModalInitialTab = "profile" | "settings";
 
@@ -20,18 +22,19 @@ interface ProfileSettingsModalProps {
   initialTab: ModalInitialTab;
   onClose: () => void;
   user: ProfileUser;
-  onSave?: (updated: ProfileUser) => void;
+  onSave?: (updated: ProfileUser) => Promise<void>;
 }
 
 export default function ProfileSettingsModal({ isOpen, initialTab, onClose, user, onSave }: ProfileSettingsModalProps) {
   const [form, setForm] = useState<ProfileUser>(user);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     if (isOpen) setForm(user);
   }, [isOpen, user]);
 
-  const handleSave = () => {
-    onSave?.(form);
+  const handleSave = async () => {
+    await onSave?.(form);
     onClose();
   };
 
@@ -92,7 +95,15 @@ export default function ProfileSettingsModal({ isOpen, initialTab, onClose, user
               </div>
               <div className="space-y-2">
                 <Label htmlFor="theme">Theme</Label>
-                <Input id="theme" placeholder="Light" disabled />
+                <Select value={theme} onValueChange={(value) => value === "dark" ? toggleTheme() : value === "light" ? toggleTheme() : null}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </TabsContent>

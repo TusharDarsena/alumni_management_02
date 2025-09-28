@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
   // Phone and branch
   phone: { type: String, unique: true, required: true, trim: true },
   branch: { type: String, enum: allowedBranches, required: true },
+  location: { type: String, trim: true },
   // Token invalidation
   tokenVersion: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
