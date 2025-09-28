@@ -11,7 +11,6 @@ const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
 
 const createUserWithEmail = async (userData) => {
   const { email, username, password, role, phone, branch, isVerified = false } = userData;
-
   const isDefaultPassword = !password;
   const finalPassword = password || DEFAULT_PASS;
 
@@ -57,11 +56,6 @@ const createUserWithEmail = async (userData) => {
 };
 
 const router = express.Router();
-
-// Example admin-only route
-router.get("/stats", requireAuth, requireRole("admin"), (req, res) => {
-  res.json({ message: "Admin stats", stats: { users: 123, active: 42 } });
-});
 
 // Fetch all pending user requests
 router.get(
