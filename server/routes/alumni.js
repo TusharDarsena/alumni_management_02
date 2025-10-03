@@ -124,12 +124,109 @@ router.post("/import", async (req, res) => {
   }
 });
 
-// GET / - Get all alumni profiles (for confirmation)
+// GET / - Search, filter and paginate alumni profiles
+// Query params: search, branch, degree, batch, page, limit
 router.get("/", async (req, res) => {
   try {
-    const profiles = await AlumniProfile.find({});
-    res.json({ success: true, count: profiles.length, data: profiles });
+    const { search, branch, degree, batch } = req.query;
+    const page = Math.max(parseInt(req.query.page || "1", 10), 1);
+    const limit = Math.max(parseInt(req.query.limit || "24", 10), 1);
+    const skip = (page - 1) * limit;
+
+    const pipeline = [];
+
+    // Atlas Search stage (if search provided)
+    if (search && String(search).trim() !== "") {
+      pipeline.push({
+        $search: {
+          index: "default",
+          compound: {
+            should: [
+              { autocomplete: { query: String(search), path: "name", fuzzy: { maxEdits: 2 } } },
+              { autocomplete: { query: String(search), path: "position", fuzzy: { maxEdits: 2 } } },
+              { autocomplete: { query: String(search), path: "current_company.name", fuzzy: { maxEdits: 2 } } }
+            ],
+            minimumShouldMatch: 1
+          }
+        }
+      });
+    }
+
+    // Match filters (education fields are inside array)
+    const match = {};
+    if (branch) match["education.field"] = String(branch);
+    if (degree) match["education.degree"] = String(degree);
+    if (batch) match["education.start_year"] = String(batch);
+
+    if (Object.keys(match).length > 0) {
+      pipeline.push({ $match: match });
+    }
+
+    // Facet for paginated data, total count and metadata
+    pipeline.push({
+      $facet: {
+        data: [
+          { $sort: { name: 1 } },
+          { $skip: skip },
+          { $limit: limit },
+          {
+            $project: {
+              _id: 0,
+              username: "$id",
+              name: 1,
+              avatar: "$avatar",
+              position: 1,
+              current_company: "$current_company.name",
+              location: 1,
+              education: 1
+            }
+          }
+        ],
+        totalCount: [{ $count: "count" }],
+        metadata: [
+          { $unwind: { path: "$education", preserveNullAndEmptyArrays: true } },
+          {
+            $group: {
+              _id: null,
+              branches: { $addToSet: "$education.field" },
+              degrees: { $addToSet: "$education.degree" },
+              batches: { $addToSet: "$education.start_year" }
+            }
+          },
+          { $project: { _id: 0, branches: 1, degrees: 1, batches: 1 } }
+        ]
+      }
+    });
+
+    const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
+
+    const data = (results[0].data || []).map((d) => ({
+      username: d.username,
+      name: d.name,
+      avatar: d.avatar,
+      position: d.position,
+      current_company: d.current_company,
+      location: d.location,
+      education: d.education
+    }));
+
+    const totalCount = results[0].totalCount[0] ? results[0].totalCount[0].count : 0;
+    const totalPages = Math.ceil(totalCount / limit);
+
+    const metadata = results[0].metadata[0] || { branches: [], degrees: [], batches: [] };
+
+    res.json({
+      data,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalResults: totalCount,
+        limit
+      },
+      metadata
+    });
   } catch (error) {
+    console.error("Alumni search error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
