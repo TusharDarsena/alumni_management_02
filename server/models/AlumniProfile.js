@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-import mongoose from "mongoose";
-
 const alumniProfileSchema = new mongoose.Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
