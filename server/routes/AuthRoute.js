@@ -20,5 +20,4 @@ router.post("/change-password-first", requireAuth, changePasswordFirst);
 router.post("/verify-otp", verifyOtp);
 router.post("/resend-otp", resendOtp);
 
-
 export default router;

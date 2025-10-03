@@ -13,7 +13,9 @@ const hashOTP = (otp) => {
 
 const findOtpUser = async (email) => {
   const normalizedEmail = String(email).toLowerCase();
-  const target = (await PendingUser.findOne({ email: normalizedEmail })) || (await User.findOne({ email: normalizedEmail }));
+  const target =
+    (await PendingUser.findOne({ email: normalizedEmail })) ||
+    (await User.findOne({ email: normalizedEmail }));
   if (!target) return { target: null, error: "User not found" };
   if (target.otpLockedUntil && target.otpLockedUntil > new Date()) {
     return { target: null, error: "Too many attempts. Try again later." };
@@ -40,7 +42,9 @@ export const signup = async (req, res) => {
 
     // Only allow alumni self-registration
     if (role && role !== "alumni") {
-      return res.status(400).json({ message: "Self-registration allowed only for alumni" });
+      return res
+        .status(400)
+        .json({ message: "Self-registration allowed only for alumni" });
     }
 
     if (!phone || !branch) {
@@ -66,9 +70,13 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Phone number already in use" });
     }
 
-    const existingPending = await PendingUser.findOne({ email: normalizedEmail });
+    const existingPending = await PendingUser.findOne({
+      email: normalizedEmail,
+    });
     if (existingPending) {
-      return res.status(400).json({ message: "A request for this email is already in progress" });
+      return res
+        .status(400)
+        .json({ message: "A request for this email is already in progress" });
     }
 
     // generate OTP
@@ -104,7 +112,8 @@ export const signup = async (req, res) => {
 
     return res.status(201).json({
       success: true,
-      message: "Your request has been submitted for admin approval. An OTP has been sent to your email to verify ownership.",
+      message:
+        "Your request has been submitted for admin approval. An OTP has been sent to your email to verify ownership.",
       pendingId: pending._id,
     });
   } catch (err) {
@@ -116,23 +125,39 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body || {};
-    if (!email || !password) return res.status(400).json({ message: "All fields required" });
+    if (!email || !password)
+      return res.status(400).json({ message: "All fields required" });
 
     const user = await User.findOne({ email: String(email).toLowerCase() });
-    if (!user) return res.status(400).json({ message: "Incorrect email or password" });
+    if (!user)
+      return res.status(400).json({ message: "Incorrect email or password" });
 
     const isPasswordValid = await user.comparePassword(password);
-    if (!isPasswordValid) return res.status(400).json({ message: "Incorrect email or password" });
+    if (!isPasswordValid)
+      return res.status(400).json({ message: "Incorrect email or password" });
 
-    if (!user.isVerified) return res.status(403).json({ message: "Please verify your email before logging in." });
+    if (!user.isVerified)
+      return res
+        .status(403)
+        .json({ message: "Please verify your email before logging in." });
 
     const token = createToken(user._id, user.tokenVersion || 0);
-    res.cookie("token", token, { httpOnly: true, sameSite: "lax", maxAge: 3 * 24 * 60 * 60 * 1000 });
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 3 * 24 * 60 * 60 * 1000,
+    });
 
     return res.status(200).json({
       message: "User logged in",
       success: true,
-      user: { username: user.username, email: user.email, role: user.role, isVerified: user.isVerified, mustChangePassword: user.mustChangePassword },
+      user: {
+        username: user.username,
+        email: user.email,
+        role: user.role,
+        isVerified: user.isVerified,
+        mustChangePassword: user.mustChangePassword,
+      },
     });
   } catch (err) {
     console.error(err);
@@ -167,7 +192,6 @@ export const logout = async (req, res) => {
   }
 };
 
-
 export const verifyUser = async (req, res) => {
   const user = req.user;
   res.setHeader("Cache-Control", "no-store");
@@ -190,16 +214,37 @@ export const changePasswordFirst = async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (!user.mustChangePassword || user.defaultPassword === false) {
-      return res.status(400).json({ success: false, message: "Password change on first login not required" });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Password change on first login not required",
+        });
     }
 
     const { newPassword } = req.body || {};
-    if (!newPassword) return res.status(400).json({ success: false, message: "New password is required" });
+    if (!newPassword)
+      return res
+        .status(400)
+        .json({ success: false, message: "New password is required" });
 
     const sameAsOld = await user.comparePassword(newPassword);
-    if (sameAsOld) return res.status(400).json({ success: false, message: "New password cannot be the same as the default password" });
+    if (sameAsOld)
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "New password cannot be the same as the default password",
+        });
 
-    if (!isStrongPassword(newPassword)) return res.status(400).json({ success: false, message: "Password too weak. Use at least 8 characters with upper, lower, number, and special character." });
+    if (!isStrongPassword(newPassword))
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message:
+            "Password too weak. Use at least 8 characters with upper, lower, number, and special character.",
+        });
 
     user.password = newPassword; // pre-save hook will hash
     user.mustChangePassword = false;
@@ -208,30 +253,42 @@ export const changePasswordFirst = async (req, res) => {
     await user.save();
 
     const refreshed = createToken(user._id, user.tokenVersion);
-    res.cookie("token", refreshed, { httpOnly: true, sameSite: "lax", maxAge: 3 * 24 * 60 * 60 * 1000 });
+    res.cookie("token", refreshed, {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 3 * 24 * 60 * 60 * 1000,
+    });
 
-    return res.json({ success: true, message: "Password updated successfully" });
+    return res.json({
+      success: true,
+      message: "Password updated successfully",
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
-
 export const verifyOtp = async (req, res) => {
   try {
     const { email, otp } = req.body || {};
-    if (!email || !otp) return res.status(400).json({ message: "Email and OTP required" });
+    if (!email || !otp)
+      return res.status(400).json({ message: "Email and OTP required" });
 
     const { target, error } = await findOtpUser(email);
-    if (error) return res.status(error === 'Too many attempts. Try again later.' ? 429 : 404).json({ message: error });
+    if (error)
+      return res
+        .status(error === "Too many attempts. Try again later." ? 429 : 404)
+        .json({ message: error });
 
-    if (!target.otp || !target.otpExpiresAt || new Date() > target.otpExpiresAt) return res.status(400).json({ message: "OTP expired or not set" });
+    if (!target.otp || !target.otpExpiresAt || new Date() > target.otpExpiresAt)
+      return res.status(400).json({ message: "OTP expired or not set" });
 
     const hashedOtp = hashOTP(otp);
     if (target.otp !== hashedOtp) {
       target.otpAttempts = (target.otpAttempts || 0) + 1;
-      if (target.otpAttempts >= 6) target.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      if (target.otpAttempts >= 6)
+        target.otpLockedUntil = new Date(Date.now() + 24 * 60 * 60 * 1000);
       await target.save();
       return res.status(400).json({ message: "Invalid OTP" });
     }
@@ -245,7 +302,9 @@ export const verifyOtp = async (req, res) => {
     target.otpLockedUntil = undefined;
     await target.save();
 
-    const message = isPending ? "Email verified successfully. Your request is queued for admin approval." : "Email verified successfully.";
+    const message = isPending
+      ? "Email verified successfully. Your request is queued for admin approval."
+      : "Email verified successfully.";
     return res.json({ message });
   } catch (err) {
     console.error(err);
@@ -259,10 +318,16 @@ export const resendOtp = async (req, res) => {
     if (!email) return res.status(400).json({ message: "Email required" });
 
     const { target, error } = await findOtpUser(email);
-    if (error) return res.status(error === 'Too many attempts. Try again later.' ? 429 : 404).json({ message: error });
+    if (error)
+      return res
+        .status(error === "Too many attempts. Try again later." ? 429 : 404)
+        .json({ message: error });
 
     const lastSent = target.lastOtpSentAt;
-    if (lastSent && new Date() - new Date(lastSent) < 60 * 1000) return res.status(429).json({ message: "Please wait before requesting another OTP." });
+    if (lastSent && new Date() - new Date(lastSent) < 60 * 1000)
+      return res
+        .status(429)
+        .json({ message: "Please wait before requesting another OTP." });
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
@@ -271,10 +336,16 @@ export const resendOtp = async (req, res) => {
     const normalizedEmail = String(email).toLowerCase();
 
     try {
-      await sendMail({ to: normalizedEmail, subject: "Your OTP", text: `Your OTP is ${otp}. It expires in 10 minutes.` });
+      await sendMail({
+        to: normalizedEmail,
+        subject: "Your OTP",
+        text: `Your OTP is ${otp}. It expires in 10 minutes.`,
+      });
     } catch (e) {
       console.error("Failed to send OTP email", e);
-      return res.status(500).json({ message: "Failed to send OTP email. Please try again later." });
+      return res
+        .status(500)
+        .json({ message: "Failed to send OTP email. Please try again later." });
     }
 
     target.otp = hashedOtp;
@@ -296,13 +367,18 @@ export const updateProfile = async (req, res) => {
     const { username, email, phone, location } = req.body;
 
     if (!username || !email || !phone) {
-      return res.status(400).json({ message: "Username, email, and phone are required" });
+      return res
+        .status(400)
+        .json({ message: "Username, email, and phone are required" });
     }
 
     const normalizedEmail = email.toLowerCase();
 
     // Check if email is already taken by another user
-    const existingEmail = await User.findOne({ email: normalizedEmail, _id: { $ne: user._id } });
+    const existingEmail = await User.findOne({
+      email: normalizedEmail,
+      _id: { $ne: user._id },
+    });
     if (existingEmail) {
       return res.status(400).json({ message: "Email already in use" });
     }
