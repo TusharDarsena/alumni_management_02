@@ -307,7 +307,9 @@ router.get("/:id", async (req, res) => {
       .lean();
 
     if (!doc) {
-      return res.status(404).json({ success: false, message: "Profile not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
     }
 
     const payload = {

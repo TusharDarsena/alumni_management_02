@@ -12,7 +12,7 @@ import { useFavorites } from "@/hooks/useFavorites";
 async function fetchAlumniProfile(id: string) {
   const res = await fetch(`/api/alumni/${encodeURIComponent(id)}`, {
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
     },
     credentials: "include",
   });
@@ -65,7 +65,10 @@ function ListSectionSkeleton({ title }: { title: string }) {
 
 export default function AlumniProfilePage() {
   const { username } = useParams<{ username: string }>();
-  const [user] = useState<UserInfo>({ name: "Merna", email: "merna@example.com" });
+  const [user] = useState<UserInfo>({
+    name: "Merna",
+    email: "merna@example.com",
+  });
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const query = useQuery({
@@ -93,7 +96,11 @@ export default function AlumniProfilePage() {
       location: d.current_company?.location || undefined,
       education: Array.isArray(d.education)
         ? d.education.map((e: any) => ({
-            degree: e.degree ? (e.field ? `${e.degree} in ${e.field}` : e.degree) : undefined,
+            degree: e.degree
+              ? e.field
+                ? `${e.degree} in ${e.field}`
+                : e.degree
+              : undefined,
             institute: e.title || undefined,
             startYear: e.start_year ? parseInt(e.start_year) : undefined,
             endYear: e.end_year ? parseInt(e.end_year) : undefined,
@@ -104,8 +111,14 @@ export default function AlumniProfilePage() {
             role: e.title || undefined,
             company: e.company || d.current_company?.name || undefined,
             location: e.location || undefined,
-            startYear: e.start_date ? parseInt((e.start_date.match(/\d{4}/)?.[0]) || "") : undefined,
-            endYear: e.end_date ? parseInt((e.end_date.match(/\d{4}/)?.[0]) || "") : (e.end_date === "Present" ? ("Present" as any) : undefined),
+            startYear: e.start_date
+              ? parseInt(e.start_date.match(/\d{4}/)?.[0] || "")
+              : undefined,
+            endYear: e.end_date
+              ? parseInt(e.end_date.match(/\d{4}/)?.[0] || "")
+              : e.end_date === "Present"
+                ? ("Present" as any)
+                : undefined,
           }))
         : [],
       skills: { technical: [], core: [] },
@@ -118,11 +131,15 @@ export default function AlumniProfilePage() {
   useEffect(() => {
     if (query.isSuccess && query.data?.data) {
       const d = query.data.data as any;
-      const titlePart = d.position || d.current_company?.title || (profile?.experience?.[0]?.role ?? "Alumni");
+      const titlePart =
+        d.position ||
+        d.current_company?.title ||
+        (profile?.experience?.[0]?.role ?? "Alumni");
       const docTitle = `${d.name} - ${titlePart || "Alumni"} | Alumni Directory`;
       document.title = docTitle;
       const meta = document.querySelector('meta[name="description"]');
-      const description = d.about || `${d.name} at ${d.current_company?.name || ""}`.trim();
+      const description =
+        d.about || `${d.name} at ${d.current_company?.name || ""}`.trim();
       if (meta) {
         meta.setAttribute("content", description);
       } else {
@@ -135,7 +152,11 @@ export default function AlumniProfilePage() {
   }, [query.isSuccess, query.data, profile]);
 
   return (
-    <DashboardLayout activePage="Alumni Profile" onNavigate={(p) => console.log("nav", p)} user={user}>
+    <DashboardLayout
+      activePage="Alumni Profile"
+      onNavigate={(p) => console.log("nav", p)}
+      user={user}
+    >
       <div className="mt-6 space-y-6">
         {query.isLoading && (
           <>
@@ -169,7 +190,9 @@ export default function AlumniProfilePage() {
                 className={`px-4 py-2 rounded-md ${isFavorite(profile.username) ? "bg-red-600 text-white" : "bg-[#3B82F6] text-white"}`}
                 onClick={() => toggleFavorite(profile.username)}
               >
-                {isFavorite(profile.username) ? "Remove Favourite" : "Save as Favourite"}
+                {isFavorite(profile.username)
+                  ? "Remove Favourite"
+                  : "Save as Favourite"}
               </button>
             </div>
           </div>
