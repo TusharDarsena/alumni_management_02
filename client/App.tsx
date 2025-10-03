@@ -88,7 +88,6 @@ const App = () => (
 
               <Route path="/help" element={<HelpPage />} />
               <Route path="/verify-otp" element={<VerifyOtpPage />} />
-              <Route path="/verify" element={<VerifyPage />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
 
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
