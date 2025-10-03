@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRoute from "./routes/AuthRoute.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
+import alumniRoute from "./routes/alumni.js";
 
 dotenv.config();
 
@@ -60,6 +61,7 @@ export function createServer() {
   // Protected portal and admin routes
   app.use("/api/portal", portalRoutes);
   app.use("/api/admin", adminRoutes);
+  app.use("/api/alumni", alumniRoute);
 
 
   return app;

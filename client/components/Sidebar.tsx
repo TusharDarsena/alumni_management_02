@@ -27,7 +27,7 @@ export default function Sidebar({ className }: SidebarProps) {
       {/* Logo */}
       <div className="p-8 flex items-center gap-2">
         <Book className="w-5 h-5 text-white" />
-        <span className="text-white font-medium">Utopia</span>
+        <span className="text-white font-medium">Alumni Management</span>
       </div>
 
       <div className="h-px bg-white/20 mx-4" />

@@ -199,6 +199,8 @@ export const verifyUser = async (req, res) => {
     user: {
       username: user.username,
       email: user.email,
+      phone: user.phone,
+      location: user.location,
       role: user.role,
       isVerified: Boolean(user.isVerified),
       mustChangePassword: Boolean(user.mustChangePassword),
@@ -392,6 +394,55 @@ export const resendOtp = async (req, res) => {
     await target.save();
 
     return res.json({ success: true, message: "OTP resent" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const user = req.user;
+    const { username, email, phone, location } = req.body;
+
+    if (!username || !email || !phone) {
+      return res.status(400).json({ message: "Username, email, and phone are required" });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+
+    // Check if email is already taken by another user
+    const existingEmail = await User.findOne({ email: normalizedEmail, _id: { $ne: user._id } });
+    if (existingEmail) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
+
+    // Check if phone is already taken by another user
+    const existingPhone = await User.findOne({ phone, _id: { $ne: user._id } });
+    if (existingPhone) {
+      return res.status(400).json({ message: "Phone number already in use" });
+    }
+
+    // Update user
+    user.username = username;
+    user.email = normalizedEmail;
+    user.phone = phone;
+    user.location = location || user.location;
+    await user.save();
+
+    return res.json({
+      success: true,
+      message: "Profile updated successfully",
+      user: {
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        location: user.location,
+        role: user.role,
+        isVerified: Boolean(user.isVerified),
+        mustChangePassword: Boolean(user.mustChangePassword),
+      },
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });

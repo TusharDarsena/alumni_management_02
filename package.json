@@ -21,16 +21,14 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-
     "bcryptjs": "^2.4.3",
-
-    "nodemailer": "^6.9.3",
-
     "cookie-parser": "^1.4.7",
+    "csv-parser": "^3.2.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.1",
+    "nodemailer": "^6.9.3",
     "nodemon": "^3.1.10",
     "zod": "^3.25.76"
   },

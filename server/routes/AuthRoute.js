@@ -11,6 +11,7 @@ import {
   sendVerification,
   setPassword,
   resendVerification,
+  updateProfile,
 } from "../controllers/AuthController.js";
 import { requireAuth } from "../middleware/auth.js";
 
@@ -28,5 +29,8 @@ router.post("/resend-otp", resendOtp);
 router.post("/send-verification", sendVerification);
 router.post("/set-password", setPassword);
 router.post("/resend-verification", resendVerification);
+
+// Profile update endpoint
+router.patch("/update-profile", requireAuth, updateProfile);
 
 export default router;

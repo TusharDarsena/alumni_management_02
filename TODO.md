@@ -1,6 +1,1 @@
-- [x] Create server/config/branches.js with allowed branches array
-- [x] Add helper function in AuthController.js for OTP user lookup and lock checking
-- [x] Modify login function to return sanitized user object (username, email, role, isVerified, mustChangePassword)
-- [x] Modify changePasswordFirst function to increment tokenVersion after password change
-- [x] Update signup function to use branches from config instead of hardcoded array
-- [x] Refactor verifyOtp and resendOtp functions to use the helper function for user lookup and lock checking
+- [x] Add alumni_data/*.json to .gitignore
