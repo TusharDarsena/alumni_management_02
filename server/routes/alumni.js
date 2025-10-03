@@ -1,6 +1,6 @@
 import express from "express";
 import AlumniProfile from "../models/AlumniProfile.js";
-import { readFile } from "fs/promises";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -70,29 +70,49 @@ function categorizeSkills(skillsStr) {
   return { technical, core };
 }
 
-// POST /import - Import alumni data from linkedin_data.json
+// POST /import - Import alumni data from alumni_data(jsons) directory
 router.post("/import", async (req, res) => {
   try {
-    const filePath = path.join(__dirname, "../../linkedin_data.json");
-    const data = await readFile(filePath, "utf-8");
-    const jsonData = JSON.parse(data);
+    const alumniDataDir = path.join(__dirname, "../../client/data/alumnidata");
+    const files = fs.readdirSync(alumniDataDir).filter(file => file.endsWith('.json'));
+    const jsonData = files.flatMap(file => {
+      const filePath = path.join(alumniDataDir, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      try {
+        return JSON.parse(content);
+      } catch (e) {
+        console.error(`Error parsing JSON file ${file}:`, e);
+        return [];
+      }
+    });
 
     // Filter out empty entries (e.g., where LinkedIn URL is empty)
-    const validEntries = jsonData.filter(entry => entry["LinkedIn URL"]);
+    const validEntries = jsonData.filter(entry => entry.url);
 
     // Transform to match schema
     const transformedData = validEntries.map(entry => ({
-      name: entry.Title || "Unknown",
+      name: entry.name || "Unknown",
       email: null,
-      imageUrl: null,
-      linkedinUrl: entry["LinkedIn URL"] || null,
-      location: entry.Location || null,
-      education: parseEducation(entry.Education),
-      experience: parseExperience(entry.Title, entry.Company, entry.Location, entry.Experience),
-      skills: categorizeSkills(entry.Skills),
-      graduationYear: extractBatch(entry.Education) ? parseInt(extractBatch(entry.Education)) : null,
-      batch: extractBatch(entry.Education) || null,
-      branch: extractBranch(entry.Education),
+      imageUrl: entry.avatar || null,
+      linkedinUrl: entry.url || null,
+      location: entry.location || null,
+      education: entry.education.map(edu => ({
+        degree: edu.degree + (edu.field ? ` in ${edu.field}` : ""),
+        institute: edu.title,
+        startYear: parseInt(edu.start_year),
+        endYear: parseInt(edu.end_year)
+      })),
+      experience: entry.experience.map(exp => ({
+        role: exp.title,
+        company: exp.company,
+        location: exp.location,
+        startYear: exp.start_date ? parseInt(exp.start_date.split(' ')[1]) : null,
+        endYear: exp.end_date === "Present" ? null : (exp.end_date ? parseInt(exp.end_date.split(' ')[1]) : null)
+      })),
+      skills: { technical: [], core: [] }, // No skills in new data
+      graduationYear: entry.education.length > 0 ? parseInt(entry.education[0].end_year) : null,
+      batch: entry.education.length > 0 ? entry.education[0].end_year : null,
+      branch: entry.education.length > 0 && entry.education[0].field === "Computer Science" ? "CSE" : "CSE", // Default to CSE
     }));
 
     // Insert into MongoDB
