@@ -1,45 +1,93 @@
 import mongoose from "mongoose";
 
+import mongoose from "mongoose";
+
 const alumniProfileSchema = new mongoose.Schema({
-  name: { type: String, required: true }, // Full name
-  email: { type: String, default: null },
-
-  // Profile info
-  imageUrl: { type: String, default: null },
-  linkedinUrl: { type: String, default: null },
-  location: { type: String, default: null },
-
-  // Education (can store multiple entries)
-  education: [
-    {
-      degree: { type: String, default: null },
-      institute: { type: String, default: null },
-      startYear: { type: Number, default: null },
-      endYear: { type: Number, default: null }
-    }
-  ],
-
-  experience: [
-    {
-      role: { type: String, default: null },
-      company: { type: String, default: null },
-      location: { type: String, default: null },
-      startYear: { type: Number, default: null },
-      endYear: { type: mongoose.Schema.Types.Mixed, default: null }
-      // can be Number or "Present"
-    }
-  ],
-
-  skills: {
-    technical: { type: [String], default: [] },
-    core: { type: [String], default: [] }
+  id: { type: String, required: true },
+  name: { type: String, required: true },
+  first_name: { type: String },
+  last_name: { type: String },
+  city: { type: String },
+  country_code: { type: String },
+  position: { type: String },
+  about: { type: String },
+  current_company: {
+    name: { type: String },
+    company_id: { type: String },
+    title: { type: String },
+    location: { type: String }
   },
-
-  graduationYear: { type: Number, default: null },
-  batch: { type: String, default: null }, // optional label, e.g. "2017–2021"
-  branch: { type: String, default: null }, // e.g. "CSE", "ECE"
-
+  experience: [{
+    title: { type: String },
+    location: { type: String },
+    description_html: { type: String },
+    start_date: { type: String },
+    end_date: { type: String },
+    company: { type: String },
+    company_id: { type: String },
+    url: { type: String },
+    company_logo_url: { type: String },
+    positions: [{
+      subtitle: { type: String },
+      meta: { type: String },
+      start_date: { type: String },
+      end_date: { type: String },
+      title: { type: String },
+      description_html: { type: String },
+      location: { type: String }
+    }],
+    duration: { type: String }
+  }],
+  url: { type: String },
+  people_also_viewed: [{
+    profile_link: { type: String },
+    name: { type: String },
+    about: { type: String },
+    location: { type: String }
+  }],
+  educations_details: { type: String },
+  education: [{
+    title: { type: String },
+    degree: { type: String },
+    field: { type: String },
+    url: { type: String },
+    start_year: { type: String },
+    end_year: { type: String },
+    description: { type: String },
+    description_html: { type: String },
+    institute_logo_url: { type: String }
+  }],
+  avatar: { type: String },
+  followers: { type: Number },
+  connections: { type: Number },
+  current_company_company_id: { type: String },
+  current_company_name: { type: String },
+  location: { type: String },
+  input_url: { type: String },
+  linkedin_id: { type: String, unique: true },
+  activity: [{
+    interaction: { type: String },
+    link: { type: String },
+    title: { type: String },
+    img: { type: String },
+    id: { type: String }
+  }],
+  linkedin_num_id: { type: String },
+  banner_image: { type: String },
+  honors_and_awards: { type: mongoose.Schema.Types.Mixed },
+  similar_profiles: [mongoose.Schema.Types.Mixed],
+  bio_links: [mongoose.Schema.Types.Mixed],
+  timestamp: { type: Date },
+  input: {
+    url: { type: String }
+  },
+  default_avatar: { type: Boolean },
+  memorialized_account: { type: Boolean }
 }, { timestamps: true });
+
+// Indexes to support filtering and sorting
+alumniProfileSchema.index({ 'education.field': 1, 'education.start_year': 1 });
+alumniProfileSchema.index({ name: 1 });
 
 const AlumniProfile = mongoose.models.AlumniProfile || mongoose.model("AlumniProfile", alumniProfileSchema);
 
