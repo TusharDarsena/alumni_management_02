@@ -52,7 +52,10 @@ const App = () => (
                   path="/search-favourites"
                   element={<SearchFavouritesPage />}
                 />
-                <Route path="/alumni/:username" element={<AlumniProfilePage />} />
+                <Route
+                  path="/alumni/:username"
+                  element={<AlumniProfilePage />}
+                />
                 <Route
                   path="/user-profile"
                   element={

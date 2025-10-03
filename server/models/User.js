@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
   otpAttempts: { type: Number, default: 0 },
   otpLockedUntil: Date,
   lastOtpSentAt: Date,
+  // Email verification token fields
+  verificationTokenHash: { type: String, default: null },
+  verificationExpires: { type: Date, default: null },
+  verificationLastSentAt: { type: Date, default: null },
   // Phone and branch
   phone: { type: String, unique: true, required: true, trim: true },
   branch: { type: String, enum: allowedBranches, required: true },

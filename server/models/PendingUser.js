@@ -18,8 +18,8 @@ const pendingUserSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["otp_sent", "pending", "approved", "rejected"],
-    default: "otp_sent",
+    enum: ["otp_sent", "verification_sent", "pending", "approved", "rejected"],
+    default: "verification_sent",
     index: true,
   },
   isVerified: { type: Boolean, default: false },
@@ -28,6 +28,10 @@ const pendingUserSchema = new mongoose.Schema({
   otpAttempts: { type: Number, default: 0 },
   otpLockedUntil: Date,
   lastOtpSentAt: Date,
+  // Verification link token fields
+  verificationTokenHash: { type: String, default: null },
+  verificationExpires: { type: Date, default: null },
+  verificationLastSentAt: { type: Date, default: null },
   phone: { type: String, unique: true, sparse: true, trim: true },
   branch: { type: String, enum: allowedBranches, required: true },
   mustChangePassword: { type: Boolean, default: false },

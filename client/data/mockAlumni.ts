@@ -1,4 +1,3 @@
-
 import alumniData from "./alumnidata/aishwarya_maurya.json";
 
 export const slugify = (name: string) =>
