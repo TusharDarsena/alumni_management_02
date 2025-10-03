@@ -18,17 +18,14 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/logout", requireAuth, logout);
-router.get("/verify", verifyHandler);
+router.get("/verify", requireAuth, verifyUser);
 router.post("/change-password-first", requireAuth, changePasswordFirst);
 router.post("/verify-otp", verifyOtp);
 router.post("/resend-otp", resendOtp);
 
-// New verification endpoints
+// Verification endpoints
 router.post("/send-verification", sendVerification);
 router.post("/set-password", setPassword);
 router.post("/resend-verification", resendVerification);
-
-// Profile update endpoint
-router.patch("/update-profile", requireAuth, updateProfile);
 
 export default router;
