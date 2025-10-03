@@ -3,7 +3,6 @@ import {
   signup,
   login,
   logout,
-  verifyHandler,
   verifyUser,
   changePasswordFirst,
   verifyOtp,
@@ -11,7 +10,6 @@ import {
   sendVerification,
   setPassword,
   resendVerification,
-  updateProfile,
 } from "../controllers/AuthController.js";
 import { requireAuth } from "../middleware/auth.js";
 
