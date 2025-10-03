@@ -1,4 +1,4 @@
-import linkedinData from "../../linkedin_data.json";
+const linkedinData = await import("../../linkedin_data.json").then(m => m.default).catch(() => []);
 
 export const slugify = (name: string) =>
   name
