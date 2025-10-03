@@ -1,4 +1,4 @@
-import type { AlumniItem } from "@/components/AlumniCard";
+import linkedinData from "../../linkedin_data.json";
 
 export const slugify = (name: string) =>
   name
@@ -8,13 +8,73 @@ export const slugify = (name: string) =>
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 
-export const alumniList: AlumniItem[] = [
-  { name: "John Doe", degree: "B.Tech", branch: "CSE", batch: "2020", company: "Google", username: slugify("John Doe"), avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=256&auto=format&fit=crop&q=60" },
-  { name: "Merna Collins", degree: "B.Tech", branch: "ECE", batch: "2019", company: "Amazon", username: slugify("Merna Collins"), avatarUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=256&auto=format&fit=crop&q=60" },
-  { name: "Aarav Gupta", degree: "M.Tech", branch: "CSE", batch: "2022", company: "Microsoft", username: slugify("Aarav Gupta"), avatarUrl: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=256&auto=format&fit=crop&q=60" },
-  { name: "Sara Lee", degree: "PhD", branch: "DS", batch: "2021", company: "NVIDIA", username: slugify("Sara Lee"), avatarUrl: "https://images.unsplash.com/photo-1541534401786-2077eed87a72?w=256&auto=format&fit=crop&q=60" },
-  { name: "Rohan Verma", degree: "B.Tech", branch: "CSE", batch: "2023", company: "Swiggy", username: slugify("Rohan Verma"), avatarUrl: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=256&auto=format&fit=crop&q=60" },
-  { name: "Emily Chen", degree: "M.Tech", branch: "ECE", batch: "2020", company: "Meta", username: slugify("Emily Chen"), avatarUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=256&auto=format&fit=crop&q=60" },
-  { name: "Mohit Sharma", degree: "B.Tech", branch: "DS", batch: "2019", company: "Adobe", username: slugify("Mohit Sharma"), avatarUrl: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=256&auto=format&fit=crop&q=60" },
-  { name: "Priya Singh", degree: "PhD", branch: "CSE", batch: "2018", company: "Intel", username: slugify("Priya Singh"), avatarUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=256&auto=format&fit=crop&q=60" },
-];
+// Helper to extract batch year from education string
+function extractBatch(education: string): string | null {
+  const match = education.match(/(\d{4})\s*-\s*(\d{4})/);
+  return match ? match[2] : null; // End year as batch
+}
+
+// Helper to parse education string into object
+function parseEducation(educationStr: string) {
+  if (!educationStr || educationStr === "") return [];
+  const parts = educationStr.split(",");
+  const institute = parts[0]?.trim() || null;
+  const degreeFull = parts[1]?.trim() || "";
+  const branch = parts[2]?.trim() || "";
+  const years = parts[3]?.trim() || "";
+  const yearMatch = years.match(/(\d{4})\s*-\s*(\d{4})/);
+  const startYear = yearMatch ? parseInt(yearMatch[1]) : null;
+  const endYear = yearMatch ? parseInt(yearMatch[2]) : null;
+  const degree = degreeFull.replace("(BTech)", "").trim() + (branch ? ` in ${branch}` : "");
+  return [{ degree, institute, startYear, endYear }];
+}
+
+// Helper to parse experience
+function parseExperience(title: string, company: string, location: string, experienceStr: string) {
+  if (!title || !company) return [];
+  const role = title;
+  const expYears = experienceStr.match(/(\d+\.?\d*)\+?\s*years?/);
+  const startYear = expYears ? new Date().getFullYear() - Math.floor(parseFloat(expYears[1])) : null;
+  return [{
+    role,
+    company,
+    location: location || null,
+    startYear,
+    endYear: "Present"
+  }];
+}
+
+// Helper to categorize skills
+function categorizeSkills(skillsStr: string) {
+  if (!skillsStr || skillsStr === "Not specified" || skillsStr === "(not explicitly listed)") return { technical: [], core: [] };
+  const skills = skillsStr.split(",").map(s => s.trim());
+  const technical = [];
+  const core = [];
+  skills.forEach(skill => {
+    if (["React", "TypeScript", "Node.js", "Python", "Coding", "Problem-solving"].includes(skill)) {
+      technical.push(skill);
+    } else {
+      core.push(skill);
+    }
+  });
+  return { technical, core };
+}
+
+// Transform linkedin_data.json to new schema
+const transformedAlumni = linkedinData
+  .filter(entry => entry["LinkedIn URL"]) // Filter out empty entries
+  .map(entry => ({
+    name: entry.Title || "Unknown",
+    email: null,
+    imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=256&auto=format&fit=crop&q=60", // Default avatar
+    linkedinUrl: entry["LinkedIn URL"] || null,
+    location: entry.Location || null,
+    education: parseEducation(entry.Education),
+    experience: parseExperience(entry.Title, entry.Company, entry.Location, entry.Experience),
+    skills: categorizeSkills(entry.Skills),
+    graduationYear: extractBatch(entry.Education) ? parseInt(extractBatch(entry.Education)) : null,
+    batch: extractBatch(entry.Education) || null,
+    username: slugify(entry.Title || "Unknown"),
+  }));
+
+export const alumniList = transformedAlumni;

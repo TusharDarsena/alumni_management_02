@@ -16,16 +16,20 @@ export default function AlumniProfilePage() {
     if (!username) return;
     const found = alumniList.find((a) => a.username === username);
     if (found) {
-      setProfile({
+      const profileData: UserProfileData = {
         username: found.username,
         name: found.name,
-        avatarUrl: found.avatarUrl,
-        degree: found.degree,
-        branch: found.branch,
+        email: found.email,
+        imageUrl: found.imageUrl,
+        linkedinUrl: found.linkedinUrl,
+        location: found.location,
+        education: found.education,
+        experience: found.experience,
+        skills: found.skills,
+        graduationYear: found.graduationYear,
         batch: found.batch,
-        currentCompany: found.company,
-        bio: `${found.name} is an alumnus of IIIT Naya Raipur currently at ${found.company ?? "a leading company"}. Passionate about technology and community building.`,
-      });
+      };
+      setProfile(profileData);
     } else {
       setProfile(null);
     }
@@ -50,35 +54,7 @@ export default function AlumniProfilePage() {
           </div>
         )}
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Experience</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-slate-600">
-            <p>Software Engineer at {profile?.currentCompany ?? "Company"} (2021 - Present)</p>
-            <p>Intern at Tech Labs (2020 - 2021)</p>
-          </CardContent>
-        </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Education</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-slate-600">
-            <p>{profile?.degree} in {profile?.branch}, IIIT Naya Raipur ({profile?.batch})</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Skills</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-wrap gap-2 text-sm">
-            {['React', 'TypeScript', 'Node.js', 'Data Structures', 'Communication'].map((s) => (
-              <span key={s} className="px-3 py-1 rounded-full bg-white border text-slate-700">{s}</span>
-            ))}
-          </CardContent>
-        </Card>
       </div>
     </DashboardLayout>
   );
