@@ -3,6 +3,7 @@ import AlumniProfile from "../models/AlumniProfile.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import crypto from "crypto";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
