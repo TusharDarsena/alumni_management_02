@@ -33,7 +33,11 @@ export default function VerifyOtpPage() {
         body: JSON.stringify({ email, otp }),
       });
       const d = await res.json();
-      if (!res.ok) return toast({ title: "Error", description: d.message || "Verification failed" });
+      if (!res.ok)
+        return toast({
+          title: "Error",
+          description: d.message || "Verification failed",
+        });
       toast({ title: "Verified", description: d.message });
     } catch (e: any) {
       toast({ title: "Error", description: e.message || "Network error" });
@@ -42,9 +46,17 @@ export default function VerifyOtpPage() {
 
   const handleResend = async () => {
     try {
-      const res = await fetch("/api/auth/resend-otp", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+      const res = await fetch("/api/auth/resend-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
       const d = await res.json();
-      if (!res.ok) return toast({ title: "Error", description: d.message || "Failed to resend" });
+      if (!res.ok)
+        return toast({
+          title: "Error",
+          description: d.message || "Failed to resend",
+        });
       toast({ title: "OTP sent", description: d.message });
       // naive: set expiry to now + 10min
       setExpiresAt(Date.now() + 10 * 60 * 1000);
@@ -66,10 +78,16 @@ export default function VerifyOtpPage() {
             <Label>OTP</Label>
             <Input value={otp} onChange={(e) => setOtp(e.target.value)} />
           </div>
-          {countdown > 0 && <div className="text-sm text-muted-foreground">OTP expires in: {countdown}s</div>}
+          {countdown > 0 && (
+            <div className="text-sm text-muted-foreground">
+              OTP expires in: {countdown}s
+            </div>
+          )}
           <div className="flex gap-2">
             <Button onClick={handleVerify}>Verify</Button>
-            <Button variant="ghost" onClick={handleResend}>Resend OTP</Button>
+            <Button variant="ghost" onClick={handleResend}>
+              Resend OTP
+            </Button>
           </div>
         </div>
       </div>

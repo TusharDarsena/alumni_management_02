@@ -34,7 +34,8 @@ function parseEducation(educationStr) {
   const yearMatch = years.match(/(\d{4})\s*-\s*(\d{4})/);
   const startYear = yearMatch ? parseInt(yearMatch[1]) : null;
   const endYear = yearMatch ? parseInt(yearMatch[2]) : null;
-  const degree = degreeFull.replace("(BTech)", "").trim() + (branch ? ` in ${branch}` : "");
+  const degree =
+    degreeFull.replace("(BTech)", "").trim() + (branch ? ` in ${branch}` : "");
   return [{ degree, institute, startYear, endYear }];
 }
 
@@ -44,24 +45,42 @@ function parseExperience(title, company, location, experienceStr) {
   // Assume current role is the title
   const role = title;
   const expYears = experienceStr.match(/(\d+\.?\d*)\+?\s*years?/);
-  const startYear = expYears ? new Date().getFullYear() - Math.floor(parseFloat(expYears[1])) : null;
-  return [{
-    role,
-    company,
-    location: location || null,
-    startYear,
-    endYear: "Present"
-  }];
+  const startYear = expYears
+    ? new Date().getFullYear() - Math.floor(parseFloat(expYears[1]))
+    : null;
+  return [
+    {
+      role,
+      company,
+      location: location || null,
+      startYear,
+      endYear: "Present",
+    },
+  ];
 }
 
 // Helper to categorize skills
 function categorizeSkills(skillsStr) {
-  if (!skillsStr || skillsStr === "Not specified" || skillsStr === "(not explicitly listed)") return { technical: [], core: [] };
-  const skills = skillsStr.split(",").map(s => s.trim());
+  if (
+    !skillsStr ||
+    skillsStr === "Not specified" ||
+    skillsStr === "(not explicitly listed)"
+  )
+    return { technical: [], core: [] };
+  const skills = skillsStr.split(",").map((s) => s.trim());
   const technical = [];
   const core = [];
-  skills.forEach(skill => {
-    if (["React", "TypeScript", "Node.js", "Python", "Coding", "Problem-solving"].includes(skill)) {
+  skills.forEach((skill) => {
+    if (
+      [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Python",
+        "Coding",
+        "Problem-solving",
+      ].includes(skill)
+    ) {
       technical.push(skill);
     } else {
       core.push(skill);
@@ -74,10 +93,12 @@ function categorizeSkills(skillsStr) {
 router.post("/import", async (req, res) => {
   try {
     const alumniDataDir = path.join(__dirname, "../../client/data/alumnidata");
-    const files = fs.readdirSync(alumniDataDir).filter(file => file.endsWith('.json'));
-    const jsonData = files.flatMap(file => {
+    const files = fs
+      .readdirSync(alumniDataDir)
+      .filter((file) => file.endsWith(".json"));
+    const jsonData = files.flatMap((file) => {
       const filePath = path.join(alumniDataDir, file);
-      const content = fs.readFileSync(filePath, 'utf-8');
+      const content = fs.readFileSync(filePath, "utf-8");
       try {
         return JSON.parse(content);
       } catch (e) {
@@ -87,37 +108,55 @@ router.post("/import", async (req, res) => {
     });
 
     // Filter out empty entries (e.g., where LinkedIn URL is empty)
-    const validEntries = jsonData.filter(entry => entry.url);
+    const validEntries = jsonData.filter((entry) => entry.url);
 
     // Transform to match schema
-    const transformedData = validEntries.map(entry => ({
+    const transformedData = validEntries.map((entry) => ({
       name: entry.name || "Unknown",
       email: null,
       imageUrl: entry.avatar || null,
       linkedinUrl: entry.url || null,
       location: entry.location || null,
-      education: entry.education.map(edu => ({
+      education: entry.education.map((edu) => ({
         degree: edu.degree + (edu.field ? ` in ${edu.field}` : ""),
         institute: edu.title,
         startYear: parseInt(edu.start_year),
-        endYear: parseInt(edu.end_year)
+        endYear: parseInt(edu.end_year),
       })),
-      experience: entry.experience.map(exp => ({
+      experience: entry.experience.map((exp) => ({
         role: exp.title,
         company: exp.company,
         location: exp.location,
-        startYear: exp.start_date ? parseInt(exp.start_date.split(' ')[1]) : null,
-        endYear: exp.end_date === "Present" ? null : (exp.end_date ? parseInt(exp.end_date.split(' ')[1]) : null)
+        startYear: exp.start_date
+          ? parseInt(exp.start_date.split(" ")[1])
+          : null,
+        endYear:
+          exp.end_date === "Present"
+            ? null
+            : exp.end_date
+              ? parseInt(exp.end_date.split(" ")[1])
+              : null,
       })),
       skills: { technical: [], core: [] }, // No skills in new data
-      graduationYear: entry.education.length > 0 ? parseInt(entry.education[0].end_year) : null,
+      graduationYear:
+        entry.education.length > 0
+          ? parseInt(entry.education[0].end_year)
+          : null,
       batch: entry.education.length > 0 ? entry.education[0].end_year : null,
-      branch: entry.education.length > 0 && entry.education[0].field === "Computer Science" ? "CSE" : "CSE", // Default to CSE
+      branch:
+        entry.education.length > 0 &&
+        entry.education[0].field === "Computer Science"
+          ? "CSE"
+          : "CSE", // Default to CSE
     }));
 
     // Insert into MongoDB
     const inserted = await AlumniProfile.insertMany(transformedData);
-    res.json({ success: true, count: inserted.length, message: "Alumni profiles imported successfully" });
+    res.json({
+      success: true,
+      count: inserted.length,
+      message: "Alumni profiles imported successfully",
+    });
   } catch (error) {
     console.error("Import error:", error);
     res.status(500).json({ success: false, error: error.message });
@@ -142,13 +181,31 @@ router.get("/", async (req, res) => {
           index: "default",
           compound: {
             should: [
-              { autocomplete: { query: String(search), path: "name", fuzzy: { maxEdits: 2 } } },
-              { autocomplete: { query: String(search), path: "position", fuzzy: { maxEdits: 2 } } },
-              { autocomplete: { query: String(search), path: "current_company.name", fuzzy: { maxEdits: 2 } } }
+              {
+                autocomplete: {
+                  query: String(search),
+                  path: "name",
+                  fuzzy: { maxEdits: 2 },
+                },
+              },
+              {
+                autocomplete: {
+                  query: String(search),
+                  path: "position",
+                  fuzzy: { maxEdits: 2 },
+                },
+              },
+              {
+                autocomplete: {
+                  query: String(search),
+                  path: "current_company.name",
+                  fuzzy: { maxEdits: 2 },
+                },
+              },
             ],
-            minimumShouldMatch: 1
-          }
-        }
+            minimumShouldMatch: 1,
+          },
+        },
       });
     }
 
@@ -178,9 +235,9 @@ router.get("/", async (req, res) => {
               position: 1,
               current_company: "$current_company.name",
               location: 1,
-              education: 1
-            }
-          }
+              education: 1,
+            },
+          },
         ],
         totalCount: [{ $count: "count" }],
         metadata: [
@@ -190,12 +247,12 @@ router.get("/", async (req, res) => {
               _id: null,
               branches: { $addToSet: "$education.field" },
               degrees: { $addToSet: "$education.degree" },
-              batches: { $addToSet: "$education.start_year" }
-            }
+              batches: { $addToSet: "$education.start_year" },
+            },
           },
-          { $project: { _id: 0, branches: 1, degrees: 1, batches: 1 } }
-        ]
-      }
+          { $project: { _id: 0, branches: 1, degrees: 1, batches: 1 } },
+        ],
+      },
     });
 
     const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
@@ -207,13 +264,19 @@ router.get("/", async (req, res) => {
       position: d.position,
       current_company: d.current_company,
       location: d.location,
-      education: d.education
+      education: d.education,
     }));
 
-    const totalCount = results[0].totalCount[0] ? results[0].totalCount[0].count : 0;
+    const totalCount = results[0].totalCount[0]
+      ? results[0].totalCount[0].count
+      : 0;
     const totalPages = Math.ceil(totalCount / limit);
 
-    const metadata = results[0].metadata[0] || { branches: [], degrees: [], batches: [] };
+    const metadata = results[0].metadata[0] || {
+      branches: [],
+      degrees: [],
+      batches: [],
+    };
 
     res.json({
       data,
@@ -221,9 +284,9 @@ router.get("/", async (req, res) => {
         currentPage: page,
         totalPages,
         totalResults: totalCount,
-        limit
+        limit,
       },
-      metadata
+      metadata,
     });
   } catch (error) {
     console.error("Alumni search error:", error);
