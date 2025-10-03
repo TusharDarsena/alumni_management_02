@@ -41,6 +41,6 @@ const alumniProfileSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const AlumniProfile = mongoose.model("AlumniProfile", alumniProfileSchema);
+const AlumniProfile = mongoose.models.AlumniProfile || mongoose.model("AlumniProfile", alumniProfileSchema);
 
 export default AlumniProfile;
