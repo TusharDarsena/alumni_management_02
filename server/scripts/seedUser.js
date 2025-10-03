@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
 import AlumniProfile from '../models/AlumniProfile.js';
-import { readFile } from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 
 dotenv.config();
@@ -112,23 +112,45 @@ const seedUsers = async () => {
     }
 
     // Seed alumni profiles
-    const linkedinData = JSON.parse(await readFile(path.join(process.cwd(), 'linkedin_data.json'), 'utf-8'));
+    const alumniDataDir = path.join(process.cwd(), 'client/data/alumnidata');
+    const files = fs.readdirSync(alumniDataDir).filter(file => file.endsWith('.json'));
+    const linkedinData = files.flatMap(file => {
+      const filePath = path.join(alumniDataDir, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      try {
+        return JSON.parse(content);
+      } catch (e) {
+        console.error(`Error parsing JSON file ${file}:`, e);
+        return [];
+      }
+    });
     for (const entry of linkedinData) {
-      if (!entry["LinkedIn URL"]) continue;
-      const name = entry.Title || "Unknown";
-      const batch = extractBatch(entry.Education);
-      const branch = extractBranch(entry.Education);
+      if (!entry.url) continue;
+      const name = entry.name || "Unknown";
+      const batch = entry.education.length > 0 ? entry.education[0].end_year : null;
+      const branch = entry.education.length > 0 && entry.education[0].field === "Computer Science" ? "CSE" : "CSE"; // Default to CSE
       const exists = await AlumniProfile.findOne({ name, batch, branch });
       if (!exists) {
         const profile = {
           name,
           email: null,
-          imageUrl: null,
-          linkedinUrl: entry["LinkedIn URL"] || null,
-          location: entry.Location || null,
-          education: parseEducation(entry.Education),
-          experience: parseExperience(entry.Title, entry.Company, entry.Location, entry.Experience),
-          skills: categorizeSkills(entry.Skills),
+          imageUrl: entry.avatar || null,
+          linkedinUrl: entry.url || null,
+          location: entry.location || null,
+          education: entry.education.map(edu => ({
+            degree: edu.degree + (edu.field ? ` in ${edu.field}` : ""),
+            institute: edu.title,
+            startYear: parseInt(edu.start_year),
+            endYear: parseInt(edu.end_year)
+          })),
+          experience: entry.experience.map(exp => ({
+            role: exp.title,
+            company: exp.company,
+            location: exp.location,
+            startYear: exp.start_date ? parseInt(exp.start_date.split(' ')[1]) : null,
+            endYear: exp.end_date === "Present" ? null : (exp.end_date ? parseInt(exp.end_date.split(' ')[1]) : null)
+          })),
+          skills: { technical: [], core: [] }, // No skills in new data
           graduationYear: batch ? parseInt(batch) : null,
           batch,
           branch,
