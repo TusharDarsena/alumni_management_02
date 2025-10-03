@@ -42,4 +42,4 @@ const pendingUserSchema = new mongoose.Schema({
 // TTL index
 pendingUserSchema.index({ otpExpiresAt: 1 }, { expireAfterSeconds: 0 });
 
-export default mongoose.models.PendingUser || mongoose.model("PendingUser", pendingUserSchema);
+export default mongoose.model("PendingUser", pendingUserSchema);
