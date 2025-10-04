@@ -62,6 +62,8 @@ export function createServer() {
   // Protected portal and admin routes
   app.use("/api/portal", portalRoutes);
   app.use("/api/admin", adminRoutes);
+  // Import route at /api/import
+  app.use("/api", importRoute);
   app.use("/api/alumni", alumniRoute);
 
 
