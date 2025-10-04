@@ -250,8 +250,8 @@ router.post("/import", async (req, res) => {
 });
 
 // Simple in-memory token-bucket rate limiter (per-IP)
-const RATE_LIMIT_MAX = 10; // tokens per second
-const RATE_LIMIT_CAPACITY = 10; // burst capacity
+const RATE_LIMIT_MAX = 5; // tokens per second
+const RATE_LIMIT_CAPACITY = 5; // burst capacity
 const rateBuckets = new Map();
 
 function rateLimiter(req, res, next) {
