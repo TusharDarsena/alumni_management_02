@@ -6,6 +6,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
 import AlumniCard from "@/components/AlumniCard";
 import { useFavorites } from "@/hooks/useFavorites";
+import AutocompleteSearch from "@/components/AutocompleteSearch";
 
 interface AlumniFilters {
   searchTerm: string;
