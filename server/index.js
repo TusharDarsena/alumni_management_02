@@ -68,8 +68,8 @@ export function createServer() {
 }
 
 
-// Standalone mode (only when executed directly)
-if (process.argv[1] && process.argv[1].includes("server/index.js")) {
+// Standalone mode (only when executed directly or when running the built bundle)
+if (process.argv[1] && (process.argv[1].includes("server/index.js") || process.argv[1].includes("server/dist/server.js") || process.argv[1].includes("server/dist/server.js"))) {
   const PORT = process.env.PORT || 8080;
   const app = createServer();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
