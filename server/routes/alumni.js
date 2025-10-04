@@ -557,6 +557,15 @@ router.get("/:id", async (req, res) => {
         .json({ success: false, message: "Profile not found" });
     }
 
+    // ETag based on id + updatedAt
+    const etag = crypto.createHash("sha1").update(String(doc.id) + String(doc.updatedAt || "")).digest("hex");
+    res.setHeader("ETag", etag);
+    res.setHeader("Cache-Control", "private, max-age=60");
+    const ifNone = req.headers["if-none-match"];
+    if (ifNone && String(ifNone) === etag) {
+      return res.status(304).end();
+    }
+
     const payload = {
       id: doc.id,
       name: doc.name,
