@@ -48,13 +48,25 @@ export default function SearchAlumniPage() {
     if (params.degree) qs.set("degree", params.degree);
     if (params.batch) qs.set("batch", params.batch);
 
-    const res = await fetch(`/api/alumni?${qs.toString()}`, { credentials: "include" });
+    const res = await fetch(`/api/alumni?${qs.toString()}`, {
+      credentials: "include",
+    });
     if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
     return res.json();
   };
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["alumniList", { page: 1, limit: 24, search: filters.searchTerm, branch: filters.branch, degree: filters.degree, batch: filters.batch }],
+    queryKey: [
+      "alumniList",
+      {
+        page: 1,
+        limit: 24,
+        search: filters.searchTerm,
+        branch: filters.branch,
+        degree: filters.degree,
+        batch: filters.batch,
+      },
+    ],
     queryFn: fetchList,
     keepPreviousData: true,
     staleTime: 60_000, // 1 minute
@@ -62,7 +74,12 @@ export default function SearchAlumniPage() {
     refetchOnWindowFocus: false,
   });
 
-  const options = data?.filters || { branches: [], degrees: [], entryYears: [], locations: [] };
+  const options = data?.filters || {
+    branches: [],
+    degrees: [],
+    entryYears: [],
+    locations: [],
+  };
   const alumni = data?.data || [];
 
   useEffect(() => {
@@ -74,7 +91,11 @@ export default function SearchAlumniPage() {
   };
 
   return (
-    <DashboardLayout activePage="Search Alumni" onNavigate={() => {}} user={user}>
+    <DashboardLayout
+      activePage="Search Alumni"
+      onNavigate={() => {}}
+      user={user}
+    >
       {/* Search and Filters */}
       <div className="flex items-center gap-12 mb-12">
         <div className="relative w-[406px]">
@@ -85,7 +106,9 @@ export default function SearchAlumniPage() {
               placeholder="Search Alumni"
               className="bg-transparent outline-none text-gray-600 placeholder-gray-500 flex-1"
               value={filters.searchTerm}
-              onChange={(e) => setFilters((f) => ({ ...f, searchTerm: e.target.value }))}
+              onChange={(e) =>
+                setFilters((f) => ({ ...f, searchTerm: e.target.value }))
+              }
             />
           </div>
         </div>
@@ -102,9 +125,13 @@ export default function SearchAlumniPage() {
           {batchOpen && (
             <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10 max-h-64 overflow-auto">
               {options.entryYears.length === 0 && !isLoading ? (
-                <div className="px-3 py-2 text-sm text-slate-500">No entry years</div>
+                <div className="px-3 py-2 text-sm text-slate-500">
+                  No entry years
+                </div>
               ) : isLoading ? (
-                <div className="p-3"><Skeleton className="h-4 w-1/2" /></div>
+                <div className="p-3">
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
               ) : (
                 options.entryYears.map((year: string) => (
                   <div
@@ -135,9 +162,13 @@ export default function SearchAlumniPage() {
           {degreeOpen && (
             <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10 max-h-64 overflow-auto">
               {options.degrees.length === 0 && !isLoading ? (
-                <div className="px-3 py-2 text-sm text-slate-500">No degrees</div>
+                <div className="px-3 py-2 text-sm text-slate-500">
+                  No degrees
+                </div>
               ) : isLoading ? (
-                <div className="p-3"><Skeleton className="h-4 w-1/2" /></div>
+                <div className="p-3">
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
               ) : (
                 options.degrees.map((degree: string) => (
                   <div
@@ -168,9 +199,13 @@ export default function SearchAlumniPage() {
           {branchOpen && (
             <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10 max-h-64 overflow-auto">
               {options.branches.length === 0 && !isLoading ? (
-                <div className="px-3 py-2 text-sm text-slate-500">No branches</div>
+                <div className="px-3 py-2 text-sm text-slate-500">
+                  No branches
+                </div>
               ) : isLoading ? (
-                <div className="p-3"><Skeleton className="h-4 w-1/2" /></div>
+                <div className="p-3">
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
               ) : (
                 options.branches.map((branch: string) => (
                   <div
@@ -192,35 +227,46 @@ export default function SearchAlumniPage() {
 
       {/* Alumni Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {isLoading && Array.from({ length: 8 }).map((_, i) => (
-          <Card key={i} className="p-4">
-            <CardContent>
-              <Skeleton className="h-16 w-16 rounded-full mb-2" />
-              <Skeleton className="h-4 w-3/4 mb-2" />
-              <Skeleton className="h-3 w-1/2" />
-            </CardContent>
-          </Card>
-        ))}
+        {isLoading &&
+          Array.from({ length: 8 }).map((_, i) => (
+            <Card key={i} className="p-4">
+              <CardContent>
+                <Skeleton className="h-16 w-16 rounded-full mb-2" />
+                <Skeleton className="h-4 w-3/4 mb-2" />
+                <Skeleton className="h-3 w-1/2" />
+              </CardContent>
+            </Card>
+          ))}
 
         {!isLoading && alumni.length === 0 && (
           <div className="text-sm text-slate-500">No alumni found.</div>
         )}
 
-        {!isLoading && alumni.map((alumniItem: any) => (
-          <AlumniCard
-            key={alumniItem.username}
-            alumnus={{ username: alumniItem.username, name: alumniItem.name, profilePictureUrl: alumniItem.avatar, graduationYear: undefined, major: undefined, company: alumniItem.current_company }}
-            isFavourite={isFavorite(alumniItem.username)}
-            onViewProfile={() => handleViewProfile(alumniItem.username)}
-            onToggleFavourite={() => toggleFavorite(alumniItem.username)}
-          />
-        ))}
+        {!isLoading &&
+          alumni.map((alumniItem: any) => (
+            <AlumniCard
+              key={alumniItem.username}
+              alumnus={{
+                username: alumniItem.username,
+                name: alumniItem.name,
+                profilePictureUrl: alumniItem.avatar,
+                graduationYear: undefined,
+                major: undefined,
+                company: alumniItem.current_company,
+              }}
+              isFavourite={isFavorite(alumniItem.username)}
+              onViewProfile={() => handleViewProfile(alumniItem.username)}
+              onToggleFavourite={() => toggleFavorite(alumniItem.username)}
+            />
+          ))}
       </div>
 
       {error && (
         <div className="mt-4 text-sm text-red-600">
           {(error as Error).message}
-          <button className="ml-3 underline" onClick={() => refetch()}>Retry</button>
+          <button className="ml-3 underline" onClick={() => refetch()}>
+            Retry
+          </button>
         </div>
       )}
     </DashboardLayout>

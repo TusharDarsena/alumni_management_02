@@ -11,9 +11,7 @@ import importRoute from "./routes/import.js";
 
 dotenv.config();
 
-
 export function createServer() {
-
   const app = express();
 
   // Middlewares
@@ -66,15 +64,12 @@ export function createServer() {
   app.use("/api", importRoute);
   app.use("/api/alumni", alumniRoute);
 
-
   return app;
 }
-
 
 // Standalone mode (only when executed directly)
 if (process.argv[1] && process.argv[1].includes("server/index.js")) {
   const PORT = process.env.PORT || 8080;
   const app = createServer();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 }

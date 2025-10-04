@@ -338,11 +338,24 @@ router.get("/filters", async (req, res) => {
           locations: { $addToSet: "$location" },
         },
       },
-      { $project: { _id: 0, branches: 1, degrees: 1, entryYears: 1, locations: 1 } },
+      {
+        $project: {
+          _id: 0,
+          branches: 1,
+          degrees: 1,
+          entryYears: 1,
+          locations: 1,
+        },
+      },
     ];
 
     const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
-    const row = results[0] || { branches: [], degrees: [], entryYears: [], locations: [] };
+    const row = results[0] || {
+      branches: [],
+      degrees: [],
+      entryYears: [],
+      locations: [],
+    };
 
     const filters = {
       branches: (row.branches || []).filter(Boolean).sort(),
@@ -352,7 +365,10 @@ router.get("/filters", async (req, res) => {
     };
 
     const cacheControl = "public, max-age=14400, stale-while-revalidate=3600";
-    const etag = crypto.createHash("sha1").update(JSON.stringify(filters)).digest("base64");
+    const etag = crypto
+      .createHash("sha1")
+      .update(JSON.stringify(filters))
+      .digest("base64");
     res.setHeader("Cache-Control", cacheControl);
     res.setHeader("ETag", etag);
 

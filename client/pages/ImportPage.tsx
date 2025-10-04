@@ -3,7 +3,10 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
 
 export default function ImportPage() {
-  const [user] = useState<UserInfo>({ name: "Merna", email: "merna@example.com" });
+  const [user] = useState<UserInfo>({
+    name: "Merna",
+    email: "merna@example.com",
+  });
   const [files, setFiles] = useState<FileList | null>(null);
   const [uploading, setUploading] = useState(false);
   const [result, setResult] = useState<any>(null);
@@ -27,7 +30,8 @@ export default function ImportPage() {
         try {
           const parsed = JSON.parse(text);
           if (Array.isArray(parsed)) allEntries.push(...parsed);
-          else if (parsed && parsed.data && Array.isArray(parsed.data)) allEntries.push(...parsed.data);
+          else if (parsed && parsed.data && Array.isArray(parsed.data))
+            allEntries.push(...parsed.data);
         } catch (e) {
           console.error("Error parsing file", f.name, e);
         }
@@ -58,7 +62,12 @@ export default function ImportPage() {
       <div className="space-y-4">
         <div className="p-4 border rounded-lg bg-white">
           <div className="mb-2 font-semibold">Upload JSON files</div>
-          <input type="file" accept=".json,application/json" multiple onChange={handleChange} />
+          <input
+            type="file"
+            accept=".json,application/json"
+            multiple
+            onChange={handleChange}
+          />
           <div className="mt-4">
             <button
               className="px-4 py-2 bg-blue-600 text-white rounded-md"
@@ -71,7 +80,8 @@ export default function ImportPage() {
           {error && <div className="mt-3 text-sm text-red-600">{error}</div>}
           {result && (
             <div className="mt-3 text-sm text-green-600">
-              Processed: {result.processed} • Upserted: {result.upserted} • Modified: {result.modified}
+              Processed: {result.processed} • Upserted: {result.upserted} •
+              Modified: {result.modified}
             </div>
           )}
         </div>
