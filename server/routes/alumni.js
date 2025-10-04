@@ -3,6 +3,7 @@ import AlumniProfile from "../models/AlumniProfile.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import crypto from "crypto";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -290,6 +291,72 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Alumni search error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// GET /:id - Fetch a single alumni profile with lean projection and caching headers
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const doc = await AlumniProfile.findOne({ id })
+      .select(
+        "id name about avatar position current_company experience education updatedAt",
+      )
+      .lean();
+
+    if (!doc) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
+    }
+
+    const payload = {
+      id: doc.id,
+      name: doc.name,
+      about: doc.about || null,
+      avatar: doc.avatar || null,
+      position: doc.position || doc.current_company?.title || null,
+      current_company: doc.current_company || null,
+      experience: Array.isArray(doc.experience) ? doc.experience : [],
+      education: Array.isArray(doc.education) ? doc.education : [],
+    };
+
+    const etag = crypto
+      .createHash("sha1")
+      .update(JSON.stringify({ ...payload, updatedAt: doc.updatedAt }))
+      .digest("base64");
+
+    const clientTag = req.headers["if-none-match"];
+    if (clientTag && clientTag === etag) {
+      res.setHeader("ETag", etag);
+      res.setHeader(
+        "Cache-Control",
+        "public, max-age=60, stale-while-revalidate=300",
+      );
+      res.status(304).end();
+      return;
+    }
+
+    const cacheControl = "public, max-age=60, stale-while-revalidate=300";
+    res.setHeader("ETag", etag);
+    res.setHeader("Cache-Control", cacheControl);
+    if (doc.updatedAt) {
+      res.setHeader("Last-Modified", new Date(doc.updatedAt).toUTCString());
+    }
+
+    res.json({
+      success: true,
+      data: payload,
+      metadata: {
+        etag,
+        lastModified: doc.updatedAt || null,
+        cacheControl,
+      },
+    });
+  } catch (error) {
+    console.error("Alumni detail error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });

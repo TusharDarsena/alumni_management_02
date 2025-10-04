@@ -42,14 +42,17 @@ const alumniProfileSchema = new mongoose.Schema(
       },
     ],
     url: { type: String },
-    people_also_viewed: [
-      {
-        profile_link: { type: String },
-        name: { type: String },
-        about: { type: String },
-        location: { type: String },
-      },
-    ],
+    people_also_viewed: {
+      type: [
+        {
+          profile_link: { type: String },
+          name: { type: String },
+          about: { type: String },
+          location: { type: String },
+        },
+      ],
+      select: false,
+    },
     educations_details: { type: String },
     education: [
       {
@@ -72,15 +75,18 @@ const alumniProfileSchema = new mongoose.Schema(
     location: { type: String },
     input_url: { type: String },
     linkedin_id: { type: String, unique: true },
-    activity: [
-      {
-        interaction: { type: String },
-        link: { type: String },
-        title: { type: String },
-        img: { type: String },
-        id: { type: String },
-      },
-    ],
+    activity: {
+      type: [
+        {
+          interaction: { type: String },
+          link: { type: String },
+          title: { type: String },
+          img: { type: String },
+          id: { type: String },
+        },
+      ],
+      select: false,
+    },
     linkedin_num_id: { type: String },
     banner_image: { type: String },
     honors_and_awards: { type: mongoose.Schema.Types.Mixed },
