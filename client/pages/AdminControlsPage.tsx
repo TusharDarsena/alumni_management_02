@@ -147,6 +147,8 @@ export default function AdminControlsPage() {
         </div>
       </div>
 
+      {mode === "add" && <ImportUpload />}
+
       {mode === "add" ? (
         <Card className="mt-6 w-full">
           <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
