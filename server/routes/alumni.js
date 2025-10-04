@@ -600,14 +600,14 @@ router.get("/:id", async (req, res) => {
       education: Array.isArray(doc.education) ? doc.education : [],
     };
 
-    const etag = crypto
+    const responseEtag = crypto
       .createHash("sha1")
       .update(JSON.stringify({ ...payload, updatedAt: doc.updatedAt }))
       .digest("base64");
 
     const clientTag = req.headers["if-none-match"];
-    if (clientTag && clientTag === etag) {
-      res.setHeader("ETag", etag);
+    if (clientTag && clientTag === responseEtag) {
+      res.setHeader("ETag", responseEtag);
       res.setHeader(
         "Cache-Control",
         "public, max-age=60, stale-while-revalidate=300",
@@ -617,7 +617,7 @@ router.get("/:id", async (req, res) => {
     }
 
     const cacheControl = "public, max-age=60, stale-while-revalidate=300";
-    res.setHeader("ETag", etag);
+    res.setHeader("ETag", responseEtag);
     res.setHeader("Cache-Control", cacheControl);
     if (doc.updatedAt) {
       res.setHeader("Last-Modified", new Date(doc.updatedAt).toUTCString());
@@ -627,7 +627,7 @@ router.get("/:id", async (req, res) => {
       success: true,
       data: payload,
       metadata: {
-        etag,
+        etag: responseEtag,
         lastModified: doc.updatedAt || null,
         cacheControl,
       },

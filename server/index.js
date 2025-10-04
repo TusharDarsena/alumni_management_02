@@ -78,41 +78,12 @@ export function createServer() {
   app.use("/api/admin", adminRoutes);
   app.use("/api/alumni", alumniRoute);
 
-  // Serve index.html for root and client-side routing fallback
-  app.get("/", (req, res) => {
-    const indexPaths = [
-      path.resolve(process.cwd(), "dist", "index.html"),
-      path.resolve(process.cwd(), "client", "dist", "index.html"),
-      path.resolve(process.cwd(), "client", "index.html"),
-      path.resolve(process.cwd(), "index.html"),
-    ];
-
-    for (const p of indexPaths) {
-      try {
-        if (require("fs").existsSync(p)) {
-          return res.sendFile(p);
-        }
-      } catch (e) {
-        // ignore
-      }
-    }
-
-    // If no index.html found, fallback to a simple JSON message
-    res.send(
-      '<!doctype html><html><head><meta charset="utf-8"/><title>App</title></head><body><pre>API is running. Visit /api/health for diagnostics.</pre></body></html>',
-    );
-  });
 
   return app;
 }
 
-// Standalone mode (only when executed directly or when running the built bundle)
-if (
-  process.argv[1] &&
-  (process.argv[1].includes("server/index.js") ||
-    process.argv[1].includes("server/dist/server.js") ||
-    process.argv[1].includes("server/dist/server.js"))
-) {
+// Standalone mode (only when executed directly)
+if (process.argv[1] && process.argv[1].includes("server/index.js")) {
   const PORT = process.env.PORT || 8080;
   const app = createServer();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
