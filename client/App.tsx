@@ -13,6 +13,7 @@ import SignupPage from "./pages/SignupPage";
 import DashboardPage from "./pages/DashboardPage";
 import SearchAlumniPage from "./pages/SearchAlumniPage";
 import AdminControlsPage from "./pages/AdminControlsPage";
+import ImportPage from "./pages/ImportPage";
 import AlumniProfilePage from "./pages/AlumniProfilePage";
 import SearchFavouritesPage from "./pages/SearchFavouritesPage";
 import UserProfilePage from "./pages/UserProfilePage";
