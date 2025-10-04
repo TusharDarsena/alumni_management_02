@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
@@ -8,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PendingUsersTable from "@/components/PendingUsersTable";
 import { useToast } from "@/hooks/use-toast";
+import ImportUpload from "@/components/ImportUpload";
 
 interface NewUser {
   name: string;
@@ -51,12 +51,7 @@ export default function AdminControlsPage() {
   const { toast } = useToast();
 
   const handleSubmit = async () => {
-    if (
-      !form.name ||
-      !form.email ||
-      !form.phone ||
-      !form.branch
-    ) {
+    if (!form.name || !form.email || !form.phone || !form.branch) {
       toast({
         title: "Missing fields",
         description: "Please fill name, email, phone and branch.",
@@ -146,6 +141,8 @@ export default function AdminControlsPage() {
           </Button>
         </div>
       </div>
+
+      {mode === "add" && <ImportUpload />}
 
       {mode === "add" ? (
         <Card className="mt-6 w-full">

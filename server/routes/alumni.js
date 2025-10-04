@@ -9,6 +9,40 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Redis / in-memory cache helpers for suggestions
+const inMemoryCache = new Map(); // key -> { value, expiresAt }
+const CACHE_TTL = 60; // seconds
+let redisClient = null;
+let redisInitializing = false;
+
+async function ensureRedis() {
+  if (redisClient) return redisClient;
+  if (redisInitializing) return null;
+  const url = process.env.REDIS_URL || process.env.REDIS_HOST || null;
+  if (!url) return null;
+  redisInitializing = true;
+  try {
+    const redisModule = await import("redis");
+    const createClient =
+      redisModule.createClient || redisModule.default?.createClient;
+    if (!createClient) {
+      console.warn("Redis client factory not found");
+      redisInitializing = false;
+      return null;
+    }
+    redisClient = createClient({ url });
+    redisClient.on &&
+      redisClient.on("error", (e) => console.warn("Redis error", e));
+    await redisClient.connect();
+    redisInitializing = false;
+    return redisClient;
+  } catch (e) {
+    console.warn("Redis not available, continuing without it:", e.message || e);
+    redisInitializing = false;
+    return null;
+  }
+}
+
 // Helper to extract batch year from education string
 function extractBatch(education) {
   const match = education.match(/(\d{4})\s*-\s*(\d{4})/);
@@ -90,76 +124,307 @@ function categorizeSkills(skillsStr) {
   return { technical, core };
 }
 
-// POST /import - Import alumni data from alumni_data(jsons) directory
+// POST /import - Import alumni data from JSON body or alumni_data directory
 router.post("/import", async (req, res) => {
   try {
-    const alumniDataDir = path.join(__dirname, "../../client/data/alumnidata");
-    const files = fs
-      .readdirSync(alumniDataDir)
-      .filter((file) => file.endsWith(".json"));
-    const jsonData = files.flatMap((file) => {
-      const filePath = path.join(alumniDataDir, file);
-      const content = fs.readFileSync(filePath, "utf-8");
-      try {
-        return JSON.parse(content);
-      } catch (e) {
-        console.error(`Error parsing JSON file ${file}:`, e);
-        return [];
-      }
-    });
+    // Accept JSON array in request body if provided
+    let incoming = null;
+    if (req.body && Array.isArray(req.body) && req.body.length > 0) {
+      incoming = req.body;
+    } else {
+      // Fallback: read from client/data/alumnidata directory
+      const alumniDataDir = path.join(
+        __dirname,
+        "../../client/data/alumnidata",
+      );
+      const files = fs.existsSync(alumniDataDir)
+        ? fs.readdirSync(alumniDataDir).filter((file) => file.endsWith(".json"))
+        : [];
 
-    // Filter out empty entries (e.g., where LinkedIn URL is empty)
-    const validEntries = jsonData.filter((entry) => entry.url);
+      incoming = files.flatMap((file) => {
+        const filePath = path.join(alumniDataDir, file);
+        const content = fs.readFileSync(filePath, "utf-8");
+        try {
+          return JSON.parse(content);
+        } catch (e) {
+          console.error(`Error parsing JSON file ${file}:`, e);
+          return [];
+        }
+      });
+    }
 
-    // Transform to match schema
-    const transformedData = validEntries.map((entry) => ({
-      name: entry.name || "Unknown",
-      email: null,
-      imageUrl: entry.avatar || null,
-      linkedinUrl: entry.url || null,
-      location: entry.location || null,
-      education: entry.education.map((edu) => ({
-        degree: edu.degree + (edu.field ? ` in ${edu.field}` : ""),
-        institute: edu.title,
-        startYear: parseInt(edu.start_year),
-        endYear: parseInt(edu.end_year),
-      })),
-      experience: entry.experience.map((exp) => ({
-        role: exp.title,
-        company: exp.company,
-        location: exp.location,
-        startYear: exp.start_date
-          ? parseInt(exp.start_date.split(" ")[1])
-          : null,
-        endYear:
-          exp.end_date === "Present"
-            ? null
-            : exp.end_date
-              ? parseInt(exp.end_date.split(" ")[1])
-              : null,
-      })),
-      skills: { technical: [], core: [] }, // No skills in new data
-      graduationYear:
-        entry.education.length > 0
-          ? parseInt(entry.education[0].end_year)
-          : null,
-      batch: entry.education.length > 0 ? entry.education[0].end_year : null,
-      branch:
-        entry.education.length > 0 &&
-        entry.education[0].field === "Computer Science"
-          ? "CSE"
-          : "CSE", // Default to CSE
-    }));
+    if (!incoming || incoming.length === 0) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No alumni data provided" });
+    }
 
-    // Insert into MongoDB
-    const inserted = await AlumniProfile.insertMany(transformedData);
+    // Sanitization and normalization helper
+    function normalize(entry) {
+      const linkedin_id = String(
+        entry.linkedin_id ||
+          entry.id ||
+          (entry.input && entry.input.url
+            ? entry.input.url.split("/").pop()
+            : "") ||
+          "",
+      ).trim();
+      const input_url =
+        entry.input?.url || entry.input_url || entry.url || null;
+
+      const doc = {
+        id: entry.id || linkedin_id || undefined,
+        name: entry.name || "Unknown",
+        first_name:
+          entry.first_name ||
+          (entry.name ? String(entry.name).split(" ")[0] : undefined),
+        last_name:
+          entry.last_name ||
+          (entry.name
+            ? String(entry.name).split(" ").slice(1).join(" ")
+            : undefined),
+        city: entry.city || undefined,
+        country_code: entry.country_code || undefined,
+        position: entry.position || undefined,
+        about: entry.about || undefined,
+        current_company:
+          entry.current_company ||
+          (entry.current_company_name || entry.current_company_company_id
+            ? {
+                name: entry.current_company_name || null,
+                company_id: entry.current_company_company_id || null,
+                title: entry.current_company_title || null,
+                location: entry.current_company_location || null,
+              }
+            : undefined),
+        experience: Array.isArray(entry.experience)
+          ? entry.experience
+          : undefined,
+        education: Array.isArray(entry.education) ? entry.education : undefined,
+        avatar: entry.avatar || undefined,
+        followers: entry.followers ? Number(entry.followers) : undefined,
+        connections: entry.connections ? Number(entry.connections) : undefined,
+        current_company_company_id:
+          entry.current_company_company_id || undefined,
+        current_company_name: entry.current_company_name || undefined,
+        location: entry.location || undefined,
+        input_url,
+        linkedin_id: linkedin_id || undefined,
+        linkedin_num_id: entry.linkedin_num_id || undefined,
+        banner_image: entry.banner_image || undefined,
+        honors_and_awards: entry.honors_and_awards || undefined,
+        similar_profiles: entry.similar_profiles || undefined,
+        bio_links: entry.bio_links || undefined,
+        timestamp: entry.timestamp ? new Date(entry.timestamp) : new Date(),
+        input: entry.input || (input_url ? { url: input_url } : undefined),
+      };
+
+      // Remove undefined properties to avoid overwriting with undefined
+      Object.keys(doc).forEach((k) => doc[k] === undefined && delete doc[k]);
+      return doc;
+    }
+
+    // Prepare sanitized list, ensure we have a key to upsert on (linkedin_id)
+    const sanitized = incoming
+      .map(normalize)
+      .filter((d) => d.linkedin_id || d.id);
+    if (sanitized.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No valid alumni entries with linkedin_id or id",
+      });
+    }
+
+    // Batch bulkWrite with upsert on linkedin_id or id
+    const batchSize = 500;
+    let processed = 0;
+    let summary = {
+      total: sanitized.length,
+      batches: 0,
+      upserted: 0,
+      modified: 0,
+      matched: 0,
+    };
+
+    for (let i = 0; i < sanitized.length; i += batchSize) {
+      const batch = sanitized.slice(i, i + batchSize);
+      const ops = batch.map((doc) => {
+        const filter = doc.linkedin_id
+          ? { linkedin_id: doc.linkedin_id }
+          : { id: doc.id };
+        return {
+          updateOne: {
+            filter,
+            update: { $set: doc },
+            upsert: true,
+          },
+        };
+      });
+
+      const result = await AlumniProfile.bulkWrite(ops, { ordered: false });
+      summary.batches += 1;
+      summary.upserted += result.upsertedCount || 0;
+      summary.modified += result.modifiedCount || 0;
+      summary.matched += result.matchedCount || 0;
+      processed += batch.length;
+    }
+
     res.json({
       success: true,
-      count: inserted.length,
-      message: "Alumni profiles imported successfully",
+      message: "Import completed",
+      summary,
+      processed,
     });
   } catch (error) {
     console.error("Import error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Simple in-memory token-bucket rate limiter (per-IP)
+const RATE_LIMIT_MAX = 5; // tokens per second
+const RATE_LIMIT_CAPACITY = 5; // burst capacity
+const rateBuckets = new Map();
+
+function rateLimiter(req, res, next) {
+  try {
+    const ip =
+      req.ip ||
+      req.headers["x-forwarded-for"] ||
+      req.socket.remoteAddress ||
+      "unknown";
+    const now = Date.now();
+    const entry = rateBuckets.get(ip) || {
+      tokens: RATE_LIMIT_CAPACITY,
+      last: now,
+    };
+    const elapsed = Math.max(0, now - entry.last);
+    const refill = (elapsed / 1000) * RATE_LIMIT_MAX;
+    entry.tokens = Math.min(RATE_LIMIT_CAPACITY, entry.tokens + refill);
+    entry.last = now;
+    if (entry.tokens >= 1) {
+      entry.tokens -= 1;
+      rateBuckets.set(ip, entry);
+      next();
+    } else {
+      res.status(429).json({ error: "Too many requests" });
+    }
+  } catch (e) {
+    next();
+  }
+}
+
+// GET /autocomplete - fast suggestions using Atlas Search (fallback to regex)
+router.get("/autocomplete", rateLimiter, async (req, res) => {
+  try {
+    const q = String(req.query.q || "").trim();
+    const branch = req.query.branch ? String(req.query.branch) : null;
+    if (!q) return res.json({ success: true, data: [] });
+
+    const limit = 10;
+
+    const cacheKey = `autocomplete:${branch || "all"}:${q.toLowerCase()}`;
+    // Attempt to read from Redis or in-memory cache
+    try {
+      const r = await ensureRedis();
+      if (r) {
+        const cached = await r.get(cacheKey);
+        if (cached) {
+          return res.json({
+            success: true,
+            data: JSON.parse(cached),
+            cached: true,
+          });
+        }
+      } else {
+        const cached = inMemoryCache.get(cacheKey);
+        if (cached && cached.expiresAt > Date.now()) {
+          return res.json({ success: true, data: cached.value, cached: true });
+        }
+      }
+    } catch (cacheErr) {
+      console.warn("Cache read failed", cacheErr?.message || cacheErr);
+    }
+    // Preferred: Atlas Search autocomplete aggregation
+    const pipeline = [
+      {
+        $search: {
+          index: "alumni_autocomplete",
+          autocomplete: {
+            query: q,
+            path: ["name", "position", "current_company.name"],
+            fuzzy: { maxEdits: 1 },
+          },
+        },
+      },
+      { $limit: limit },
+      {
+        $project: {
+          _id: 0,
+          name: 1,
+          avatar: "$avatar",
+          linkedin_id: "$linkedin_id",
+          position: 1,
+          current_company: "$current_company.name",
+        },
+      },
+    ];
+
+    if (branch) {
+      pipeline.splice(1, 0, { $match: { "education.field": branch } });
+    }
+
+    let results = null;
+    try {
+      results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
+    } catch (err) {
+      // Atlas Search not available or failed — fallback to regex search
+      console.warn(
+        "Atlas Search failed, falling back to regex search:",
+        err.message,
+      );
+      const safe = (s) => s.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
+      const regex = new RegExp(safe(q), "i");
+      const match = {
+        $or: [
+          { name: regex },
+          { position: regex },
+          { "current_company.name": regex },
+        ],
+      };
+      if (branch) match["education.field"] = branch;
+      const docs = await AlumniProfile.find(match)
+        .select("name avatar linkedin_id position current_company")
+        .limit(limit)
+        .lean();
+      results = docs.map((d) => ({
+        name: d.name,
+        avatar: d.avatar,
+        linkedin_id: d.linkedin_id,
+        position: d.position,
+        current_company: d.current_company?.name || null,
+      }));
+    }
+
+    // Cache results
+    try {
+      const payload = JSON.stringify(results);
+      const r = await ensureRedis();
+      if (r) {
+        await r.set(cacheKey, payload, { EX: CACHE_TTL });
+      } else {
+        inMemoryCache.set(cacheKey, {
+          value: results,
+          expiresAt: Date.now() + CACHE_TTL * 1000,
+        });
+      }
+    } catch (cacheErr) {
+      console.warn("Cache write failed", cacheErr?.message || cacheErr);
+    }
+
+    return res.json({ success: true, data: results });
+  } catch (error) {
+    console.error("Autocomplete error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
@@ -307,7 +572,21 @@ router.get("/:id", async (req, res) => {
       .lean();
 
     if (!doc) {
-      return res.status(404).json({ success: false, message: "Profile not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
+    }
+
+    // ETag based on id + updatedAt
+    const etag = crypto
+      .createHash("sha1")
+      .update(String(doc.id) + String(doc.updatedAt || ""))
+      .digest("hex");
+    res.setHeader("ETag", etag);
+    res.setHeader("Cache-Control", "private, max-age=60");
+    const ifNone = req.headers["if-none-match"];
+    if (ifNone && String(ifNone) === etag) {
+      return res.status(304).end();
     }
 
     const payload = {

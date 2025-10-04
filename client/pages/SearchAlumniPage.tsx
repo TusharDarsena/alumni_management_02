@@ -6,6 +6,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
 import AlumniCard from "@/components/AlumniCard";
 import { useFavorites } from "@/hooks/useFavorites";
+import AutocompleteSearch from "@/components/AutocompleteSearch";
 
 interface AlumniFilters {
   searchTerm: string;
@@ -30,9 +31,11 @@ export default function SearchAlumniPage() {
     searchTerm: "",
     batch: "",
     degree: "",
-    branch: ""
+    branch: "",
   });
-  const [filteredAlumni, setFilteredAlumni] = useState<AlumniItem[]>(alumniList as any);
+  const [filteredAlumni, setFilteredAlumni] = useState<AlumniItem[]>(
+    alumniList as any,
+  );
   const [batchOpen, setBatchOpen] = useState(false);
   const [degreeOpen, setDegreeOpen] = useState(false);
   const [branchOpen, setBranchOpen] = useState(false);
@@ -50,7 +53,9 @@ export default function SearchAlumniPage() {
     const term = filters.searchTerm?.toLowerCase().trim() ?? "";
     const res = (alumniList as any).filter((a: AlumniItem) => {
       const matchName = term ? a.name.toLowerCase().includes(term) : true;
-      const matchYear = filters.batch ? a.graduationYear === filters.batch : true;
+      const matchYear = filters.batch
+        ? a.graduationYear === filters.batch
+        : true;
       const matchMajor = filters.degree ? a.major === filters.degree : true;
       const matchBranch = filters.branch ? a.company === filters.branch : true;
       return matchName && matchYear && matchMajor && matchBranch;
@@ -67,19 +72,25 @@ export default function SearchAlumniPage() {
   };
 
   return (
-    <DashboardLayout activePage="Search Alumni" onNavigate={handleNavigation} user={user}>
+    <DashboardLayout
+      activePage="Search Alumni"
+      onNavigate={handleNavigation}
+      user={user}
+    >
       {/* Search and Filters */}
       <div className="flex items-center gap-12 mb-12">
         {/* Search Bar */}
         <div className="relative w-[406px]">
           <div className="flex items-center gap-2 bg-black/10 rounded-full px-4 py-3">
             <Search className="w-4 h-4 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search Alumni"
-              className="bg-transparent outline-none text-gray-600 placeholder-gray-500 flex-1"
+            <AutocompleteSearch
               value={filters.searchTerm}
-              onChange={(e) => setFilters(f => ({ ...f, searchTerm: e.target.value }))}
+              onChange={(v) => setFilters((f) => ({ ...f, searchTerm: v }))}
+              onSelect={(s) => {
+                // navigate to profile on selection
+                if (s.linkedin_id) navigate(`/alumni/${s.linkedin_id}`);
+              }}
+              branch={filters.branch || undefined}
             />
           </div>
         </div>
@@ -95,12 +106,12 @@ export default function SearchAlumniPage() {
           </div>
           {batchOpen && (
             <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10">
-              {["2016", "2017", "2018", "2019"].map(year => (
+              {["2016", "2017", "2018", "2019"].map((year) => (
                 <div
                   key={year}
                   className="px-3 py-3 hover:bg-gray-50 cursor-pointer"
                   onClick={() => {
-                    setFilters(f => ({ ...f, batch: year }));
+                    setFilters((f) => ({ ...f, batch: year }));
                     setBatchOpen(false);
                   }}
                 >
@@ -122,12 +133,12 @@ export default function SearchAlumniPage() {
           </div>
           {degreeOpen && (
             <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10">
-              {["B.Tech", "M.Tech", "P.H.D"].map(degree => (
+              {["B.Tech", "M.Tech", "P.H.D"].map((degree) => (
                 <div
                   key={degree}
                   className="px-3 py-3 hover:bg-gray-50 cursor-pointer"
                   onClick={() => {
-                    setFilters(f => ({ ...f, degree }));
+                    setFilters((f) => ({ ...f, degree }));
                     setDegreeOpen(false);
                   }}
                 >
@@ -149,12 +160,12 @@ export default function SearchAlumniPage() {
           </div>
           {branchOpen && (
             <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10">
-              {["C.S.E", "D.SA.I", "E.C.E"].map(branch => (
+              {["C.S.E", "D.SA.I", "E.C.E"].map((branch) => (
                 <div
                   key={branch}
                   className="px-3 py-3 hover:bg-gray-50 cursor-pointer"
                   onClick={() => {
-                    setFilters(f => ({ ...f, branch }));
+                    setFilters((f) => ({ ...f, branch }));
                     setBranchOpen(false);
                   }}
                 >
@@ -171,7 +182,14 @@ export default function SearchAlumniPage() {
         {filteredAlumni.slice(0, 24).map((alumni) => (
           <AlumniCard
             key={alumni.username}
-            alumnus={{ username: alumni.username, name: alumni.name, profilePictureUrl: alumni.avatarUrl, graduationYear: alumni.graduationYear, major: alumni.major, company: alumni.company }}
+            alumnus={{
+              username: alumni.username,
+              name: alumni.name,
+              profilePictureUrl: alumni.avatarUrl,
+              graduationYear: alumni.graduationYear,
+              major: alumni.major,
+              company: alumni.company,
+            }}
             isFavourite={isFavorite(alumni.username)}
             onViewProfile={handleViewProfile}
             onToggleFavourite={() => toggleFavorite(alumni.username)}

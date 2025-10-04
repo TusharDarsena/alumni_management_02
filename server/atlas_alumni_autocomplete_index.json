@@ -1,0 +1,46 @@
+{
+  "name": "alumni_autocomplete",
+  "type": "search",
+  "definition": {
+    "mappings": {
+      "dynamic": false,
+      "fields": {
+        "name": {
+          "type": "autocomplete",
+          "analyzer": "lucene.standard",
+          "tokenization": "nGram",
+          "minGrams": 2,
+          "maxGrams": 15,
+          "fuzzy": {
+            "maxEdits": 1
+          }
+        },
+        "position": {
+          "type": "autocomplete",
+          "analyzer": "lucene.standard",
+          "tokenization": "nGram",
+          "minGrams": 2,
+          "maxGrams": 15,
+          "fuzzy": {
+            "maxEdits": 1
+          }
+        },
+        "current_company": {
+          "type": "object",
+          "fields": {
+            "name": {
+              "type": "autocomplete",
+              "analyzer": "lucene.standard",
+              "tokenization": "nGram",
+              "minGrams": 2,
+              "maxGrams": 15,
+              "fuzzy": {
+                "maxEdits": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
