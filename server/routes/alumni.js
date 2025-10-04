@@ -249,6 +249,101 @@ router.post("/import", async (req, res) => {
   }
 });
 
+// Simple in-memory token-bucket rate limiter (per-IP)
+const RATE_LIMIT_MAX = 10; // tokens per second
+const RATE_LIMIT_CAPACITY = 10; // burst capacity
+const rateBuckets = new Map();
+
+function rateLimiter(req, res, next) {
+  try {
+    const ip = req.ip || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown";
+    const now = Date.now();
+    const entry = rateBuckets.get(ip) || { tokens: RATE_LIMIT_CAPACITY, last: now };
+    const elapsed = Math.max(0, now - entry.last);
+    const refill = (elapsed / 1000) * RATE_LIMIT_MAX;
+    entry.tokens = Math.min(RATE_LIMIT_CAPACITY, entry.tokens + refill);
+    entry.last = now;
+    if (entry.tokens >= 1) {
+      entry.tokens -= 1;
+      rateBuckets.set(ip, entry);
+      next();
+    } else {
+      res.status(429).json({ error: "Too many requests" });
+    }
+  } catch (e) {
+    next();
+  }
+}
+
+// GET /autocomplete - fast suggestions using Atlas Search (fallback to regex)
+router.get("/autocomplete", rateLimiter, async (req, res) => {
+  try {
+    const q = String(req.query.q || "").trim();
+    const branch = req.query.branch ? String(req.query.branch) : null;
+    if (!q) return res.json({ success: true, data: [] });
+
+    const limit = 10;
+    // Preferred: Atlas Search autocomplete aggregation
+    const pipeline = [
+      {
+        $search: {
+          index: "alumni_autocomplete",
+          autocomplete: {
+            query: q,
+            path: ["name", "position", "current_company.name"],
+            fuzzy: { maxEdits: 1 },
+          },
+        },
+      },
+      { $limit: limit },
+      {
+        $project: {
+          _id: 0,
+          name: 1,
+          avatar: "$avatar",
+          linkedin_id: "$linkedin_id",
+          position: 1,
+          current_company: "$current_company.name",
+        },
+      },
+    ];
+
+    if (branch) {
+      pipeline.splice(1, 0, { $match: { "education.field": branch } });
+    }
+
+    try {
+      const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
+      return res.json({ success: true, data: results });
+    } catch (err) {
+      // Atlas Search not available or failed — fallback to regex search
+      console.warn("Atlas Search failed, falling back to regex search:", err.message);
+      const safe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(safe(q), "i");
+      const match = {
+        $or: [{ name: regex }, { position: regex }, { "current_company.name": regex }],
+      };
+      if (branch) match["education.field"] = branch;
+      const docs = await AlumniProfile.find(match)
+        .select("name avatar linkedin_id position current_company")
+        .limit(limit)
+        .lean();
+      const mapped = docs.map((d) => ({
+        name: d.name,
+        avatar: d.avatar,
+        linkedin_id: d.linkedin_id,
+        position: d.position,
+        current_company: d.current_company?.name || null,
+      }));
+      return res.json({ success: true, data: mapped });
+    }
+  } catch (error) {
+    console.error("Autocomplete error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
 // GET / - Search, filter and paginate alumni profiles
 // Query params: search, branch, degree, batch, page, limit
 router.get("/", async (req, res) => {
