@@ -23,14 +23,16 @@ async function ensureRedis() {
   redisInitializing = true;
   try {
     const redisModule = await import("redis");
-    const createClient = redisModule.createClient || redisModule.default?.createClient;
+    const createClient =
+      redisModule.createClient || redisModule.default?.createClient;
     if (!createClient) {
       console.warn("Redis client factory not found");
       redisInitializing = false;
       return null;
     }
     redisClient = createClient({ url });
-    redisClient.on && redisClient.on('error', (e) => console.warn('Redis error', e));
+    redisClient.on &&
+      redisClient.on("error", (e) => console.warn("Redis error", e));
     await redisClient.connect();
     redisInitializing = false;
     return redisClient;
@@ -227,12 +229,10 @@ router.post("/import", async (req, res) => {
       .map(normalize)
       .filter((d) => d.linkedin_id || d.id);
     if (sanitized.length === 0) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "No valid alumni entries with linkedin_id or id",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "No valid alumni entries with linkedin_id or id",
+      });
     }
 
     // Batch bulkWrite with upsert on linkedin_id or id
@@ -288,9 +288,16 @@ const rateBuckets = new Map();
 
 function rateLimiter(req, res, next) {
   try {
-    const ip = req.ip || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown";
+    const ip =
+      req.ip ||
+      req.headers["x-forwarded-for"] ||
+      req.socket.remoteAddress ||
+      "unknown";
     const now = Date.now();
-    const entry = rateBuckets.get(ip) || { tokens: RATE_LIMIT_CAPACITY, last: now };
+    const entry = rateBuckets.get(ip) || {
+      tokens: RATE_LIMIT_CAPACITY,
+      last: now,
+    };
     const elapsed = Math.max(0, now - entry.last);
     const refill = (elapsed / 1000) * RATE_LIMIT_MAX;
     entry.tokens = Math.min(RATE_LIMIT_CAPACITY, entry.tokens + refill);
@@ -316,14 +323,18 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
 
     const limit = 10;
 
-    const cacheKey = `autocomplete:${branch || 'all'}:${q.toLowerCase()}`;
+    const cacheKey = `autocomplete:${branch || "all"}:${q.toLowerCase()}`;
     // Attempt to read from Redis or in-memory cache
     try {
       const r = await ensureRedis();
       if (r) {
         const cached = await r.get(cacheKey);
         if (cached) {
-          return res.json({ success: true, data: JSON.parse(cached), cached: true });
+          return res.json({
+            success: true,
+            data: JSON.parse(cached),
+            cached: true,
+          });
         }
       } else {
         const cached = inMemoryCache.get(cacheKey);
@@ -332,7 +343,7 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
         }
       }
     } catch (cacheErr) {
-      console.warn('Cache read failed', cacheErr?.message || cacheErr);
+      console.warn("Cache read failed", cacheErr?.message || cacheErr);
     }
     // Preferred: Atlas Search autocomplete aggregation
     const pipeline = [
@@ -368,11 +379,18 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
       results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
     } catch (err) {
       // Atlas Search not available or failed — fallback to regex search
-      console.warn("Atlas Search failed, falling back to regex search:", err.message);
+      console.warn(
+        "Atlas Search failed, falling back to regex search:",
+        err.message,
+      );
       const safe = (s) => s.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
       const regex = new RegExp(safe(q), "i");
       const match = {
-        $or: [{ name: regex }, { position: regex }, { "current_company.name": regex }],
+        $or: [
+          { name: regex },
+          { position: regex },
+          { "current_company.name": regex },
+        ],
       };
       if (branch) match["education.field"] = branch;
       const docs = await AlumniProfile.find(match)
@@ -395,10 +413,13 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
       if (r) {
         await r.set(cacheKey, payload, { EX: CACHE_TTL });
       } else {
-        inMemoryCache.set(cacheKey, { value: results, expiresAt: Date.now() + CACHE_TTL * 1000 });
+        inMemoryCache.set(cacheKey, {
+          value: results,
+          expiresAt: Date.now() + CACHE_TTL * 1000,
+        });
       }
     } catch (cacheErr) {
-      console.warn('Cache write failed', cacheErr?.message || cacheErr);
+      console.warn("Cache write failed", cacheErr?.message || cacheErr);
     }
 
     return res.json({ success: true, data: results });
@@ -407,7 +428,6 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
-
 
 // GET / - Search, filter and paginate alumni profiles
 // Query params: search, branch, degree, batch, page, limit
@@ -558,7 +578,10 @@ router.get("/:id", async (req, res) => {
     }
 
     // ETag based on id + updatedAt
-    const etag = crypto.createHash("sha1").update(String(doc.id) + String(doc.updatedAt || "")).digest("hex");
+    const etag = crypto
+      .createHash("sha1")
+      .update(String(doc.id) + String(doc.updatedAt || ""))
+      .digest("hex");
     res.setHeader("ETag", etag);
     res.setHeader("Cache-Control", "private, max-age=60");
     const ifNone = req.headers["if-none-match"];

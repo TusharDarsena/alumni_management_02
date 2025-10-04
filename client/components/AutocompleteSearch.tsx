@@ -48,7 +48,9 @@ export default function AutocompleteSearch({
       const params = new URLSearchParams();
       params.set("q", query);
       if (branch) params.set("branch", branch);
-      fetch(`/api/alumni/autocomplete?${params.toString()}`, { signal: ac.signal })
+      fetch(`/api/alumni/autocomplete?${params.toString()}`, {
+        signal: ac.signal,
+      })
         .then((r) => r.json())
         .then((data) => {
           if (data && data.data) {
@@ -114,7 +116,9 @@ export default function AutocompleteSearch({
         value={query}
         onChange={(e) => handleInput(e.target.value)}
         onKeyDown={handleKeyDown}
-        onFocus={() => { if (suggestions.length > 0) setOpen(true); }}
+        onFocus={() => {
+          if (suggestions.length > 0) setOpen(true);
+        }}
         placeholder="Search Alumni"
       />
 
@@ -124,26 +128,38 @@ export default function AutocompleteSearch({
           role="listbox"
           className="absolute z-50 mt-2 w-full bg-white border rounded-md shadow-lg max-h-64 overflow-auto"
         >
-          {loading && <li className="px-3 py-2 text-sm text-gray-500">Loading...</li>}
+          {loading && (
+            <li className="px-3 py-2 text-sm text-gray-500">Loading...</li>
+          )}
           {!loading && suggestions.length === 0 && (
             <li className="px-3 py-2 text-sm text-gray-500">No results</li>
           )}
-          {!loading && suggestions.map((s, idx) => (
-            <li
-              key={s.linkedin_id || s.name + idx}
-              role="option"
-              aria-selected={activeIndex === idx}
-              className={`flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 ${activeIndex === idx ? 'bg-gray-100' : ''}`}
-              onMouseDown={(e) => { e.preventDefault(); handleSelect(s); }}
-              onMouseEnter={() => setActiveIndex(idx)}
-            >
-              <img src={s.avatar || '/placeholder.svg'} className="w-8 h-8 rounded-full object-cover" alt="" />
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">{s.name}</span>
-                <span className="text-xs text-gray-500">{s.position || s.current_company || ''}</span>
-              </div>
-            </li>
-          ))}
+          {!loading &&
+            suggestions.map((s, idx) => (
+              <li
+                key={s.linkedin_id || s.name + idx}
+                role="option"
+                aria-selected={activeIndex === idx}
+                className={`flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 ${activeIndex === idx ? "bg-gray-100" : ""}`}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handleSelect(s);
+                }}
+                onMouseEnter={() => setActiveIndex(idx)}
+              >
+                <img
+                  src={s.avatar || "/placeholder.svg"}
+                  className="w-8 h-8 rounded-full object-cover"
+                  alt=""
+                />
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium">{s.name}</span>
+                  <span className="text-xs text-gray-500">
+                    {s.position || s.current_company || ""}
+                  </span>
+                </div>
+              </li>
+            ))}
         </ul>
       )}
     </div>
