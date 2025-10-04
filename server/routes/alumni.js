@@ -279,18 +279,86 @@ router.get("/", async (req, res) => {
       batches: [],
     };
 
-    res.json({
+    // Normalize filters
+    const filters = {
+      branches: (metadata.branches || []).filter(Boolean).sort(),
+      degrees: (metadata.degrees || []).filter(Boolean).sort(),
+      entryYears: (metadata.batches || []).filter(Boolean).sort(),
+      locations: [], // will populate below
+    };
+
+    // Collect distinct locations with a lightweight aggregation
+    const locAgg = await AlumniProfile.aggregate([
+      { $match: Object.keys(match).length ? match : {} },
+      { $group: { _id: null, locations: { $addToSet: "$location" } } },
+      { $project: { _id: 0, locations: 1 } },
+    ]).allowDiskUse(true);
+
+    filters.locations = (locAgg[0]?.locations || []).filter(Boolean).sort();
+
+    const responseBody = {
       data,
+      filters,
       pagination: {
         currentPage: page,
         totalPages,
         totalResults: totalCount,
         limit,
       },
-      metadata,
-    });
+    };
+
+    // Cache headers: 4 hour TTL
+    const cacheControl = "public, max-age=14400, stale-while-revalidate=3600";
+    const etag = crypto
+      .createHash("sha1")
+      .update(JSON.stringify({ page, limit, totalCount, filters }))
+      .digest("base64");
+
+    res.setHeader("Cache-Control", cacheControl);
+    res.setHeader("ETag", etag);
+
+    res.json(responseBody);
   } catch (error) {
     console.error("Alumni search error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// GET /filters - Return only filter metadata (fallback)
+router.get("/filters", async (req, res) => {
+  try {
+    const pipeline = [
+      { $unwind: { path: "$education", preserveNullAndEmptyArrays: true } },
+      {
+        $group: {
+          _id: null,
+          branches: { $addToSet: "$education.field" },
+          degrees: { $addToSet: "$education.degree" },
+          entryYears: { $addToSet: "$education.start_year" },
+          locations: { $addToSet: "$location" },
+        },
+      },
+      { $project: { _id: 0, branches: 1, degrees: 1, entryYears: 1, locations: 1 } },
+    ];
+
+    const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
+    const row = results[0] || { branches: [], degrees: [], entryYears: [], locations: [] };
+
+    const filters = {
+      branches: (row.branches || []).filter(Boolean).sort(),
+      degrees: (row.degrees || []).filter(Boolean).sort(),
+      entryYears: (row.entryYears || []).filter(Boolean).sort(),
+      locations: (row.locations || []).filter(Boolean).sort(),
+    };
+
+    const cacheControl = "public, max-age=14400, stale-while-revalidate=3600";
+    const etag = crypto.createHash("sha1").update(JSON.stringify(filters)).digest("base64");
+    res.setHeader("Cache-Control", cacheControl);
+    res.setHeader("ETag", etag);
+
+    res.json({ filters });
+  } catch (error) {
+    console.error("Filters aggregation error:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
