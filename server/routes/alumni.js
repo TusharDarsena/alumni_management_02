@@ -363,13 +363,13 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
       pipeline.splice(1, 0, { $match: { "education.field": branch } });
     }
 
+    let results = null;
     try {
-      const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
-      return res.json({ success: true, data: results });
+      results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
     } catch (err) {
       // Atlas Search not available or failed — fallback to regex search
       console.warn("Atlas Search failed, falling back to regex search:", err.message);
-      const safe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const safe = (s) => s.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
       const regex = new RegExp(safe(q), "i");
       const match = {
         $or: [{ name: regex }, { position: regex }, { "current_company.name": regex }],
@@ -379,15 +379,29 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
         .select("name avatar linkedin_id position current_company")
         .limit(limit)
         .lean();
-      const mapped = docs.map((d) => ({
+      results = docs.map((d) => ({
         name: d.name,
         avatar: d.avatar,
         linkedin_id: d.linkedin_id,
         position: d.position,
         current_company: d.current_company?.name || null,
       }));
-      return res.json({ success: true, data: mapped });
     }
+
+    // Cache results
+    try {
+      const payload = JSON.stringify(results);
+      const r = await ensureRedis();
+      if (r) {
+        await r.set(cacheKey, payload, { EX: CACHE_TTL });
+      } else {
+        inMemoryCache.set(cacheKey, { value: results, expiresAt: Date.now() + CACHE_TTL * 1000 });
+      }
+    } catch (cacheErr) {
+      console.warn('Cache write failed', cacheErr?.message || cacheErr);
+    }
+
+    return res.json({ success: true, data: results });
   } catch (error) {
     console.error("Autocomplete error:", error);
     res.status(500).json({ success: false, error: error.message });
