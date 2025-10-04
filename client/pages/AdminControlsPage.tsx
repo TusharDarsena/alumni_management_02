@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
@@ -8,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PendingUsersTable from "@/components/PendingUsersTable";
 import { useToast } from "@/hooks/use-toast";
+import ImportUpload from "@/components/ImportUpload";
 
 interface NewUser {
   name: string;
