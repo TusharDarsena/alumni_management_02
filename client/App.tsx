@@ -85,6 +85,7 @@ const App = () => (
               {/* Admin-only routes */}
               <Route element={<ProtectedRoute roles={["admin"]} />}>
                 <Route path="/admin" element={<AdminControlsPage />} />
+                <Route path="/admin/import" element={<ImportPage />} />
               </Route>
 
               <Route path="/help" element={<HelpPage />} />
