@@ -9,6 +9,38 @@ const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Redis / in-memory cache helpers for suggestions
+const inMemoryCache = new Map(); // key -> { value, expiresAt }
+const CACHE_TTL = 60; // seconds
+let redisClient = null;
+let redisInitializing = false;
+
+async function ensureRedis() {
+  if (redisClient) return redisClient;
+  if (redisInitializing) return null;
+  const url = process.env.REDIS_URL || process.env.REDIS_HOST || null;
+  if (!url) return null;
+  redisInitializing = true;
+  try {
+    const redisModule = await import("redis");
+    const createClient = redisModule.createClient || redisModule.default?.createClient;
+    if (!createClient) {
+      console.warn("Redis client factory not found");
+      redisInitializing = false;
+      return null;
+    }
+    redisClient = createClient({ url });
+    redisClient.on && redisClient.on('error', (e) => console.warn('Redis error', e));
+    await redisClient.connect();
+    redisInitializing = false;
+    return redisClient;
+  } catch (e) {
+    console.warn("Redis not available, continuing without it:", e.message || e);
+    redisInitializing = false;
+    return null;
+  }
+}
+
 // Helper to extract batch year from education string
 function extractBatch(education) {
   const match = education.match(/(\d{4})\s*-\s*(\d{4})/);
