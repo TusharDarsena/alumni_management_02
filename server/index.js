@@ -7,6 +7,7 @@ import authRoute from "./routes/AuthRoute.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
+import importRoute from "./routes/import.js";
 
 dotenv.config();
 
