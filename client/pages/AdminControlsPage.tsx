@@ -51,12 +51,7 @@ export default function AdminControlsPage() {
   const { toast } = useToast();
 
   const handleSubmit = async () => {
-    if (
-      !form.name ||
-      !form.email ||
-      !form.phone ||
-      !form.branch
-    ) {
+    if (!form.name || !form.email || !form.phone || !form.branch) {
       toast({
         title: "Missing fields",
         description: "Please fill name, email, phone and branch.",

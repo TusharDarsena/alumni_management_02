@@ -99,7 +99,10 @@ router.post("/import", async (req, res) => {
       incoming = req.body;
     } else {
       // Fallback: read from client/data/alumnidata directory
-      const alumniDataDir = path.join(__dirname, "../../client/data/alumnidata");
+      const alumniDataDir = path.join(
+        __dirname,
+        "../../client/data/alumnidata",
+      );
       const files = fs.existsSync(alumniDataDir)
         ? fs.readdirSync(alumniDataDir).filter((file) => file.endsWith(".json"))
         : [];
@@ -117,30 +120,58 @@ router.post("/import", async (req, res) => {
     }
 
     if (!incoming || incoming.length === 0) {
-      return res.status(400).json({ success: false, message: "No alumni data provided" });
+      return res
+        .status(400)
+        .json({ success: false, message: "No alumni data provided" });
     }
 
     // Sanitization and normalization helper
     function normalize(entry) {
-      const linkedin_id = String(entry.linkedin_id || entry.id || (entry.input && entry.input.url ? entry.input.url.split('/').pop() : '') || '').trim();
-      const input_url = entry.input?.url || entry.input_url || entry.url || null;
+      const linkedin_id = String(
+        entry.linkedin_id ||
+          entry.id ||
+          (entry.input && entry.input.url
+            ? entry.input.url.split("/").pop()
+            : "") ||
+          "",
+      ).trim();
+      const input_url =
+        entry.input?.url || entry.input_url || entry.url || null;
 
       const doc = {
         id: entry.id || linkedin_id || undefined,
-        name: entry.name || 'Unknown',
-        first_name: entry.first_name || (entry.name ? String(entry.name).split(' ')[0] : undefined),
-        last_name: entry.last_name || (entry.name ? String(entry.name).split(' ').slice(1).join(' ') : undefined),
+        name: entry.name || "Unknown",
+        first_name:
+          entry.first_name ||
+          (entry.name ? String(entry.name).split(" ")[0] : undefined),
+        last_name:
+          entry.last_name ||
+          (entry.name
+            ? String(entry.name).split(" ").slice(1).join(" ")
+            : undefined),
         city: entry.city || undefined,
         country_code: entry.country_code || undefined,
         position: entry.position || undefined,
         about: entry.about || undefined,
-        current_company: entry.current_company || (entry.current_company_name || entry.current_company_company_id ? { name: entry.current_company_name || null, company_id: entry.current_company_company_id || null, title: entry.current_company_title || null, location: entry.current_company_location || null } : undefined),
-        experience: Array.isArray(entry.experience) ? entry.experience : undefined,
+        current_company:
+          entry.current_company ||
+          (entry.current_company_name || entry.current_company_company_id
+            ? {
+                name: entry.current_company_name || null,
+                company_id: entry.current_company_company_id || null,
+                title: entry.current_company_title || null,
+                location: entry.current_company_location || null,
+              }
+            : undefined),
+        experience: Array.isArray(entry.experience)
+          ? entry.experience
+          : undefined,
         education: Array.isArray(entry.education) ? entry.education : undefined,
         avatar: entry.avatar || undefined,
         followers: entry.followers ? Number(entry.followers) : undefined,
         connections: entry.connections ? Number(entry.connections) : undefined,
-        current_company_company_id: entry.current_company_company_id || undefined,
+        current_company_company_id:
+          entry.current_company_company_id || undefined,
         current_company_name: entry.current_company_name || undefined,
         location: entry.location || undefined,
         input_url,
@@ -160,20 +191,35 @@ router.post("/import", async (req, res) => {
     }
 
     // Prepare sanitized list, ensure we have a key to upsert on (linkedin_id)
-    const sanitized = incoming.map(normalize).filter((d) => d.linkedin_id || d.id);
+    const sanitized = incoming
+      .map(normalize)
+      .filter((d) => d.linkedin_id || d.id);
     if (sanitized.length === 0) {
-      return res.status(400).json({ success: false, message: "No valid alumni entries with linkedin_id or id" });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "No valid alumni entries with linkedin_id or id",
+        });
     }
 
     // Batch bulkWrite with upsert on linkedin_id or id
     const batchSize = 500;
     let processed = 0;
-    let summary = { total: sanitized.length, batches: 0, upserted: 0, modified: 0, matched: 0 };
+    let summary = {
+      total: sanitized.length,
+      batches: 0,
+      upserted: 0,
+      modified: 0,
+      matched: 0,
+    };
 
     for (let i = 0; i < sanitized.length; i += batchSize) {
       const batch = sanitized.slice(i, i + batchSize);
       const ops = batch.map((doc) => {
-        const filter = doc.linkedin_id ? { linkedin_id: doc.linkedin_id } : { id: doc.id };
+        const filter = doc.linkedin_id
+          ? { linkedin_id: doc.linkedin_id }
+          : { id: doc.id };
         return {
           updateOne: {
             filter,
@@ -191,7 +237,12 @@ router.post("/import", async (req, res) => {
       processed += batch.length;
     }
 
-    res.json({ success: true, message: "Import completed", summary, processed });
+    res.json({
+      success: true,
+      message: "Import completed",
+      summary,
+      processed,
+    });
   } catch (error) {
     console.error("Import error:", error);
     res.status(500).json({ success: false, error: error.message });
@@ -341,7 +392,9 @@ router.get("/:id", async (req, res) => {
       .lean();
 
     if (!doc) {
-      return res.status(404).json({ success: false, message: "Profile not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
     }
 
     const payload = {
