@@ -81,10 +81,10 @@ export function createServer() {
   // Serve index.html for root and client-side routing fallback
   app.get('/', (req, res) => {
     const indexPaths = [
-      path.resolve(process.cwd(), 'index.html'),
-      path.resolve(process.cwd(), 'client', 'index.html'),
+      path.resolve(process.cwd(), 'dist', 'index.html'),
       path.resolve(process.cwd(), 'client', 'dist', 'index.html'),
-      path.resolve(process.cwd(), 'dist', 'index.html')
+      path.resolve(process.cwd(), 'client', 'index.html'),
+      path.resolve(process.cwd(), 'index.html')
     ];
 
     for (const p of indexPaths) {
