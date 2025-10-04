@@ -315,6 +315,25 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
     if (!q) return res.json({ success: true, data: [] });
 
     const limit = 10;
+
+    const cacheKey = `autocomplete:${branch || 'all'}:${q.toLowerCase()}`;
+    // Attempt to read from Redis or in-memory cache
+    try {
+      const r = await ensureRedis();
+      if (r) {
+        const cached = await r.get(cacheKey);
+        if (cached) {
+          return res.json({ success: true, data: JSON.parse(cached), cached: true });
+        }
+      } else {
+        const cached = inMemoryCache.get(cacheKey);
+        if (cached && cached.expiresAt > Date.now()) {
+          return res.json({ success: true, data: cached.value, cached: true });
+        }
+      }
+    } catch (cacheErr) {
+      console.warn('Cache read failed', cacheErr?.message || cacheErr);
+    }
     // Preferred: Atlas Search autocomplete aggregation
     const pipeline = [
       {
