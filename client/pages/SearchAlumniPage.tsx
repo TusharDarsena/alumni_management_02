@@ -75,12 +75,14 @@ export default function SearchAlumniPage() {
         <div className="relative w-[406px]">
           <div className="flex items-center gap-2 bg-black/10 rounded-full px-4 py-3">
             <Search className="w-4 h-4 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search Alumni"
-              className="bg-transparent outline-none text-gray-600 placeholder-gray-500 flex-1"
+            <AutocompleteSearch
               value={filters.searchTerm}
-              onChange={(e) => setFilters(f => ({ ...f, searchTerm: e.target.value }))}
+              onChange={(v) => setFilters((f) => ({ ...f, searchTerm: v }))}
+              onSelect={(s) => {
+                // navigate to profile on selection
+                if (s.linkedin_id) navigate(`/alumni/${s.linkedin_id}`);
+              }}
+              branch={filters.branch || undefined}
             />
           </div>
         </div>
