@@ -64,14 +64,15 @@ function parseEducation(educationStr) {
   const parts = educationStr.split(",");
   const institute = parts[0]?.trim() || null;
   const degreeFull = parts[1]?.trim() || "";
-  const branch = parts[2]?.trim() || "";
+  const branchStr = parts[2]?.trim() || "";
   const years = parts[3]?.trim() || "";
   const yearMatch = years.match(/(\d{4})\s*-\s*(\d{4})/);
-  const startYear = yearMatch ? parseInt(yearMatch[1]) : null;
-  const endYear = yearMatch ? parseInt(yearMatch[2]) : null;
+  const start_year = yearMatch ? parseInt(yearMatch[1]) : null;
+  const end_year = yearMatch ? parseInt(yearMatch[2]) : null;
   const degree =
-    degreeFull.replace("(BTech)", "").trim() + (branch ? ` in ${branch}` : "");
-  return [{ degree, institute, startYear, endYear }];
+    degreeFull.replace("(BTech)", "").trim() + (branchStr ? ` in ${branchStr}` : "");
+  const field = extractBranch(educationStr) || branchStr || "CSE"; // Use extractBranch or fallback
+  return [{ field, degree, institute, start_year, end_year }];
 }
 
 // Helper to parse experience
@@ -200,7 +201,7 @@ router.post("/import", async (req, res) => {
         experience: Array.isArray(entry.experience)
           ? entry.experience
           : undefined,
-        education: Array.isArray(entry.education) ? entry.education : undefined,
+        education: Array.isArray(entry.education) ? entry.education : parseEducation(entry.education || ""),
         avatar: entry.avatar || undefined,
         followers: entry.followers ? Number(entry.followers) : undefined,
         connections: entry.connections ? Number(entry.connections) : undefined,
@@ -350,10 +351,30 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
       {
         $search: {
           index: "alumni_autocomplete",
-          autocomplete: {
-            query: q,
-            path: ["name", "position", "current_company.name"],
-            fuzzy: { maxEdits: 1 },
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: q,
+                  path: "name",
+                  fuzzy: { maxEdits: 1 },
+                },
+              },
+              {
+                autocomplete: {
+                  query: q,
+                  path: "position",
+                  fuzzy: { maxEdits: 1 },
+                },
+              },
+              {
+                autocomplete: {
+                  query: q,
+                  path: "current_company.name",
+                  fuzzy: { maxEdits: 1 },
+                },
+              },
+            ],
           },
         },
       },
@@ -429,8 +450,6 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
   }
 });
 
-// GET / - Search, filter and paginate alumni profiles
-// Query params: search, branch, degree, batch, page, limit
 router.get("/", async (req, res) => {
   try {
     const { search, branch, degree, batch } = req.query;
@@ -438,54 +457,40 @@ router.get("/", async (req, res) => {
     const limit = Math.max(parseInt(req.query.limit || "24", 10), 1);
     const skip = (page - 1) * limit;
 
+    console.log("Search query:", search);
+
     const pipeline = [];
 
-    // Atlas Search stage (if search provided)
-    if (search && String(search).trim() !== "") {
-      pipeline.push({
-        $search: {
-          index: "default",
-          compound: {
-            should: [
-              {
-                autocomplete: {
-                  query: String(search),
-                  path: "name",
-                  fuzzy: { maxEdits: 2 },
-                },
-              },
-              {
-                autocomplete: {
-                  query: String(search),
-                  path: "position",
-                  fuzzy: { maxEdits: 2 },
-                },
-              },
-              {
-                autocomplete: {
-                  query: String(search),
-                  path: "current_company.name",
-                  fuzzy: { maxEdits: 2 },
-                },
-              },
-            ],
-            minimumShouldMatch: 1,
-          },
+// --- AFTER (Correct) ---
+if (search && String(search).trim() !== "") {
+  pipeline.push({
+    $search: {
+      index: "default", // Uses your main search index
+      text: {
+        query: String(search),
+        // Searches across all important fields at once
+        path: ["name", "position", "current_company.name", "location"],
+        fuzzy: {
+          maxEdits: 1, // Allows for one typo
         },
-      });
-    }
+      },
+    },
+  });
+}
 
-    // Match filters (education fields are inside array)
     const match = {};
-    if (branch) match["education.field"] = String(branch);
-    if (degree) match["education.degree"] = String(degree);
-    if (batch) match["education.start_year"] = String(batch);
+    const elemMatch = {};
+    if (branch) elemMatch.field = String(branch);
+    if (degree) elemMatch.degree = String(degree);
+    if (batch) elemMatch.start_year = String(batch);
+    if (Object.keys(elemMatch).length > 0) {
+      match["education"] = { $elemMatch: elemMatch };
+    }
 
     if (Object.keys(match).length > 0) {
       pipeline.push({ $match: match });
     }
 
-    // Facet for paginated data, total count and metadata
     pipeline.push({
       $facet: {
         data: [
@@ -495,7 +500,7 @@ router.get("/", async (req, res) => {
           {
             $project: {
               _id: 0,
-              username: "$id",
+              id: "$id",
               name: 1,
               avatar: "$avatar",
               position: 1,
@@ -523,8 +528,10 @@ router.get("/", async (req, res) => {
 
     const results = await AlumniProfile.aggregate(pipeline).allowDiskUse(true);
 
+    console.log("Search results count:", results[0].data.length);
+
     const data = (results[0].data || []).map((d) => ({
-      username: d.username,
+      id: d.id,
       name: d.name,
       avatar: d.avatar,
       position: d.position,

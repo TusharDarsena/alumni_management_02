@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, ChevronDown } from "lucide-react";
-import { alumniList } from "@/data/mockAlumni";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
 import AlumniCard from "@/components/AlumniCard";
 import { useFavorites } from "@/hooks/useFavorites";
 import AutocompleteSearch from "@/components/AutocompleteSearch";
+import AlumniFilterBar from "@/components/AlumniFilterBar";
+import { useQuery } from "@tanstack/react-query";
 
 interface AlumniFilters {
   searchTerm: string;
   batch?: string;
   degree?: string;
   branch?: string;
-}
-
-interface AlumniItem {
-  username: string;
-  name: string;
-  avatarUrl?: string;
-  graduationYear?: string;
-  major?: string;
-  company?: string;
-  email?: string;
 }
 
 export default function SearchAlumniPage() {
@@ -33,12 +23,6 @@ export default function SearchAlumniPage() {
     degree: "",
     branch: "",
   });
-  const [filteredAlumni, setFilteredAlumni] = useState<AlumniItem[]>(
-    alumniList as any,
-  );
-  const [batchOpen, setBatchOpen] = useState(false);
-  const [degreeOpen, setDegreeOpen] = useState(false);
-  const [branchOpen, setBranchOpen] = useState(false);
 
   const { isFavorite, toggleFavorite } = useFavorites();
 
@@ -49,26 +33,32 @@ export default function SearchAlumniPage() {
     notificationCount: 3,
   });
 
-  useEffect(() => {
-    const term = filters.searchTerm?.toLowerCase().trim() ?? "";
-    const res = (alumniList as any).filter((a: AlumniItem) => {
-      const matchName = term ? a.name.toLowerCase().includes(term) : true;
-      const matchYear = filters.batch
-        ? a.graduationYear === filters.batch
-        : true;
-      const matchMajor = filters.degree ? a.major === filters.degree : true;
-      const matchBranch = filters.branch ? a.company === filters.branch : true;
-      return matchName && matchYear && matchMajor && matchBranch;
-    });
-    setFilteredAlumni(res);
-  }, [filters]);
+const { data } = useQuery({
+  queryKey: ["alumni", filters],
+  queryFn: async () => {
+    const params = new URLSearchParams();
+    if (filters.searchTerm) params.append("search", filters.searchTerm);
+    if (filters.batch) params.append("batch", filters.batch);
+    if (filters.degree) params.append("degree", filters.degree);
+    if (filters.branch) params.append("branch", filters.branch);
+
+    const response = await fetch(`/api/alumni?${params.toString()}`);
+    if (!response.ok) throw new Error("Failed to fetch alumni");
+
+    const result = await response.json();
+    console.log("API result:", result); // ✅ this will now run
+    return result; // ✅ result is returned properly
+  },
+});
+
+const alumni = data?.data || [];
 
   const handleNavigation = (path: string) => {
     navigate(path);
   };
 
-  const handleViewProfile = (username: string) => {
-    navigate(`/alumni/${username}`);
+  const handleViewProfile = (id: string) => {
+    navigate(`/alumni/${id}`);
   };
 
   return (
@@ -78,121 +68,19 @@ export default function SearchAlumniPage() {
       user={user}
     >
       {/* Search and Filters */}
-      <div className="flex items-center gap-12 mb-12">
-        {/* Search Bar */}
-        <div className="relative w-[406px]">
-          <div className="flex items-center gap-2 bg-black/10 rounded-full px-4 py-3">
-            <Search className="w-4 h-4 text-gray-500" />
-            <AutocompleteSearch
-              value={filters.searchTerm}
-              onChange={(v) => setFilters((f) => ({ ...f, searchTerm: v }))}
-              onSelect={(s) => {
-                // navigate to profile on selection
-                if (s.linkedin_id) navigate(`/alumni/${s.linkedin_id}`);
-              }}
-              branch={filters.branch || undefined}
-            />
-          </div>
-        </div>
-
-        {/* Entry Batch Filter */}
-        <div className="relative w-[180px]">
-          <div
-            className="flex items-center justify-between px-3 py-3 border border-[#9D9D9D] rounded-lg bg-white cursor-pointer"
-            onClick={() => setBatchOpen(!batchOpen)}
-          >
-            <span className="text-black">{filters.batch || "Entry Batch"}</span>
-            <ChevronDown className="w-6 h-6" />
-          </div>
-          {batchOpen && (
-            <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10">
-              {["2016", "2017", "2018", "2019"].map((year) => (
-                <div
-                  key={year}
-                  className="px-3 py-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setFilters((f) => ({ ...f, batch: year }));
-                    setBatchOpen(false);
-                  }}
-                >
-                  {year}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Degree Filter */}
-        <div className="relative w-[180px]">
-          <div
-            className="flex items-center justify-between px-3 py-3 border border-[#9D9D9D] rounded-lg bg-white cursor-pointer"
-            onClick={() => setDegreeOpen(!degreeOpen)}
-          >
-            <span className="text-black">{filters.degree || "Degree"}</span>
-            <ChevronDown className="w-6 h-6" />
-          </div>
-          {degreeOpen && (
-            <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10">
-              {["B.Tech", "M.Tech", "P.H.D"].map((degree) => (
-                <div
-                  key={degree}
-                  className="px-3 py-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setFilters((f) => ({ ...f, degree }));
-                    setDegreeOpen(false);
-                  }}
-                >
-                  {degree}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Branch Filter */}
-        <div className="relative w-[180px]">
-          <div
-            className="flex items-center justify-between px-3 py-3 border border-[#9D9D9D] rounded-lg bg-white cursor-pointer"
-            onClick={() => setBranchOpen(!branchOpen)}
-          >
-            <span className="text-black">{filters.branch || "Branch"}</span>
-            <ChevronDown className="w-6 h-6" />
-          </div>
-          {branchOpen && (
-            <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-xl z-10">
-              {["C.S.E", "D.SA.I", "E.C.E"].map((branch) => (
-                <div
-                  key={branch}
-                  className="px-3 py-3 hover:bg-gray-50 cursor-pointer"
-                  onClick={() => {
-                    setFilters((f) => ({ ...f, branch }));
-                    setBranchOpen(false);
-                  }}
-                >
-                  {branch}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+      <div className="mb-12">
+        <AlumniFilterBar filters={filters} onFilterChange={setFilters} />
       </div>
 
       {/* Alumni Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredAlumni.slice(0, 24).map((alumni) => (
+        {alumni.slice(0, 24).map((alumnus: any) => (
           <AlumniCard
-            key={alumni.username}
-            alumnus={{
-              username: alumni.username,
-              name: alumni.name,
-              profilePictureUrl: alumni.avatarUrl,
-              graduationYear: alumni.graduationYear,
-              major: alumni.major,
-              company: alumni.company,
-            }}
-            isFavourite={isFavorite(alumni.username)}
+            key={alumnus.id}
+            alumnus={alumnus}
+            isFavourite={isFavorite(alumnus.id)}
             onViewProfile={handleViewProfile}
-            onToggleFavourite={() => toggleFavorite(alumni.username)}
+            onToggleFavourite={toggleFavorite}
           />
         ))}
       </div>

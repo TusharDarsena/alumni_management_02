@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { alumniList } from "@/data/mockAlumni";
 
 const STORAGE_KEY = "utopia:favorites";
 
@@ -22,23 +21,21 @@ export function useFavorites() {
   }, [favorites]);
 
   const isFavorite = useCallback(
-    (username: string) => favorites.includes(username),
+    (id: string) => favorites.includes(id),
     [favorites],
   );
 
-  const addFavorite = useCallback((username: string) => {
-    setFavorites((prev) => (prev.includes(username) ? prev : [...prev, username]));
+  const addFavorite = useCallback((id: string) => {
+    setFavorites((prev) => (prev.includes(id) ? prev : [...prev, id]));
   }, []);
 
-  const removeFavorite = useCallback((username: string) => {
-    setFavorites((prev) => prev.filter((u) => u !== username));
+  const removeFavorite = useCallback((id: string) => {
+    setFavorites((prev) => prev.filter((u) => u !== id));
   }, []);
 
-  const toggleFavorite = useCallback((username: string) => {
-    setFavorites((prev) => (prev.includes(username) ? prev.filter((u) => u !== username) : [...prev, username]));
+  const toggleFavorite = useCallback((id: string) => {
+    setFavorites((prev) => (prev.includes(id) ? prev.filter((u) => u !== id) : [...prev, id]));
   }, []);
 
-  const favoriteAlumni = alumniList.filter((a: any) => favorites.includes(a.username));
-
-  return { favorites, favoriteAlumni, isFavorite, addFavorite, removeFavorite, toggleFavorite };
+  return { favorites, isFavorite, addFavorite, removeFavorite, toggleFavorite };
 }

@@ -4,54 +4,64 @@ import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface AlumniItem {
-  username: string;
+  id: string;
   name: string;
   email?: string;
-  imageUrl?: string;
-  linkedinUrl?: string;
+  avatar?: string;
+  url?: string;
   location?: string;
   education?: Array<{
-    degree?: string;
-    institute?: string;
-    startYear?: number;
-    endYear?: number;
+    title?: string;
+    field?: string;
+    start_year?: string;
+    end_year?: string;
   }>;
   experience?: Array<{
-    role?: string;
+    title?: string;
     company?: string;
     location?: string;
-    startYear?: number;
-    endYear?: string | number;
+    start_date?: string;
+    end_date?: string;
   }>;
-  skills: {
-    technical: string[];
-    core: string[];
-  };
-  graduationYear?: number;
+  position?: string;
+  about?: string;
+  graduationYear?: string;
   batch?: string;
 }
 
 interface AlumniCardProps {
   alumnus: AlumniItem;
   isFavourite?: boolean;
-  onViewProfile?: (username: string) => void;
-  onToggleFavourite?: (username: string) => void;
+  onViewProfile?: (id: string) => void;
+  onToggleFavourite?: (id: string) => void;
   // compatibility with older usage
-  onClick?: (username: string) => void;
+  onClick?: (id: string) => void;
+}
+
+function getBatchAndGraduationYear(education: AlumniItem["education"]): { batch?: string; graduationYear?: string } {
+  if (!education) return {};
+  const iiitEdu = education.find((edu) => edu.title === "IIIT-Naya Raipur");
+  if (!iiitEdu) return {};
+  return {
+    batch: iiitEdu.start_year,
+    graduationYear: iiitEdu.end_year,
+  };
 }
 
 export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile, onToggleFavourite, onClick }: AlumniCardProps) {
+  const { batch, graduationYear } = getBatchAndGraduationYear(alumnus.education);
+
   const handleView = () => {
-    onViewProfile?.(alumnus.username);
-    onClick?.(alumnus.username);
+    onViewProfile?.(alumnus.id);
+    onClick?.(alumnus.id);
   };
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onToggleFavourite?.(alumnus.username);
+    onToggleFavourite?.(alumnus.id);
   };
 
-  const subtitle = `Name: ${alumnus.name}. Email: ${alumnus.email || 'Not available'}`;
+  const subtitle = `Batch: ${batch || "N/A"} | Graduation Year: ${graduationYear || "N/A"}`;
 
   return (
     <Card className="rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-default">
@@ -60,8 +70,8 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
       </div>
       <CardContent className="pt-0 -mt-8 text-center">
         <div className="mx-auto h-16 w-16 rounded-full bg-white p-0.5 overflow-hidden border-2 border-white">
-          {alumnus.imageUrl ? (
-            <img src={alumnus.imageUrl} alt={alumnus.name} className="h-full w-full object-cover rounded-full" />
+          {alumnus.avatar ? (
+            <img src={alumnus.avatar} alt={alumnus.name} className="h-full w-full object-cover rounded-full" />
           ) : (
             <div className="h-full w-full bg-slate-200 rounded-full" />
           )}

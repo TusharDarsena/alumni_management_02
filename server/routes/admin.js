@@ -2,7 +2,7 @@ import express from "express";
 import { requireAuth, requireRole } from "../middleware/auth.js";
 import PendingUser from "../models/PendingUser.js";
 import User from "../models/User.js";
-import allowedBranches from "../config/branches.js";
+import { allowedBranches } from "../config/config.js";
 import { sendMail } from "../utils/mailer.js";
 import { isStrongPassword } from "../controllers/AuthController.js";
 import { generateToken, hashToken } from "../utils/token.js";

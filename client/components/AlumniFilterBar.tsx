@@ -1,6 +1,6 @@
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import AutocompleteSearch from "./AutocompleteSearch";
 
 export interface AlumniFilters {
   searchTerm: string;
@@ -19,11 +19,11 @@ export default function AlumniFilterBar({ filters, onFilterChange }: AlumniFilte
     <div className="rounded-lg border bg-white p-4 grid gap-4 md:grid-cols-4">
       <div className="space-y-2 md:col-span-2">
         <Label htmlFor="search">Search</Label>
-        <Input
-          id="search"
-          placeholder="Search by name"
+        <AutocompleteSearch
           value={filters.searchTerm}
-          onChange={(e) => onFilterChange({ ...filters, searchTerm: e.target.value })}
+          onChange={(value) => onFilterChange({ ...filters, searchTerm: value })}
+          onSelect={(suggestion) => onFilterChange({ ...filters, searchTerm: suggestion.name })}
+          branch={filters.branch}
         />
       </div>
       <div className="space-y-2">

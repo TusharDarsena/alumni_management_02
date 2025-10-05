@@ -1,30 +1,28 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export interface UserProfileData {
-  username: string;
+  id: string;
   name: string;
   email?: string;
-  imageUrl?: string;
-  linkedinUrl?: string;
+  avatar?: string;
+  url?: string;
   location?: string;
   education?: Array<{
-    degree?: string;
-    institute?: string;
-    startYear?: number;
-    endYear?: number;
+    title?: string;
+    field?: string;
+    start_year?: string;
+    end_year?: string;
   }>;
   experience?: Array<{
-    role?: string;
+    title?: string;
     company?: string;
     location?: string;
-    startYear?: number;
-    endYear?: string | number;
+    start_date?: string;
+    end_date?: string;
   }>;
-  skills?: {
-    technical: string[];
-    core: string[];
-  };
-  graduationYear?: number;
+  position?: string;
+  about?: string;
+  graduationYear?: string;
   batch?: string;
 }
 
@@ -32,9 +30,20 @@ interface UserProfileProps {
   data: UserProfileData;
 }
 
+function getBatchAndGraduationYear(education: UserProfileData["education"]): { batch?: string; graduationYear?: string } {
+  if (!education) return {};
+  const iiitEdu = education.find((edu) => edu.title === "IIIT-Naya Raipur");
+  if (!iiitEdu) return {};
+  return {
+    batch: iiitEdu.start_year,
+    graduationYear: iiitEdu.end_year,
+  };
+}
+
 export default function UserProfile({ data }: UserProfileProps) {
   const currentEducation = data.education?.[0];
   const currentExperience = data.experience?.[0];
+  const { batch, graduationYear } = getBatchAndGraduationYear(data.education);
 
   return (
     <div className="space-y-6">
@@ -42,17 +51,17 @@ export default function UserProfile({ data }: UserProfileProps) {
       <Card>
         <CardContent className="p-6 flex items-center gap-6">
           <div className="h-20 w-20 rounded-full bg-slate-200 overflow-hidden">
-            {data.imageUrl ? (
-              <img src={data.imageUrl} alt={data.name} className="h-full w-full object-cover" />
+            {data.avatar ? (
+              <img src={data.avatar} alt={data.name} className="h-full w-full object-cover" />
             ) : null}
           </div>
           <div className="space-y-1">
             <div className="text-xl font-bold">{data.name || "Not available"}</div>
             <div className="text-sm text-slate-600">
-              {currentExperience?.role || "Not available"} at {currentExperience?.company || "Not available"}
+              {currentExperience?.title || "Not available"} at {currentExperience?.company || "Not available"}
             </div>
             <div className="text-sm text-slate-500">
-              {currentEducation?.degree || "Not available"} from {currentEducation?.institute || "Not available"}
+              {currentEducation?.title || "Not available"} from {currentEducation?.field || "Not available"}
             </div>
             <div className="text-sm text-slate-500">
               {data.location || "Not available"}
@@ -70,10 +79,10 @@ export default function UserProfile({ data }: UserProfileProps) {
           {data.experience && data.experience.length > 0 ? (
             data.experience.map((exp, index) => (
               <div key={index} className="mb-4">
-                <div className="font-semibold">{exp.role || "Not available"}</div>
+                <div className="font-semibold">{exp.title || "Not available"}</div>
                 <div className="text-sm text-slate-600">{exp.company || "Not available"} • {exp.location || "Not available"}</div>
                 <div className="text-sm text-slate-500">
-                  {exp.startYear || "Not available"} - {exp.endYear || "Not available"}
+                  {exp.start_date || "Not available"} - {exp.end_date || "Not available"}
                 </div>
               </div>
             ))
@@ -92,10 +101,10 @@ export default function UserProfile({ data }: UserProfileProps) {
           {data.education && data.education.length > 0 ? (
             data.education.map((edu, index) => (
               <div key={index} className="mb-4">
-                <div className="font-semibold">{edu.degree || "Not available"}</div>
-                <div className="text-sm text-slate-600">{edu.institute || "Not available"}</div>
+                <div className="font-semibold">{edu.title || "Not available"}</div>
+                <div className="text-sm text-slate-600">{edu.field || "Not available"}</div>
                 <div className="text-sm text-slate-500">
-                  {edu.startYear || "Not available"} - {edu.endYear || "Not available"}
+                  {edu.start_year || "Not available"} - {edu.end_year || "Not available"}
                 </div>
               </div>
             ))
@@ -115,13 +124,13 @@ export default function UserProfile({ data }: UserProfileProps) {
             <div>
               <div className="font-semibold">Technical Skills</div>
               <div className="text-sm text-slate-600">
-                {data.skills && data.skills.technical && data.skills.technical.length > 0 ? data.skills.technical.join(", ") : "Not available"}
+                {data.position || "Not available"}
               </div>
             </div>
             <div>
-              <div className="font-semibold">Core Skills</div>
+              <div className="font-semibold">About</div>
               <div className="text-sm text-slate-600">
-                {data.skills && data.skills.core && data.skills.core.length > 0 ? data.skills.core.join(", ") : "Not available"}
+                {data.about || "Not available"}
               </div>
             </div>
           </div>

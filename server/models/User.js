@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import allowedBranches from "../config/branches.js";
+import { allowedBranches } from "../config/config.js";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
   verificationLastSentAt: { type: Date, default: null },
   // Phone and branch
   phone: { type: String, unique: true, required: true, trim: true },
-  branch: { type: String, enum: allowedBranches, required: true },
+  branch: { type: String, enum: Object.values(allowedBranches).flatMap(d => d.branches), required: true },
   location: { type: String, trim: true },
   // Token invalidation
   tokenVersion: { type: Number, default: 0 },

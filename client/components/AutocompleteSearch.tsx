@@ -1,165 +1,120 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 
+// Define the shape of a suggestion object from your API
 interface Suggestion {
   name: string;
   avatar?: string;
   linkedin_id?: string;
   position?: string;
-  current_company?: string | null;
 }
 
-export default function AutocompleteSearch({
-  value,
-  onChange,
-  onSelect,
-  branch,
-}: {
+// Define the props for your component
+interface AutocompleteSearchProps {
   value: string;
-  onChange: (v: string) => void;
-  onSelect?: (s: Suggestion) => void;
+  onChange: (value: string) => void;
+  onSelect: (suggestion: Suggestion) => void;
   branch?: string | null;
-}) {
-  const [query, setQuery] = useState(value || "");
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [loading, setLoading] = useState(false);
+}
+
+// The API fetching function, kept separate for clarity
+async function fetchAutocompleteSuggestions(query: string, branch: string | null | undefined) {
+  if (query.length < 2) return []; // Don't fetch for very short queries
+  
+  const params = new URLSearchParams({ q: query });
+  if (branch) params.set("branch", branch);
+
+  const res = await fetch(`/api/alumni/autocomplete?${params.toString()}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch suggestions");
+  }
+  const data = await res.json();
+  return data.data as Suggestion[];
+}
+
+export default function AutocompleteSearch({ value, onChange, onSelect, branch }: AutocompleteSearchProps) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const abortRef = useRef<AbortController | null>(null);
-  const debounceRef = useRef<number | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [debouncedQuery, setDebouncedQuery] = useState(value);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => setQuery(value || ""), [value]);
-
+  // Debounce the search query to avoid excessive API calls
   useEffect(() => {
-    // debounce 300ms
-    if (debounceRef.current) window.clearTimeout(debounceRef.current);
-    if (!query || query.trim().length === 0) {
-      setSuggestions([]);
-      setOpen(false);
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-    debounceRef.current = window.setTimeout(() => {
-      // cancel previous
-      if (abortRef.current) abortRef.current.abort();
-      const ac = new AbortController();
-      abortRef.current = ac;
-      const params = new URLSearchParams();
-      params.set("q", query);
-      if (branch) params.set("branch", branch);
-      fetch(`/api/alumni/autocomplete?${params.toString()}`, {
-        signal: ac.signal,
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          if (data && data.data) {
-            setSuggestions(data.data as Suggestion[]);
-            setOpen(true);
-            setActiveIndex(-1);
-          } else {
-            setSuggestions([]);
-            setOpen(false);
-          }
-        })
-        .catch((err) => {
-          if (err.name === "AbortError") return;
-          console.error("Autocomplete fetch error", err);
-        })
-        .finally(() => setLoading(false));
-    }, 300);
+    const handler = setTimeout(() => {
+      setDebouncedQuery(value);
+    }, 300); // 300ms delay
+    return () => clearTimeout(handler);
+  }, [value]);
 
-    return () => {
-      if (debounceRef.current) window.clearTimeout(debounceRef.current);
-    };
-  }, [query, branch]);
+  // useQuery handles fetching, loading, errors, and caching automatically
+  const { data: suggestions = [], isLoading } = useQuery({
+    queryKey: ['autocomplete', debouncedQuery, branch], // This key triggers refetch on change
+    queryFn: () => fetchAutocompleteSuggestions(debouncedQuery, branch),
+    enabled: debouncedQuery.length > 1 && open, // Only fetch when needed
+  });
 
-  const handleInput = (v: string) => {
-    setQuery(v);
-    onChange(v);
-  };
-
-  const handleSelect = (s: Suggestion) => {
-    setQuery(s.name);
-    onChange(s.name);
+  const handleSelect = (suggestion: Suggestion) => {
+    onChange(suggestion.name);
+    onSelect(suggestion);
     setOpen(false);
-    if (onSelect) onSelect(s);
   };
 
+  // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!open) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
+      setActiveIndex(i => Math.min(i + 1, suggestions.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setActiveIndex((i) => Math.max(i - 1, 0));
-    } else if (e.key === "Enter") {
+      setActiveIndex(i => Math.max(i - 1, 0));
+    } else if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
-      if (activeIndex >= 0 && suggestions[activeIndex]) {
-        handleSelect(suggestions[activeIndex]);
-      }
+      handleSelect(suggestions[activeIndex]);
     } else if (e.key === "Escape") {
       setOpen(false);
     }
   };
 
-  return (
-    <div className="relative" style={{ width: 406 }}>
-      <input
-        ref={inputRef}
-        role="combobox"
-        aria-expanded={open}
-        aria-controls="autocomplete-listbox"
-        aria-autocomplete="list"
-        className="bg-transparent outline-none text-gray-600 placeholder-gray-500 flex-1"
-        value={query}
-        onChange={(e) => handleInput(e.target.value)}
-        onKeyDown={handleKeyDown}
-        onFocus={() => {
-          if (suggestions.length > 0) setOpen(true);
-        }}
-        placeholder="Search Alumni"
-      />
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-      {open && (
-        <ul
-          id="autocomplete-listbox"
-          role="listbox"
-          className="absolute z-50 mt-2 w-full bg-white border rounded-md shadow-lg max-h-64 overflow-auto"
-        >
-          {loading && (
-            <li className="px-3 py-2 text-sm text-gray-500">Loading...</li>
-          )}
-          {!loading && suggestions.length === 0 && (
-            <li className="px-3 py-2 text-sm text-gray-500">No results</li>
-          )}
-          {!loading &&
-            suggestions.map((s, idx) => (
-              <li
-                key={s.linkedin_id || s.name + idx}
-                role="option"
-                aria-selected={activeIndex === idx}
-                className={`flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 ${activeIndex === idx ? "bg-gray-100" : ""}`}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  handleSelect(s);
-                }}
-                onMouseEnter={() => setActiveIndex(idx)}
-              >
-                <img
-                  src={s.avatar || "/placeholder.svg"}
-                  className="w-8 h-8 rounded-full object-cover"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">{s.name}</span>
-                  <span className="text-xs text-gray-500">
-                    {s.position || s.current_company || ""}
-                  </span>
-                </div>
-              </li>
-            ))}
+  return (
+    <div className="relative" ref={containerRef}>
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={() => setOpen(true)}
+        onKeyDown={handleKeyDown}
+        placeholder="Search Alumni"
+        className="bg-transparent outline-none w-full text-gray-600 placeholder-gray-500"
+      />
+      {open && debouncedQuery.length > 1 && (
+        <ul className="absolute z-50 mt-2 w-full bg-white border rounded-md shadow-lg max-h-64 overflow-auto">
+          {isLoading && <li className="px-3 py-2 text-sm text-gray-500">Loading...</li>}
+          {!isLoading && suggestions.length === 0 && <li className="px-3 py-2 text-sm text-gray-500">No results</li>}
+          {suggestions.map((s, idx) => (
+            <li
+              key={s.linkedin_id || idx}
+              className={`flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 ${activeIndex === idx ? "bg-gray-100" : ""}`}
+              onMouseDown={() => handleSelect(s)}
+              onMouseEnter={() => setActiveIndex(idx)}
+            >
+              <img src={s.avatar || `https://placehold.co/40x40/E2E8F0/4A5568?text=${s.name[0]}`} className="w-8 h-8 rounded-full object-cover" alt={s.name} />
+              <div>
+                <span className="text-sm font-medium">{s.name}</span>
+                <span className="block text-xs text-gray-500">{s.position}</span>
+              </div>
+            </li>
+          ))}
         </ul>
       )}
     </div>

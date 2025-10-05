@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import PendingUser from "../models/PendingUser.js";
 import { createToken } from "../utils/jwt.js";
 import { sendMail } from "../utils/mailer.js";
-import allowedBranches from "../config/branches.js";
+import { allowedBranches } from "../config/config.js";
 
 const hashOTP = (otp) => {
   const salt = "otp-salt"; // Fixed salt for simplicity; use unique per user in production

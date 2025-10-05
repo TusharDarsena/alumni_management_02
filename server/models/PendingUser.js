@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import allowedBranches from "../config/branches.js";
+import { allowedBranches } from "../config/config.js";
 
 const pendingUserSchema = new mongoose.Schema({
   email: {
@@ -33,7 +33,7 @@ const pendingUserSchema = new mongoose.Schema({
   verificationExpires: { type: Date, default: null },
   verificationLastSentAt: { type: Date, default: null },
   phone: { type: String, unique: true, sparse: true, trim: true },
-  branch: { type: String, enum: allowedBranches, required: true },
+  branch: { type: String, enum: Object.values(allowedBranches).flatMap(d => d.branches), required: true },
   mustChangePassword: { type: Boolean, default: false },
   defaultPassword: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
