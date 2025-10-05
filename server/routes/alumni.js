@@ -479,13 +479,9 @@ if (search && String(search).trim() !== "") {
 }
 
     const match = {};
-    const elemMatch = {};
-    if (branch) elemMatch.field = String(branch);
-    if (degree) elemMatch.degree = String(degree);
-    if (batch) elemMatch.start_year = String(batch);
-    if (Object.keys(elemMatch).length > 0) {
-      match["education"] = { $elemMatch: elemMatch };
-    }
+    if (branch) match.branch = String(branch);
+    if (batch) match.batch = String(batch);
+    // degree filter removed as education is simplified
 
     if (Object.keys(match).length > 0) {
       pipeline.push({ $match: match });
@@ -507,18 +503,20 @@ if (search && String(search).trim() !== "") {
               current_company: "$current_company.name",
               location: 1,
               education: 1,
+              batch: 1,
+              branch: 1,
+              graduationYear: 1,
             },
           },
         ],
         totalCount: [{ $count: "count" }],
         metadata: [
-          { $unwind: { path: "$education", preserveNullAndEmptyArrays: true } },
           {
             $group: {
               _id: null,
-              branches: { $addToSet: "$education.field" },
+              branches: { $addToSet: "$branch" },
               degrees: { $addToSet: "$education.degree" },
-              batches: { $addToSet: "$education.start_year" },
+              batches: { $addToSet: "$batch" },
             },
           },
           { $project: { _id: 0, branches: 1, degrees: 1, batches: 1 } },
@@ -574,7 +572,7 @@ router.get("/:id", async (req, res) => {
 
     const doc = await AlumniProfile.findOne({ id })
       .select(
-        "id name about avatar position current_company experience education updatedAt",
+        "id name about avatar position current_company experience education batch branch graduationYear updatedAt",
       )
       .lean();
 
@@ -605,6 +603,9 @@ router.get("/:id", async (req, res) => {
       current_company: doc.current_company || null,
       experience: Array.isArray(doc.experience) ? doc.experience : [],
       education: Array.isArray(doc.education) ? doc.education : [],
+      batch: doc.batch || null,
+      branch: doc.branch || null,
+      graduationYear: doc.graduationYear || null,
     };
 
     const responseEtag = crypto

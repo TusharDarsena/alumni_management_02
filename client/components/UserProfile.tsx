@@ -53,18 +53,22 @@ export default function UserProfile({ data }: UserProfileProps) {
           <div className="h-20 w-20 rounded-full bg-slate-200 overflow-hidden">
             {data.avatar ? (
               <img src={data.avatar} alt={data.name} className="h-full w-full object-cover" />
-            ) : null}
+            ) : (
+              <div className="h-full w-full bg-gray-300 flex items-center justify-center text-gray-500">
+                <span>No Image</span>
+              </div>
+            )}
           </div>
           <div className="space-y-1">
-            <div className="text-xl font-bold">{data.name || "Not available"}</div>
+            <div className="text-xl font-bold">{data.name || "Name not available"}</div>
             <div className="text-sm text-slate-600">
-              {currentExperience?.title || "Not available"} at {currentExperience?.company || "Not available"}
+              {(currentExperience?.title && currentExperience.title !== "Not available" ? currentExperience.title : "Title not available")} at {(currentExperience?.company && currentExperience.company !== "Not available" ? currentExperience.company : "Company not available")}
             </div>
             <div className="text-sm text-slate-500">
-              {currentEducation?.title || "Not available"} from {currentEducation?.field || "Not available"}
+              {(currentEducation?.title && currentEducation.title !== "Not available" ? currentEducation.title : "Institute not available")} from {(currentEducation?.field && currentEducation.field !== "Not available" ? currentEducation.field : "Field not available")}
             </div>
             <div className="text-sm text-slate-500">
-              {data.location || "Not available"}
+              {data.location || "Location not available"}
             </div>
           </div>
         </CardContent>
@@ -79,10 +83,10 @@ export default function UserProfile({ data }: UserProfileProps) {
           {data.experience && data.experience.length > 0 ? (
             data.experience.map((exp, index) => (
               <div key={index} className="mb-4">
-                <div className="font-semibold">{exp.title || "Not available"}</div>
-                <div className="text-sm text-slate-600">{exp.company || "Not available"} • {exp.location || "Not available"}</div>
+                <div className="font-semibold">{exp.title && exp.title !== "Not available" ? exp.title : "Title not available"}</div>
+                <div className="text-sm text-slate-600">{exp.company && exp.company !== "Not available" ? exp.company : "Company not available"} • {exp.location && exp.location !== "Not available" ? exp.location : "Location not available"}</div>
                 <div className="text-sm text-slate-500">
-                  {exp.start_date || "Not available"} - {exp.end_date || "Not available"}
+                  {exp.start_date || "Start date not available"} - {exp.end_date || "End date not available"}
                 </div>
               </div>
             ))
@@ -101,10 +105,10 @@ export default function UserProfile({ data }: UserProfileProps) {
           {data.education && data.education.length > 0 ? (
             data.education.map((edu, index) => (
               <div key={index} className="mb-4">
-                <div className="font-semibold">{edu.title || "Not available"}</div>
-                <div className="text-sm text-slate-600">{edu.field || "Not available"}</div>
+                <div className="font-semibold">{edu.title && edu.title !== "Not available" ? edu.title : "Institute not available"}</div>
+                <div className="text-sm text-slate-600">{edu.field && edu.field !== "Not available" ? edu.field : "Field not available"}</div>
                 <div className="text-sm text-slate-500">
-                  {edu.start_year || "Not available"} - {edu.end_year || "Not available"}
+                  {edu.start_year || "Start year not available"} - {edu.end_year || "End year not available"}
                 </div>
               </div>
             ))
@@ -124,13 +128,13 @@ export default function UserProfile({ data }: UserProfileProps) {
             <div>
               <div className="font-semibold">Technical Skills</div>
               <div className="text-sm text-slate-600">
-                {data.position || "Not available"}
+                {data.position && data.position !== "Not available" ? data.position : "Position not available"}
               </div>
             </div>
             <div>
               <div className="font-semibold">About</div>
               <div className="text-sm text-slate-600">
-                {data.about || "Not available"}
+                {data.about && data.about !== "Not available" ? data.about : "About not available"}
               </div>
             </div>
           </div>

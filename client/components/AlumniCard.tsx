@@ -38,18 +38,9 @@ interface AlumniCardProps {
   onClick?: (id: string) => void;
 }
 
-function getBatchAndGraduationYear(education: AlumniItem["education"]): { batch?: string; graduationYear?: string } {
-  if (!education) return {};
-  const iiitEdu = education.find((edu) => edu.title === "IIIT-Naya Raipur");
-  if (!iiitEdu) return {};
-  return {
-    batch: iiitEdu.start_year,
-    graduationYear: iiitEdu.end_year,
-  };
-}
-
 export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile, onToggleFavourite, onClick }: AlumniCardProps) {
-  const { batch, graduationYear } = getBatchAndGraduationYear(alumnus.education);
+  const batch = alumnus.batch;
+  const graduationYear = alumnus.graduationYear;
 
   const handleView = () => {
     onViewProfile?.(alumnus.id);
@@ -61,7 +52,7 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
     onToggleFavourite?.(alumnus.id);
   };
 
-  const subtitle = `Batch: ${batch || "N/A"} | Graduation Year: ${graduationYear || "N/A"}`;
+  const subtitle = `Batch: ${batch && batch !== "N/A" ? batch : "Batch not available"} | Graduation Year: ${graduationYear && graduationYear !== "N/A" ? graduationYear : "Graduation year not available"}`;
 
   return (
     <Card className="rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-default">
@@ -73,10 +64,12 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
           {alumnus.avatar ? (
             <img src={alumnus.avatar} alt={alumnus.name} className="h-full w-full object-cover rounded-full" />
           ) : (
-            <div className="h-full w-full bg-slate-200 rounded-full" />
+            <div className="h-full w-full bg-slate-200 rounded-full flex items-center justify-center text-gray-500">
+              <span>No Image</span>
+            </div>
           )}
         </div>
-        <div className="mt-3 font-semibold text-slate-800">{alumnus.name}</div>
+        <div className="mt-3 font-semibold text-slate-800">{alumnus.name || "Name not available"}</div>
         <div className="text-sm text-slate-500">{subtitle}</div>
 
         <div className="mt-4 flex items-center justify-center gap-3">

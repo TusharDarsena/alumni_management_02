@@ -1,0 +1,541 @@
+[
+  {
+    "id": "gazal-jain-4366a9153",
+    "name": "Gazal Jain",
+    "city": "Raipur, Chhattisgarh, India",
+    "country_code": "IN",
+    "position": "Engineering @Adobe | Ex- SDE @Microsoft Research, @PayPal, @Nasdaq| Full Stack Development",
+    "current_company": {
+      "name": "Adobe",
+      "company_id": "adobe",
+      "title": "Computer Scientist - 1",
+      "location": "Greater Bengaluru Area"
+    },
+    "experience": [
+      {
+        "title": "Computer Scientist - 1",
+        "location": "Greater Bengaluru Area",
+        "description_html": null,
+        "start_date": "Apr 2025",
+        "end_date": "Present",
+        "company": "Adobe",
+        "company_id": "adobe",
+        "url": "https://www.linkedin.com/company/adobe",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQFrtK-ioO1rsQ/company-logo_100_100/company-logo_100_100/0/1630645864762/adobe_logo?e=2147483647&v=beta&t=Vg0IkCp055jxAgqs_f7eIDMneyo1NkTWSvyAMoqnhd8"
+      },
+      {
+        "title": "Full Stack Engineer (Contingent)",
+        "location": "Bengaluru, Karnataka, India",
+        "description": "- Contributed to the developement of HyWay Project - a PoC initiative under MSR Labs, enabling seamless\n\ninteraction between in-person and remote participants in hybrid events. Led key functionalities like user\n\ncontrols, the authoring tool, and real-time feedback integration via Microsoft’s Feedback SDK.\n\n- Migrated the application’s authentication flow to MSAL (Microsoft Authentication Library) and Azure services\n\nto Managed Identity by designing a robust middleware-based authentication layer, eliminating the security\n\nrisk of storing Azure service connection tokens locally in the application.\n\n- Led application analytics implementation with Azure Application Insights, designing a robust logging\n\nframework and batching mechanism for client-side logs, overcoming SDK limits for smooth data transmission",
+        "description_html": "- Contributed to the developement of HyWay Project - a PoC initiative under MSR Labs, enabling seamless <br> interaction between in-person and remote participants in hybrid events. Led key functionalities like user <br> controls, the authoring tool, and real-time feedback integration via Microsoft&#x2019;s Feedback SDK. <br> - Migrated the application&#x2019;s authentication flow to MSAL (Microsoft Authentication Library) and Azure services <br> to Managed Identity by designing a robust middleware-based authentication layer, eliminating the security <br> risk of storing Azure service connection tokens locally in the application. <br> - Led application analytics implementation with Azure Application Insights, designing a robust logging <br> framework and batching mechanism for client-side logs, overcoming SDK limits for smooth data transmission",
+        "start_date": "Mar 2024",
+        "end_date": "Apr 2025",
+        "company": "Microsoft",
+        "company_id": "microsoft",
+        "url": "https://www.linkedin.com/company/microsoft",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQH32RJQCl3dDQ/company-logo_100_100/B56ZYQ0mrGGoAU-/0/1744038948046/microsoft_logo?e=2147483647&v=beta&t=rr_7_bFRKp6umQxIHErPOZHtR8dMPIYeTjlKFdotJBY"
+      },
+      {
+        "title": "PayPal",
+        "location": "Bengaluru, Karnataka, India",
+        "description_html": null,
+        "duration": "1 year 10 months",
+        "positions": [
+          {
+            "subtitle": "PayPal",
+            "meta": "Feb 2024 - Mar 2024 2 months",
+            "start_date": "Feb 2024",
+            "end_date": "Mar 2024",
+            "title": "SDE - 2",
+            "description_html": null,
+            "location": "Bengaluru, Karnataka, India"
+          },
+          {
+            "subtitle": "PayPal",
+            "meta": "Jun 2022 - Feb 2024 1 year 9 months",
+            "description": "-Joined Mexico project, focused on Pricing component for transaction fee calculation in PayPal. Implemented caching logic for IC2B initiative, storing user's installment preference in cache for later retrieval during response to another API call. - Spearheaded transformative alterations within the realm of Compliance services revolutionizing the experience of eKYC for Sole Proprietorship business users in Japan. Designed new compliance rules as a part of PoC for implementing eKYC functionality. - Received Spot Award for excellent performance in the eKYC initiative. - Played a pivotal role in the Japan eKYB initiative by implementing strategic enhancements to the message daemon utilized in a key service component. Configured the message daemon code to publish the new request body from one service into other. - Consistently took charge of addressing real-time customer issues, showcasing a proactive com- mitment to seamless service. Addressed and resolved above 50+ live customer issues and gave support in migration of accounts from manual kyc to ekyc and vice-versa. - Designed meticulous Unit Tests and Functional Tests in eKYC and eKYB initiatives, elevating the overall application flow and ensuring exceptional code integrity. Added above 100+ test cases in both initiatives. - Tech Stack: Spring Boot, Mockito Framework.",
+            "start_date": "Jun 2022",
+            "end_date": "Feb 2024",
+            "title": "SDE -1",
+            "description_html": "-Joined Mexico project, focused on Pricing component for transaction fee calculation in PayPal. Implemented caching logic for IC2B initiative, storing user&apos;s installment preference in cache for later retrieval during response to another API call. <br> - Spearheaded transformative alterations within the realm of Compliance services revolutionizing the experience of eKYC for Sole Proprietorship business users in Japan. Designed new compliance rules as a part of PoC for implementing eKYC functionality. <br> - Received Spot Award for excellent performance in the eKYC initiative. <br> - Played a pivotal role in the Japan eKYB initiative by implementing strategic enhancements to the message daemon utilized in a key service component. Configured the message daemon code <br> to publish the new request body from one service into other. <br> - Consistently took charge of addressing real-time customer issues, showcasing a proactive com- <br> mitment to seamless service. Addressed and resolved above 50+ live customer issues and gave <br> support in migration of accounts from manual kyc to ekyc and vice-versa. <br> - Designed meticulous Unit Tests and Functional Tests in eKYC and eKYB initiatives, elevating the overall application flow and ensuring exceptional code integrity. Added above 100+ test cases <br> in both initiatives. <br> - Tech Stack: Spring Boot, Mockito Framework.",
+            "location": "Bengaluru, Karnataka, India"
+          }
+        ],
+        "company": "PayPal",
+        "company_id": "paypal",
+        "url": "https://www.linkedin.com/company/paypal?trk=public_profile_experience-group-header",
+        "company_logo_url": null
+      },
+      {
+        "title": "Nasdaq",
+        "location": "Bengaluru, Karnataka, India",
+        "description_html": null,
+        "duration": "1 year 5 months",
+        "positions": [
+          {
+            "subtitle": "Nasdaq",
+            "meta": "Jul 2021 - Jun 2022 1 year",
+            "description": "- Worked on creating a ledger integrated UI application which facilitates asset trade and transfer between different parties using smart contracts. - Created smart contracts for features like asset creation, asset allocation, Free of Payments(FoP), Delivery vs Payments(DvP), Market Trade and also implemented the features on UI. - Tech Stack: ReactJS, DAML smart contracts, Spring Boot.",
+            "start_date": "Jul 2021",
+            "end_date": "Jun 2022",
+            "title": "Senior Software Developer",
+            "description_html": "- Worked on creating a ledger integrated UI application which facilitates asset trade and transfer between different parties using smart contracts. <br> - Created smart contracts for features like asset creation, asset allocation, Free of Payments(FoP), Delivery vs Payments(DvP), Market Trade and also implemented the features on UI. <br> - Tech Stack: ReactJS, DAML smart contracts, Spring Boot. <!---->",
+            "location": "Bengaluru, Karnataka, India"
+          },
+          {
+            "subtitle": "Nasdaq",
+            "meta": "Feb 2021 - Jul 2021 6 months",
+            "description": "- Created UI templates using ReactJS for the website involving trade of bio-medical health data. - Worked on Free of Payments (FoP) feature for the application along with quality assurance. - Tech Stack: Reactive Programming (Spring Boot), ReactJS, Mockito, Taiko, Gauge.",
+            "start_date": "Feb 2021",
+            "end_date": "Jul 2021",
+            "title": "SDE Intern",
+            "description_html": "- Created UI templates using ReactJS for the website involving trade of bio-medical health data. <br> - Worked on Free of Payments (FoP) feature for the application along with quality assurance. <br> - Tech Stack: Reactive Programming (Spring Boot), ReactJS, Mockito, Taiko, Gauge. <!---->",
+            "location": "Bengaluru, Karnataka, India"
+          }
+        ],
+        "company": "Nasdaq",
+        "company_id": "nasdaq",
+        "url": "https://www.linkedin.com/company/nasdaq?trk=public_profile_experience-group-header",
+        "company_logo_url": null
+      },
+      {
+        "title": "Market Technology Engineering Intern",
+        "location": "Bengaluru, Karnataka, India",
+        "description": "- Worked on optimising search engine for null result handling in a web application using Elasticsearch, ReactJS and Flask. \n\n- Also added recommendation functionality in the UI for user's search history which was showing null results in the past.",
+        "description_html": "- Worked on optimising search engine for null result handling in a web application using Elasticsearch, ReactJS and Flask. <br> - Also added recommendation functionality in the UI for user&apos;s search history which was showing null results in the past. <!---->",
+        "start_date": "Jun 2020",
+        "end_date": "Aug 2020",
+        "company": "Nasdaq",
+        "company_id": "nasdaq",
+        "url": "https://www.linkedin.com/company/nasdaq",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQHa5sYUYvnOfw/company-logo_100_100/company-logo_100_100/0/1651501366522/nasdaq_logo?e=2147483647&v=beta&t=4gEIxXOxQH_tGRLSht_gmn9hlyf48htX2ZZh6YFmRxs"
+      },
+      {
+        "title": "Dare in reality challenge",
+        "location": "Bangalore",
+        "description": "Secured 1st position in Genpact's 'Dare in reality challenge' with cash prize of Rs. 3,00,000.  It was a team challenge and we were a team of 5 members.We designed a solution to the problem of 'Predicting ADR labels on unlabeled social media data'.",
+        "description_html": "Secured 1st position in Genpact&apos;s &apos;Dare in reality challenge&apos; with cash prize of Rs. 3,00,000. It was a team challenge and we were a team of 5 members.We designed a solution to the problem of &apos;Predicting ADR labels on unlabeled social media data&apos;. <!---->",
+        "start_date": "Sep 2019",
+        "end_date": "Feb 2020",
+        "company": "Genpact",
+        "company_id": "genpact",
+        "url": "https://www.linkedin.com/company/genpact",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQFIjOdiff8hjA/company-logo_100_100/company-logo_100_100/0/1736265728917/genpact_logo?e=2147483647&v=beta&t=Jm64InCy2eaPouk0Sx0XC-HIfv3mrdSUoF4zOkk7SKQ"
+      },
+      {
+        "title": "Published Research Paper Author",
+        "location": "Patna, Bihar, India",
+        "description": "Research paper published on \"Smart Fruit Warehouse and Control System Using IoT\" under IEEE in the 5th international ICDSE conference 2019. The link for paper is available on my profile.",
+        "description_html": "Research paper published on &quot;Smart Fruit Warehouse and Control System Using IoT&quot; under IEEE in the 5th international ICDSE conference 2019. The link for paper is available on my profile. <!---->",
+        "start_date": "Sep 2019",
+        "end_date": "Sep 2019",
+        "company": "IIT Patna",
+        "company_id": "iit-patna",
+        "url": "https://in.linkedin.com/company/iit-patna",
+        "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+      },
+      {
+        "title": "AI and ML Research Intern at ROBITA Lab, IIIT Allahabad",
+        "location": "India",
+        "description_html": null,
+        "start_date": "May 2019",
+        "end_date": "Jul 2019",
+        "company": "ROBITA lab, IIIT Allahabad",
+        "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+      }
+    ],
+    "url": "https://be.linkedin.com/in/Gazal-jain-4366a9153",
+    "people_also_viewed": [
+      {
+        "profile_link": "https://in.linkedin.com/in/devanshi-goel-81b252195",
+        "name": "Devanshi Goel",
+        "about": "ServiceNow",
+        "location": "8K followers Hyderabad"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/suril-mehta",
+        "name": "Suril Mehta",
+        "about": "Amazon",
+        "location": "6K followers South Delhi"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/vineethm1627",
+        "name": "VINEETH M",
+        "about": "Amazon",
+        "location": "7K followers Ghaziabad"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/ananya-sajwan-2407",
+        "name": "Ananya Sajwan",
+        "about": "Vellore Institute of Technology",
+        "location": "4K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/paneri-sahare-4bab68157",
+        "name": "Paneri Sahare",
+        "about": "Xceedance",
+        "location": "4K followers Nagpur"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/shuvayan-ghosh-dastidar",
+        "name": "Shuvayan Ghosh Dastidar",
+        "about": "Amazon",
+        "location": "2K followers Hyderabad"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/prasath-k-60138516a",
+        "name": "Prasath K.",
+        "about": "IBM",
+        "location": "6K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/ramarohit-reddy",
+        "name": "RamaRohit Reddy",
+        "about": "Indeed",
+        "location": "2K followers Hyderabad"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/sharmistha-mandal-636744194",
+        "name": "Sharmistha Mandal",
+        "about": "Jupiter",
+        "location": "5K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/spandanghosh2",
+        "name": "Spandan Ghosh",
+        "about": "Qualcomm",
+        "location": "3K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://uk.linkedin.com/in/aparajita-karmakar-570560170",
+        "name": "Aparajita Karmakar",
+        "about": "Rosalind Franklin Institute",
+        "location": "7K followers Greater Oxford Area"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/puja-jain-16682b142",
+        "name": "Puja Jain",
+        "about": "Uber",
+        "location": "1K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/rahul-verma-0a7a23136",
+        "name": "Rahul Verma",
+        "about": "Curefit - house of cult",
+        "location": "7K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/devangipurkayastha",
+        "name": "Devangi Purkayastha",
+        "about": "Broadcom",
+        "location": "4K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/nachiketa-hebbar-86186515b",
+        "name": "Nachiketa Hebbar",
+        "about": "TikTok",
+        "location": "7K followers San Jose, CA"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/catplotlib",
+        "name": "Puja Chaudhury",
+        "about": "Laza Medical",
+        "location": "6K followers Mountain View, CA"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/rheaparekh12",
+        "name": "Rhea Parekh",
+        "about": "Meta",
+        "location": "2K followers New York, NY"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/siddharth-yadav-20",
+        "name": "Siddharth Yadav",
+        "about": "Acuity Knowledge Partners",
+        "location": "3K followers Gurgaon"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/sangeetha-s-chegaraddi-331840184",
+        "name": "Sangeetha S Chegaraddi",
+        "about": "JPMorganChase",
+        "location": "3K followers Bengaluru"
+      },
+      {
+        "profile_link": "https://in.linkedin.com/in/naveenkumarg651",
+        "name": "Naveen Kumar",
+        "about": "Nemetschek India",
+        "location": "6K followers Hyderabad"
+      }
+    ],
+    "educations_details": "IIIT NAYA RAIPUR",
+    "education": [
+      {
+        "title": "IIIT NAYA RAIPUR",
+        "degree": "Bachelor of Technology",
+        "field": "Computer Science",
+        "start_year": "2017",
+        "end_year": "2021",
+        "description": null,
+        "description_html": null,
+        "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+      },
+      {
+        "title": "Delhi public school,bhilai",
+        "start_year": "2015",
+        "end_year": "2017",
+        "description": null,
+        "description_html": null,
+        "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+      }
+    ],
+    "recommendations_count": 6,
+    "avatar": "https://media.licdn.com/dms/image/v2/D5603AQGkG0gIIEFb1w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709548589839?e=2147483647&v=beta&t=MjJhOYa0sujnEmHkt2GSEnrOUi7QdTJcpZpyxAJEXco",
+    "courses": [
+      {
+        "subtitle": "-",
+        "title": "Computer Networks"
+      },
+      {
+        "subtitle": "-",
+        "title": "Computer Organisation and Architecture"
+      },
+      {
+        "subtitle": "-",
+        "title": "Course on DBMS (Beginner and Advanced)"
+      },
+      {
+        "subtitle": "-",
+        "title": "Data Structures and Algorithms"
+      },
+      {
+        "subtitle": "-",
+        "title": "Digital signal and systems"
+      },
+      {
+        "subtitle": "-",
+        "title": "Discrete Mathematics"
+      },
+      {
+        "subtitle": "-",
+        "title": "Embedded Systems"
+      },
+      {
+        "subtitle": "-",
+        "title": "Object Oriented Programming(Java)"
+      },
+      {
+        "subtitle": "-",
+        "title": "Operating Systems"
+      },
+      {
+        "subtitle": "-",
+        "title": "Predictive Analytics"
+      }
+    ],
+    "certifications": [
+      {
+        "meta": "Issued Jan 2022 See credential",
+        "subtitle": "Amazon Web Services (AWS)",
+        "title": "Certificate of Architecting on AWS",
+        "credential_url": "https://www.aws.training/Transcript/CompletionCertificateHtml?transcriptid=ANZABSG-F0SRqOkeQMIRsQ2&trk=public_profile_see-credential",
+        "credential_id": null
+      },
+      {
+        "meta": "Issued May 2020 Credential ID A33QBFXJXLGG See credential",
+        "subtitle": "Coursera",
+        "title": "Front-End Web Development with React",
+        "credential_url": "https://www.coursera.org/account/accomplishments/certificate/A33QBFXJXLGG?trk=public_profile_see-credential",
+        "credential_id": "A33QBFXJXLGG"
+      },
+      {
+        "meta": "Issued May 2020",
+        "subtitle": "InsideSherpa",
+        "title": "JP Morgan Chase & Co. Virtual Internship program",
+        "credential_url": null,
+        "credential_id": null
+      },
+      {
+        "meta": "Issued Mar 2020",
+        "subtitle": "GUVI Geek Networks, IITM Research Park",
+        "title": "MYSQL GUVI Course",
+        "credential_url": null,
+        "credential_id": null
+      },
+      {
+        "meta": "Issued Sep 2019",
+        "subtitle": "Indian Institute of Technology, Patna",
+        "title": "Research Paper Published on 'Iot Based Smart Fruit Warehouse Management System'",
+        "credential_url": null,
+        "credential_id": null
+      },
+      {
+        "meta": "Issued Jul 2019",
+        "subtitle": "Indian Institute Of Information Technology",
+        "title": "Research Internship on project \"Real Time Object Detection and Segmentation using RCNN",
+        "credential_url": null,
+        "credential_id": null
+      },
+      {
+        "meta": "Issued May 2018 See credential",
+        "subtitle": "Udemy",
+        "title": "Certification for Web Developement Course",
+        "credential_url": "https://www.udemy.com/certificate/UC-8SUV2ZOR/?utm_campaign=email&utm_source=sendgrid.com&utm_medium=email&trk=public_profile_see-credential",
+        "credential_id": null
+      },
+      {
+        "meta": "Issued Nov 2021 Expires Nov 2022 Credential ID 120955a9d4a87bd52422218e9df52f3f8f7387ce",
+        "subtitle": "Checkmarx",
+        "title": "Certificate of Application Security and Secure Coding Training in Java",
+        "credential_url": null,
+        "credential_id": "120955a9d4a87bd52422218e9df52f3f8f7387ce"
+      },
+      {
+        "meta": "Issued May 2018 Expires May 2018",
+        "subtitle": "IIIT-Naya Raipur",
+        "title": "Certification in 5G technology",
+        "credential_url": null,
+        "credential_id": null
+      },
+      {
+        "meta": "Issued Dec 2017 Expires Jan 2018 Credential ID TF17-fd1fb620",
+        "subtitle": "Techfest, IIT Bombay",
+        "title": "Ethical Hacking",
+        "credential_url": null,
+        "credential_id": "TF17-fd1fb620"
+      }
+    ],
+    "recommendations": [
+      "Akshya Chettiar “It is very rare to find people who have the ability to learn quickly and start applying their skills to solve problems. One of them is Gazal. From backend to frontend to blockchain, she has worked on all of them diligently. I have worked with Gazal at Nasdaq. Calling her smart would be an understatement. She always emphasized the importance of strong teamwork. Anyone would be lucky to have her on their team.”",
+      "Pratik Gupta “Gazal is a very dedicated person when it comes to work. Having worked with her on many projects, I can say for sure that she is a great team player. She comes with unique, innovative ideas and plays a key role in development of the projects.”"
+    ],
+    "volunteer_experience": [
+      {
+        "cause": "Education",
+        "duration": "Mar 2018 · - \nMar 2018 · \n1 month",
+        "duration_short": "- \nMar 2018",
+        "info": "I volunteered in the Coding competition held in our annual college fest Technovate 2018. My task was to arrange the resources required for the conduction of the event and to manage the participants crowd for registration on event day and also manage them during the competition.",
+        "start_date": "Mar 2018",
+        "subtitle": "Technovate IIIT Naya Raipur",
+        "title": "Volunteer in coding competition"
+      }
+    ],
+    "followers": 3270,
+    "connections": 500,
+    "current_company_company_id": "adobe",
+    "current_company_name": "Adobe",
+    "publications": [
+      {
+        "title": "Smart Fruit Warehouse and Control System Using IoT.",
+        "subtitle": "Fifth International Conference on Data Science and Engineering (ICDSE) 2019",
+        "date": "September 27, 2019"
+      }
+    ],
+    "projects": [
+      {
+        "title": "Escape Island Game",
+        "start_date": "Jan 2024"
+      },
+      {
+        "title": "Open Source Contribution at @Karya.Inc",
+        "start_date": "Oct 2022",
+        "description": "-Improvised the application by adding new changes in schema design.-Database Migration - Refactored the existing code in a way to automatically perform db operations like alter table, create table and drop table based on changes in new incoming schema-spec (which contains definitions of all schemas and tables of the application)."
+      },
+      {
+        "title": "A CNN based approach to an integrated audio-video query answering system.",
+        "start_date": "May 2019",
+        "description": "Developed a app with database of text files in which user query is inputted along with the text document and the DL model embedded in the app produces one sentence answer as output.The 1d-CNN approach is used to reduce both training and testing time.Currently working on to improve the accuracy of the model and extracting answers for queries on videos"
+      },
+      null,
+      null,
+      {
+        "title": "Job Search WebApp for blue collared workers – WIT Microsoft Hackathon",
+        "start_date": "Feb 2021",
+        "description": "-Developed a WebApp to help blue collared workers find jobs in their nearby locations.- Included special features which focused mainly on providing employment to female workers.- Tech Stack: Elasticsearch, NodeJS, HTML, CSS, JavaScript"
+      },
+      {
+        "title": "Sahyog App",
+        "start_date": "Feb 2021"
+      },
+      {
+        "title": "Early Warning System on the prediction of ADR(Adverse drug Reaction)",
+        "start_date": "Oct 2019",
+        "description": "We developed a self-learning, early warning system for adverse drug reaction (ADR) and won prize money worth INR 3 lakhs.The web application can be used by healthcare professionals all over the world to get information regarding the probability of ADR associated with the drugs they would prescribe their patients."
+      },
+      {
+        "title": "Live Trending Stocks Data Scraping.",
+        "start_date": "Dec 2019",
+        "description": "Scraping of live stocks data from https://www.investing.com/equities/trending-stocks using python, selenium, lxml,pandas,beautiful soup.Live data scraped from dynamic and multiple tables as well as bar graphs."
+      },
+      {
+        "title": "Real Time Object Detection and segmentation Using Mask RCNN",
+        "start_date": "May 2019",
+        "description": "ML model trained on the COCO dataset and using the architecture of ResNet 101 to detect objects in photos or in real-time videos and which also does masking of the detected objects along with the labeling."
+      },
+      {
+        "title": "Smart Fruit Warehouse System using IoT",
+        "start_date": "Feb 2019",
+        "description": "A smart fruit warehouse system designed for providing global access and monitoring control to users and to preserve the fruit stored for the desired number of days as per the user by automatically adjusting the parameters such as temperature humidity and light as per the requirement of that fruit."
+      },
+      {
+        "title": "PARKIIIT- IOT based Smart Parking System",
+        "start_date": "Nov 2017",
+        "description": "A smart parking system based on IOT designed using Arduino and Sensors,a project intended towards energy conservation and to provide ease to the person in Parking vehicles"
+      }
+    ],
+    "organizations": [
+      {
+        "title": "Capriccio Music Club , IIIT Naya Raipur",
+        "membership_type": "Secretary",
+        "start_date": "Sep 2018",
+        "end_date": "Sep 2019",
+        "membership_number": null
+      },
+      {
+        "title": "TECHNOVATE 2019 (Annual Fest of IIIT Naya Raipur)",
+        "membership_type": "Event Head of Coder's Crusade(Coding Competition)",
+        "start_date": "Mar 2019",
+        "end_date": "Mar 2019",
+        "membership_number": null
+      }
+    ],
+    "location": "Raipur",
+    "input_url": "https://in.linkedin.com/in/gazal-jain-4366a9153",
+    "linkedin_id": "gazal-jain-4366a9153",
+    "activity": [
+      {
+        "interaction": "Liked by Gazal Jain",
+        "link": "https://www.linkedin.com/posts/sameersegal_were-hiring-engineers-researchers-activity-7374974648557621248-zmzX",
+        "title": "🚀 We’re Hiring Engineers & Researchers At Microsoft, we’re tackling one of the hardest problems in software engineering: eliminating technical debt…",
+        "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+        "id": "7374974648557621248"
+      },
+      {
+        "interaction": "Liked by Gazal Jain",
+        "link": "https://www.linkedin.com/posts/sourajita-dewasi-52b3b4193_i-completed-my-last-day-at-american-express-activity-7337950303285063680-cgns",
+        "title": "I completed my last day at American Express last Thursday, and it has been an intensely emotional and grateful moment for me. Amex brought me to the…",
+        "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+        "id": "7337950303285063680"
+      },
+      {
+        "interaction": "Liked by Gazal Jain",
+        "link": "https://www.linkedin.com/posts/ravi-shreyas-anupindi-27447a154_extreme-classification-microsoft-research-activity-7332247280588128259-zl6t",
+        "title": "The extreme classification team at MSR India (https://lnkd.in/gJyaRfU8) is looking for an undergraduate student interested in a 6-month internship…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQEwrMn9JKv55w/articleshare-shrink_800/B56ZYGXzsBH0AI-/0/1743863626892?e=2147483647&v=beta&t=r8Dlggu14xe2TsXqX97CwtKyTgFFMixGxQBSFBlxCWE",
+        "id": "7332247280588128259"
+      }
+    ],
+    "linkedin_num_id": "619815210",
+    "banner_image": "https://media.licdn.com/dms/image/v2/C5116AQGEm6yMbFCE-A/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1572441152692?e=2147483647&v=beta&t=xMI9W7FXrESkWgv_jz-GO79afHTeRGUX57xKdmLqFAA",
+    "honors_and_awards": null,
+    "similar_profiles": [],
+    "default_avatar": false,
+    "memorialized_account": false,
+    "bio_links": [],
+    "first_name": "Gazal",
+    "last_name": "Jain",
+    "timestamp": "2025-10-05T17:58:57.062Z",
+    "input": {
+      "url": "https://in.linkedin.com/in/gazal-jain-4366a9153"
+    }
+  }
+]

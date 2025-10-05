@@ -27,16 +27,68 @@ const admin = {
 };
 
 // Helper functions for alumni parsing
-function extractBatch(education) {
-  const match = education.match(/(\d{4})\s*-\s*(\d{4})/);
-  return match ? match[2] : null;
+function isRelevantDegree(degree) {
+  if (!degree) return false;
+  const deg = degree.toLowerCase();
+  return deg.includes("btech") || deg.includes("b.tech") || deg.includes("bachelor of technology") ||
+         deg.includes("mtech") || deg.includes("m.tech") || deg.includes("master of technology") ||
+         deg.includes("phd") || deg.includes("ph.d") || deg.includes("doctor of philosophy");
 }
 
-function extractBranch(educationStr) {
-  if (educationStr.includes("Computer Science")) return "CSE";
-  if (educationStr.includes("Electronics")) return "ECE";
-  if (educationStr.includes("Data Science")) return "DS";
-  return "CSE";
+function extractBatch(education) {
+  // Find IIIT-Naya Raipur education with relevant degree
+  const iiitEdu = education.find(edu =>
+    edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
+    isRelevantDegree(edu.degree)
+  );
+  return iiitEdu ? iiitEdu.start_year : null;
+}
+
+function extractBranch(education) {
+  // Find IIIT-Naya Raipur education with relevant degree
+  const iiitEdu = education.find(edu =>
+    edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
+    isRelevantDegree(edu.degree)
+  );
+  if (!iiitEdu) return "CSE"; // Default
+  const field = iiitEdu.field;
+  if (!field) return "CSE";
+  const f = field.toLowerCase();
+  // Map to allowed branches from config
+  if (f.includes("computer science")) return "CSE";
+  if (f.includes("electronics") && f.includes("communication")) return "ECE";
+  if (f.includes("data science")) return "DSAI";
+  // Add more mappings as needed
+  return "CSE"; // Default
+}
+
+function extractGraduationYear(education) {
+  // Find IIIT-Naya Raipur education with relevant degree
+  const iiitEdu = education.find(edu =>
+    edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
+    isRelevantDegree(edu.degree)
+  );
+  return iiitEdu ? iiitEdu.end_year : null;
+}
+
+function extractCurrentCompany(entry) {
+  if (entry.current_company) {
+    return {
+      name: entry.current_company.name,
+      title: entry.current_company.title,
+      location: entry.current_company.location
+    };
+  }
+  // Extract from latest experience
+  if (entry.experience && entry.experience.length > 0) {
+    const latestExp = entry.experience[0]; // Assuming first is latest
+    return {
+      name: latestExp.company,
+      title: latestExp.title,
+      location: latestExp.location
+    };
+  }
+  return null;
 }
 
 function parseEducation(educationStr) {
@@ -119,59 +171,82 @@ const seedUsers = async () => {
 
     // Seed alumni profiles
     const alumniDataDir = path.join(process.cwd(), 'client/data/alumnidata');
+    const updatedDataDir = path.join(process.cwd(), 'client/data/updated_data');
+    if (!fs.existsSync(updatedDataDir)) {
+      fs.mkdirSync(updatedDataDir, { recursive: true });
+    }
     const files = fs.readdirSync(alumniDataDir).filter(file => file.endsWith('.json'));
-    const linkedinData = files.flatMap(file => {
+    for (const file of files) {
       const filePath = path.join(alumniDataDir, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+      let data;
+      try {
+        data = JSON.parse(content);
+      } catch (e) {
+        console.error(`Error parsing JSON file ${file}:`, e);
+        continue;
+      }
+      const entries = Array.isArray(data) ? data : [data];
+      for (const entry of entries) {
+        if (!entry.url) continue;
+        const name = entry.name || "Unknown";
+        const batch = extractBatch(entry.education);
+        const branch = extractBranch(entry.education);
+        const graduationYear = extractGraduationYear(entry.education);
+        const current_company = extractCurrentCompany(entry);
+        const updatedEntry = {
+          id: entry.id,
+          name,
+          avatar: entry.avatar || null,
+          position: entry.position || null,
+          current_company,
+          location: entry.location || null,
+          about: entry.about || null,
+          education: (entry.education || []).map(edu => ({
+            title: edu.title,
+            degree: edu.degree,
+            field: edu.field,
+            start_year: edu.start_year,
+            end_year: edu.end_year,
+          })),
+          experience: (entry.experience || []).map(exp => {
+            // Use nested positions if available for more detailed info
+            const firstPosition = exp.positions && exp.positions.length > 0 ? exp.positions[0] : null;
+            return {
+              title: exp.title || (firstPosition ? firstPosition.title : null),
+              company: exp.company,
+              location: exp.location || (firstPosition ? firstPosition.location : null),
+              start_date: exp.start_date || (firstPosition ? firstPosition.start_date : null),
+              end_date: exp.end_date || (firstPosition ? firstPosition.end_date : null),
+            };
+          }),
+          batch,
+          branch,
+          graduationYear,
+          url: entry.url,
+          linkedin_id: entry.linkedin_id,
+        };
+        const updatedFileName = `u${entry.id}.json`;
+        const updatedFilePath = path.join(updatedDataDir, updatedFileName);
+        fs.writeFileSync(updatedFilePath, JSON.stringify(updatedEntry, null, 2));
+        console.log(`Created updated JSON: ${updatedFileName}`);
+      }
+    }
+    // Now read from updated_data and seed
+    const updatedFiles = fs.readdirSync(updatedDataDir).filter(file => file.endsWith('.json'));
+    const linkedinData = updatedFiles.flatMap(file => {
+      const filePath = path.join(updatedDataDir, file);
       const content = fs.readFileSync(filePath, 'utf-8');
       try {
         return JSON.parse(content);
       } catch (e) {
-        console.error(`Error parsing JSON file ${file}:`, e);
+        console.error(`Error parsing updated JSON file ${file}:`, e);
         return [];
       }
     });
     for (const entry of linkedinData) {
-      if (!entry.url) continue;
-      const name = entry.name || "Unknown";
-      const batch = entry.education.length > 0 ? entry.education[0].end_year : null;
-      const branch = entry.education.length > 0 && entry.education[0].field === "Computer Science" ? "CSE" : "CSE"; // Default to CSE
-      const profile = {
-        id: entry.id,
-        name,
-        email: null,
-        avatar: entry.avatar || null,
-        url: entry.url || null,
-        location: entry.location || null,
-        position: entry.position || null,
-        current_company: entry.current_company || null,
-        linkedin_id: entry.linkedin_id || null,
-        education: entry.education.map(edu => ({
-          title: edu.title,
-          degree: edu.degree,
-          field: edu.field,
-          url: edu.url || null,
-          start_year: edu.start_year,
-          end_year: edu.end_year,
-          description: edu.description || null,
-          description_html: edu.description_html || null,
-          institute_logo_url: edu.institute_logo_url || null,
-        })),
-        experience: entry.experience.map(exp => ({
-          title: exp.title,
-          location: exp.location,
-          description_html: exp.description_html || null,
-          start_date: exp.start_date || null,
-          end_date: exp.end_date || null,
-          company: exp.company,
-          company_id: exp.company_id || null,
-          url: exp.url || null,
-          company_logo_url: exp.company_logo_url || null,
-          positions: exp.positions || [],
-          duration: exp.duration || null,
-        })),
-      };
-      await AlumniProfile.updateOne({ id: entry.id }, profile, { upsert: true });
-      console.log(`Seeded/Updated alumni: ${name}`);
+      await AlumniProfile.updateOne({ id: entry.id }, entry, { upsert: true });
+      console.log(`Seeded/Updated alumni: ${entry.name} (Batch: ${entry.batch}, Branch: ${entry.branch})`);
     }
 
     console.log('Seeding complete');

@@ -24,6 +24,15 @@ export default function SearchAlumniPage() {
     branch: "",
   });
 
+  // Defensive setter to sanitize searchTerm
+  const safeSetFilters = (newFilters: AlumniFilters) => {
+    const sanitizedSearchTerm =
+      newFilters.searchTerm && newFilters.searchTerm !== "undefined"
+        ? newFilters.searchTerm
+        : "";
+    setFilters({ ...newFilters, searchTerm: sanitizedSearchTerm });
+  };
+
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const [user] = useState<UserInfo>({
@@ -69,7 +78,7 @@ const alumni = data?.data || [];
     >
       {/* Search and Filters */}
       <div className="mb-12">
-        <AlumniFilterBar filters={filters} onFilterChange={setFilters} />
+        <AlumniFilterBar filters={filters} onFilterChange={safeSetFilters} />
       </div>
 
       {/* Alumni Cards Grid */}

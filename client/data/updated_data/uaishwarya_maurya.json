@@ -1,0 +1,57 @@
+{
+  "id": "aishwarya-maurya",
+  "name": "Aishwarya Maurya",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQH44O0EmzwtJA/profile-displayphoto-shrink_200_200/B56ZXTlYAvGcAc-/0/1743011547162?e=2147483647&v=beta&t=0nBg3pWxibZl1jJiYJNgdm3bcu2dUPp8pGA729eKRws",
+  "position": "Full Stack Developer @GravityOne | Angular, React.js, React Native, JavaScript, Frontend Development",
+  "current_company": {
+    "name": "GravityONE",
+    "title": "Full Stack Developer",
+    "location": "Bengaluru, Karnataka, India"
+  },
+  "location": "Bengaluru",
+  "about": "🚀 Frontend Developer | Angular | React Native | React JS | JavaScript | Scalable UI Development Passionate about crafting high-performance, user-centric web and mobile applications, I specialize in Angular, React Native, React JS, TypeScript, and JavaScript. With a strong background in responsive UI/UX design, API integrations, and scalable architecture, I thrive on building seamless digital experiences. 🔹 Key Skills: Angular | React | TypeScript | JavaScript | RxJS | REST APIs | Git | WebSockets | Agile | UI/UX 🔹 Passionate About: Scalable UI design, performance optimization, and problem-solving 🔹 Always Exploring: New technologies, design patterns, and best practices in frontend development Let’s connect and innovate together! 🚀",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology - BTech",
+      "field": "Computer Science",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "title": "Chinmaya Vidyalaya",
+      "degree": "Intermediate",
+      "field": "88%",
+      "start_year": "2016",
+      "end_year": "2017"
+    },
+    {
+      "title": "Chinmaya Vidyalaya",
+      "degree": "Metric",
+      "field": "10 CGPA",
+      "start_year": "2014",
+      "end_year": "2015"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack Developer",
+      "company": "GravityONE",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Aug 2025",
+      "end_date": "Present"
+    },
+    {
+      "title": "Krayonnz",
+      "company": "Krayonnz",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": "2017",
+  "branch": "CSE",
+  "graduationYear": "2021",
+  "url": "https://kw.linkedin.com/in/Aishwarya-maurya",
+  "linkedin_id": "aishwarya-maurya"
+}

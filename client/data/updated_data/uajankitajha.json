@@ -1,0 +1,38 @@
+{
+  "id": "ajankitajha",
+  "name": "Ankita Jha",
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "position": "Power Solutions Intern @ INTEL",
+  "current_company": {
+    "location": null
+  },
+  "location": "Mangaluru",
+  "about": null,
+  "education": [
+    {
+      "title": "National Institute of Technology Karnataka",
+      "degree": "Master of Technology - MTech",
+      "field": "Communication Engineering & Networks (ECE)",
+      "start_year": "2024",
+      "end_year": "2026"
+    },
+    {
+      "title": "IIIT NAYA RAIPUR",
+      "degree": "Bachelor of Technology - BTech",
+      "field": "ECE",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "title": "FIITJEE",
+      "start_year": "2015",
+      "end_year": "2017"
+    }
+  ],
+  "experience": [],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://za.linkedin.com/in/ajankitajha",
+  "linkedin_id": "ajankitajha"
+}

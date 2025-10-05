@@ -75,6 +75,9 @@ const alumniProfileSchema = new mongoose.Schema(
     location: { type: String },
     input_url: { type: String },
     linkedin_id: { type: String, unique: true },
+    batch: { type: String },
+    branch: { type: String },
+    graduationYear: { type: String },
     activity: {
       type: [
         {

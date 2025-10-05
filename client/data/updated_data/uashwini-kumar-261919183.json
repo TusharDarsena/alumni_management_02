@@ -1,0 +1,65 @@
+{
+  "id": "ashwini-kumar-261919183",
+  "name": "Ashwini Kumar",
+  "avatar": "https://media.licdn.com/dms/image/v2/C5603AQFcoWOAc1nNfQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1611855715651?e=2147483647&v=beta&t=g8Vkp8oG1wgIKXWzkvOVwVcq8TAEzueyYUdvjdHQAoo",
+  "position": null,
+  "current_company": {
+    "name": "Avalara",
+    "location": null
+  },
+  "location": "Hyderabad",
+  "about": "Hi 🙋🏻‍♂️, My name is Ashwini Kumar, and I am currently working as a Project…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2004",
+      "end_year": "2016"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Avalara",
+      "company": "Avalara",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****",
+      "company": "****",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "*&* ********** ******** *******",
+      "company": "*&* ********** ******** *******",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****-**** ******",
+      "company": "****-**** ******",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "******** *********",
+      "company": "******** *********",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://de.linkedin.com/in/ashwini-kumar-261919183",
+  "linkedin_id": "ashwini-kumar-261919183"
+}

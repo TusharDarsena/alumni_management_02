@@ -1,0 +1,105 @@
+{
+  "id": "amandubey-21d09",
+  "name": "Aman Dubey",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQFe_MGOc-FDHg/profile-displayphoto-shrink_200_200/B4EZYYSFheHUAY-/0/1744164117010?e=2147483647&v=beta&t=uABuX18Qu86G4q-ct5NTWKkXOqyyHbTwZbOaq60LcpY",
+  "position": "Quality Analyst - TCS Canada | Masters CS LU | Ex-SOTI | Btech ECE IIITNR",
+  "current_company": {
+    "name": "Tata Consultancy Services",
+    "title": "Quality Analyst",
+    "location": "Toronto, Ontario, Canada"
+  },
+  "location": "Toronto",
+  "about": "MSc graduate @ Laurentian University | Ex - QA- SOTI | B.Tech IIIT NR | Intern - Netweb Technologies",
+  "education": [
+    {
+      "title": "Laurentian University/Université Laurentienne",
+      "degree": "Masters",
+      "field": "Computational Science",
+      "start_year": "2023",
+      "end_year": "2025"
+    },
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology - BTech",
+      "field": "Electrical, Electronics and Communications Engineering",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "title": "Delhi Public School (DPS)",
+      "degree": "High school",
+      "start_year": "2005",
+      "end_year": "2016"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Quality Analyst",
+      "company": "Tata Consultancy Services",
+      "location": "Toronto, Ontario, Canada",
+      "start_date": "Apr 2025",
+      "end_date": "Present"
+    },
+    {
+      "title": "Brand Ambassador",
+      "company": "Embr",
+      "location": "Sudbury, Ontario, Canada",
+      "start_date": "Sep 2023",
+      "end_date": "Present"
+    },
+    {
+      "title": "Test Administrator",
+      "company": "Pearson",
+      "location": "Sudbury, Ontario, Canada",
+      "start_date": "Jan 2024",
+      "end_date": "Feb 2025"
+    },
+    {
+      "title": "QA Specialist",
+      "company": "SOTI",
+      "location": "Gurugram, Haryana, India",
+      "start_date": "Sep 2021",
+      "end_date": "Aug 2023"
+    },
+    {
+      "title": "Student",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": "Aug 2017",
+      "end_date": "Nov 2021"
+    },
+    {
+      "title": "Jr. Developer – HPC",
+      "company": "NetWeb Technologies",
+      "location": "Faridabad, Haryana, India",
+      "start_date": "Jan 2021",
+      "end_date": "Sep 2021"
+    },
+    {
+      "title": "Summer Intern",
+      "company": "NTPC Limited",
+      "location": "Noida Area, India",
+      "start_date": "Jun 2019",
+      "end_date": "Jul 2019"
+    },
+    {
+      "title": "Summer Intern",
+      "company": "Vodafone Idea Limited",
+      "location": "Noida Area, India",
+      "start_date": "May 2019",
+      "end_date": "Jun 2019"
+    },
+    {
+      "title": "Event organizer",
+      "company": "Technovate IIIT Naya Raipur",
+      "location": "IIIT naya raipur",
+      "start_date": "Mar 2018",
+      "end_date": "Apr 2018"
+    }
+  ],
+  "batch": "2017",
+  "branch": "ECE",
+  "graduationYear": "2021",
+  "url": "https://cl.linkedin.com/in/amandubey-21d09",
+  "linkedin_id": "amandubey-21d09"
+}

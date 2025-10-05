@@ -1,0 +1,90 @@
+{
+  "id": "gazal-jain-4366a9153",
+  "name": "Gazal Jain",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQGkG0gIIEFb1w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709548589839?e=2147483647&v=beta&t=MjJhOYa0sujnEmHkt2GSEnrOUi7QdTJcpZpyxAJEXco",
+  "position": "Engineering @Adobe | Ex- SDE @Microsoft Research, @PayPal, @Nasdaq| Full Stack Development",
+  "current_company": {
+    "name": "Adobe",
+    "title": "Computer Scientist - 1",
+    "location": "Greater Bengaluru Area"
+  },
+  "location": "Raipur",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT NAYA RAIPUR",
+      "degree": "Bachelor of Technology",
+      "field": "Computer Science",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "title": "Delhi public school,bhilai",
+      "start_year": "2015",
+      "end_year": "2017"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Computer Scientist - 1",
+      "company": "Adobe",
+      "location": "Greater Bengaluru Area",
+      "start_date": "Apr 2025",
+      "end_date": "Present"
+    },
+    {
+      "title": "Full Stack Engineer (Contingent)",
+      "company": "Microsoft",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Mar 2024",
+      "end_date": "Apr 2025"
+    },
+    {
+      "title": "PayPal",
+      "company": "PayPal",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Feb 2024",
+      "end_date": "Mar 2024"
+    },
+    {
+      "title": "Nasdaq",
+      "company": "Nasdaq",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Jul 2021",
+      "end_date": "Jun 2022"
+    },
+    {
+      "title": "Market Technology Engineering Intern",
+      "company": "Nasdaq",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Jun 2020",
+      "end_date": "Aug 2020"
+    },
+    {
+      "title": "Dare in reality challenge",
+      "company": "Genpact",
+      "location": "Bangalore",
+      "start_date": "Sep 2019",
+      "end_date": "Feb 2020"
+    },
+    {
+      "title": "Published Research Paper Author",
+      "company": "IIT Patna",
+      "location": "Patna, Bihar, India",
+      "start_date": "Sep 2019",
+      "end_date": "Sep 2019"
+    },
+    {
+      "title": "AI and ML Research Intern at ROBITA Lab, IIIT Allahabad",
+      "company": "ROBITA lab, IIIT Allahabad",
+      "location": "India",
+      "start_date": "May 2019",
+      "end_date": "Jul 2019"
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://be.linkedin.com/in/Gazal-jain-4366a9153",
+  "linkedin_id": "gazal-jain-4366a9153"
+}

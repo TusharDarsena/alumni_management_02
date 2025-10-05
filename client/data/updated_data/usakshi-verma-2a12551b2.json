@@ -1,0 +1,76 @@
+{
+  "id": "sakshi-verma-2a12551b2",
+  "name": "Sakshi Verma",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQG3610zUCJAQg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1673539696474?e=2147483647&v=beta&t=uWgsXurud6RDml3A_3QhcNh4HDSlPc732X9au1_klmM",
+  "position": "American Express | JustDial | IIIT-NR",
+  "current_company": {
+    "name": "American Express",
+    "title": "Senior Business Analyst",
+    "location": "Gurugram, Haryana, India"
+  },
+  "location": "Gurugram",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "B.Tech",
+      "field": "Electronics and Communication Engineering",
+      "start_year": "2019",
+      "end_year": "2023"
+    },
+    {
+      "title": "Delhi Public School, Durg",
+      "start_year": "2005",
+      "end_year": "2019"
+    }
+  ],
+  "experience": [
+    {
+      "title": "American Express",
+      "company": "American Express",
+      "location": "Gurugram, Haryana, India",
+      "start_date": "Oct 2024",
+      "end_date": "Present"
+    },
+    {
+      "title": "Data Analyst",
+      "company": "Justdial",
+      "location": null,
+      "start_date": "Jun 2022",
+      "end_date": "Jul 2022"
+    },
+    {
+      "title": "IIIT-Naya Raipur",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": "May 2021",
+      "end_date": "May 2022"
+    },
+    {
+      "title": "Software Engineer Intern",
+      "company": "CGNet Swara",
+      "location": null,
+      "start_date": "Sep 2021",
+      "end_date": "Dec 2021"
+    },
+    {
+      "title": "Contributor",
+      "company": "GirlScript Winter of Contributing",
+      "location": null,
+      "start_date": "Sep 2021",
+      "end_date": "Nov 2021"
+    },
+    {
+      "title": "Coordinator",
+      "company": "SCInTFIC - IIIT Naya Raipur",
+      "location": null,
+      "start_date": "Oct 2020",
+      "end_date": "Jan 2021"
+    }
+  ],
+  "batch": "2019",
+  "branch": "ECE",
+  "graduationYear": "2023",
+  "url": "https://hu.linkedin.com/in/Sakshi-verma-2a12551b2",
+  "linkedin_id": "sakshi-verma-2a12551b2"
+}

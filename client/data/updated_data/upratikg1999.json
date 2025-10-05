@@ -1,0 +1,61 @@
+{
+  "id": "pratikg1999",
+  "name": "Pratik Gupta",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQH9yzVlAxa0ZQ/profile-displayphoto-shrink_200_200/B56ZSeCiJ9GsAY-/0/1737818252515?e=2147483647&v=beta&t=p71UiPgVKMX4vkveWC2ftUtY6LD7PkZtr0pLxa7vOXo",
+  "position": null,
+  "current_company": {
+    "name": "Amazon",
+    "location": null
+  },
+  "location": "Hyderabad",
+  "about": "Software Development Engineer with 3.5+ years experience in designing and delivering…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Amazon",
+      "company": "Amazon",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "*****",
+      "company": "*****",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "********** ***.",
+      "company": "********** ***.",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****-**** ******",
+      "company": "****-**** ******",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "***** ****** ******, *******-******",
+      "company": "***** ****** ******, *******-******",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://mx.linkedin.com/in/pratikg1999",
+  "linkedin_id": "pratikg1999"
+}

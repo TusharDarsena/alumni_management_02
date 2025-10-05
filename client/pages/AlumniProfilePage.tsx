@@ -85,40 +85,40 @@ export default function AlumniProfilePage() {
     if (!query.data?.data) return null;
     const d = query.data.data as any;
     const mapped: UserProfileData = {
-      username: d.id,
+      id: d.id,
       name: d.name,
       email: undefined,
-      imageUrl: d.avatar || undefined,
-      linkedinUrl: d.input_url || undefined,
+      avatar: d.avatar || undefined,
+      url: d.input_url || undefined,
       location: d.current_company?.location || undefined,
       education: Array.isArray(d.education)
         ? d.education.map((e: any) => ({
             degree: e.degree ? (e.field ? `${e.degree} in ${e.field}` : e.degree) : undefined,
-            institute: e.title || undefined,
-            startYear: e.start_year ? parseInt(e.start_year) : undefined,
-            endYear: e.end_year ? parseInt(e.end_year) : undefined,
+            title: e.title || undefined,
+            start_year: e.start_year ? parseInt(e.start_year) : undefined,
+            end_year: e.end_year ? parseInt(e.end_year) : undefined,
           }))
         : [],
       experience: Array.isArray(d.experience)
         ? d.experience.map((e: any) => ({
-            role: e.title || undefined,
+            title: e.title || undefined,
             company: e.company || d.current_company?.name || undefined,
             location: e.location || undefined,
-            startYear: e.start_date ? parseInt((e.start_date.match(/\d{4}/)?.[0]) || "") : undefined,
-            endYear: e.end_date ? parseInt((e.end_date.match(/\d{4}/)?.[0]) || "") : (e.end_date === "Present" ? ("Present" as any) : undefined),
+            start_date: e.start_date || undefined,
+            end_date: e.end_date || (e.end_date === "Present" ? ("Present" as any) : undefined),
           }))
         : [],
-      skills: { technical: [], core: [] },
       graduationYear: undefined,
       batch: undefined,
     };
     return mapped;
   }, [query.data]);
 
+
   useEffect(() => {
     if (query.isSuccess && query.data?.data) {
       const d = query.data.data as any;
-      const titlePart = d.position || d.current_company?.title || (profile?.experience?.[0]?.role ?? "Alumni");
+      const titlePart = d.position || d.current_company?.title || (profile?.experience?.[0]?.title ?? "Alumni");
       const docTitle = `${d.name} - ${titlePart || "Alumni"} | Alumni Directory`;
       document.title = docTitle;
       const meta = document.querySelector('meta[name="description"]');
@@ -166,10 +166,10 @@ export default function AlumniProfilePage() {
             <UserProfile data={profile} />
             <div className="mt-4">
               <button
-                className={`px-4 py-2 rounded-md ${isFavorite(profile.username) ? "bg-red-600 text-white" : "bg-[#3B82F6] text-white"}`}
-                onClick={() => toggleFavorite(profile.username)}
+                className={`px-4 py-2 rounded-md ${isFavorite(profile.id) ? "bg-red-600 text-white" : "bg-[#3B82F6] text-white"}`}
+                onClick={() => toggleFavorite(profile.id)}
               >
-                {isFavorite(profile.username) ? "Remove Favourite" : "Save as Favourite"}
+                {isFavorite(profile.id) ? "Remove Favourite" : "Save as Favourite"}
               </button>
             </div>
           </div>
