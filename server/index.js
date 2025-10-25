@@ -9,6 +9,9 @@ import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
 
+import scrapingRoutes from './routes/scraping.js';
+
+
 dotenv.config();
 
 export function createServer() {
@@ -77,6 +80,10 @@ export function createServer() {
   app.use("/api/portal", portalRoutes);
   app.use("/api/admin", adminRoutes);
   app.use("/api/alumni", alumniRoute);
+
+  // Scraping routes
+  app.use('/api/scrape', scrapingRoutes);
+
 
 
   return app;

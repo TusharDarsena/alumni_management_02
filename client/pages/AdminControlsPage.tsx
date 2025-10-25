@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import axios from 'axios'; // <-- ADD THIS LINE
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserInfo } from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // <-- UPDATED THIS LINE
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PendingUsersTable from "@/components/PendingUsersTable";
@@ -44,13 +46,24 @@ export default function AdminControlsPage() {
 
   const [mode, setMode] = useState<"add" | "requests">("add");
 
+  // --- NEW CODE FOR SCRAPING ---
+  const [alumniName, setAlumniName] = useState('');
+  const [isScraping, setIsScraping] = useState(false);
+  // --- END NEW CODE ---
+
+  const { toast } = useToast();
+
+
   const handleChange = (key: keyof NewUser, value: string | File | null) => {
     setForm((f) => ({ ...f, [key]: value }));
   };
 
-  const { toast } = useToast();
+
+
 
   const handleSubmit = async () => {
+    // ... (This is your original handleSubmit function, no changes needed here)
+
     if (!form.name || !form.email || !form.phone || !form.branch) {
       toast({
         title: "Missing fields",
@@ -58,6 +71,7 @@ export default function AdminControlsPage() {
       });
       return;
     }
+
 
     if (!["CSE", "DSAI", "ECE"].includes(form.branch)) {
       toast({ title: "Invalid branch" });
@@ -115,6 +129,28 @@ export default function AdminControlsPage() {
     }
   };
 
+
+
+  // --- NEW FUNCTION FOR SCRAPING ---
+  const handleScrapeProfile = async () => {
+    if (!alumniName) {
+      toast({ title: "Error", description: "Please enter an alumni name.", variant: "destructive" });
+      return;
+    }
+    setIsScraping(true);
+    try {
+      const response = await axios.post('/api/scrape/get-linkedin-profile', { alumniName });
+      toast({ title: "Success!", description: response.data.message });
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to scrape profile.", variant: "destructive" });
+    } finally {
+      setIsScraping(false);
+      setAlumniName('');
+    }
+  };
+  // --- END NEW FUNCTION ---
+
+
   return (
     <DashboardLayout
       activePage="Admin Controls"
@@ -122,6 +158,32 @@ export default function AdminControlsPage() {
       user={user}
       fullWidth
     >
+
+      {/* --- NEW SCRAPING CARD --- */}
+      <Card className="mt-6 w-full">
+        <CardHeader>
+          <CardTitle>Scrape LinkedIn Profile</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p>
+            Enter the full name of an alumnus to save their profile as a JSON file.
+          </p>
+          <div className="flex space-x-2">
+            <Input
+              placeholder="e.g., Ramesh Kumar"
+              value={alumniName}
+              onChange={(e) => setAlumniName(e.target.value)}
+              disabled={isScraping}
+            />
+            <Button onClick={handleScrapeProfile} disabled={isScraping}>
+              {isScraping ? 'Scraping...' : 'Scrape Profile'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      {/* --- END NEW CARD --- */}
+
+
       <div className="mt-6 flex items-center justify-between">
         <h2 className="text-xl font-semibold">
           {mode === "add" ? "Add User" : "Requests"}
@@ -146,6 +208,9 @@ export default function AdminControlsPage() {
 
       {mode === "add" ? (
         <Card className="mt-6 w-full">
+
+          {/* This is your original Add User form, no changes needed here */}
+
           <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
@@ -155,6 +220,7 @@ export default function AdminControlsPage() {
                 onChange={(e) => handleChange("name", e.target.value)}
               />
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -244,6 +310,8 @@ export default function AdminControlsPage() {
               />
             </div>
 
+
+            
             <div className="md:col-span-2 flex justify-end gap-3 mt-2">
               <Button
                 variant="ghost"
@@ -274,4 +342,5 @@ export default function AdminControlsPage() {
       )}
     </DashboardLayout>
   );
+
 }
