@@ -62,7 +62,7 @@ export default function SignupPage() {
         <div className="px-6">
           <div className="h-12 w-12 rounded-full bg-slate-100 mb-6" />
           <h1 className="text-4xl font-serif font-bold">
-            Let\'s Get you registered
+            Let's Get you registered
           </h1>
           <p className="mt-4 text-slate-600 max-w-lg">
             The Alumni Management Cell is here to stay connected. Reach out with
