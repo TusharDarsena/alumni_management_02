@@ -25,9 +25,12 @@
   },
   "dependencies": {
 
+
     "@airtop/sdk": "^0.1.45",
     "@prisma/client": "^6.18.0",
     "axios": "^1.12.2",
+
+
 
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
