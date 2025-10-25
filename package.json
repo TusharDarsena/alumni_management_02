@@ -21,7 +21,11 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+<<<<<<< HEAD
 
+=======
+    "@airtop/sdk": "^0.1.45",
+>>>>>>> 281ba78 (json file added for yogesh_kumar)
     "axios": "^1.12.2",
 
     "bcryptjs": "^2.4.3",
