@@ -8,10 +8,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/DashboardLayout";
+import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED UserSummary
+import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 export default function MyJobListingsPage() {
   const [listings, setListings] = useState<JobListing[] | null>(null);
   const toast = useToast();
+  const { user: authUser } = useAuth(); // ✅ ADDED auth hook
 
   useEffect(() => {
     let mounted = true;
@@ -36,8 +40,21 @@ export default function MyJobListingsPage() {
     }
   }
 
+  // ✅ CREATED user object for layout
+  const userForLayout: UserSummary = {
+    name: authUser.username, // Mapped username to name
+    email: authUser.email,
+    avatarUrl: authUser.avatarUrl,
+    notificationCount: authUser.notificationCount,
+    mobile: authUser.phone,
+    location: authUser.location,
+  };
+
   return (
-    <DashboardLayout activePage="My Job Listings" user={{ name: "User" }}>
+    <DashboardLayout 
+      activePage="My Job Listings" 
+      user={userForLayout} // ✅ PASSED correct user
+    >
       <div className="p-6">
         <PageHeader
           btnSection={

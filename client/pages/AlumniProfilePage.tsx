@@ -2,12 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import DashboardLayout from "@/components/DashboardLayout";
-import Header, { type UserInfo } from "@/components/Header";
+import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED UserSummary
 import UserProfile, { type UserProfileData } from "@/components/UserProfile";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/hooks/useFavorites";
+import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 async function fetchAlumniProfile(id: string) {
   const res = await fetch(`/api/alumni/${encodeURIComponent(id)}`, {
@@ -65,7 +67,8 @@ function ListSectionSkeleton({ title }: { title: string }) {
 
 export default function AlumniProfilePage() {
   const { username } = useParams<{ username: string }>();
-  const [user] = useState<UserInfo>({ name: "Merna", email: "merna@example.com" });
+  // ✅ REMOVED hardcoded 'Merna' user
+  const { user: authUser } = useAuth(); // ✅ ADDED auth hook
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const query = useQuery({
@@ -134,8 +137,22 @@ export default function AlumniProfilePage() {
     }
   }, [query.isSuccess, query.data, profile]);
 
+  // ✅ CREATED user object for layout
+  const userForLayout: UserSummary = {
+    name: authUser.username, // Mapped username to name
+    email: authUser.email,
+    avatarUrl: authUser.avatarUrl,
+    notificationCount: authUser.notificationCount,
+    mobile: authUser.phone,
+    location: authUser.location,
+  };
+
   return (
-    <DashboardLayout activePage="Alumni Profile" onNavigate={(p) => console.log("nav", p)} user={user}>
+    <DashboardLayout 
+      activePage="Alumni Profile" 
+      onNavigate={(p) => console.log("nav", p)} 
+      user={userForLayout} // ✅ PASSED correct user
+    >
       <div className="mt-6 space-y-6">
         {query.isLoading && (
           <>
