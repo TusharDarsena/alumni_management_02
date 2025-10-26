@@ -9,8 +9,12 @@ export function getPublishedListings() {
     .catch(() => []);
 }
 
-export function createNewJobListing(data: z.infer<typeof jobListingFormSchema>) {
-  return baseApi.post("/job-listings", data).then((res) => jobListingFormSchema.parseAsync(res.data));
+export function createNewJobListing(
+  data: z.infer<typeof jobListingFormSchema>,
+) {
+  return baseApi
+    .post("/job-listings", data)
+    .then((res) => jobListingFormSchema.parseAsync(res.data));
 }
 
 export function deleteListing(id: string) {
@@ -18,9 +22,23 @@ export function deleteListing(id: string) {
 }
 
 export function getJobListing(id: string) {
-  return baseApi.get(`/job-listings/${id}`).then((res) => jobListingFormSchema.parseAsync(res.data));
+  return baseApi
+    .get(`/job-listings/${id}`)
+    .then((res) => jobListingFormSchema.parseAsync(res.data));
 }
 
-export function editJobListing(id: string, data: z.infer<typeof jobListingFormSchema>) {
-  return baseApi.put(`/job-listings/${id}`, data).then((res) => jobListingFormSchema.parseAsync(res.data));
+export function editJobListing(
+  id: string,
+  data: z.infer<typeof jobListingFormSchema>,
+) {
+  return baseApi
+    .put(`/job-listings/${id}`, data)
+    .then((res) => jobListingFormSchema.parseAsync(res.data));
+}
+
+export function getAllMyListings() {
+  return baseApi
+    .get("/job-listings/mine")
+    .then((res) => z.array(jobListingSchema).parseAsync(res.data))
+    .catch(() => []);
 }

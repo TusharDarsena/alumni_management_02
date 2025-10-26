@@ -24,4 +24,8 @@ model JobListing {
   updatedAt        DateTime  @updatedAt
   expiresAt        DateTime?
   postedAt         DateTime?
+  // Mongo user id (string) of the user who posted the listing
+  postedBy         String?
+
+  @@index([postedBy])
 }
