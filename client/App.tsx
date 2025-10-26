@@ -56,6 +56,8 @@ const App = () => (
                   element={<SearchFavouritesPage />}
                 />
                 <Route path="/job-opportunities" element={<JobOpportunitiesPage />} />
+                <Route path="/jobs/my-listings" element={<MyJobListingsPage />} />
+                <Route path="/jobs/edit/:id" element={<EditJobListingPage />} />
                 <Route
                   path="/alumni/:username"
                   element={<AlumniProfilePage />}
