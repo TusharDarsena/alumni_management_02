@@ -22,6 +22,8 @@ import Unauthorized from "./pages/Unauthorized";
 import FirstLoginPasswordChange from "./pages/FirstLoginPasswordChange";
 import HelpPage from "./pages/HelpPage";
 import VerifyOtpPage from "./pages/VerifyOtpPage";
+import MyJobListingsPage from "./pages/MyJobListingsPage";
+import EditJobListingPage from "./pages/EditJobListingPage";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
