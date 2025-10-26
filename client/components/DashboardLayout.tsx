@@ -76,13 +76,13 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col bg-white min-h-screen">
+      <div className="flex-1 flex flex-col bg-white overflow-auto">
         {/* TopBar */}
         <div className="sticky top-0 z-20 bg-white border-b">
-          <div className="px-6 h-16 flex items-center justify-between pl-[70px]">
+          <div className="px-6 h-16 flex items-center justify-between">
             <div className="text-lg font-semibold text-slate-800">
               {activePage}
             </div>
@@ -204,7 +204,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Welcome Section */}
-        <div className="px-6 py-6 pl-[70px]">
+        <div className="px-6 py-6">
           <div className="flex items-center gap-2 mb-6">
             <span className="text-xl">👋</span>
             <span className="text-[#0C1E33] text-xl font-normal">
@@ -218,8 +218,8 @@ export default function DashboardLayout({
         <div
           className={
             fullWidth
-              ? "flex-1 overflow-auto px-6 pb-6 pl-[70px]"
-              : "flex-1 overflow-auto px-6 pb-6 pl-[70px]"
+              ? "flex-1 px-6 pb-6"
+              : "flex-1 px-6 pb-6"
           }
         >
           {children}

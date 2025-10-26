@@ -56,10 +56,8 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
 
   return (
     <Card className="rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-default">
-      <div className="h-28 bg-slate-200 relative">
-        {/* No cover image data, keep default bg */}
-      </div>
-      <CardContent className="pt-0 -mt-8 text-center">
+      
+      <CardContent className="pt-6 text-center">
         <div className="mx-auto h-16 w-16 rounded-full bg-white p-0.5 overflow-hidden border-2 border-white">
           {alumnus.avatar ? (
             <img src={alumnus.avatar} alt={alumnus.name} className="h-full w-full object-cover rounded-full" />
