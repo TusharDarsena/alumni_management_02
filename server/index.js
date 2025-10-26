@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import authRoute from "./routes/AuthRoute.js";
+import { jobListingsRouter } from "./routes/jobListings.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
@@ -83,6 +84,9 @@ export function createServer() {
 
   // Scraping routes
   app.use('/api/scrape', scrapingRoutes);
+
+  // Job listings (Prisma/SQLite)
+  app.use('/api/job-listings', jobListingsRouter);
 
 
 

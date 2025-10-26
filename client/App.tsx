@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import JobOpportunitiesPage from "./pages/JobOpportunitiesPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -52,6 +53,7 @@ const App = () => (
                   path="/search-favourites"
                   element={<SearchFavouritesPage />}
                 />
+                <Route path="/job-opportunities" element={<JobOpportunitiesPage />} />
                 <Route
                   path="/alumni/:username"
                   element={<AlumniProfilePage />}
