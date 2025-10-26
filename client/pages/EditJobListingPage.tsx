@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getJobListing, editJobListing, JobListingForm } from "@/features/job-listing";
+import {
+  getJobListing,
+  editJobListing,
+  JobListingForm,
+} from "@/features/job-listing";
 import JobListingFormComponent from "@/features/job-listing/components/JobListingForm";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -18,16 +22,25 @@ export default function EditJobListingPage() {
   useEffect(() => {
     if (!id) return;
     let mounted = true;
-    getJobListing(id).then((res) => {
-      if (mounted) setInitial(res);
-    }).catch(() => { /* ignore */ }).finally(() => { if (mounted) setLoading(false); });
-    return () => { mounted = false };
+    getJobListing(id)
+      .then((res) => {
+        if (mounted) setInitial(res);
+      })
+      .catch(() => {
+        /* ignore */
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+    return () => {
+      mounted = false;
+    };
   }, [id]);
 
   if (!id) return <div>Not Found</div>;
 
   return (
-    <DashboardLayout activePage="Edit Listing" user={{ name: 'User' }}>
+    <DashboardLayout activePage="Edit Listing" user={{ name: "User" }}>
       <div className="p-6">
         <PageHeader>Edit Listing</PageHeader>
         {loading ? (
@@ -38,10 +51,16 @@ export default function EditJobListingPage() {
             onSubmit={async (values) => {
               try {
                 await editJobListing(id, values as any);
-                toast.toast({ title: 'Updated', description: 'Listing updated' });
-                navigate('/jobs/my-listings');
+                toast.toast({
+                  title: "Updated",
+                  description: "Listing updated",
+                });
+                navigate("/jobs/my-listings");
               } catch (err: any) {
-                toast.toast({ title: 'Error', description: err?.message || 'Failed to update' });
+                toast.toast({
+                  title: "Error",
+                  description: err?.message || "Failed to update",
+                });
               }
             }}
           />

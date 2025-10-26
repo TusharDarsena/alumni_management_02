@@ -29,7 +29,10 @@ export default function MyJobListingsPage() {
       setListings((prev) => (prev ? prev.filter((j) => j.id !== id) : prev));
       toast.toast({ title: "Deleted", description: "Listing deleted" });
     } catch (err: any) {
-      toast.toast({ title: "Error", description: err?.message || "Failed to delete" });
+      toast.toast({
+        title: "Error",
+        description: err?.message || "Failed to delete",
+      });
     }
   }
 

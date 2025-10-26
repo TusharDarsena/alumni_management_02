@@ -21,7 +21,10 @@ export default function MyJobListingGrid({ jobListings, onDelete }: Props) {
               <Button variant="ghost" asChild>
                 <Link to={`/jobs/edit/${job.id}`}>Edit</Link>
               </Button>
-              <Button variant="destructive" onClick={() => onDelete && onDelete(job.id)}>
+              <Button
+                variant="destructive"
+                onClick={() => onDelete && onDelete(job.id)}
+              >
                 Delete
               </Button>
             </div>

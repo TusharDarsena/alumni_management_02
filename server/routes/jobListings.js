@@ -26,7 +26,9 @@ const jobListingFormSchema = z.object({
 // Public: get published listings
 jobListingsRouter.get("/published", async (req, res) => {
   const now = new Date();
-  const listings = await prisma.jobListing.findMany({ where: { expiresAt: { gt: now } } });
+  const listings = await prisma.jobListing.findMany({
+    where: { expiresAt: { gt: now } },
+  });
   res.json(listings);
 });
 
@@ -35,7 +37,9 @@ jobListingsRouter.get("/mine", requireAuth, async (req, res) => {
   const userId = req.user?._id?.toString();
   if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
-  const listings = await prisma.jobListing.findMany({ where: { postedBy: userId } });
+  const listings = await prisma.jobListing.findMany({
+    where: { postedBy: userId },
+  });
   res.json(listings);
 });
 
