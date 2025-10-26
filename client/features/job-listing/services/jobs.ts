@@ -24,3 +24,7 @@ export function getJobListing(id: string) {
 export function editJobListing(id: string, data: z.infer<typeof jobListingFormSchema>) {
   return baseApi.put(`/job-listings/${id}`, data).then((res) => jobListingFormSchema.parseAsync(res.data));
 }
+
+export function getAllMyListings() {
+  return baseApi.get('/job-listings/mine').then((res) => z.array(jobListingSchema).parseAsync(res.data)).catch(() => [])
+}
