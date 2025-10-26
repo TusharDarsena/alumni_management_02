@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { JobListing, getPublishedListings, createNewJobListing } from "@/features/job-listing";
+import {
+  JobListing,
+  getPublishedListings,
+  createNewJobListing,
+} from "@/features/job-listing";
 import JobListingGrid from "@/features/job-listing/components/JobListingGrid";
 import { PublishedJobCard } from "@/features/job-listing";
 import JobListingFilterForm from "@/features/job-listing/components/JobListingFilterForm";
@@ -35,11 +39,17 @@ export default function JobOpportunitiesPage() {
     try {
       const created = await createNewJobListing(values as any);
       setListings((prev) => (prev ? [created, ...prev] : [created]));
-      toast.toast({ title: "Job created", description: "Job listing created successfully" });
+      toast.toast({
+        title: "Job created",
+        description: "Job listing created successfully",
+      });
       close();
     } catch (err: any) {
       console.error(err);
-      toast.toast({ title: "Error", description: err?.message || "Failed to create job" });
+      toast.toast({
+        title: "Error",
+        description: err?.message || "Failed to create job",
+      });
     }
   }
 
@@ -55,8 +65,14 @@ export default function JobOpportunitiesPage() {
             </DialogTrigger>
             <DialogContent>
               <div>
-                <h2 className="text-lg font-semibold mb-4">Create Job Listing</h2>
-                <JobListingForm onSubmit={(values) => handleCreate(values, () => setCreateOpen(false))} />
+                <h2 className="text-lg font-semibold mb-4">
+                  Create Job Listing
+                </h2>
+                <JobListingForm
+                  onSubmit={(values) =>
+                    handleCreate(values, () => setCreateOpen(false))
+                  }
+                />
               </div>
             </DialogContent>
           </Dialog>
@@ -82,7 +98,10 @@ export default function JobOpportunitiesPage() {
   );
 
   return (
-    <DashboardLayout activePage="Job Opportunities" user={user || { name: "User" }}>
+    <DashboardLayout
+      activePage="Job Opportunities"
+      user={user || { name: "User" }}
+    >
       {content}
     </DashboardLayout>
   );

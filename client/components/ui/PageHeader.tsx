@@ -6,10 +6,16 @@ type PageHeaderProps = {
   subtitle?: React.ReactNode;
 };
 
-export function PageHeader({ children, btnSection, subtitle }: PageHeaderProps) {
+export function PageHeader({
+  children,
+  btnSection,
+  subtitle,
+}: PageHeaderProps) {
   return (
     <>
-      <h1 className={`text-3xl flex justify-between items-center gap-8 font-bold ${subtitle ? "mb-4" : "mb-8"}`}>
+      <h1
+        className={`text-3xl flex justify-between items-center gap-8 font-bold ${subtitle ? "mb-4" : "mb-8"}`}
+      >
         {children}
         {btnSection && <div className="text-2xl font-normal">{btnSection}</div>}
       </h1>
