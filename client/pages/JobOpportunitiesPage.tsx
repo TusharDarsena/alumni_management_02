@@ -43,21 +43,25 @@ export default function JobOpportunitiesPage() {
     }
   }
 
+  const [createOpen, setCreateOpen] = useState(false);
+
   const content = (
     <div className="p-6">
-      <PageHeader btnSection={
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>Create Job</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Create Job Listing</h2>
-              <JobListingForm onSubmit={(values) => handleCreate(values, () => {})} />
-            </div>
-          </DialogContent>
-        </Dialog>
-      }>
+      <PageHeader
+        btnSection={
+          <Dialog open={createOpen} onOpenChange={setCreateOpen}>
+            <DialogTrigger asChild>
+              <Button>Create Job</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <div>
+                <h2 className="text-lg font-semibold mb-4">Create Job Listing</h2>
+                <JobListingForm onSubmit={(values) => handleCreate(values, () => setCreateOpen(false))} />
+              </div>
+            </DialogContent>
+          </Dialog>
+        }
+      >
         Job Opportunities
       </PageHeader>
 
