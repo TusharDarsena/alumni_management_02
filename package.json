@@ -24,9 +24,11 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+
     "@airtop/sdk": "^0.1.45",
     "@prisma/client": "^6.18.0",
     "axios": "^1.12.2",
+
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "csv-parser": "^3.2.0",
@@ -72,7 +74,9 @@
     "@swc/core": "^1.13.3",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.84.2",
+
     "@types/axios": "^0.14.4",
+
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.2.1",
