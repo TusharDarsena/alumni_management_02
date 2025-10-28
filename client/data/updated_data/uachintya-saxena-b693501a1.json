@@ -1,0 +1,43 @@
+{
+  "id": "achintya-saxena-b693501a1",
+  "name": "Achintya Saxena",
+  "avatar": "https://media.licdn.com/dms/image/v2/C5103AQGALIcwuc4ldA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1585554500744?e=2147483647&v=beta&t=wXQ-_j4lKG6ihuTBhqAXJR6kHj1-Sr0JgJQh1PHV1lU",
+  "position": "Windows Server Administrator at Capgemini",
+  "current_company": {
+    "name": "Capgemini",
+    "title": "Associate Consultant",
+    "location": "Bengaluru, Karnataka, India"
+  },
+  "location": "Bengaluru",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology - BTech",
+      "field": "Electronics and Communications Engineering",
+      "start_year": "2017",
+      "end_year": "2021"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Capgemini",
+      "company": "Capgemini",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Apr 2023",
+      "end_date": "Present"
+    },
+    {
+      "title": "Machine Learning Intern",
+      "company": "Utopia Global, Inc.",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Jan 2021",
+      "end_date": "Jun 2021"
+    }
+  ],
+  "batch": "2017",
+  "branch": "ECE",
+  "graduationYear": "2021",
+  "url": "https://nl.linkedin.com/in/achintya-saxena-b693501a1",
+  "linkedin_id": "achintya-saxena-b693501a1"
+}

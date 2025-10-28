@@ -1,0 +1,42 @@
+function parseEducation(educationStr) {
+  if (!educationStr || educationStr === "") return [];
+  const parts = educationStr.split(",");
+  const institute = parts[0]?.trim() || null;
+  const degreeFull = parts[1]?.trim() || "";
+  const branch = parts[2]?.trim() || "";
+  const years = parts[3]?.trim() || "";
+  const yearMatch = years.match(/(\d{4})\s*-\s*(\d{4})/);
+  const startYear = yearMatch ? parseInt(yearMatch[1]) : null;
+  const endYear = yearMatch ? parseInt(yearMatch[2]) : null;
+  const degree = degreeFull.replace("(BTech)", "").trim() + (branch ? ` in ${branch}` : "");
+  return [{ degree, institute, startYear, endYear }];
+}
+
+function parseExperience(title, company, location, experienceStr) {
+  if (!title || !company) return [];
+  const role = title;
+  const expYears = experienceStr.match(/(\d+\.?\d*)\+?\s*years?/);
+  const startYear = expYears ? new Date().getFullYear() - Math.floor(parseFloat(expYears[1])) : null;
+  return [{
+    role,
+    company,
+    location: location || null,
+    startYear,
+    endYear: "Present"
+  }];
+}
+
+function categorizeSkills(skillsStr) {
+  if (!skillsStr || skillsStr === "Not specified" || skillsStr === "(not explicitly listed)") return { technical: [], core: [] };
+  const skills = skillsStr.split(",").map(s => s.trim());
+  const technical = [];
+  const core = [];
+  skills.forEach(skill => {
+    if (["React", "TypeScript", "Node.js", "Python", "Coding", "Problem-solving"].includes(skill)) {
+      technical.push(skill);
+    } else {
+      core.push(skill);
+    }
+  });
+  return { technical, core };
+}

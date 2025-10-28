@@ -36,7 +36,6 @@ function isRelevantDegree(degree) {
 }
 
 function extractBatch(education) {
-  // Find IIIT-Naya Raipur education with relevant degree
   const iiitEdu = education.find(edu =>
     edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
     isRelevantDegree(edu.degree)
@@ -45,25 +44,21 @@ function extractBatch(education) {
 }
 
 function extractBranch(education) {
-  // Find IIIT-Naya Raipur education with relevant degree
   const iiitEdu = education.find(edu =>
     edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
     isRelevantDegree(edu.degree)
   );
-  if (!iiitEdu) return "CSE"; // Default
+  if (!iiitEdu) return "CSE";
   const field = iiitEdu.field;
   if (!field) return "CSE";
   const f = field.toLowerCase();
-  // Map to allowed branches from config
   if (f.includes("computer science")) return "CSE";
   if (f.includes("electronics") && f.includes("communication")) return "ECE";
   if (f.includes("data science")) return "DSAI";
-  // Add more mappings as needed
-  return "CSE"; // Default
+  return "CSE";
 }
 
 function extractGraduationYear(education) {
-  // Find IIIT-Naya Raipur education with relevant degree
   const iiitEdu = education.find(edu =>
     edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
     isRelevantDegree(edu.degree)
@@ -79,9 +74,8 @@ function extractCurrentCompany(entry) {
       location: entry.current_company.location
     };
   }
-  // Extract from latest experience
   if (entry.experience && entry.experience.length > 0) {
-    const latestExp = entry.experience[0]; // Assuming first is latest
+    const latestExp = entry.experience[0];
     return {
       name: latestExp.company,
       title: latestExp.title,
@@ -91,83 +85,46 @@ function extractCurrentCompany(entry) {
   return null;
 }
 
-function parseEducation(educationStr) {
-  if (!educationStr || educationStr === "") return [];
-  const parts = educationStr.split(",");
-  const institute = parts[0]?.trim() || null;
-  const degreeFull = parts[1]?.trim() || "";
-  const branch = parts[2]?.trim() || "";
-  const years = parts[3]?.trim() || "";
-  const yearMatch = years.match(/(\d{4})\s*-\s*(\d{4})/);
-  const startYear = yearMatch ? parseInt(yearMatch[1]) : null;
-  const endYear = yearMatch ? parseInt(yearMatch[2]) : null;
-  const degree = degreeFull.replace("(BTech)", "").trim() + (branch ? ` in ${branch}` : "");
-  return [{ degree, institute, startYear, endYear }];
-}
-
-function parseExperience(title, company, location, experienceStr) {
-  if (!title || !company) return [];
-  const role = title;
-  const expYears = experienceStr.match(/(\d+\.?\d*)\+?\s*years?/);
-  const startYear = expYears ? new Date().getFullYear() - Math.floor(parseFloat(expYears[1])) : null;
-  return [{
-    role,
-    company,
-    location: location || null,
-    startYear,
-    endYear: "Present"
-  }];
-}
-
-function categorizeSkills(skillsStr) {
-  if (!skillsStr || skillsStr === "Not specified" || skillsStr === "(not explicitly listed)") return { technical: [], core: [] };
-  const skills = skillsStr.split(",").map(s => s.trim());
-  const technical = [];
-  const core = [];
-  skills.forEach(skill => {
-    if (["React", "TypeScript", "Node.js", "Python", "Coding", "Problem-solving"].includes(skill)) {
-      technical.push(skill);
-    } else {
-      core.push(skill);
-    }
-  });
-  return { technical, core };
-}
-
-const seedUsers = async () => {
+// Main seeding function that can be called from anywhere
+export const seedUsers = async (skipStudentsAndAdmin = false) => {
   try{
-    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser:true, useUnifiedTopology:true });
-    console.log('MongoDB connected for seeding');
+    // Connect to MongoDB if not already connected
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser:true, useUnifiedTopology:true });
+      console.log('MongoDB connected for seeding');
+    }
 
-    // Seed students
-    for(const email of students){
-      const exists = await User.findOne({ email });
-      if(!exists){
-        await User.create({
-          email,
-          username: email.split('@')[0],
-          password: DEFAULT_PASS,
-          role: 'student',
-          mustChangePassword:true,
-          defaultPassword:true,
-          phone: `987654321${students.indexOf(email) + 1}`,
-          branch: 'CSE'
-        });
-        console.log(`Seeded student: ${email}`);
+    if (!skipStudentsAndAdmin) {
+      // Seed students
+      for(const email of students){
+        const exists = await User.findOne({ email });
+        if(!exists){
+          await User.create({
+            email,
+            username: email.split('@')[0],
+            password: DEFAULT_PASS,
+            role: 'student',
+            mustChangePassword:true,
+            defaultPassword:true,
+            phone: `987654321${students.indexOf(email) + 1}`,
+            branch: 'CSE'
+          });
+          console.log(`Seeded student: ${email}`);
+        }
+      }
+
+      // Seed admin
+      const existsAdmin = await User.findOne({ email: admin.email });
+      if(!existsAdmin){
+         await User.create(admin);
+         console.log(`Seeded admin: ${admin.email}`);
+      } else {
+     // Update existing admin to ensure isVerified is true
+        existsAdmin.isVerified = true;
+        await existsAdmin.save();
+        console.log(`Updated existing admin: ${admin.email} to verified`);
       }
     }
-
-    // Seed admin
-    const existsAdmin = await User.findOne({ email: admin.email });
-    if(!existsAdmin){
-       await User.create(admin);
-       console.log(`Seeded admin: ${admin.email}`);
-    } else {
-     // Update existing admin to ensure isVerified is true
-     existsAdmin.isVerified = true;
-      await existsAdmin.save();
-      console.log(`Updated existing admin: ${admin.email} to verified`);
-     }
 
     // Seed alumni profiles
     const alumniDataDir = path.join(process.cwd(), 'client/data/alumnidata');
@@ -175,7 +132,9 @@ const seedUsers = async () => {
     if (!fs.existsSync(updatedDataDir)) {
       fs.mkdirSync(updatedDataDir, { recursive: true });
     }
+    
     const files = fs.readdirSync(alumniDataDir).filter(file => file.endsWith('.json'));
+    
     for (const file of files) {
       const filePath = path.join(alumniDataDir, file);
       const content = fs.readFileSync(filePath, 'utf-8');
@@ -210,7 +169,6 @@ const seedUsers = async () => {
             end_year: edu.end_year,
           })),
           experience: (entry.experience || []).map(exp => {
-            // Use nested positions if available for more detailed info
             const firstPosition = exp.positions && exp.positions.length > 0 ? exp.positions[0] : null;
             return {
               title: exp.title || (firstPosition ? firstPosition.title : null),
@@ -232,6 +190,7 @@ const seedUsers = async () => {
         console.log(`Created updated JSON: ${updatedFileName}`);
       }
     }
+    
     // Now read from updated_data and seed
     const updatedFiles = fs.readdirSync(updatedDataDir).filter(file => file.endsWith('.json'));
     const linkedinData = updatedFiles.flatMap(file => {
@@ -244,17 +203,26 @@ const seedUsers = async () => {
         return [];
       }
     });
+    
     for (const entry of linkedinData) {
       await AlumniProfile.updateOne({ id: entry.id }, entry, { upsert: true });
       console.log(`Seeded/Updated alumni: ${entry.name} (Batch: ${entry.batch}, Branch: ${entry.branch})`);
     }
 
     console.log('Seeding complete');
-    process.exit();
+    return { success: true, count: linkedinData.length };
   } catch(err){
     console.error(err);
-    process.exit(1);
+    throw err;
   }
 };
 
-seedUsers();
+// When run directly from command line
+if (import.meta.url === `file://${process.argv[1]}`) {
+  seedUsers().then(() => {
+    process.exit();
+  }).catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}
