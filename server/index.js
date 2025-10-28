@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import authRoute from "./routes/AuthRoute.js";
+import { jobListingsRouter } from "./routes/jobListings.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
@@ -84,14 +85,15 @@ export function createServer() {
   // Scraping routes
   app.use('/api/scrape', scrapingRoutes);
 
+  // Job listings (Prisma/SQLite)
+  app.use('/api/job-listings', jobListingsRouter);
+
 
 
   return app;
 }
 
-// Standalone mode (only when executed directly)
-if (process.argv[1] && process.argv[1].includes("server/index.js")) {
-  const PORT = process.env.PORT || 8080;
-  const app = createServer();
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}
+// Standalone mode
+const PORT = process.env.PORT || 8080;
+const app = createServer();
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

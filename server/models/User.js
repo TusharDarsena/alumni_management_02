@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { allowedBranches } from "../config/config.js";
 
+
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -58,4 +60,4 @@ userSchema.methods.comparePassword = function (candidate) {
   return bcrypt.compare(candidate, this.password);
 };
 
-export default mongoose.model("User", userSchema);
+export default mongoose.models.User || mongoose.model("User", userSchema);

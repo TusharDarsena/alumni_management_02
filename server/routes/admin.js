@@ -104,7 +104,8 @@ router.post(
         }
       }
 
-      if (pending.branch && !allowedBranches.includes(pending.branch)) {
+      const allBranches = Object.values(allowedBranches).flatMap(d => d.branches);
+      if (pending.branch && !allBranches.includes(pending.branch)) {
         return res.status(400).json({ success: false, message: "Invalid branch" });
       }
 
@@ -172,9 +173,10 @@ router.post(
       if (!email || !username || !role || !phone || !branch) {
         return res.status(400).json({ success: false, message: "Missing required fields" });
       }
-      if (!allowedBranches.includes(branch)) {
+      const allBranches = Object.values(allowedBranches).flatMap(d => d.branches);
+      if (!allBranches.includes(branch)) {
         return res.status(400).json({ success: false, message: "Invalid branch" });
-      }
+    }
 
       if (password && !isStrongPassword(password)) {
         return res.status(400).json({ success: false, message: "Password must be strong (8+ chars, upper, lower, digit, special)" });

@@ -8,6 +8,9 @@ type User = {
   role: string;
   mustChangePassword?: boolean;
   defaultPassword?: boolean;
+  // ✅ ADDED THESE TWO LINES
+  avatarUrl?: string;
+  notificationCount?: number;
 } | null;
 
 type AuthContextType = {
@@ -49,6 +52,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           role: data.user.role,
           mustChangePassword: data.user.mustChangePassword,
           defaultPassword: data.user.defaultPassword,
+          // ✅ ADDED THESE TWO LINES
+          avatarUrl: data.user.avatarUrl,
+          notificationCount: data.user.notificationCount,
         });
       } else {
         setUser(null);

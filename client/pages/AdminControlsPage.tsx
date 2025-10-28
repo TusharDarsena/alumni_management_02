@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import axios from 'axios'; // <-- ADD THIS LINE
+import axios from 'axios';
 import DashboardLayout from "@/components/DashboardLayout";
-import { type UserInfo } from "@/components/Header";
+import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED UserSummary
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // <-- UPDATED THIS LINE
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PendingUsersTable from "@/components/PendingUsersTable";
 import { useToast } from "@/hooks/use-toast";
 import ImportUpload from "@/components/ImportUpload";
+import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 interface NewUser {
   name: string;
@@ -26,10 +27,9 @@ interface NewUser {
 }
 
 export default function AdminControlsPage() {
-  const [user] = useState<UserInfo>({
-    name: "Merna",
-    email: "merna@example.com",
-  });
+  // ✅ REMOVED hardcoded user
+  const { user: authUser } = useAuth(); // ✅ ADDED auth hook
+
   const [form, setForm] = useState<NewUser>({
     name: "",
     email: "",
@@ -45,25 +45,16 @@ export default function AdminControlsPage() {
   });
 
   const [mode, setMode] = useState<"add" | "requests">("add");
-
-  // --- NEW CODE FOR SCRAPING ---
   const [alumniName, setAlumniName] = useState('');
   const [isScraping, setIsScraping] = useState(false);
-  // --- END NEW CODE ---
-
   const { toast } = useToast();
-
 
   const handleChange = (key: keyof NewUser, value: string | File | null) => {
     setForm((f) => ({ ...f, [key]: value }));
   };
 
-
-
-
   const handleSubmit = async () => {
     // ... (This is your original handleSubmit function, no changes needed here)
-
     if (!form.name || !form.email || !form.phone || !form.branch) {
       toast({
         title: "Missing fields",
@@ -71,7 +62,6 @@ export default function AdminControlsPage() {
       });
       return;
     }
-
 
     if (!["CSE", "DSAI", "ECE"].includes(form.branch)) {
       toast({ title: "Invalid branch" });
@@ -129,9 +119,6 @@ export default function AdminControlsPage() {
     }
   };
 
-
-
-  // --- NEW FUNCTION FOR SCRAPING ---
   const handleScrapeProfile = async () => {
     if (!alumniName) {
       toast({ title: "Error", description: "Please enter an alumni name.", variant: "destructive" });
@@ -148,17 +135,24 @@ export default function AdminControlsPage() {
       setAlumniName('');
     }
   };
-  // --- END NEW FUNCTION ---
 
+  // ✅ CREATED user object for layout
+  const userForLayout: UserSummary = {
+    name: authUser.username, // Mapped username to name
+    email: authUser.email,
+    avatarUrl: authUser.avatarUrl,
+    notificationCount: authUser.notificationCount,
+    mobile: authUser.phone,
+    location: authUser.location,
+  };
 
   return (
     <DashboardLayout
       activePage="Admin Controls"
       onNavigate={(p) => console.log("navigate", p)}
-      user={user}
+      user={userForLayout} // ✅ PASSED correct user
       fullWidth
     >
-
       {/* --- NEW SCRAPING CARD --- */}
       <Card className="mt-6 w-full">
         <CardHeader>
@@ -182,7 +176,6 @@ export default function AdminControlsPage() {
         </CardContent>
       </Card>
       {/* --- END NEW CARD --- */}
-
 
       <div className="mt-6 flex items-center justify-between">
         <h2 className="text-xl font-semibold">
@@ -208,9 +201,7 @@ export default function AdminControlsPage() {
 
       {mode === "add" ? (
         <Card className="mt-6 w-full">
-
           {/* This is your original Add User form, no changes needed here */}
-
           <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
@@ -310,8 +301,6 @@ export default function AdminControlsPage() {
               />
             </div>
 
-
-            
             <div className="md:col-span-2 flex justify-end gap-3 mt-2">
               <Button
                 variant="ghost"
@@ -342,5 +331,4 @@ export default function AdminControlsPage() {
       )}
     </DashboardLayout>
   );
-
 }

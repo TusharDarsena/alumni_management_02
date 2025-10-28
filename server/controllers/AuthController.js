@@ -50,7 +50,8 @@ export const signup = async (req, res) => {
     if (!phone || !branch) {
       return res.status(400).json({ message: "Phone and branch are required" });
     }
-    if (!allowedBranches.includes(branch)) {
+    const allBranches = Object.values(allowedBranches).flatMap(d => d.branches);
+    if (!allBranches.includes(branch)) {
       return res.status(400).json({ message: "Invalid branch" });
     }
 

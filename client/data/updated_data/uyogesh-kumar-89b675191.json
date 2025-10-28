@@ -1,0 +1,77 @@
+{
+  "id": "yogesh-kumar-89b675191",
+  "name": "Yogesh Kumar",
+  "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQEpbiSE-Aj7Kg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1639074429025?e=2147483647&v=beta&t=N1M5JQqHc7FzmQthVxeD7FFx6V17Ofr4svHLv_MVyew",
+  "position": null,
+  "current_company": {
+    "name": "Google",
+    "location": null
+  },
+  "location": "South Delhi",
+  "about": "I have a keen curiosity about the origin and development of computers. The clock cycle…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2019",
+      "end_year": "2023"
+    },
+    {
+      "start_year": "2018",
+      "end_year": "2019"
+    },
+    {
+      "start_year": "2011",
+      "end_year": "2018"
+    },
+    {
+      "start_year": "2009",
+      "end_year": "2011"
+    },
+    {
+      "start_year": "2003",
+      "end_year": "2009"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Google",
+      "company": "Google",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****",
+      "company": "****",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****",
+      "company": "****",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****-**** ******",
+      "company": "****-**** ******",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "****** ******* ***. ***. ****",
+      "company": "****** ******* ***. ***. ****",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://my.linkedin.com/in/Yogesh-kumar-89b675191",
+  "linkedin_id": "yogesh-kumar-89b675191"
+}
