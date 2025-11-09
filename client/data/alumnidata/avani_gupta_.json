@@ -1,0 +1,245 @@
+{
+  "id": "avani-p-gajallewar-644a9a257",
+  "name": "Avani P. Gajallewar",
+  "city": "Raipur, Chhattisgarh, India",
+  "country_code": "IN",
+  "position": "Final Year IIIT-NR || PUF DESIGN || GATE(ECE) AIR 1218 || Front End Developer || Kaggle Contributor",
+  "about": "Passionate Electronics and Communication Engineering (ECE) student at IIIT Naya Raipur with a strong interdisciplinary focus bridging hardware systems, VLSI design, and AI-driven software solutions. My experience spans spintronics-based hardware security (PUFs), antenna optimization, and CAD/EDA simulations, alongside deep learning applications in medical imaging and LLM-powered hardware verification automation. With a GATE (ECE) qualification (AIR-1218) and hands-on projects in ResNet(2+1)D-based brain tumor classification, Verilog-to-testbench automation using Transformers, and CST-driven RF optimization, I bring expertise in both circuit-level innovation and AI-driven computational modeling. Skilled in Verilog, Python, C++, TensorFlow, and Cadence Virtuoso, I am passionate about building solutions at the intersection of electronics, computer science, and machine intelligence to advance healthcare, hardware security, and next-gen communication systems.",
+  "current_company": {
+    "link": "https://in.linkedin.com/school/iiitnrofficial/?trk=public_profile_topcard-current-company",
+    "name": "IIIT-Naya Raipur",
+    "title": "Final Year IIIT-NR || PUF DESIGN || GATE(ECE) AIR 1218 || Front End Developer || Kaggle Contributor",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "VLSI Design Engineer Intern",
+      "description": "As a VLSI Design Engineer Intern, I worked on advanced hardware security primitives, focusing on the design and implementation of Physically Unclonable Functions (PUFs) using emerging spintronics technology. My primary design and simulation work was carried out using Cadence Virtuoso, where I developed transistor-level schematics and verified performance across various process, voltage, and temperature corners.\n\nThis internship provided me with hands-on experience in Integrating PUF structures into VLSI designs for cryptographic applications and exploring the potential of spintronics emerging technologies in secure hardware design.",
+      "description_html": "As a VLSI Design Engineer Intern, I worked on advanced hardware security primitives, focusing on the design and implementation of Physically Unclonable Functions (PUFs) using emerging spintronics technology. My primary design and simulation work was carried out using Cadence Virtuoso, where I developed transistor-level schematics and verified performance across various process, voltage, and temperature corners. <br> This internship provided me with hands-on experience in Integrating PUF structures into VLSI designs for cryptographic applications and exploring the potential of spintronics emerging technologies in secure hardware design.",
+      "start_date": "May 2025",
+      "end_date": "Jul 2025",
+      "company": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Information Technology Network Specialist",
+      "description": "As an IT Specialist Trainee, I had the opportunity to work closely under the guidance of experienced IT professionals, gaining hands-on experience and foundational knowledge in enterprise-level networking. My training focused on understanding the routing and distribution of network infrastructure within corporate environments.\n\nThroughout the program, I studied how data flows through networks, the configuration and management of routers and switches, and the design of efficient network topologies. I also gained insight into best practices for maintaining network performance, security, and reliability in organizational settings.\n\nThis experience strengthened my technical foundation and prepared me for future roles in network administration and IT support, where structured planning and critical thinking are essential.",
+      "description_html": "As an IT Specialist Trainee, I had the opportunity to work closely under the guidance of experienced IT professionals, gaining hands-on experience and foundational knowledge in enterprise-level networking. My training focused on understanding the routing and distribution of network infrastructure within corporate environments. <br> Throughout the program, I studied how data flows through networks, the configuration and management of routers and switches, and the design of efficient network topologies. I also gained insight into best practices for maintaining network performance, security, and reliability in organizational settings. <br> This experience strengthened my technical foundation and prepared me for future roles in network administration and IT support, where structured planning and critical thinking are essential.",
+      "start_date": "May 2024",
+      "end_date": "Jul 2024",
+      "company": "NTPC Limited",
+      "company_id": "ntpc",
+      "url": "https://in.linkedin.com/company/ntpc",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQE8gNecsDrsRg/company-logo_100_100/company-logo_100_100/0/1731218341294/ntpc_logo?e=2147483647&v=beta&t=qgjfLeEWHQLJ82yb3uy4epKfdhipRst4wcjRU9jWKxI"
+    }
+  ],
+  "url": "https://au.linkedin.com/in/avani-p-gajallewar-644a9a257",
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology",
+      "field": "Electrical, Electronics and Communications Engineering",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/?trk=public_profile_school_profile-section-card_image-click",
+      "start_year": "2022",
+      "end_year": "2026",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Ryan International School, Raipur",
+      "degree": "95.4%",
+      "start_year": "2020",
+      "end_year": "2022",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    },
+    {
+      "title": "Bhartiya Vidya Bhavans Raipur",
+      "degree": "93.8%",
+      "start_year": "2015",
+      "end_year": "2020",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQH7A7hFxPH4LA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1689921188672?e=2147483647&v=beta&t=uzNH_ul7R1qzsARgqxB4actxpOo4edC5Pl5RP6A5QXU",
+  "certifications": [
+    {
+      "meta": "Issued Jan 2024 See credential",
+      "subtitle": "Cisco",
+      "title": "JavaScript Essentials I",
+      "credential_url": "https://www.credly.com/badges/d65e24e9-8307-49ab-a7e6-7255482b3d70/public_url?trk=public_profile_see-credential",
+      "credential_id": null
+    }
+  ],
+  "followers": 1187,
+  "connections": 500,
+  "current_company_name": "IIIT-Naya Raipur",
+  "projects": [
+    {
+      "title": "RTL Implementation of 1X3 Router",
+      "start_date": "Oct 2024",
+      "description": "A 1x3 router is a digital circuit that receives data from a single input port and routes it to one of three output ports based on control signals. The router is designed using Register Transfer Level (RTL) coding in Verilog and follows a Finite State Machine (FSM) for efficient data flow management."
+    },
+    {
+      "title": "Applicant Tracking System: Resume Analysis",
+      "start_date": "Jan 2024",
+      "description": "Efficient talent acquisition is critical for firms to succeed in today's changing employment market. The difficulty of finding the proper talent to hire grows along with the volume of applicants. Curriculum-Vitae (CV) or Resume screening is a cumbersome process in which an organization or firm examines a job applicant’s CV for recruitment. Numerous applicants with diverse skills and limited and conventional ways of candidate hiring make the resume screening process more labor-intensive and tedious. Thus, automating the hiring process is the need of the hour to strengthen efficiency and accuracy while segregating the most appropriate resume. To streamline the recruitment procedure, machine learning techniques can be applied to create a model that aids the recruiters in sorting out the most qualified candidates by extracting the most valuable insights from the heap of resumes accumulated."
+    },
+    {},
+    {},
+    {
+      "title": "House Price Prediction using Machine Learning",
+      "start_date": "Apr 2023",
+      "description": "The House Price Prediction Model is an AIML project based on machine learning operations. It sorts the given data of house prices based on customer's requirements such as land area, facilities available, location, etc. We have provided some expected results in an Excel workbook and compared them with our local market conditions. Our house price prediction model is a critical element of our team. It provides customers with an accurate and comprehensive outlook regarding the market trends, such as pricing, inventory, and sales. Our customers can use this service to calculate the overall cost of their house at the time of purchase."
+    },
+    {}
+  ],
+  "location": "Raipur",
+  "input_url": "https://in.linkedin.com/in/avani-p-gajallewar-644a9a257",
+  "linkedin_id": "avani-p-gajallewar-644a9a257",
+  "activity": [
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/nimishsocialmedia_respectourscientists-unsungheroes-indianpride-activity-7384914144812068864-9ioo",
+      "title": "🌍 When Glamour Gets Applause, But Genius Gets Silence. When a Bollywood actor buys a new car — it trends. When a celebrity sneezes — it becomes…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQEewX1JSs32pw/feedshare-shrink_1280/B56Znx8RAIIsAs-/0/1760700735946?e=2147483647&v=beta&t=m646fxFvtsp3uBuxv_P5sNmv3uD1rKQ5KMcXeNAmuAM",
+      "id": "7384914144812068864"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/omsrivastava_agenticai-llms-futureofai-activity-7380806536492883968-OM1h",
+      "title": "👉 The Full Stack of Agentic AI Just like modern apps need a tech stack… Agentic AI needs its own stack too. 🎯 Here’s what it looks like: 🔹…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFUVrkZoFK9Ww/feedshare-shrink_1280/B56ZmgPvKLJoAs-/0/1759330109705?e=2147483647&v=beta&t=eaDJ9Z3_qObX62yg4k8QuKNSxCcu38i9S3TiEJf-PSg",
+      "id": "7380806536492883968"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/ali-kamaly_ai-ml-machinelearning-activity-7378776188649013256-lHbd",
+      "title": "CPU, GPU, NPU and TPU - The Real Differences for AI/ML CPU (Central Processing Unit) The classic processor in every computer. CPUs can run any…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEq4DqbtRAzgw/feedshare-shrink_800/B4DZmat1rAGwAg-/0/1759237332766?e=2147483647&v=beta&t=oj_jNvucqSJfxq2xbQUzGWHxHNqOV368LR0a7NcxNnk",
+      "id": "7378776188649013256"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/dr-gaurav-bhoj-87ba32193_hiring-internship-multiple-activity-7378266863736205312-wvdc",
+      "title": "URGENT #HIRING INTERNS FOR #INTERNSHIP PROGRAM!! Apply Now - https://lnkd.in/dMx-ZN5D Role:- Frontend Developer, Python Developer, Web Developer…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQEmM1zfqH9pGg/feedshare-shrink_1280/B4EZmTem86IUAs-/0/1759115900742?e=2147483647&v=beta&t=DI18tFRiO7WDAK9iBnjPIFFF9XJtciqks9hXOLltLgs",
+      "id": "7378266863736205312"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/dr-archana-sharma-ds_ieee-deis-summer-school-2025-i-had-the-opportunity-activity-7377741892832256000-I-Ty",
+      "title": "IEEE DEIS Summer School 2025 I had the opportunity to deliver an invited technical talk on “Research Opportunities and Challenges in the Insulation…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFeysr78fyD6g/feedshare-shrink_800/B56ZmMBKA3I0Ag-/0/1758990737960?e=2147483647&v=beta&t=cG4J0nn_b5ZJDjpdhiadI_uNGG0AT1ic41YkF3IzT8w",
+      "id": "2025"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/shresht0713_thrilled-to-announce-that-our-team-just-won-activity-7377397835572527104-XfFr",
+      "title": "Thrilled to announce that our team just won First Prize at the Innovation Expo at LSEG for our groundbreaking solution, PRIME D3: Detect, Denoise…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFLQEem9Hk2wQ/feedshare-shrink_2048_1536/B4DZmHINhiIgAw-/0/1758908702155?e=2147483647&v=beta&t=FhaqTz6Zcg6qbxImJqnDv0vt0dJ1mF5NXbD1YdIKl0w",
+      "id": "7377397835572527104"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/kartik-raii_engineering-mba-startup-activity-7373241393944686592-LYCb",
+      "title": "𝗛𝗮𝗽𝗽𝘆 𝗘𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝘀’ 𝗗𝗮𝘆 !! We are the rare species who: Study engineering for 4 years, And then… end up becoming everything else MBA…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGAGy49LuTu9g/feedshare-shrink_1280/B56ZlMD9.3HMA0-/0/1757917734453?e=2147483647&v=beta&t=GVRopoc1OJXJ7_PP7d4-RoF7hLi9qi95PpXE_aFYndE",
+      "id": "7373241393944686592"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/placement-cell-iiitnr_google-placement-iiitnr-activity-7376919156572622848-bfeL",
+      "title": "​Huge congratulations to Swasti Srivastava from the International Institute of Information Technology, Naya Raipur, on receiving a placement offer…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQH5Ng6OU6V0kw/feedshare-shrink_800/B4DZmAU2.RGwAg-/0/1758794581947?e=2147483647&v=beta&t=sZP39J-QKTDk55Ej2nkERB7oChGI0dm4nTBPpx2y0O8",
+      "id": "7376919156572622848"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/kolla-jaswanth-ram_%F0%9D%97%A7%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%94%F0%9D%97%B4%F0%9D%97%B2%F0%9D%97%BB%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%B0-%F0%9D%97%94%F0%9D%97%9C-%F0%9D%97%A8%F0%9D%97%BB%F0%9D%97%B6%F0%9D%98%83%F0%9D%97%B2%F0%9D%97%BF%F0%9D%98%80%F0%9D%97%B2-activity-7375023406137733120-mfld",
+      "title": "🌌 𝗧𝗵𝗲 𝗔𝗴𝗲𝗻𝘁𝗶𝗰 𝗔𝗜 𝗨𝗻𝗶𝘃𝗲𝗿𝘀𝗲 – 𝗔 𝗟𝗮𝘆𝗲𝗿𝗲𝗱 𝗩𝗶𝗲𝘄 𝗼𝗳 𝗔𝗜 𝗘𝘃𝗼𝗹𝘂𝘁𝗶𝗼𝗻 Artificial Intelligence is not a single…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFQvUz5nnK1KQ/feedshare-shrink_2048_1536/B56ZlbNwS2KIA0-/0/1758171957150?e=2147483647&v=beta&t=rECnpPpuoy-E_63s7H4n5kGAN9Lc6tz3GgdhzEHDYII",
+      "id": "7375023406137733120"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/deepikagupta7234_ieeemadhyapradeshsection-activity-7361348173879046145-eM1o",
+      "title": "Exciting opportunity for student and researchers to showcase their ideas in area of semiconductor and VLSI Design in IIITNR and IEEE student branch…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFVa-4obfjgZA/feedshare-shrink_2048_1536/B4DZijAqMQHwAo-/0/1755081517838?e=2147483647&v=beta&t=V-OsP0K5KnF6U_l-6N23eObJ0IM9ICgk6iheFsCK6l8",
+      "id": "7361348173879046145"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/avasarala-nirupam-laxmi-srujan-480683292_machinelearning-medicalai-deeplearning-activity-7371015793473585152-4JXi",
+      "title": "🎉 Excited to share that our paper has been published at IEEE TENSYMP held from Jul 7-9 2025 , at Christchurch , New Zealand 🎉 \"HybridNet: A…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEOoQ_R_AF9IA/feedshare-shrink_1280/B4DZksbzNVH4As-/0/1757387110595?e=2147483647&v=beta&t=LfFIcUamzt21gWBgiCtelgWwhx_qkkbxH_ZoM1Q5lS8",
+      "id": "7371015793473585152"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/surendharasic_semiconductors-vlsi-freshers-activity-7370647960352776192-mWbG",
+      "title": "Top 10 Semiconductor Companies for Freshers in India (VLSI & Chip Design) The semiconductor industry is booming in India, and freshers with the…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGid7gmD1tq9g/feedshare-shrink_2048_1536/B56ZknNQTxHcAw-/0/1757299412683?e=2147483647&v=beta&t=cHvMs4qZo-N1zWEZBxw80z6GJk4R2mdlj-p6UaRPMCM",
+      "id": "7370647960352776192"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/jagadeesh-bathula-246aba300_vlsi-semiconductors-chipdesign-activity-7369287012488552448-WRGc",
+      "title": "🚀 Free VLSI Online Courses & Certifications ✨ While scrolling through LinkedIn, I came across this really useful list of Free Online Courses &…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQFBrLS_K_YJYg/feedshare-shrink_2048_1536/B4EZkT3eCqGoA8-/0/1756974937052?e=2147483647&v=beta&t=f_pmN7Hi1AJL5mZJbGXQx2AznYPlGRzMKG4iu8CaOTc",
+      "id": "7369287012488552448"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/sreedath-panat_yolo-you-only-look-once-revolutionized-activity-7369587647566008322-VkV5",
+      "title": "YOLO (You Only Look Once) revolutionized object detection by solving a fundamental problem: how to detect objects in real-time with just one forward…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFR9XHhWHAgag/feedshare-shrink_1280/B56ZkX65yNHMA4-/0/1757042950667?e=2147483647&v=beta&t=33cLZ4gc8Xr-NJQe78HqXAhFfZ2so6QHP8DgrjowW7s",
+      "id": "7369587647566008322"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/nagaraju-ramavath_hello-vlsi-aspirants-yesterday-i-connected-activity-7367896445137416193-SK0e",
+      "title": "Hello VLSI Aspirants... Yesterday, I connected with a recent graduate from Indian Institute of Technology, Kharagpur who is currently working as a…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHaA6XexPhF6Q/feedshare-shrink_800/B56Zj_sHO1G0Ag-/0/1756636412612?e=2147483647&v=beta&t=gZvWgQLypyJ36LkKNHc3xny9Uuwf9TvwVcTnsHXxTjk",
+      "id": "7367896445137416193"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/amritanshu-yadav-6480662a8_ai-deeplearning-healthcare-activity-7369746606474055682-01Zh",
+      "title": "Excited to share that our paper, “Cvision: A Deep Learning Framework for Cataract Detection via Smartphones” (with Shorya Kumar, Shashwati…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHz9ybzs6_zfA/feedshare-shrink_2048_1536/B56ZkaZfD4HUBU-/0/1757084513469?e=2147483647&v=beta&t=WFUlv8Ru9QxaTe2EFwUtOc6PnC6M7dt2FTHUs_iTBtI",
+      "id": "7369746606474055682"
+    },
+    {
+      "interaction": "Liked by Avani P. Gajallewar",
+      "link": "https://www.linkedin.com/posts/nairitbanerjee_qualcomm-belimitless-newbeginnings-activity-7367951447499427842-qJfk",
+      "title": "I am truly excited to share that I have started my new journey with @ Qualcomm India Pvt. Ltd. The path to this milestone was far from easy. Unlike…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQH3IECvpUYU8g/feedshare-shrink_800/B56ZkA4yk.HIAs-/0/1756656513337?e=2147483647&v=beta&t=sCbgs3Ba9wyjiY5BQgjMkcbO71UkWccWbDyYLQUyta8",
+      "id": "7367951447499427842"
+    }
+  ],
+  "linkedin_num_id": "1062717460",
+  "banner_image": "https://media.licdn.com/dms/image/v2/D4D16AQGWGDBw_Xws_A/profile-displaybackgroundimage-shrink_200_800/B4DZkgatqHGgAY-/0/1757185499149?e=2147483647&v=beta&t=Fzakuq0KFBChDKc4HJV8e-SkknapKEBnRnQFs8twUGY",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [
+    {
+      "title": "Personal Website",
+      "link": "https://github.com/avanig1834"
+    }
+  ],
+  "first_name": "Avani",
+  "last_name": "P. Gajallewar",
+  "timestamp": "2025-10-28T10:01:07.914Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/avani-p-gajallewar-644a9a257"
+  }
+}

@@ -4,126 +4,13 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import crypto from "crypto";
+import { normalizeAlumniEntry, normalizeAlumniEntries } from "../utils/alumniNormalizer.js";
+import { getCached, setCached } from "../utils/cacheManager.js";
+import { rateLimiter } from "../middleware/rateLimiter.js";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Redis / in-memory cache helpers for suggestions
-const inMemoryCache = new Map(); // key -> { value, expiresAt }
-const CACHE_TTL = 60; // seconds
-let redisClient = null;
-let redisInitializing = false;
-
-async function ensureRedis() {
-  if (redisClient) return redisClient;
-  if (redisInitializing) return null;
-  const url = process.env.REDIS_URL || process.env.REDIS_HOST || null;
-  if (!url) return null;
-  redisInitializing = true;
-  try {
-    const redisModule = await import("redis");
-    const createClient =
-      redisModule.createClient || redisModule.default?.createClient;
-    if (!createClient) {
-      console.warn("Redis client factory not found");
-      redisInitializing = false;
-      return null;
-    }
-    redisClient = createClient({ url });
-    redisClient.on &&
-      redisClient.on("error", (e) => console.warn("Redis error", e));
-    await redisClient.connect();
-    redisInitializing = false;
-    return redisClient;
-  } catch (e) {
-    console.warn("Redis not available, continuing without it:", e.message || e);
-    redisInitializing = false;
-    return null;
-  }
-}
-
-// Helper to extract batch year from education string
-function extractBatch(education) {
-  const match = education.match(/(\d{4})\s*-\s*(\d{4})/);
-  return match ? match[2] : null; // End year as batch
-}
-
-// Helper to extract branch from education
-function extractBranch(educationStr) {
-  if (educationStr.includes("Computer Science")) return "CSE";
-  if (educationStr.includes("Electronics")) return "ECE";
-  if (educationStr.includes("Data Science")) return "DS";
-  return "CSE"; // Default
-}
-
-// Helper to parse education string into object
-function parseEducation(educationStr) {
-  if (!educationStr || educationStr === "") return [];
-  // Example: "IIIT-Naya Raipur, Bachelor of Technology (BTech), Electronics and Communications Engineering, 2017-2021"
-  const parts = educationStr.split(",");
-  const institute = parts[0]?.trim() || null;
-  const degreeFull = parts[1]?.trim() || "";
-  const branchStr = parts[2]?.trim() || "";
-  const years = parts[3]?.trim() || "";
-  const yearMatch = years.match(/(\d{4})\s*-\s*(\d{4})/);
-  const start_year = yearMatch ? parseInt(yearMatch[1]) : null;
-  const end_year = yearMatch ? parseInt(yearMatch[2]) : null;
-  const degree =
-    degreeFull.replace("(BTech)", "").trim() + (branchStr ? ` in ${branchStr}` : "");
-  const field = extractBranch(educationStr) || branchStr || "CSE"; // Use extractBranch or fallback
-  return [{ field, degree, institute, start_year, end_year }];
-}
-
-// Helper to parse experience
-function parseExperience(title, company, location, experienceStr) {
-  if (!title || !company) return [];
-  // Assume current role is the title
-  const role = title;
-  const expYears = experienceStr.match(/(\d+\.?\d*)\+?\s*years?/);
-  const startYear = expYears
-    ? new Date().getFullYear() - Math.floor(parseFloat(expYears[1]))
-    : null;
-  return [
-    {
-      role,
-      company,
-      location: location || null,
-      startYear,
-      endYear: "Present",
-    },
-  ];
-}
-
-// Helper to categorize skills
-function categorizeSkills(skillsStr) {
-  if (
-    !skillsStr ||
-    skillsStr === "Not specified" ||
-    skillsStr === "(not explicitly listed)"
-  )
-    return { technical: [], core: [] };
-  const skills = skillsStr.split(",").map((s) => s.trim());
-  const technical = [];
-  const core = [];
-  skills.forEach((skill) => {
-    if (
-      [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "Python",
-        "Coding",
-        "Problem-solving",
-      ].includes(skill)
-    ) {
-      technical.push(skill);
-    } else {
-      core.push(skill);
-    }
-  });
-  return { technical, core };
-}
 
 // POST /import - Import alumni data from JSON body or alumni_data directory
 router.post("/import", async (req, res) => {
@@ -160,75 +47,8 @@ router.post("/import", async (req, res) => {
         .json({ success: false, message: "No alumni data provided" });
     }
 
-    // Sanitization and normalization helper
-    function normalize(entry) {
-      const linkedin_id = String(
-        entry.linkedin_id ||
-          entry.id ||
-          (entry.input && entry.input.url
-            ? entry.input.url.split("/").pop()
-            : "") ||
-          "",
-      ).trim();
-      const input_url =
-        entry.input?.url || entry.input_url || entry.url || null;
-
-      const doc = {
-        id: entry.id || linkedin_id || undefined,
-        name: entry.name || "Unknown",
-        first_name:
-          entry.first_name ||
-          (entry.name ? String(entry.name).split(" ")[0] : undefined),
-        last_name:
-          entry.last_name ||
-          (entry.name
-            ? String(entry.name).split(" ").slice(1).join(" ")
-            : undefined),
-        city: entry.city || undefined,
-        country_code: entry.country_code || undefined,
-        position: entry.position || undefined,
-        about: entry.about || undefined,
-        current_company:
-          entry.current_company ||
-          (entry.current_company_name || entry.current_company_company_id
-            ? {
-                name: entry.current_company_name || null,
-                company_id: entry.current_company_company_id || null,
-                title: entry.current_company_title || null,
-                location: entry.current_company_location || null,
-              }
-            : undefined),
-        experience: Array.isArray(entry.experience)
-          ? entry.experience
-          : undefined,
-        education: Array.isArray(entry.education) ? entry.education : parseEducation(entry.education || ""),
-        avatar: entry.avatar || undefined,
-        followers: entry.followers ? Number(entry.followers) : undefined,
-        connections: entry.connections ? Number(entry.connections) : undefined,
-        current_company_company_id:
-          entry.current_company_company_id || undefined,
-        current_company_name: entry.current_company_name || undefined,
-        location: entry.location || undefined,
-        input_url,
-        linkedin_id: linkedin_id || undefined,
-        linkedin_num_id: entry.linkedin_num_id || undefined,
-        banner_image: entry.banner_image || undefined,
-        honors_and_awards: entry.honors_and_awards || undefined,
-        similar_profiles: entry.similar_profiles || undefined,
-        bio_links: entry.bio_links || undefined,
-        timestamp: entry.timestamp ? new Date(entry.timestamp) : new Date(),
-        input: entry.input || (input_url ? { url: input_url } : undefined),
-      };
-
-      // Remove undefined properties to avoid overwriting with undefined
-      Object.keys(doc).forEach((k) => doc[k] === undefined && delete doc[k]);
-      return doc;
-    }
-
     // Prepare sanitized list, ensure we have a key to upsert on (linkedin_id)
-    const sanitized = incoming
-      .map(normalize)
-      .filter((d) => d.linkedin_id || d.id);
+    const sanitized = normalizeAlumniEntries(incoming);
     if (sanitized.length === 0) {
       return res.status(400).json({
         success: false,
@@ -282,39 +102,6 @@ router.post("/import", async (req, res) => {
   }
 });
 
-// Simple in-memory token-bucket rate limiter (per-IP)
-const RATE_LIMIT_MAX = 5; // tokens per second
-const RATE_LIMIT_CAPACITY = 5; // burst capacity
-const rateBuckets = new Map();
-
-function rateLimiter(req, res, next) {
-  try {
-    const ip =
-      req.ip ||
-      req.headers["x-forwarded-for"] ||
-      req.socket.remoteAddress ||
-      "unknown";
-    const now = Date.now();
-    const entry = rateBuckets.get(ip) || {
-      tokens: RATE_LIMIT_CAPACITY,
-      last: now,
-    };
-    const elapsed = Math.max(0, now - entry.last);
-    const refill = (elapsed / 1000) * RATE_LIMIT_MAX;
-    entry.tokens = Math.min(RATE_LIMIT_CAPACITY, entry.tokens + refill);
-    entry.last = now;
-    if (entry.tokens >= 1) {
-      entry.tokens -= 1;
-      rateBuckets.set(ip, entry);
-      next();
-    } else {
-      res.status(429).json({ error: "Too many requests" });
-    }
-  } catch (e) {
-    next();
-  }
-}
-
 // GET /autocomplete - fast suggestions using Atlas Search (fallback to regex)
 router.get("/autocomplete", rateLimiter, async (req, res) => {
   try {
@@ -325,27 +112,17 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
     const limit = 10;
 
     const cacheKey = `autocomplete:${branch || "all"}:${q.toLowerCase()}`;
-    // Attempt to read from Redis or in-memory cache
-    try {
-      const r = await ensureRedis();
-      if (r) {
-        const cached = await r.get(cacheKey);
-        if (cached) {
-          return res.json({
-            success: true,
-            data: JSON.parse(cached),
-            cached: true,
-          });
-        }
-      } else {
-        const cached = inMemoryCache.get(cacheKey);
-        if (cached && cached.expiresAt > Date.now()) {
-          return res.json({ success: true, data: cached.value, cached: true });
-        }
-      }
-    } catch (cacheErr) {
-      console.warn("Cache read failed", cacheErr?.message || cacheErr);
+    
+    // Attempt to read from cache
+    const cachedData = await getCached(cacheKey);
+    if (cachedData) {
+      return res.json({
+        success: true,
+        data: cachedData,
+        cached: true,
+      });
     }
+    
     // Preferred: Atlas Search autocomplete aggregation
     const pipeline = [
       {
@@ -428,20 +205,7 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
     }
 
     // Cache results
-    try {
-      const payload = JSON.stringify(results);
-      const r = await ensureRedis();
-      if (r) {
-        await r.set(cacheKey, payload, { EX: CACHE_TTL });
-      } else {
-        inMemoryCache.set(cacheKey, {
-          value: results,
-          expiresAt: Date.now() + CACHE_TTL * 1000,
-        });
-      }
-    } catch (cacheErr) {
-      console.warn("Cache write failed", cacheErr?.message || cacheErr);
-    }
+    await setCached(cacheKey, results);
 
     return res.json({ success: true, data: results });
   } catch (error) {
