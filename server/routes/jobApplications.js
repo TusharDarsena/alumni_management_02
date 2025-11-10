@@ -4,6 +4,7 @@ import { zParse } from "../utils/zParse.js";
 import { PrismaClient } from "@prisma/client";
 import { requireAuth } from "../middleware/auth.js";
 import User from "../models/User.js";
+import AlumniProfile from "../models/AlumniProfile.js";
 
 export const jobApplicationsRouter = Router();
 const prisma = new PrismaClient();
@@ -118,7 +119,20 @@ jobApplicationsRouter.get("/job/:jobId", requireAuth, async (req, res) => {
     // Fetch applicant details for each application
     const applicationsWithDetails = await Promise.all(
       applications.map(async (app) => {
-        const applicant = await User.findById(app.applicantId).select("username email");
+        const applicant = await User.findById(app.applicantId).select("username email branch role");
+        
+        // Try to fetch alumni profile if available
+        let alumniProfile = null;
+        if (applicant && applicant.email) {
+          // Try to find alumni profile by email or name
+          alumniProfile = await AlumniProfile.findOne({
+            $or: [
+              { name: { $regex: applicant.username, $options: 'i' } },
+              // Add more matching criteria as needed
+            ]
+          }).select("name branch batch graduationYear current_company position location avatar");
+        }
+        
         return {
           ...app,
           applicant: applicant
@@ -126,6 +140,20 @@ jobApplicationsRouter.get("/job/:jobId", requireAuth, async (req, res) => {
                 id: applicant._id.toString(),
                 username: applicant.username,
                 email: applicant.email,
+                branch: applicant.branch,
+                role: applicant.role,
+              }
+            : null,
+          alumniProfile: alumniProfile
+            ? {
+                name: alumniProfile.name,
+                branch: alumniProfile.branch,
+                batch: alumniProfile.batch,
+                graduationYear: alumniProfile.graduationYear,
+                currentCompany: alumniProfile.current_company?.name || alumniProfile.current_company_name,
+                position: alumniProfile.position || alumniProfile.current_company?.title,
+                location: alumniProfile.location,
+                avatar: alumniProfile.avatar,
               }
             : null,
         };

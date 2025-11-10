@@ -127,11 +127,25 @@ jobListingsRouter.post("/", requireAuth, async (req, res) => {
     },
   });
 
-  // Return the listing with parsed arrays
+  // Fetch poster information
+  let poster = null;
+  if (userId) {
+    const posterUser = await User.findById(userId).select("username email");
+    poster = posterUser 
+      ? { 
+          id: posterUser._id.toString(), 
+          username: posterUser.username, 
+          email: posterUser.email 
+        } 
+      : null;
+  }
+
+  // Return the listing with parsed arrays and poster info
   const parsedListing = {
     ...jobListing,
-    eligibleBranches: eligibleBranches,
-    eligibleRoles: eligibleRoles,
+    eligibleBranches: eligibleBranches || [],
+    eligibleRoles: eligibleRoles || [],
+    poster: poster,
   };
 
   res.json(parsedListing);
@@ -189,8 +203,8 @@ jobListingsRouter.put("/:id", requireAuth, async (req, res) => {
   // Return the listing with parsed arrays
   const parsedListing = {
     ...updatedJobListing,
-    eligibleBranches: eligibleBranches,
-    eligibleRoles: eligibleRoles,
+    eligibleBranches: eligibleBranches || [],
+    eligibleRoles: eligibleRoles || [],
   };
 
   res.json(parsedListing);

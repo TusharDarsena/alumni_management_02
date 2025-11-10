@@ -18,6 +18,9 @@ export default function MyJobListingGrid({ jobListings, onDelete }: Props) {
           job={job}
           footerBtns={
             <div className="flex gap-2">
+              <Button variant="outline" asChild>
+                <Link to={`/jobs/${job.id}/applicants`}>View Applicants</Link>
+              </Button>
               <Button variant="ghost" asChild>
                 <Link to={`/jobs/edit/${job.id}`}>Edit</Link>
               </Button>
