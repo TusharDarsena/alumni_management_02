@@ -4,6 +4,92 @@
  */
 
 /**
+ * Check if a degree is relevant (BTech, MTech, PhD)
+ * @param {string} degree - Degree string
+ * @returns {boolean} Whether the degree is relevant
+ */
+export function isRelevantDegree(degree) {
+  if (!degree) return false;
+  const deg = degree.toLowerCase();
+  return deg.includes("btech") || deg.includes("b.tech") || deg.includes("bachelor of technology") ||
+         deg.includes("mtech") || deg.includes("m.tech") || deg.includes("master of technology") ||
+         deg.includes("phd") || deg.includes("ph.d") || deg.includes("doctor of philosophy");
+}
+
+/**
+ * Extract batch year from education array (for LinkedIn profile format)
+ * @param {Array} education - Array of education objects
+ * @returns {string|null} Batch year (start year) or null
+ */
+export function extractBatchFromArray(education) {
+  if (!Array.isArray(education)) return null;
+  const iiitEdu = education.find(edu =>
+    edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
+    isRelevantDegree(edu.degree)
+  );
+  return iiitEdu ? iiitEdu.start_year : null;
+}
+
+/**
+ * Extract branch from education array (for LinkedIn profile format)
+ * @param {Array} education - Array of education objects
+ * @returns {string} Branch code (CSE, ECE, DSAI) or default CSE
+ */
+export function extractBranchFromArray(education) {
+  if (!Array.isArray(education)) return "CSE";
+  const iiitEdu = education.find(edu =>
+    edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
+    isRelevantDegree(edu.degree)
+  );
+  if (!iiitEdu) return "CSE";
+  const field = iiitEdu.field;
+  if (!field) return "CSE";
+  const f = field.toLowerCase();
+  if (f.includes("computer science")) return "CSE";
+  if (f.includes("electronics") && f.includes("communication")) return "ECE";
+  if (f.includes("data science")) return "DSAI";
+  return "CSE";
+}
+
+/**
+ * Extract graduation year from education array
+ * @param {Array} education - Array of education objects
+ * @returns {string|null} Graduation year (end year) or null
+ */
+export function extractGraduationYear(education) {
+  if (!Array.isArray(education)) return null;
+  const iiitEdu = education.find(edu =>
+    edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
+    isRelevantDegree(edu.degree)
+  );
+  return iiitEdu ? iiitEdu.end_year : null;
+}
+
+/**
+ * Extract current company information from alumni entry
+ * @param {Object} entry - Alumni profile entry
+ * @returns {Object|null} Current company object or null
+ */
+export function extractCurrentCompany(entry) {
+  if (entry.current_company) {
+    return {
+      name: entry.current_company.name,
+      title: entry.current_company.title,
+      location: entry.current_company.location
+    };
+  }
+  if (entry.experience && entry.experience.length > 0) {
+    const latestExp = entry.experience[0];
+    return {
+      name: latestExp.company,
+      title: latestExp.title,
+      location: latestExp.location
+    };
+  }
+  return null;
+}
+
+/**
  * Extract batch year from education string
  * @param {string} education - Education string containing year range
  * @returns {string|null} Batch year (end year) or null
