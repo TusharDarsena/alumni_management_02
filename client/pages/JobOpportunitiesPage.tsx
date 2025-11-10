@@ -12,7 +12,17 @@ import { useJobListingFilterForm } from "@/features/job-listing";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserSummary } from "@/components/DashboardLayout"; // ✅ Added UserSummary type
 import { useAuth } from "@/context/AuthContext";
-import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import JobListingForm from "@/features/job-listing/components/JobListingForm";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -57,6 +67,30 @@ export default function JobOpportunitiesPage() {
   }
 
   const [createOpen, setCreateOpen] = useState(false);
+  const [showConfirmClose, setShowConfirmClose] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  const handleDialogClose = (open: boolean) => {
+    if (!open && hasUnsavedChanges) {
+      // User is trying to close with unsaved changes
+      setShowConfirmClose(true);
+    } else {
+      setCreateOpen(open);
+      if (!open) {
+        setHasUnsavedChanges(false);
+      }
+    }
+  };
+
+  const confirmClose = () => {
+    setShowConfirmClose(false);
+    setCreateOpen(false);
+    setHasUnsavedChanges(false);
+  };
+
+  const cancelClose = () => {
+    setShowConfirmClose(false);
+  };
   
   // ✅ Create the user object for the layout
   const userForLayout: UserSummary = {
@@ -80,23 +114,64 @@ export default function JobOpportunitiesPage() {
             </Button>
 
             {/* Existing "Create Job" Button */}
-            <Dialog open={createOpen} onOpenChange={setCreateOpen}>
+            <Dialog open={createOpen} onOpenChange={handleDialogClose}>
               <DialogTrigger asChild>
                 <Button>Create Job</Button>
               </DialogTrigger>
-              <DialogContent>
-                <div>
-                  <h2 className="text-lg font-semibold mb-4">
-                    Create Job Listing
-                  </h2>
+              <DialogContent 
+                className="max-w-5xl max-h-[90vh] overflow-y-auto"
+                onInteractOutside={(e) => {
+                  // Prevent closing when clicking outside if there are unsaved changes
+                  if (hasUnsavedChanges) {
+                    e.preventDefault();
+                    setShowConfirmClose(true);
+                  }
+                }}
+                onEscapeKeyDown={(e) => {
+                  // Prevent closing with ESC if there are unsaved changes
+                  if (hasUnsavedChanges) {
+                    e.preventDefault();
+                    setShowConfirmClose(true);
+                  }
+                }}
+              >
+                <DialogHeader>
+                  <DialogTitle className="text-2xl">Create Job Listing</DialogTitle>
+                  <DialogDescription>
+                    Fill in the details below to post a new job opportunity. All fields marked with * are required.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="mt-4">
                   <JobListingForm
-                    onSubmit={(values) =>
-                      handleCreate(values, () => setCreateOpen(false))
-                    }
+                    onSubmit={(values) => {
+                      handleCreate(values, () => {
+                        setCreateOpen(false);
+                        setHasUnsavedChanges(false);
+                      });
+                    }}
+                    onFormChange={() => setHasUnsavedChanges(true)}
                   />
                 </div>
               </DialogContent>
             </Dialog>
+
+            {/* Confirmation Dialog for Unsaved Changes */}
+            <AlertDialog open={showConfirmClose} onOpenChange={setShowConfirmClose}>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Unsaved Changes</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    You have unsaved changes. Are you sure you want to close this form? All your changes will be lost.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel onClick={cancelClose}>Continue Editing</AlertDialogCancel>
+                  <AlertDialogAction onClick={confirmClose} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                    Discard Changes
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         }
       >

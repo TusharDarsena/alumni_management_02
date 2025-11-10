@@ -26,10 +26,13 @@ import { jobListingFormSchema } from "../constants/schema";
 import {
   JOB_LISTING_EXPERIENCE_LEVELS,
   JOB_LISTING_TYPES,
+  ELIGIBLE_BRANCHES,
+  ELIGIBLE_ROLES,
 } from "../constants/schema";
 import JobListingGrid from "./JobListingGrid";
 import JobListingCard from "./JobListingCard";
 import { Button } from "@/components/ui/button";
+import { MultiSelect } from "@/components/ui/multi-select";
 
 type JobListingFormValues = z.infer<typeof jobListingFormSchema>;
 
@@ -43,16 +46,20 @@ const DEFAULT_VALUES: JobListingFormValues = {
   shortDescription: "",
   title: "",
   type: "Full Time",
+  eligibleBranches: ["All Branches"],
+  eligibleRoles: ["Open for all"],
 };
 
 type JobListingFromProps = {
   onSubmit: (values: JobListingFormValues) => void;
   initialJobListing?: JobListingFormValues;
+  onFormChange?: () => void;
 };
 
 export default function JobListingForm({
   onSubmit,
   initialJobListing = DEFAULT_VALUES,
+  onFormChange,
 }: JobListingFromProps) {
   const form = useForm<JobListingFormValues>({
     resolver: zodResolver(jobListingFormSchema),
@@ -61,6 +68,16 @@ export default function JobListingForm({
 
   const [showPreview, setShowPreview] = useState(false);
   const jobListingValues = form.watch();
+
+  // Track form changes
+  React.useEffect(() => {
+    const subscription = form.watch(() => {
+      if (onFormChange) {
+        onFormChange();
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form, onFormChange]);
 
   return (
     <>
@@ -165,9 +182,55 @@ export default function JobListingForm({
 
             <FormField
               control={form.control}
+              name="eligibleBranches"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Eligible Branches</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={ELIGIBLE_BRANCHES.map((branch) => ({
+                        label: branch,
+                        value: branch,
+                      }))}
+                      selected={field.value}
+                      onChange={field.onChange}
+                      placeholder="Select eligible branches"
+                    />
+                  </FormControl>
+                  <FormDescription>Select applicable branches</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="eligibleRoles"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Eligible Roles</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={ELIGIBLE_ROLES.map((role) => ({
+                        label: role,
+                        value: role,
+                      }))}
+                      selected={field.value}
+                      onChange={field.onChange}
+                      placeholder="Select eligible roles"
+                    />
+                  </FormControl>
+                  <FormDescription>Select applicable roles</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="shortDescription"
               render={({ field }) => (
-                <FormItem className="sm:col-span-2">
+                <FormItem className="sm:col-span-2 lg:col-span-3">
                   <FormLabel>Short Description</FormLabel>
                   <FormControl>
                     <Textarea {...field} />

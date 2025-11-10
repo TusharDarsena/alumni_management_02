@@ -3,6 +3,8 @@ export { default as JobListingCard } from "./components/JobListingCard";
 export { default as JobListingFilterForm } from "./components/JobListingFilterForm";
 export { JobListingSkeletonGrid } from "./components/JobListingSkeletonGrid";
 export { PublishedJobCard } from "./components/PublishedJobCard";
+export { JobDetailsModal } from "./components/JobDetailsModal";
+export { JobApplicationModal } from "./components/JobApplicationModal";
 export {
   createNewJobListing,
   getPublishedListings,

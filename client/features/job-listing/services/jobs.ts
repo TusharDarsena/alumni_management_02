@@ -14,7 +14,7 @@ export function createNewJobListing(
 ) {
   return baseApi
     .post("/job-listings", data)
-    .then((res) => jobListingFormSchema.parseAsync(res.data));
+    .then((res) => jobListingSchema.parseAsync(res.data));
 }
 
 export function deleteListing(id: string) {
@@ -24,7 +24,7 @@ export function deleteListing(id: string) {
 export function getJobListing(id: string) {
   return baseApi
     .get(`/job-listings/${id}`)
-    .then((res) => jobListingFormSchema.parseAsync(res.data));
+    .then((res) => jobListingSchema.parseAsync(res.data));
 }
 
 export function editJobListing(
@@ -33,7 +33,7 @@ export function editJobListing(
 ) {
   return baseApi
     .put(`/job-listings/${id}`, data)
-    .then((res) => jobListingFormSchema.parseAsync(res.data));
+    .then((res) => jobListingSchema.parseAsync(res.data));
 }
 
 export function getAllMyListings() {
