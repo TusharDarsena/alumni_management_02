@@ -4,6 +4,7 @@ import { zParse } from "../utils/zParse.js";
 // `@prisma/client` may export a default interop object depending on installation and Node resolution.
 // Use a safe default import and extract `PrismaClient` so both ESM/CJS shapes work.
 import { requireAuth } from "../middleware/auth.js";
+import User from "../models/User.js";
 
 // Lazily load Prisma client at runtime. If the generated client is not present
 // (e.g. `.prisma/client` not generated), the route handlers will return 503
@@ -30,6 +31,31 @@ export const jobListingsRouter = Router();
 const JOB_LISTING_TYPES = ["Full Time", "Part Time", "Internship"];
 const JOB_LISTING_EXPERIENCE_LEVELS = ["Junior", "Mid-Level", "Senior"];
 
+const ELIGIBLE_BRANCHES = [
+  "CSE", 
+  "DSAI", 
+  "ECE",
+  "CSE (Data Science/AI)",
+  "CSE (Information Security)",
+  "ECE (VLSI & Embedded Systems)",
+  "ECE (Communication & Signal Processing)",
+  "Computer Science and Engineering",
+  "Electronics and Communication Engineering",
+  "Mathematics",
+  "Management Studies",
+  "Physics",
+  "Humanities",
+  "All Branches"
+];
+
+const ELIGIBLE_ROLES = [
+  "Alumni",
+  "B.Tech",
+  "M.Tech",
+  "PhD",
+  "Open for all"
+];
+
 const jobListingFormSchema = z.object({
   id: z.string().nonempty().optional(),
   title: z.string().nonempty(),
@@ -41,6 +67,8 @@ const jobListingFormSchema = z.object({
   salary: z.number().int().positive(),
   shortDescription: z.string().max(200).nonempty(),
   description: z.string().nonempty(),
+  eligibleBranches: z.array(z.enum(ELIGIBLE_BRANCHES)).min(1),
+  eligibleRoles: z.array(z.enum(ELIGIBLE_ROLES)).min(1),
 });
 
 // Public: get published listings
@@ -51,7 +79,32 @@ jobListingsRouter.get("/published", async (req, res) => {
   const listings = await prisma.jobListing.findMany({
     where: { expiresAt: { gt: now } },
   });
-  res.json(listings);
+
+  // Fetch poster information for each listing
+  const listingsWithPosters = await Promise.all(
+    listings.map(async (listing) => {
+      let poster = null;
+      if (listing.postedBy) {
+        const posterUser = await User.findById(listing.postedBy).select("username email");
+        poster = posterUser 
+          ? { 
+              id: posterUser._id.toString(), 
+              username: posterUser.username, 
+              email: posterUser.email 
+            } 
+          : null;
+      }
+      
+      return {
+        ...listing,
+        poster,
+        eligibleBranches: listing.eligibleBranches ? JSON.parse(listing.eligibleBranches) : [],
+        eligibleRoles: listing.eligibleRoles ? JSON.parse(listing.eligibleRoles) : [],
+      };
+    })
+  );
+
+  res.json(listingsWithPosters);
 });
 
 // Get listings posted by the authenticated user
@@ -65,7 +118,14 @@ jobListingsRouter.get("/mine", requireAuth, async (req, res) => {
   const listings = await prisma.jobListing.findMany({
     where: { postedBy: userId },
   });
-  res.json(listings);
+  
+  const parsedListings = listings.map(listing => ({
+    ...listing,
+    eligibleBranches: listing.eligibleBranches ? JSON.parse(listing.eligibleBranches) : [],
+    eligibleRoles: listing.eligibleRoles ? JSON.parse(listing.eligibleRoles) : [],
+  }));
+  
+  res.json(parsedListings);
 });
 
 // Create listing (authenticated)
@@ -79,19 +139,43 @@ jobListingsRouter.post("/", requireAuth, async (req, res) => {
 
   const userId = req.user?._id?.toString();
 
-  const prisma = await ensurePrisma();
-  if (!prisma) return res.status(503).json({ message: "Prisma client unavailable" });
+
+  const { eligibleBranches, eligibleRoles, ...restBody } = body;
+
 
   const jobListing = await prisma.jobListing.create({
     data: {
-      ...body,
+      ...restBody,
       postedAt: now,
       expiresAt,
       postedBy: userId,
+      eligibleBranches: JSON.stringify(eligibleBranches),
+      eligibleRoles: JSON.stringify(eligibleRoles),
     },
   });
 
-  res.json(jobListing);
+  // Fetch poster information
+  let poster = null;
+  if (userId) {
+    const posterUser = await User.findById(userId).select("username email");
+    poster = posterUser 
+      ? { 
+          id: posterUser._id.toString(), 
+          username: posterUser.username, 
+          email: posterUser.email 
+        } 
+      : null;
+  }
+
+  // Return the listing with parsed arrays and poster info
+  const parsedListing = {
+    ...jobListing,
+    eligibleBranches: eligibleBranches || [],
+    eligibleRoles: eligibleRoles || [],
+    poster: poster,
+  };
+
+  res.json(parsedListing);
 });
 
 jobListingsRouter.get("/:id", async (req, res) => {
@@ -107,7 +191,13 @@ jobListingsRouter.get("/:id", async (req, res) => {
     return;
   }
 
-  res.json(jobListing);
+  const parsedListing = {
+    ...jobListing,
+    eligibleBranches: jobListing.eligibleBranches ? JSON.parse(jobListing.eligibleBranches) : [],
+    eligibleRoles: jobListing.eligibleRoles ? JSON.parse(jobListing.eligibleRoles) : [],
+  };
+
+  res.json(parsedListing);
 });
 
 // Update listing - only owner or admin
@@ -132,12 +222,25 @@ jobListingsRouter.put("/:id", requireAuth, async (req, res) => {
     return res.status(403).json({ message: "Forbidden" });
   }
 
+  const { eligibleBranches, eligibleRoles, ...restBody } = body;
+
   const updatedJobListing = await prisma.jobListing.update({
     where: { id },
-    data: body,
+    data: {
+      ...restBody,
+      eligibleBranches: JSON.stringify(eligibleBranches),
+      eligibleRoles: JSON.stringify(eligibleRoles),
+    },
   });
 
-  res.json(updatedJobListing);
+  // Return the listing with parsed arrays
+  const parsedListing = {
+    ...updatedJobListing,
+    eligibleBranches: eligibleBranches || [],
+    eligibleRoles: eligibleRoles || [],
+  };
+
+  res.json(parsedListing);
 });
 
 // Delete listing - only owner or admin

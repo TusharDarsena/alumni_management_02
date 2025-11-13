@@ -24,6 +24,7 @@ import HelpPage from "./pages/HelpPage";
 import VerifyOtpPage from "./pages/VerifyOtpPage";
 import MyJobListingsPage from "./pages/MyJobListingsPage";
 import EditJobListingPage from "./pages/EditJobListingPage";
+import JobApplicantsPage from "./pages/JobApplicantsPage";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -64,6 +65,7 @@ const App = () => (
                   element={<MyJobListingsPage />}
                 />
                 <Route path="/jobs/edit/:id" element={<EditJobListingPage />} />
+                <Route path="/jobs/:jobId/applicants" element={<JobApplicantsPage />} />
                 <Route
                   path="/alumni/:username"
                   element={<AlumniProfilePage />}

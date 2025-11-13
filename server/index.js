@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import authRoute from "./routes/AuthRoute.js";
 import { jobListingsRouter } from "./routes/jobListings.js";
+import { jobApplicationsRouter } from "./routes/jobApplications.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
@@ -87,6 +88,9 @@ export function createServer() {
 
   // Job listings (Prisma/SQLite)
   app.use('/api/job-listings', jobListingsRouter);
+
+  // Job applications (Prisma/SQLite)
+  app.use('/api/job-applications', jobApplicationsRouter);
 
 
 

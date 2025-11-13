@@ -26,6 +26,27 @@ model JobListing {
   postedAt         DateTime?
   // Mongo user id (string) of the user who posted the listing
   postedBy         String?
+  // Eligibility fields
+  eligibleBranches String?   // JSON array or comma-separated
+  eligibleRoles    String?   // JSON array or comma-separated
+
+  applications     JobApplication[]
 
   @@index([postedBy])
+}
+
+model JobApplication {
+  id            String      @id @default(uuid())
+  jobListingId  String
+  jobListing    JobListing  @relation(fields: [jobListingId], references: [id], onDelete: Cascade)
+  // Mongo user id (string) of the applicant
+  applicantId   String
+  linkedinUrl   String?
+  githubUrl     String?
+  personalNote  String
+  appliedAt     DateTime    @default(now())
+  status        String      @default("pending") // pending, reviewed, accepted, rejected
+
+  @@index([jobListingId])
+  @@index([applicantId])
 }
