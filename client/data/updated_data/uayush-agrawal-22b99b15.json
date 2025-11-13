@@ -1,0 +1,85 @@
+{
+  "id": "ayush-agrawal-22b99b15",
+  "name": "Ayush Agrawal",
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "position": "Research Associate",
+  "current_company": {
+    "name": "Raman Research Institute",
+    "title": "Research Associate",
+    "location": null
+  },
+  "location": "Raipur",
+  "about": "Being a Chemical Engineer, I would like to work on applied science towards translational research that aims to have a positive impact in society.",
+  "education": [
+    {
+      "title": "Indian Institute of Science (IISc)",
+      "degree": "Doctor's Degree",
+      "field": "Chemical Engineering",
+      "start_year": "2009",
+      "end_year": "2016"
+    },
+    {
+      "title": "Indian Institute of Science (IISc)",
+      "degree": "Doctor's Degree",
+      "field": "Chemical Engineering",
+      "start_year": "2009",
+      "end_year": "2016"
+    },
+    {
+      "title": "Indian Institute of Science",
+      "degree": "PhD",
+      "field": "Biophysics (Lipid Bilayer System)",
+      "start_year": "2009",
+      "end_year": "2016"
+    },
+    {
+      "title": "Indian Institute of Science (IISc)",
+      "degree": "Master's degree",
+      "field": "Chemical Engineering",
+      "start_year": "2009",
+      "end_year": "2010"
+    },
+    {
+      "title": "National Institute of Technology Raipur",
+      "degree": "Bachelor's degree",
+      "field": "Chemical Engineering",
+      "start_year": "2005",
+      "end_year": "2009"
+    },
+    {
+      "title": "National Institute of Technology Raipur",
+      "degree": "Bachelor's degree",
+      "field": "Chemical Engineering",
+      "start_year": "2005",
+      "end_year": "2009"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Research Associate",
+      "company": "Raman Research Institute",
+      "location": "Bangalore-560080, India",
+      "start_date": "May 2017",
+      "end_date": "Aug 2021"
+    },
+    {
+      "title": "Research Scholar",
+      "company": "Indian Institute of Science",
+      "location": "Bengaluru Area, India",
+      "start_date": "Aug 2009",
+      "end_date": "Jul 2016"
+    },
+    {
+      "title": "B. Tech",
+      "company": "National Institute of Technology, Raipur",
+      "location": null,
+      "start_date": "Aug 2005",
+      "end_date": "Jul 2009"
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://in.linkedin.com/in/ayush-agrawal-22b99b15",
+  "linkedin_id": "ayush-agrawal-22b99b15"
+}

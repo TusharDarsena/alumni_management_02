@@ -85,7 +85,7 @@ router.post('/get-linkedin-profile', async (req, res) => {
                 'User-Agent': 'PostmanRuntime/7.49.0'
             },
             body: JSON.stringify({
-                "zone": "serp_api_tushar",
+                "zone": "serp_api1",
                 "url": googleSearchUrl,
                 "format": "raw"
             })

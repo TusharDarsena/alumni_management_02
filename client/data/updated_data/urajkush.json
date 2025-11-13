@@ -1,0 +1,76 @@
+{
+  "id": "rajkush",
+  "name": "Rituraj kushwaha",
+  "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQHLVANoEtVlbA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1599371262561?e=2147483647&v=beta&t=teAVlGkr3oMW3rtz6it5MAGPkseLCG0Mp-fwtYwEcMo",
+  "position": "Consultant at Deloitte",
+  "current_company": {
+    "name": "Deloitte",
+    "title": "Consultant",
+    "location": "Bangalore Urban, Karnataka, India"
+  },
+  "location": "Bengaluru",
+  "about": "My areas of interest are Software development, Data Science and AI. I like learning about new technologies, their advancements and their applications in fields for solving challenging problems with practical impact. The idea that something I create can impact someone across the world now, or in the future is what drives my passion for Technology. I get exotic energy from playing musical instruments, badminton and traveling. For more visit: https://riturajkush.github.io/",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor's degree",
+      "field": "Computer Science",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "title": "St. Joseph's School, Shaktinagar",
+      "start_year": "2004",
+      "end_year": "2016"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Deloitte",
+      "company": "Deloitte",
+      "location": "Bangalore Urban, Karnataka, India",
+      "start_date": "Jun 2024",
+      "end_date": "Present"
+    },
+    {
+      "title": "Machine Learning Intern",
+      "company": "Utopia Global, Inc.",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Jan 2021",
+      "end_date": "Jun 2021"
+    },
+    {
+      "title": "Python Development and Analytics Intern",
+      "company": "MyWays",
+      "location": "New Delhi, Delhi, India",
+      "start_date": "Sep 2020",
+      "end_date": "Dec 2020"
+    },
+    {
+      "title": "Student Activity Center (SAC IIIT-NR)",
+      "company": "IIIT-Naya Raipur",
+      "location": "Naya Raipur",
+      "start_date": "Jul 2019",
+      "end_date": "Apr 2020"
+    },
+    {
+      "title": "Student Coordinator",
+      "company": "Technovate IIIT-NR",
+      "location": null,
+      "start_date": "Sep 2019",
+      "end_date": "Mar 2020"
+    },
+    {
+      "title": "Summer Intern",
+      "company": "Indian Institute Of Information Technology",
+      "location": "Allahabad, Uttar Pradesh",
+      "start_date": "May 2019",
+      "end_date": "Jul 2019"
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://ar.linkedin.com/in/rajkush",
+  "linkedin_id": "rajkush"
+}

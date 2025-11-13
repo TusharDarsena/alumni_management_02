@@ -1,0 +1,428 @@
+{
+  "id": "rajkush",
+  "name": "Rituraj kushwaha",
+  "city": "Bengaluru, Karnataka, India",
+  "country_code": "IN",
+  "position": "Consultant at Deloitte",
+  "about": "My areas of interest are Software development, Data Science and AI. I like learning about new technologies, their advancements and their applications in fields for solving challenging problems with practical impact. The idea that something I create can impact someone across the world now, or in the future is what drives my passion for Technology. I get exotic energy from playing musical instruments, badminton and traveling. For more visit: https://riturajkush.github.io/",
+  "current_company": {
+    "link": "https://www.linkedin.com/company/deloitte",
+    "name": "Deloitte",
+    "company_id": "deloitte",
+    "title": "Consultant",
+    "location": "Bangalore Urban, Karnataka, India"
+  },
+  "experience": [
+    {
+      "title": "Deloitte",
+      "location": "Bangalore Urban, Karnataka, India",
+      "description_html": null,
+      "duration": "4 years 2 months",
+      "positions": [
+        {
+          "subtitle": "Deloitte",
+          "meta": "Jun 2024 - Present 1 year 5 months",
+          "start_date": "Jun 2024",
+          "end_date": "Present",
+          "title": "Consultant",
+          "description_html": null,
+          "location": "Bangalore Urban, Karnataka, India"
+        },
+        {
+          "subtitle": "Deloitte",
+          "meta": "Sep 2021 - May 2024 2 years 9 months",
+          "start_date": "Sep 2021",
+          "end_date": "May 2024",
+          "title": "Analyst",
+          "description_html": null,
+          "location": "Bengaluru, Karnataka, India"
+        }
+      ],
+      "company": "Deloitte",
+      "company_id": "deloitte",
+      "url": "https://www.linkedin.com/company/deloitte?trk=public_profile_experience-group-header",
+      "company_logo_url": null
+    },
+    {
+      "title": "Machine Learning Intern",
+      "location": "Bengaluru, Karnataka, India",
+      "description": "- Worked on module of uIDE (Utopia Intelligent Data Enrichment) project which involved text classification of extracted textual data from image.\n\n- Worked across Software Development Life Cycle to develop REST API for PID (Pipeline and\n\nInstrumentation Design) project which helped in automating the extraction of stored equipment\n\nand sub equipment tags and displaying in desired format.\n\n- Gained experience in deep diving into codebases, writing industry standard code, maintaining\n\ndocumentation, writing logs for applications and pushing the changes.",
+      "description_html": "- Worked on module of uIDE (Utopia Intelligent Data Enrichment) project which involved text classification of extracted textual data from image. <br> - Worked across Software Development Life Cycle to develop REST API for PID (Pipeline and <br> Instrumentation Design) project which helped in automating the extraction of stored equipment <br> and sub equipment tags and displaying in desired format. <br> - Gained experience in deep diving into codebases, writing industry standard code, maintaining <br> documentation, writing logs for applications and pushing the changes.",
+      "start_date": "Jan 2021",
+      "end_date": "Jun 2021",
+      "company": "Utopia Global, Inc.",
+      "company_id": "utopia-inc",
+      "url": "https://www.linkedin.com/company/utopia-inc",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQH2nyLQLodbbg/company-logo_100_100/company-logo_100_100/0/1630644414960/utopia_inc_logo?e=2147483647&v=beta&t=CcpcXDIe3LthhLTz0U4MGh_up1elUWiPyEZEaWlAPTo"
+    },
+    {
+      "title": "Python Development and Analytics Intern",
+      "location": "New Delhi, Delhi, India",
+      "description": "- Wrote python scripts for web scrapping of data from websites and storing in excel sheet.\n\n- Created a dashboard using Elastic Stack for analysis of mongodb logs which helped the enterprise to efficiently and quickly track down errors and resource utilisation.\n\n- Set up and integrated Elastic APM for managing and monitoring performance of backend applications.",
+      "description_html": "- Wrote python scripts for web scrapping of data from websites and storing in excel sheet. <br> - Created a dashboard using Elastic Stack for analysis of mongodb logs which helped the enterprise to efficiently and quickly track down errors and resource utilisation. <br> - Set up and integrated Elastic APM for managing and monitoring performance of backend applications. <!---->",
+      "start_date": "Sep 2020",
+      "end_date": "Dec 2020",
+      "company": "MyWays",
+      "company_id": "followingmyways",
+      "url": "https://in.linkedin.com/company/followingmyways",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQF6paqCYX5tpg/company-logo_100_100/company-logo_100_100/0/1691228501404/followingmyways_logo?e=2147483647&v=beta&t=-cqUHprwdIDAgSSnzgWBFEDhJfhBAiHAjOjxm7U4BJ4"
+    },
+    {
+      "title": "Student Activity Center (SAC IIIT-NR)",
+      "location": "Naya Raipur",
+      "description": "Directed the activities of various cultural clubs and societies of the institution and managing the intra/inter college event.",
+      "description_html": "Directed the activities of various cultural clubs and societies of the institution and managing the intra/inter college event. <!---->",
+      "start_date": "Jul 2019",
+      "end_date": "Apr 2020",
+      "company": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Student Coordinator",
+      "description": "Managed the annual inter college techno-cultural fest of institute.",
+      "description_html": "Managed the annual inter college techno-cultural fest of institute. <!---->",
+      "start_date": "Sep 2019",
+      "end_date": "Mar 2020",
+      "company": "Technovate IIIT-NR",
+      "company_id": "technovate_iiitnr",
+      "url": "https://in.linkedin.com/company/technovate_iiitnr",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQHlbUD6T-pNtw/company-logo_100_100/company-logo_100_100/0/1630586553618/technovate_iiitnr_logo?e=2147483647&v=beta&t=YgVldipN9CRrwfYM51YFTb4ao4sXk1OcMKPhA4JBxaU"
+    },
+    {
+      "title": "Summer Intern",
+      "location": "Allahabad, Uttar Pradesh",
+      "description": "Worked on Image Processing and Computer Vision.",
+      "description_html": "Worked on Image Processing and Computer Vision. <!---->",
+      "start_date": "May 2019",
+      "end_date": "Jul 2019",
+      "company": "Indian Institute Of Information Technology",
+      "url": "https://in.linkedin.com/school/indian-institute-of-information-technology-allahabad-india/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQFVFXxLqxgX3g/company-logo_100_100/company-logo_100_100/0/1631305211714?e=2147483647&v=beta&t=iwTK9z-LXywwEzKw3E8PV7UMJy_9yK3ALvKdcp1aW5k"
+    }
+  ],
+  "url": "https://ar.linkedin.com/in/rajkush",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/ankush-jain-22313a20",
+      "name": "Ankush Jain",
+      "about": "Apra Labs.",
+      "location": "1K followers Chhattisgarh, India"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/venugopalkadamba",
+      "name": "Venu Gopal Kadamba",
+      "about": "Intellistack",
+      "location": "7K followers New York, NY"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/chaitanyachadha12",
+      "name": "Chaitanya Chadha",
+      "about": "MONEYTECH BUSINESS SYSTEMS",
+      "location": "4K followers Washington, DC"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sufbhura",
+      "name": "Sufiyaan Bhura",
+      "about": "Varian",
+      "location": "7K followers Pune"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/misha-dey",
+      "name": "Misha Dey",
+      "about": "Horizontal",
+      "location": "2K followers Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/soumyadip-sarkar",
+      "name": "Soumyadip Sarkar",
+      "about": "Jio Platforms Limited (JPL)",
+      "location": "4K followers Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/kshitiz-verma-38b019101",
+      "name": "Kshitiz Verma",
+      "about": "HCLTech",
+      "location": "3K followers Lucknow"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/vrunda2909",
+      "name": "Vrunda Patel",
+      "about": "IBM",
+      "location": "5K followers Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/rishabh-rahatgaonkar",
+      "name": "Rishabh R Rahatgaonkar",
+      "about": "Akridata",
+      "location": "4K followers Pune"
+    },
+    {
+      "profile_link": "https://uk.linkedin.com/in/arpit-verma-364340a3",
+      "name": "Arpit N. Verma",
+      "about": "Avensure Ltd",
+      "location": "7K followers United Kingdom"
+    }
+  ],
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor's degree",
+      "field": "Computer Science",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/?trk=public_profile_school_profile-section-card_image-click",
+      "start_year": "2017",
+      "end_year": "2021",
+      "description": "Activities and Societies: Capriccio, The Society of Coders",
+      "description_html": "Activities and Societies: Capriccio, The Society of Coders",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "St. Joseph's School, Shaktinagar",
+      "start_year": "2004",
+      "end_year": "2016",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQHLVANoEtVlbA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1599371262561?e=2147483647&v=beta&t=teAVlGkr3oMW3rtz6it5MAGPkseLCG0Mp-fwtYwEcMo",
+  "courses": [
+    {
+      "subtitle": "-",
+      "title": "Big Data"
+    },
+    {
+      "subtitle": "-",
+      "title": "Compiler Design"
+    },
+    {
+      "subtitle": "-",
+      "title": "Computational Intelligence"
+    },
+    {
+      "subtitle": "-",
+      "title": "Computer Networks"
+    },
+    {
+      "subtitle": "-",
+      "title": "Computer Organization"
+    },
+    {
+      "subtitle": "-",
+      "title": "Cryptography"
+    },
+    {
+      "subtitle": "-",
+      "title": "Data Mining"
+    },
+    {
+      "subtitle": "-",
+      "title": "Data Structures and Algorithms"
+    },
+    {
+      "subtitle": "-",
+      "title": "Database Management Systems and Warehousing"
+    },
+    {
+      "subtitle": "-",
+      "title": "Deep Learning"
+    },
+    {
+      "subtitle": "-",
+      "title": "Discrete Mathematics"
+    },
+    {
+      "subtitle": "-",
+      "title": "Formal Language and Automata Theory"
+    },
+    {
+      "subtitle": "-",
+      "title": "Linear Algebra and Differential Equations"
+    },
+    {
+      "subtitle": "-",
+      "title": "Machine Learning"
+    },
+    {
+      "subtitle": "-",
+      "title": "Object Oriented Methodologies"
+    },
+    {
+      "subtitle": "-",
+      "title": "Operating Systems"
+    },
+    {
+      "subtitle": "-",
+      "title": "Random Process and Statistics"
+    },
+    {
+      "subtitle": "-",
+      "title": "Signals and Systems"
+    },
+    {
+      "subtitle": "-",
+      "title": "Software Engineering"
+    }
+  ],
+  "certifications": [
+    {
+      "meta": "Issued Oct 2024",
+      "subtitle": "Salesforce",
+      "title": "MuleSoft Certified Developer",
+      "credential_url": null,
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Sep 2021 Credential ID UC-0ec383bd-5366-4803-b7a0-f92bc5de31e7 See credential",
+      "subtitle": "Udemy",
+      "title": "Introduction to Cloud Computing",
+      "credential_url": "https://udemy-certificate.s3.amazonaws.com/pdf/UC-0ec383bd-5366-4803-b7a0-f92bc5de31e7.pdf?trk=public_profile_see-credential",
+      "credential_id": "UC-0ec383bd-5366-4803-b7a0-f92bc5de31e7"
+    },
+    {
+      "meta": "Issued Sep 2021 Credential ID UC-9698f73c-448e-4001-bf93-4f6e684dd22e See credential",
+      "subtitle": "Udemy",
+      "title": "Software Development Life Cycle",
+      "credential_url": "https://udemy-certificate.s3.amazonaws.com/pdf/UC-9698f73c-448e-4001-bf93-4f6e684dd22e.pdf?trk=public_profile_see-credential",
+      "credential_id": "UC-9698f73c-448e-4001-bf93-4f6e684dd22e"
+    },
+    {
+      "meta": "Issued Sep 2020 Credential ID UC-36da30b9-aea3-4fb9-997f-c60b74fcaf91 See credential",
+      "subtitle": "Udemy",
+      "title": "Data Analytics Essentials with Power BI",
+      "credential_url": "https://www.udemy.com/certificate/UC-36da30b9-aea3-4fb9-997f-c60b74fcaf91/?trk=public_profile_see-credential",
+      "credential_id": "UC-36da30b9-aea3-4fb9-997f-c60b74fcaf91"
+    },
+    {
+      "meta": "Issued May 2020 Credential ID rPP4xnZ9SF5Ro2epk See credential",
+      "subtitle": "JPMorgan Chase & Co.",
+      "title": "Software Engineering Virtual Experience",
+      "credential_url": "https://insidesherpa.s3.amazonaws.com/completion-certificates/JP%20Morgan/R5iK7HMxJGBgaSbvk_JPMorgan%20Chase_TuiADtmdrHfAadMts_completion_certificate.pdf?trk=public_profile_see-credential",
+      "credential_id": "rPP4xnZ9SF5Ro2epk"
+    },
+    {
+      "meta": "Issued Dec 2019 Credential ID 14390278 See credential",
+      "subtitle": "PadhAI - One Fourth Labs",
+      "title": "Deep Learning",
+      "credential_url": "https://www.credential.net/205fc760-2aec-4ce7-9b83-f9586120784c?trk=public_profile_see-credential",
+      "credential_id": "14390278"
+    },
+    {
+      "meta": "Issued Jul 2020 Expires Jul 2023 Credential ID 4239b1bb9382af7271e17d38172fc6f32340fb70133e7d556a267cf673ca528e See credential",
+      "subtitle": "Alphaa AI",
+      "title": "Alphaa AI Data Expert",
+      "credential_url": "https://awards.alphaa.ai/docs/5efecfe0b0af2c3f3815679f?trk=public_profile_see-credential",
+      "credential_id": "4239b1bb9382af7271e17d38172fc6f32340fb70133e7d556a267cf673ca528e"
+    },
+    {
+      "meta": "Issued Apr 2020 Expires May 2023 Credential ID dPV4WO1bQcKBsLVriBoUtQ See credential",
+      "subtitle": "Google",
+      "title": "Google Analytics for Beginners",
+      "credential_url": "https://analytics.google.com/analytics/academy/certificate/dPV4WO1bQcKBsLVriBoUtQ?trk=public_profile_see-credential",
+      "credential_id": "dPV4WO1bQcKBsLVriBoUtQ"
+    }
+  ],
+  "followers": 1370,
+  "connections": 500,
+  "current_company_company_id": "deloitte",
+  "current_company_name": "Deloitte",
+  "projects": [
+    {
+      "title": "Blockhain for Health records"
+    },
+    {
+      "title": "Cinephile - A web page for movie lovers"
+    },
+    {
+      "title": "Dashboard for Twitter Sentiment Analysis"
+    },
+    {
+      "title": "Emotion Detection using MATLAB"
+    },
+    {
+      "title": "Self Driving Car using Raspberry Pi"
+    },
+    {
+      "title": "Time Series forecast of product's price"
+    },
+    {
+      "title": "Unusual activity Detection"
+    },
+    {
+      "title": "Vehicle Path Prediction"
+    },
+    {
+      "title": "Visualizations using R"
+    },
+    {
+      "title": "Voice Enabled Smart News App"
+    },
+    {
+      "title": "Web app for Binary Classification"
+    },
+    {
+      "title": "Web app for Neural Style Transfer"
+    }
+  ],
+  "location": "Bengaluru",
+  "input_url": "https://in.linkedin.com/in/rajkush",
+  "linkedin_id": "rajkush",
+  "activity": [
+    {
+      "interaction": "Liked by Rituraj kushwaha",
+      "link": "https://www.linkedin.com/posts/surjyaswain_stars-align-evergreen-ai-and-data-management-activity-7036934247340802048-ONDk",
+      "title": "Know that feeling when the last piece of a jigsaw puzzle slips into place? Find that satisfaction from your data with effective #DataOps. Follow the…",
+      "img": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFYfREbaCgWVg/articleshare-shrink_800/articleshare-shrink_800/0/1711113419434?e=2147483647&v=beta&t=q4wKVo1LG5JN8i9FbXG-bCVt6IVoKRwU7fTeUR1hwWU",
+      "id": "7036934247340802048"
+    },
+    {
+      "interaction": "Liked by Rituraj kushwaha",
+      "link": "https://www.linkedin.com/posts/jain-samyak_layoffs-python-php-activity-7037324486718726144-k0VO",
+      "title": "Are you a Tech fresher who's been impacted by recent #layoffs? We want to help. I know firsthand how difficult it can be to lose your job…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7037324486718726144"
+    },
+    {
+      "interaction": "Liked by Rituraj kushwaha",
+      "link": "https://www.linkedin.com/posts/p-kartik06_dataanalysis-sql-learning-activity-7019284176000479232-2hTc",
+      "title": "Many of us may become perplexed and anxious when learning SQL as a result of the breadth of the content it covers. However, by understanding the…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7019284176000479232"
+    },
+    {
+      "interaction": "Liked by Rituraj kushwaha",
+      "link": "https://www.linkedin.com/posts/sahilsrivastava25_microsoft-layoff-activity-7022141443670454272-rofO",
+      "title": "21 years in an org, going through 7 promotions and you are being laid off🤐 Reminder to everyone that work is work not life, even after 21 years…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7022141443670454272"
+    },
+    {
+      "interaction": "Liked by Rituraj kushwaha",
+      "link": "https://www.linkedin.com/posts/ramit-sawhney_hiring-towerresearchcapital-interviews-activity-7022105576947998720-h5pD",
+      "title": "Tower Research Capital is hiring for a couple of roles, I’d love to talk more about them and refer suitable candidates. These aren’t the easiest of…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7022105576947998720"
+    },
+    {
+      "interaction": "Liked by Rituraj kushwaha",
+      "link": "https://www.linkedin.com/posts/shreybatra_why-is-there-no-build-api-with-no-code-activity-6978576900008865792-lwkN",
+      "title": "Why is there no \"Build API with No Code\" platform?? APIs and backends are the most redundant part of any startup / product where 80% time it is the…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "6978576900008865792"
+    }
+  ],
+  "linkedin_num_id": "711593950",
+  "banner_image": "https://static.licdn.com/aero-v1/sc/h/5q92mjc5c51bjlwaj3rs9aa82",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [],
+  "first_name": "Rituraj",
+  "last_name": "kushwaha",
+  "timestamp": "2025-10-28T10:17:02.971Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/rajkush"
+  }
+}
