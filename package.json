@@ -19,6 +19,7 @@
     "build:server": "vite build --config vite.config.server.ts",
     "start": "node server/node-build.js && node server/dist/server.js",
     "seed": "tsx server/scripts/seedUser.js",
+    "seed:jobs": "tsx server/scripts/seedJobListings.js",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
     "typecheck": "tsc"

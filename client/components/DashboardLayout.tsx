@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
 import { Bell, User as UserIcon, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -40,6 +40,27 @@ export default function DashboardLayout({
     useState<ModalInitialTab>("profile");
   const { logout, refresh } = useAuth();
   const { theme, toggleTheme } = useTheme();
+
+  // Refs for click-outside detection
+  const notifRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (notifRef.current && !notifRef.current.contains(event.target as Node)) {
+        setNotifOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setProfileOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   function handleOpenProfile() {
     setModalInitialTab("profile");
@@ -87,29 +108,31 @@ export default function DashboardLayout({
               {activePage}
             </div>
             <div className="flex items-center gap-4 relative">
-              <button
-                aria-label="Notifications"
-                className="relative p-2 rounded-md hover:bg-slate-50"
-                onClick={() => setNotifOpen((v) => !v)}
-              >
-                <Bell className="h-5 w-5 text-slate-600" />
-                {user.notificationCount ? (
-                  <span className="absolute -top-0.5 -right-0.5 inline-flex h-2.5 w-2.5 rounded-full bg-red-600" />
-                ) : null}
-              </button>
+              <div ref={notifRef} className="relative">
+                <button
+                  aria-label="Notifications"
+                  className="relative p-2 rounded-md hover:bg-slate-50"
+                  onClick={() => setNotifOpen((v) => !v)}
+                >
+                  <Bell className="h-5 w-5 text-slate-600" />
+                  {user.notificationCount ? (
+                    <span className="absolute -top-0.5 -right-0.5 inline-flex h-2.5 w-2.5 rounded-full bg-red-600" />
+                  ) : null}
+                </button>
 
-              {notifOpen && (
-                <div className="absolute right-14 mt-2 w-80 rounded-md border bg-white shadow-lg">
-                  <div className="p-3 text-sm font-medium border-b">
-                    Notifications
-                  </div>
-                  <div className="max-h-56 overflow-auto">
-                    <div className="p-3 text-sm text-slate-600">
-                      No new notifications
+                {notifOpen && (
+                  <div className="absolute right-0 mt-2 w-80 rounded-md border bg-white shadow-lg">
+                    <div className="p-3 text-sm font-medium border-b">
+                      Notifications
+                    </div>
+                    <div className="max-h-56 overflow-auto">
+                      <div className="p-3 text-sm text-slate-600">
+                        No new notifications
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
 
               <button
                 aria-label="Toggle theme"
@@ -123,7 +146,7 @@ export default function DashboardLayout({
                 )}
               </button>
 
-              <div className="relative">
+              <div ref={profileRef} className="relative">
                 <button
                   className="flex items-center gap-3 rounded-md p-1 hover:bg-slate-50"
                   onClick={() => setProfileOpen((v) => !v)}

@@ -36,6 +36,9 @@ export default function JobOpportunitiesPage() {
   const { user: authUser } = useAuth(); // ✅ Renamed to authUser
   const toast = useToast();
 
+  // Watch form values to trigger re-render when filters change
+  const formValues = form.watch();
+
   useEffect(() => {
     let mounted = true;
     getPublishedListings().then((res) => {
@@ -108,6 +111,11 @@ export default function JobOpportunitiesPage() {
         btnSection={
           // ✅ Wrapped buttons in a div
           <div className="flex items-center gap-2">
+            {/* ✅ Added "Applied Jobs" Button */}
+            <Button variant="outline" asChild>
+              <Link to="/jobs/applied">My Applications</Link>
+            </Button>
+            
             {/* ✅ Added "My Job Listings" Button */}
             <Button variant="outline" asChild>
               <Link to="/jobs/my-listings">My Job Listings</Link>
