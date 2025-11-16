@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { extractBatch, extractBranch, extractCurrentCompany } from "@shared/alumniUtils";
 
 export interface AlumniItem {
   id: string;
@@ -27,6 +28,12 @@ export interface AlumniItem {
   about?: string;
   graduationYear?: string;
   batch?: string;
+  branch?: string;
+  current_company?: string | {
+    name?: string;
+    title?: string;
+    location?: string;
+  };
 }
 
 interface AlumniCardProps {
@@ -39,8 +46,10 @@ interface AlumniCardProps {
 }
 
 export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile, onToggleFavourite, onClick }: AlumniCardProps) {
-  const batch = alumnus.batch;
-  const graduationYear = alumnus.graduationYear;
+  // Extract batch, branch, and company from education/experience arrays
+  const batch = alumnus.batch || extractBatch(alumnus.education);
+  const branch = alumnus.branch || extractBranch(alumnus.education);
+  const currentCompanyName = extractCurrentCompany(alumnus.current_company, alumnus.experience);
 
   const handleView = () => {
     onViewProfile?.(alumnus.id);
@@ -52,7 +61,24 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
     onToggleFavourite?.(alumnus.id);
   };
 
-  const subtitle = `Batch: ${batch && batch !== "N/A" ? batch : "Batch not available"} | Graduation Year: ${graduationYear && graduationYear !== "N/A" ? graduationYear : "Graduation year not available"}`;
+  // Build subtitle with batch, branch, and current company
+  const subtitleParts: string[] = [];
+  
+  if (batch && batch !== "N/A" && batch !== "") {
+    subtitleParts.push(`Batch: ${batch}`);
+  }
+  
+  if (branch && branch !== "N/A" && branch !== "") {
+    subtitleParts.push(`Branch: ${branch}`);
+  }
+  
+  if (currentCompanyName && currentCompanyName !== "N/A" && currentCompanyName !== "") {
+    subtitleParts.push(`${currentCompanyName}`);
+  }
+  
+  const subtitle = subtitleParts.length > 0 
+    ? subtitleParts.join(" | ") 
+    : "Information not available";
 
   return (
     <Card className="rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-default">
