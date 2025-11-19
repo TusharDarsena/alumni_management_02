@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useToast } from "@/hooks/use-toast";
 
@@ -16,51 +16,64 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ processed: 0, total: 0, currentName: "" });
   const [logs, setLogs] = useState<string[]>([]);
-  const shouldStopRef = useRef(false); // To handle cancellation
   const { toast } = useToast();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startScraping = async (names: string[]) => {
-    if (isProcessing) return; // Prevent double start
+  // Function to poll the server status
+  const checkStatus = async () => {
+    try {
+      const res = await axios.get('/api/scrape/status');
+      const data = res.data;
 
-    setIsProcessing(true);
-    setLogs([]); // Clear old logs
-    setProgress({ processed: 0, total: names.length, currentName: "" });
-    shouldStopRef.current = false;
+      // Sync local state with server state
+      setIsProcessing(data.isRunning);
+      setProgress({
+        processed: data.processed,
+        total: data.total,
+        currentName: data.currentName
+      });
+      setLogs(data.logs || []);
 
-    toast({ title: "Scraping Started", description: `Processing ${names.length} profiles in background...` });
-
-    for (let i = 0; i < names.length; i++) {
-      // Check if user clicked cancel
-      if (shouldStopRef.current) {
-        setLogs((prev) => [`⚠️ Process cancelled by user.`, ...prev]);
-        break;
+      // If server finished, stop polling
+      if (!data.isRunning && data.total > 0 && data.processed === data.total) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
       }
-
-      const name = names[i];
-      setProgress({ processed: i, total: names.length, currentName: name });
-
-      try {
-        // The 150s timeout you requested
-        await axios.post('/api/scrape/get-linkedin-profile', 
-          { alumniName: name },
-          { timeout: 150000 } 
-        );
-        setLogs((prev) => [`✅ Success: ${name}`, ...prev]);
-      } catch (error: any) {
-        const errorMsg = error.response?.data?.message || error.message;
-        setLogs((prev) => [`❌ Failed: ${name} - ${errorMsg}`, ...prev]);
-      }
+    } catch (error) {
+      console.error("Failed to check status", error);
     }
-
-    setIsProcessing(false);
-    setProgress((prev) => ({ ...prev, processed: names.length, currentName: "Completed" }));
-    toast({ title: "Batch Complete", description: "All background tasks finished." });
   };
 
-  const cancelScraping = () => {
-    shouldStopRef.current = true;
-    setIsProcessing(false);
-    toast({ title: "Stopping", description: "Finishing current task then stopping." });
+  // On Load: Check if a job is already running (This fixes the F5 issue)
+  useEffect(() => {
+    checkStatus(); // Check immediately on mount/refresh
+    
+    // Set up polling interval (every 2 seconds)
+    intervalRef.current = setInterval(checkStatus, 2000);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  const startScraping = async (names: string[]) => {
+    try {
+      await axios.post('/api/scrape/start-batch', { names });
+      toast({ title: "Background Job Started", description: "You can refresh or leave the page." });
+      
+      // Force an immediate check
+      checkStatus();
+    } catch (error: any) {
+      toast({ title: "Error", description: error.response?.data?.message || "Failed to start", variant: "destructive" });
+    }
+  };
+
+  const cancelScraping = async () => {
+    try {
+      await axios.post('/api/scrape/stop-batch');
+      toast({ title: "Stopping...", description: "The current item will finish, then it stops." });
+    } catch (error) {
+      console.error("Failed to stop", error);
+    }
   };
 
   return (
