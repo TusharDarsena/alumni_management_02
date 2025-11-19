@@ -1,82 +1,132 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import * as xlsx from "xlsx"; // Import the xlsx library
+import axios from "axios"; // Import axios
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
+// Define the shape of a row in the XLSX file
+interface AlumniRow {
+  Name: string;
+  // Add other columns if you need them, but "Name" is required
+}
+
 export default function ImportUpload() {
-  const [file, setFile] = useState<File | null>(null);
-  const [uploading, setUploading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [logs, setLogs] = useState<string[]>([]);
+  const [progress, setProgress] = useState({ processed: 0, total: 0 });
   const { toast } = useToast();
+  
+  // Use a ref to reset the file input
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = (f: File | null) => {
-    setFile(f);
-  };
+  const handleFile = async (file: File | null) => {
+    if (!file) return;
 
-  const handleUpload = async () => {
-    if (!file) {
-      toast({
-        title: "No file selected",
-        description: "Please choose a JSON file to import.",
-      });
-      return;
-    }
+    setIsProcessing(true);
+    setLogs([]);
+    setProgress({ processed: 0, total: 0 });
 
-    setUploading(true);
     try {
-      const text = await file.text();
-      const data = JSON.parse(text);
-      if (!Array.isArray(data)) {
+      // 1. Read the file
+      const data = await file.arrayBuffer();
+      const workbook = xlsx.read(data, { type: "buffer" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      
+      // Read as generic objects to inspect keys manually
+      const json = xlsx.utils.sheet_to_json<any>(worksheet);
+
+      // 2. Validate and get names (ROBUST METHOD)
+      const names: string[] = json
+        .map((row) => {
+          // Find the specific key in this row that looks like "name"
+          // This handles "Name ", "name", "NAME", etc.
+          const key = Object.keys(row).find(
+            (k) => k.trim().toLowerCase() === "name"
+          );
+          return key ? row[key] : null;
+        })
+        .filter((name): name is string => !!name && typeof name === 'string');
+
+      if (names.length === 0) {
         toast({
           title: "Invalid file",
-          description: "JSON must be an array of alumni objects.",
+          description: "No names found. Please check your Excel header row.",
+          variant: "destructive",
         });
-        setUploading(false);
+        setIsProcessing(false);
         return;
       }
+      
+      setProgress({ processed: 0, total: names.length });
+      setLogs([`Found ${names.length} names. Starting scrape...`]);
 
-      const res = await fetch("/api/alumni/import", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      // 3. Process names one by one
+      for (const [index, name] of names.entries()) {
+        try {
+          setLogs((prev) => [...prev, `[${index + 1}/${names.length}] Scraping "${name}"...`]);
+          
+          const res = await axios.post('/api/scrape/get-linkedin-profile', {
+            alumniName: name,
+          });
+          
+          setLogs((prev) => [...prev, `  ✅ Success: "${name}" (${res.data.message})`]);
+
+        } catch (error: any) {
+          const errorMsg = error.response?.data?.message || error.message;
+          setLogs((prev) => [...prev, `  ❌ Error scraping "${name}": ${errorMsg}`]);
+        } finally {
+          setProgress((prev) => ({ ...prev, processed: prev.processed + 1 }));
+        }
+      }
+
+      setLogs((prev) => [...prev, "--- Bulk scrape complete! ---"]);
+      toast({
+        title: "Bulk Scrape Complete",
+        description: `Processed ${names.length} entries.`,
       });
 
-      const json = await res.json();
-      if (!res.ok) {
-        toast({
-          title: "Import failed",
-          description: json.error || json.message || "Server error",
-        });
-      } else {
-        toast({
-          title: "Import complete",
-          description: `Processed ${json.processed || 0} entries.`,
-        });
-      }
     } catch (e: any) {
-      toast({ title: "Error", description: e.message || "Failed to import" });
+      toast({ title: "Error", description: e.message || "Failed to read file", variant: "destructive" });
     } finally {
-      setUploading(false);
-      setFile(null);
+      setIsProcessing(false);
+      // Reset the file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     }
   };
 
   return (
     <div className="w-full p-4 bg-white border border-gray-100 rounded-md mb-4">
-      <h3 className="text-lg font-medium mb-2">Bulk Import Alumni</h3>
+      <h3 className="text-lg font-medium mb-2">Bulk Scrape Alumni</h3>
       <p className="text-sm text-gray-600 mb-3">
-        Upload a JSON file containing an array of alumni objects. Upserts on
-        linkedin_id.
+        Upload an XLSX file with a column named "Name". Each name will be
+        scraped one by one.
       </p>
       <div className="flex items-center gap-3">
         <Input
+          ref={fileInputRef}
           type="file"
-          accept="application/json"
+          accept=".xlsx, .xls" // Accept Excel files
           onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
+          disabled={isProcessing}
         />
-        <Button onClick={handleUpload} disabled={uploading}>
-          {uploading ? "Uploading..." : "Upload"}
+        <Button onClick={() => handleFile(fileInputRef.current?.files?.[0] ?? null)} disabled={isProcessing}>
+          {isProcessing
+            ? `Processing ${progress.processed}/${progress.total}...`
+            : "Upload and Scrape"}
         </Button>
       </div>
+
+      {logs.length > 0 && (
+        <div className="mt-4 p-3 bg-gray-900 text-white rounded-md max-h-60 overflow-y-auto">
+          <pre className="text-sm whitespace-pre-wrap">
+            {logs.join("\n")}
+          </pre>
+        </div>
+      )}
     </div>
   );
 }
