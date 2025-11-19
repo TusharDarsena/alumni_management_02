@@ -28,6 +28,7 @@ import JobApplicantsPage from "./pages/JobApplicantsPage";
 import AppliedJobsPage from "./pages/AppliedJobsPage";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { ScrapingProvider } from "./context/ScrapingContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
@@ -39,7 +40,8 @@ const App = () => (
         <Toaster />
         <Sonner />
         <AuthProvider>
-          <BrowserRouter>
+          <ScrapingProvider>
+            <BrowserRouter>
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
@@ -113,6 +115,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
+          </ScrapingProvider>
         </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
