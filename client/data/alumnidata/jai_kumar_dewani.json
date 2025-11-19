@@ -8,8 +8,9 @@
     {
       "title": "HashCode 2020 Experience",
       "attribution": "This was my first time participating in google hashcode. Since I knew nothing about the 2 months before the…",
+      "img": "https://media.licdn.com/dms/image/v2/C5112AQH7RfOgmNV_CQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1582309049644?e=2147483647&v=beta&t=0lgxL7vqObHrugmMdCnls2MSImlMk8I8ZCx4_WoUofs",
       "link": "https://www.linkedin.com/pulse/hashcode-2020-experience-jai-kumar-dewani",
-      "created_at": "2020-02-21T00:00:00.000Z",
+      "created_at": "Fri Feb 21 2020 00:00:00 GMT+0000 (Coordinated Universal Time)",
       "interaction": "4 -",
       "id": "6636679350412513281"
     }
@@ -46,7 +47,7 @@
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
-  "url": "https://bh.linkedin.com/in/jai-dewani",
+  "url": "https://www.linkedin.com/in/jai-dewani",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/ertarunagarwal",
@@ -107,6 +108,66 @@
       "name": "Nizam Mohammed",
       "about": null,
       "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ayushi-pathak-06572b12b",
+      "name": "Ayushi Pathak",
+      "about": null,
+      "location": "Gurgaon"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/rajeshwariraghu",
+      "name": "Rajeshwari Raghuwanshi",
+      "about": null,
+      "location": "Bhopal"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/mern-full-stack-developer",
+      "name": "Himanshu Bhardwaj",
+      "about": null,
+      "location": "Rajasthan, India"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/vatsala-jha-dev",
+      "name": "Vatsala Jha",
+      "about": null,
+      "location": "New York City Metropolitan Area"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sejallkhanna",
+      "name": "Sejal Khanna",
+      "about": null,
+      "location": "Gurugram"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sauain",
+      "name": "Saurav Jain",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/namratavalecha",
+      "name": "Namrata Valecha",
+      "about": null,
+      "location": "Gurugram"
+    },
+    {
+      "profile_link": "https://uk.linkedin.com/in/akshitaagarwal11",
+      "name": "Akshita Agarwalla",
+      "about": null,
+      "location": "London"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shatadru-majumdar",
+      "name": "Shatadru Majumdar",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sagnik-mukherjee-23b21b16a",
+      "name": "Sagnik Mukherjee",
+      "about": null,
+      "location": "Bengaluru"
     }
   ],
   "educations_details": "IIIT-Naya Raipur",
@@ -337,7 +398,7 @@
   "bio_links": [],
   "first_name": "✨Jai",
   "last_name": "Kumar Dewani",
-  "timestamp": "2025-11-19T19:51:06.211Z",
+  "timestamp": "2025-11-19T20:04:18.832Z",
   "input": {
     "url": "https://in.linkedin.com/in/jai-dewani"
   }

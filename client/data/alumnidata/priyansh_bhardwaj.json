@@ -1,4 +1,4 @@
 {
-  "snapshot_id": "s_mi6flva42n78z6tijb",
+  "snapshot_id": "sd_mi6fqvuj14qo2j29u3",
   "message": "Your request is still in progress and cannot be retrieved in this call. Use the provided Snapshot ID to track progress via the Monitor Snapshot endpoint and download it once ready via the Download Snapshot endpoint. More information on https://docs.brightdata.com/api-reference/web-scraper-api/management-apis/monitor-progress"
 }

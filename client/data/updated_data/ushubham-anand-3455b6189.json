@@ -1,14 +1,14 @@
 {
-  "id": "ashwini-kumar-261919183",
-  "name": "Ashwini Kumar",
-  "avatar": "https://media.licdn.com/dms/image/v2/C5603AQFcoWOAc1nNfQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1611855715651?e=2147483647&v=beta&t=g8Vkp8oG1wgIKXWzkvOVwVcq8TAEzueyYUdvjdHQAoo",
+  "id": "shubham-anand-3455b6189",
+  "name": "Shubham Anand",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQFFVNHqLdqy3A/profile-displayphoto-scale_200_200/B4DZllglR2JAAY-/0/1758344668610?e=2147483647&v=beta&t=DB3S8_dbWFDGCNDDx_10iwU-EIZfhqGd43ZRkJCITMU",
   "position": null,
   "current_company": {
-    "name": "Avalara",
+    "name": "Bharat Electronics Limited",
     "location": null
   },
-  "location": "Hyderabad",
-  "about": "Hi 🙋🏻‍♂️, My name is Ashwini Kumar, and I am currently working as a Project…",
+  "location": "Bengaluru",
+  "about": null,
   "education": [
     {
       "title": "IIIT-Naya Raipur",
@@ -16,14 +16,14 @@
       "end_year": "2021"
     },
     {
-      "start_year": "2004",
-      "end_year": "2016"
+      "start_year": "2003",
+      "end_year": "2017"
     }
   ],
   "experience": [
     {
-      "title": "Avalara",
-      "company": "Avalara",
+      "title": "Bharat Electronics Limited",
+      "company": "Bharat Electronics Limited",
       "location": null,
       "start_date": null,
       "end_date": null
@@ -56,6 +56,6 @@
   "batch": null,
   "branch": "CSE",
   "graduationYear": null,
-  "url": "https://bh.linkedin.com/in/ashwini-kumar-261919183",
-  "linkedin_id": "ashwini-kumar-261919183"
+  "url": "https://dk.linkedin.com/in/Shubham-anand-3455b6189",
+  "linkedin_id": "shubham-anand-3455b6189"
 }
