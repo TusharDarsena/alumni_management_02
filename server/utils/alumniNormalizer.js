@@ -4,6 +4,7 @@
  */
 
 import { parseEducation } from './alumniHelpers.js';
+import { extractBatch, extractBranch, extractGraduationYear } from '../../shared/alumniUtils.ts';
 
 /**
  * Normalize and sanitize a single alumni entry
@@ -70,6 +71,32 @@ export function normalizeAlumniEntry(entry) {
     timestamp: entry.timestamp ? new Date(entry.timestamp) : new Date(),
     input: entry.input || (input_url ? { url: input_url } : undefined),
   };
+
+  // Extract batch, branch, and graduation year from education if not already set
+  const educationData = doc.education || entry.education;
+  if (Array.isArray(educationData)) {
+    if (!entry.batch) {
+      doc.batch = extractBatch(educationData) || undefined;
+    } else {
+      doc.batch = entry.batch;
+    }
+    
+    if (!entry.branch) {
+      doc.branch = extractBranch(educationData) || undefined;
+    } else {
+      doc.branch = entry.branch;
+    }
+    
+    if (!entry.graduationYear) {
+      doc.graduationYear = extractGraduationYear(educationData) || undefined;
+    } else {
+      doc.graduationYear = entry.graduationYear;
+    }
+  } else {
+    doc.batch = entry.batch || undefined;
+    doc.branch = entry.branch || undefined;
+    doc.graduationYear = entry.graduationYear || undefined;
+  }
 
   // Remove undefined properties to avoid overwriting with undefined
   Object.keys(doc).forEach((k) => doc[k] === undefined && delete doc[k]);

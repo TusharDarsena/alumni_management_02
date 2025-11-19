@@ -29,3 +29,13 @@ export const allowedBranches = {
 };
 
 export const title = "IIIT Naya Raipur";
+
+// Institute name variations for matching education entries
+export const instituteNameVariations = [
+  "IIIT-Naya Raipur",
+  "IIIT Naya Raipur",
+  "IIIT-NR",
+  "IIIT NR",
+  "iiitnr",
+  "Dr. S.P.M. International Institute of Information Technology, Naya Raipur"
+];

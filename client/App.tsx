@@ -25,6 +25,7 @@ import VerifyOtpPage from "./pages/VerifyOtpPage";
 import MyJobListingsPage from "./pages/MyJobListingsPage";
 import EditJobListingPage from "./pages/EditJobListingPage";
 import JobApplicantsPage from "./pages/JobApplicantsPage";
+import AppliedJobsPage from "./pages/AppliedJobsPage";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -63,6 +64,10 @@ const App = () => (
                 <Route
                   path="/jobs/my-listings"
                   element={<MyJobListingsPage />}
+                />
+                <Route
+                  path="/jobs/applied"
+                  element={<AppliedJobsPage />}
                 />
                 <Route path="/jobs/edit/:id" element={<EditJobListingPage />} />
                 <Route path="/jobs/:jobId/applicants" element={<JobApplicantsPage />} />

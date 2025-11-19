@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED UserSummary
@@ -8,25 +8,61 @@ import { useFavorites } from "@/hooks/useFavorites";
 import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
-interface Props {
-  favouriteAlumni?: any[];
-}
-
-export default function SearchFavouritesPage({ favouriteAlumni = [] }: Props) {
+export default function SearchFavouritesPage() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const [favoriteAlumni, setFavoriteAlumni] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { favorites, isFavorite, toggleFavorite } = useFavorites();
   
-  // ✅ REMOVED hardcoded user
-  const { user: authUser } = useAuth(); // ✅ ADDED auth hook
+  const { user: authUser } = useAuth();
 
-  const list = favouriteAlumni as any;
+  // Fetch alumni data for favorites
+  useEffect(() => {
+    async function fetchFavoriteAlumni() {
+      if (favorites.length === 0) {
+        setFavoriteAlumni([]);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        // Fetch all alumni that match the favorite IDs
+        const promises = favorites.map(async (id) => {
+          try {
+            const response = await fetch(`/api/alumni/${id}`);
+            if (!response.ok) return null;
+            const result = await response.json();
+            return result.success ? result.data : null;
+          } catch (error) {
+            console.error(`Failed to fetch alumni ${id}:`, error);
+            return null;
+          }
+        });
+
+        const results = await Promise.all(promises);
+        const validAlumni = results.filter(Boolean);
+        setFavoriteAlumni(validAlumni);
+      } catch (error) {
+        console.error("Error fetching favorite alumni:", error);
+        setFavoriteAlumni([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchFavoriteAlumni();
+  }, [favorites]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return list;
-    return list.filter((a: any) => a.name.toLowerCase().includes(q));
-  }, [query, list]);
+    if (!q) return favoriteAlumni;
+    return favoriteAlumni.filter((a: any) => 
+      a.name?.toLowerCase().includes(q) || 
+      a.username?.toLowerCase().includes(q)
+    );
+  }, [query, favoriteAlumni]);
 
   const handleView = (username: string) => {
     navigate(`/alumni/${username}`);
@@ -56,11 +92,30 @@ export default function SearchFavouritesPage({ favouriteAlumni = [] }: Props) {
         <Input placeholder="Search favourites by name..." value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filtered.map((al: any) => (
-          <AlumniCard key={al.username} alumnus={{ id: al.username, name: al.name, avatar: al.avatarUrl, graduationYear: al.graduationYear, batch: al.graduationYear }} isFavourite={isFavorite(al.username)} onViewProfile={(id) => handleView(id)} onToggleFavourite={(id) => toggleFavorite(id)} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center py-12">
+          <LoadingSpinner />
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-12 text-slate-500">
+          {favoriteAlumni.length === 0 
+            ? "No favourites yet. Start adding alumni to your favourites from the Search Alumni page!"
+            : "No results found for your search."
+          }
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.map((al: any) => (
+            <AlumniCard 
+              key={al.id || al.username} 
+              alumnus={al}
+              isFavourite={isFavorite(al.id || al.username)} 
+              onViewProfile={(id) => handleView(id)} 
+              onToggleFavourite={(id) => toggleFavorite(id)} 
+            />
+          ))}
+        </div>
+      )}
     </DashboardLayout>
   );
 }
