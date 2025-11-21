@@ -1,14 +1,14 @@
 {
-  "id": "rajkush",
-  "name": "Rituraj kushwaha",
-  "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQHLVANoEtVlbA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1599371262561?e=2147483647&v=beta&t=teAVlGkr3oMW3rtz6it5MAGPkseLCG0Mp-fwtYwEcMo",
+  "id": "priyans619",
+  "name": "Priyansh Bhardwaj",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQE4jJPem4JVpA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1678632524646?e=2147483647&v=beta&t=HspWOPhrh8MZb2zLX-9NjFnW0rgN_JpODxwv57oSjOk",
   "position": null,
   "current_company": {
-    "name": "Deloitte",
+    "name": "Stashfin",
     "location": null
   },
-  "location": "Bengaluru",
-  "about": "My areas of interest are Software development, Data Science and AI. I like learning…",
+  "location": "Raipur",
+  "about": "As a passionate Full-Stack Developer, I specialize in building scalable web applications…",
   "education": [
     {
       "title": "IIIT-Naya Raipur",
@@ -16,14 +16,14 @@
       "end_year": "2021"
     },
     {
-      "start_year": "2004",
-      "end_year": "2016"
+      "start_year": "2015-07",
+      "end_year": "2017-06"
     }
   ],
   "experience": [
     {
-      "title": "Deloitte",
-      "company": "Deloitte",
+      "title": "Stashfin",
+      "company": "Stashfin",
       "location": null,
       "start_date": null,
       "end_date": null
@@ -56,6 +56,6 @@
   "batch": null,
   "branch": "CSE",
   "graduationYear": null,
-  "url": "https://ph.linkedin.com/in/rajkush",
-  "linkedin_id": "rajkush"
+  "url": "https://ch.linkedin.com/in/priyans619",
+  "linkedin_id": "priyans619"
 }

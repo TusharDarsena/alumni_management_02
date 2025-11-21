@@ -25,6 +25,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@airtop/sdk": "^0.1.47",
     "@prisma/client": "^6.18.0",
     "@tanstack/react-table": "^8.21.3",
     "@vitejs/plugin-react": "^5.1.0",

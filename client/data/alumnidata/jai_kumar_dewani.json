@@ -8,6 +8,7 @@
     {
       "title": "HashCode 2020 Experience",
       "attribution": "This was my first time participating in google hashcode. Since I knew nothing about the 2 months before the…",
+      "img": "https://media.licdn.com/dms/image/v2/C5112AQH7RfOgmNV_CQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1582309049644?e=2147483647&v=beta&t=0lgxL7vqObHrugmMdCnls2MSImlMk8I8ZCx4_WoUofs",
       "link": "https://www.linkedin.com/pulse/hashcode-2020-experience-jai-kumar-dewani",
       "created_at": "2020-02-21T00:00:00.000Z",
       "interaction": "4 -",
@@ -257,7 +258,7 @@
   "volunteer_experience": [
     {
       "cause": "Education",
-      "duration": "May 2021 · - \nMay 2021 · 1 month",
+      "duration": "May 2021 · - \nMay 2021 · \n1 month",
       "duration_short": "- \nMay 2021",
       "info": "- Mentored 10 teams regarding Web, Auth and API development - Evaluated project submissions as a judge on diverse parameters with other judges to help organizer select the best hacks.",
       "start_date": "May 2021",
@@ -265,7 +266,7 @@
       "title": "Judge and Mentor"
     },
     {
-      "duration": "Jan 2021 · - Present · \n4 years 11 months",
+      "duration": "Jan 2021 · - Present · \n\n4 years 11 months",
       "duration_short": "- Present",
       "info": "EddieHub is an open source organisation focusing on reciprocal collaboration between members of the tech community and believes in Collaboration first, Code second; to encourage and promote communication, best practices, and technical expertise in an inclusive and welcome environment.",
       "start_date": "Jan 2021",
@@ -274,7 +275,7 @@
     },
     {
       "cause": "Education",
-      "duration": "Aug 2018 · - \nApr 2020 · 1 year 9 months",
+      "duration": "Aug 2018 · - \nApr 2020 · \n1 year 9 months",
       "duration_short": "- \nApr 2020",
       "info": "Core Member and Software Dev lead at the Computer Society of IIIT Naya Raipur. Responsible for organizing workshops, events, contests, delivering content and management",
       "start_date": "Aug 2018",
@@ -283,7 +284,7 @@
     },
     {
       "cause": "Education",
-      "duration": "Apr 2020 · - \nMay 2020 · 2 months",
+      "duration": "Apr 2020 · - \nMay 2020 · \n2 months",
       "duration_short": "- \nMay 2020",
       "info": "Organized Dare2Compete Online Hackathon Festival (OHF) Season 2 where 5,802 Teams participated and the overall top teams won prizes worth Rs 50,000/- and we ranked 8th among 30 the organizers of Dare2Compete Online Hackathon Festival (OHF) Season 2",
       "start_date": "Apr 2020",
@@ -292,7 +293,7 @@
     },
     {
       "cause": "Education",
-      "duration": "Feb 2017 · - Present · \n8 years 10 months",
+      "duration": "Feb 2017 · - Present · \n\n8 years 10 months",
       "duration_short": "- Present",
       "info": "Gave lectures to an audience of 60 students on how to utilize the power of smartphones to extract knowledge instead inaptly wasting time on it.",
       "start_date": "Feb 2017",
@@ -301,7 +302,7 @@
     },
     {
       "cause": "Education",
-      "duration": "Mar 2020 · - \nMar 2021 · 1 year 1 month",
+      "duration": "Mar 2020 · - \nMar 2021 · \n1 year 1 month",
       "duration_short": "- \nMar 2021",
       "start_date": "Mar 2020",
       "subtitle": "Scaler Academy",
@@ -397,7 +398,7 @@
   "bio_links": [],
   "first_name": "✨Jai",
   "last_name": "Kumar Dewani",
-  "timestamp": "2025-11-19T20:48:30.886Z",
+  "timestamp": "2025-11-20T17:31:13.929Z",
   "input": {
     "url": "https://in.linkedin.com/in/jai-dewani"
   }
