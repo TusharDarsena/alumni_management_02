@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, CheckCircle2, AlertCircle, Play } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, AlertTriangle, Play, RotateCcw } from "lucide-react";
 // IMPORT THE HOOK
 import { useScraping } from "@/context/ScrapingContext";
 
 export default function ImportUpload() {
   // Get global state instead of local state
-  const { isProcessing, progress, logs, startScraping, cancelScraping } = useScraping();
+  const { isProcessing, progress, logs, failedQueue, startScraping, cancelScraping } = useScraping();
   
   // Local state just for the file reading part
   const [pendingNames, setPendingNames] = useState<string[]>([]);
@@ -58,10 +58,15 @@ export default function ImportUpload() {
   };
 
   const handleStartConfirm = () => {
-    startScraping(pendingNames); // Call global function
+    startScraping(pendingNames, false); // False = Use Airtop (Standard)
     setShowConfirmModal(false);
     setPendingNames([]);
     if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleRetryFailed = () => {
+    // Start a new batch with only the failed names, and FORCE FALLBACK
+    startScraping(failedQueue, true);
   };
 
   const handleCancelConfirm = () => {
@@ -118,6 +123,26 @@ export default function ImportUpload() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* RETRY FAILED CARD (Only shows if job is done AND there are failures) */}
+      {!isProcessing && failedQueue.length > 0 && (
+        <Card className="border-amber-200 bg-amber-50 animate-in slide-in-from-top-2">
+          <CardContent className="pt-6 flex justify-between items-center">
+            <div>
+              <h4 className="font-bold text-amber-800 flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5" /> 
+                {failedQueue.length} Profiles Failed
+              </h4>
+              <p className="text-sm text-amber-700 mt-1">
+                Airtop couldn't find these. Retry using BrightData Fallback?
+              </p>
+            </div>
+            <Button onClick={handleRetryFailed} variant="default" className="bg-amber-600 hover:bg-amber-700 text-white">
+              <RotateCcw className="h-4 w-4 mr-2" /> Retry Selection
+            </Button>
+          </CardContent>
+        </Card>
       )}
 
       {/* Progress UI - Visible if processing OR if there are logs (completed) */}

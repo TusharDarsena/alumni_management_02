@@ -6,7 +6,8 @@ interface ScrapingContextType {
   isProcessing: boolean;
   progress: { processed: number; total: number; currentName: string };
   logs: string[];
-  startScraping: (names: string[]) => void;
+  failedQueue: string[]; // <--- NEW
+  startScraping: (names: string[], forceFallback?: boolean) => void; // <--- Updated Signature
   cancelScraping: () => void;
 }
 
@@ -16,6 +17,7 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ processed: 0, total: 0, currentName: "" });
   const [logs, setLogs] = useState<string[]>([]);
+  const [failedQueue, setFailedQueue] = useState<string[]>([]); // <--- NEW
   const { toast } = useToast();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -33,6 +35,7 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
         currentName: data.currentName
       });
       setLogs(data.logs || []);
+      setFailedQueue(data.failedQueue || []); // <--- Sync Failed Queue
 
       // If server finished, stop polling
       if (!data.isRunning && data.total > 0 && data.processed === data.total) {
@@ -55,10 +58,17 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const startScraping = async (names: string[]) => {
+  // Update start function to accept fallback flag
+  const startScraping = async (names: string[], forceFallback = false) => {
     try {
-      await axios.post('/api/scrape/start-batch', { names });
-      toast({ title: "Background Job Started", description: "You can refresh or leave the page." });
+      // Pass forceFallback to backend
+      await axios.post('/api/scrape/start-batch', { names, forceFallback });
+      
+      setFailedQueue([]); // Clear old failures on new start
+      toast({ 
+        title: forceFallback ? "Starting Retry Batch" : "Background Job Started", 
+        description: forceFallback ? "Using BrightData Fallback..." : "You can refresh or leave the page." 
+      });
       
       // Force an immediate check
       checkStatus();
@@ -77,7 +87,7 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ScrapingContext.Provider value={{ isProcessing, progress, logs, startScraping, cancelScraping }}>
+    <ScrapingContext.Provider value={{ isProcessing, progress, logs, failedQueue, startScraping, cancelScraping }}>
       {children}
     </ScrapingContext.Provider>
   );
