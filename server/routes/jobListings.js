@@ -133,6 +133,9 @@ jobListingsRouter.post("/", requireAuth, async (req, res) => {
   const body = await zParse(req.body, jobListingFormSchema, res);
   if (body == null) return;
 
+  const prisma = await ensurePrisma();
+  if (!prisma) return res.status(503).json({ message: "Prisma client unavailable" });
+
   const now = new Date();
   const expiresAt = new Date(now);
   expiresAt.setDate(now.getDate() + 30);

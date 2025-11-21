@@ -1,0 +1,39 @@
+{
+  "id": "abhi-udai-singh-057416322",
+  "name": "Abhi Udai Singh",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQER_dSmDavUxQ/profile-displayphoto-shrink_200_200/B56ZTvB772GoAY-/0/1739177050364?e=2147483647&v=beta&t=izpSd3kk_chKGCNXuEAJujJGiTFJGfXqiphky2QcyMI",
+  "position": null,
+  "current_company": {
+    "name": "Inquizitive",
+    "location": null
+  },
+  "location": "Jaipur",
+  "about": null,
+  "education": [
+    {
+      "title": "International Institute of Information Technology Naya Raipur",
+      "start_year": "2024",
+      "end_year": "2028"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Inquizitive",
+      "company": "Inquizitive",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://uk.linkedin.com/in/abhi-udai-singh-057416322",
+  "linkedin_id": "abhi-udai-singh-057416322"
+}

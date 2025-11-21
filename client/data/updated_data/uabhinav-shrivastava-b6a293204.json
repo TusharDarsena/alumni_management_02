@@ -1,0 +1,43 @@
+{
+  "id": "abhinav-shrivastava-b6a293204",
+  "name": "Abhinav Shrivastava",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQES2Aecq5DETw/profile-displayphoto-scale_200_200/B4DZqawojlIMAY-/0/1763533036486?e=2147483647&v=beta&t=e_DTgyX3uJqdMgI81QngVA4lxxeISs0qUafGKzH8i1Q",
+  "position": null,
+  "current_company": {
+    "name": "Club Dé Théâtre, IIITNR",
+    "location": null
+  },
+  "location": "Rajnandgaon",
+  "about": "2nd-year DSAI student @ IIIT Naya Raipur, focused on the complete development…",
+  "education": [
+    {
+      "end_year": "2024-04"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Club Dé Théâtre, IIITNR",
+      "company": "Club Dé Théâtre, IIITNR",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://ch.linkedin.com/in/abhinav-shrivastava-b6a293204",
+  "linkedin_id": "abhinav-shrivastava-b6a293204"
+}

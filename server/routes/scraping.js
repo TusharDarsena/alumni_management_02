@@ -64,7 +64,7 @@ async function processSingleProfile(alumniName) {
         const sessionId = session.data.id;
         
         // specific search query for IIIT Naya Raipur alumni
-        const searchQuery = `site:linkedin.com/in/ "${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur")`;
+        const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur")`;
         const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
 
         console.log(`[STEP 1.1] Searching Google via Airtop...`);
@@ -127,7 +127,9 @@ async function processSingleProfile(alumniName) {
         });
 
         if (!linkedinResponse.ok) {
-            throw new Error(`Bright Data scraping failed: ${linkedinResponse.status}`);
+            const errorText = await linkedinResponse.text();
+            console.error(`Bright Data Error Response (${linkedinResponse.status}):`, errorText);
+            throw new Error(`Bright Data scraping failed: ${linkedinResponse.status} - ${errorText}`);
         }
         
         const rawLinkedinText = await linkedinResponse.text();
@@ -232,5 +234,30 @@ async function runBackgroundJob() {
     activeJob.currentName = "Completed";
     activeJob.logs.unshift("🎉 Batch Scraping Finished!");
 }
+
+router.post('/get-linkedin-profile', async (req, res) => {
+    const { alumniName } = req.body;
+    
+    if (!alumniName) {
+        return res.status(400).json({ message: 'Alumni name is required' });
+    }
+
+    try {
+        // Reuse the same powerful Airtop function used by the batch system
+        await processSingleProfile(alumniName);
+        
+        return res.status(200).json({ 
+            success: true,
+            message: `Successfully scraped profile for ${alumniName}`
+        });
+
+    } catch (error) {
+        console.error('Single scrape error:', error);
+        return res.status(500).json({ 
+            success: false,
+            message: error.message || 'Failed to scrape profile'
+        });
+    }
+});
 
 export default router;
