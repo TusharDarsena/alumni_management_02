@@ -1,0 +1,64 @@
+{
+  "id": "saswatiparida",
+  "name": "Saswati Parida",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQFXtn8diGhWFg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1720464276138?e=2147483647&v=beta&t=5sUFwq-zV_qrIbsNIATuiDL4qj68ydP1BgtkgMTY8JQ",
+  "position": null,
+  "current_company": {
+    "name": "Inovaare Corporation",
+    "location": null
+  },
+  "location": "Delhi",
+  "about": "Hello! I'm Saswati parida, a web developer and AI-ML enthusiast who believes envisioning…",
+  "education": [
+    {
+      "title": "International Institute of Information Technology, Bhubaneswar",
+      "start_year": "2020",
+      "end_year": "2024"
+    },
+    {
+      "start_year": "2018-04",
+      "end_year": "2020-03"
+    },
+    {
+      "end_year": "2018-03"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Inovaare Corporation",
+      "company": "Inovaare Corporation",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://pl.linkedin.com/in/saswatiparida",
+  "linkedin_id": "saswatiparida"
+}

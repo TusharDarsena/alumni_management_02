@@ -1,0 +1,59 @@
+{
+  "id": "suresh-kumar-rajana-6b569b15",
+  "name": "Suresh Kumar Rajana",
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "position": null,
+  "current_company": {
+    "name": "National Institute of Technology Raipur",
+    "location": null
+  },
+  "location": "Midnapore Sadar",
+  "about": null,
+  "education": [
+    {
+      "title": "Indian Institute of Technology, Kharagpur",
+      "start_year": "2009-07",
+      "end_year": "2014-05"
+    },
+    {
+      "start_year": "2007-07",
+      "end_year": "2009-06"
+    },
+    {
+      "start_year": "2001",
+      "end_year": "2005"
+    }
+  ],
+  "experience": [
+    {
+      "title": "National Institute of Technology Raipur",
+      "company": "National Institute of Technology Raipur",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://vn.linkedin.com/in/suresh-kumar-rajana-6b569b15",
+  "linkedin_id": "suresh-kumar-rajana-6b569b15"
+}

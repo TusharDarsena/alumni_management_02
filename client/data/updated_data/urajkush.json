@@ -1,0 +1,61 @@
+{
+  "id": "rajkush",
+  "name": "Rituraj kushwaha",
+  "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQHLVANoEtVlbA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1599371262561?e=2147483647&v=beta&t=teAVlGkr3oMW3rtz6it5MAGPkseLCG0Mp-fwtYwEcMo",
+  "position": null,
+  "current_company": {
+    "name": "Deloitte",
+    "location": null
+  },
+  "location": "Bengaluru",
+  "about": "My areas of interest are Software development, Data Science and AI. I like learning…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2004",
+      "end_year": "2016"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Deloitte",
+      "company": "Deloitte",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://nz.linkedin.com/in/Rajkush",
+  "linkedin_id": "rajkush"
+}

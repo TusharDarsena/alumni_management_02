@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import PendingUsersTable from "@/components/PendingUsersTable";
 import { useToast } from "@/hooks/use-toast";
 import ImportUpload from "@/components/ImportUpload";
+import SingleProfileScraper from "@/components/SingleProfileScraper";
 import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
@@ -45,8 +46,6 @@ export default function AdminControlsPage() {
   });
 
   const [mode, setMode] = useState<"add" | "requests">("add");
-  const [alumniName, setAlumniName] = useState('');
-  const [isScraping, setIsScraping] = useState(false);
   const { toast } = useToast();
 
   const handleChange = (key: keyof NewUser, value: string | File | null) => {
@@ -119,23 +118,6 @@ export default function AdminControlsPage() {
     }
   };
 
-  const handleScrapeProfile = async () => {
-    if (!alumniName) {
-      toast({ title: "Error", description: "Please enter an alumni name.", variant: "destructive" });
-      return;
-    }
-    setIsScraping(true);
-    try {
-      const response = await axios.post('/api/scrape/get-linkedin-profile', { alumniName });
-      toast({ title: "Success!", description: response.data.message });
-    } catch (error) {
-      toast({ title: "Error", description: "Failed to scrape profile.", variant: "destructive" });
-    } finally {
-      setIsScraping(false);
-      setAlumniName('');
-    }
-  };
-
   // ✅ CREATED user object for layout
   const userForLayout: UserSummary = {
     name: authUser.username, // Mapped username to name
@@ -153,29 +135,13 @@ export default function AdminControlsPage() {
       user={userForLayout} // ✅ PASSED correct user
       fullWidth
     >
-      {/* --- NEW SCRAPING CARD --- */}
-      <Card className="mt-6 w-full">
-        <CardHeader>
-          <CardTitle>Scrape LinkedIn Profile</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p>
-            Enter the full name of an alumnus to save their profile as a JSON file.
-          </p>
-          <div className="flex space-x-2">
-            <Input
-              placeholder="e.g., Ramesh Kumar"
-              value={alumniName}
-              onChange={(e) => setAlumniName(e.target.value)}
-              disabled={isScraping}
-            />
-            <Button onClick={handleScrapeProfile} disabled={isScraping}>
-              {isScraping ? 'Scraping...' : 'Scrape Profile'}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-      {/* --- END NEW CARD --- */}
+      {/* --- NEW: Single Profile Scraper Component --- */}
+      <div className="mt-6 mb-8">
+        <SingleProfileScraper />
+      </div>
+      
+      {/* --- Divider --- */}
+      <div className="border-t my-6" />
 
       <div className="mt-6 flex items-center justify-between">
         <h2 className="text-xl font-semibold">

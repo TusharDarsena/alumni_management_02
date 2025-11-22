@@ -1,0 +1,45 @@
+{
+  "id": "shashank-barle-bb1630167",
+  "name": "Shashank Barle",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQG6kMDddd0QvA/profile-displayphoto-shrink_200_200/B4DZZejVjhGgAY-/0/1745343050557?e=2147483647&v=beta&t=TRM2DBSBZGpFLO_lgSU1bJBquMWPvSy0Pjs-gV8F-hk",
+  "position": null,
+  "current_company": {
+    "name": "Pandrol",
+    "location": null
+  },
+  "location": "Bhilai",
+  "about": null,
+  "education": [
+    {
+      "title": "OP Jindal University",
+      "start_year": "2017",
+      "end_year": "2021"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Pandrol",
+      "company": "Pandrol",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://in.linkedin.com/in/shashank-barle-bb1630167",
+  "linkedin_id": "shashank-barle-bb1630167"
+}

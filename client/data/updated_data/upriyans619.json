@@ -1,0 +1,61 @@
+{
+  "id": "priyans619",
+  "name": "Priyansh Bhardwaj",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQE4jJPem4JVpA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1678632524646?e=2147483647&v=beta&t=HspWOPhrh8MZb2zLX-9NjFnW0rgN_JpODxwv57oSjOk",
+  "position": null,
+  "current_company": {
+    "name": "Stashfin",
+    "location": null
+  },
+  "location": "Raipur",
+  "about": "As a passionate Full-Stack Developer, I specialize in building scalable web applications…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2015-07",
+      "end_year": "2017-06"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Stashfin",
+      "company": "Stashfin",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://ch.linkedin.com/in/priyans619",
+  "linkedin_id": "priyans619"
+}

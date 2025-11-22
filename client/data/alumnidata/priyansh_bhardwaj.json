@@ -1,0 +1,106 @@
+{
+  "id": "priyans619",
+  "name": "Priyansh Bhardwaj",
+  "city": "Raipur, Chhattisgarh, India",
+  "country_code": "IN",
+  "about": "As a passionate Full-Stack Developer, I specialize in building scalable web applications…",
+  "current_company": {
+    "link": "https://in.linkedin.com/company/stashfin?trk=public_profile_topcard-current-company",
+    "name": "Stashfin",
+    "company_id": "stashfin",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "Stashfin",
+      "description_html": null,
+      "company": "Stashfin",
+      "company_logo_url": null
+    },
+    {
+      "description_html": null,
+      "company_logo_url": null
+    },
+    {
+      "description_html": null,
+      "company_logo_url": null
+    },
+    {
+      "description_html": null,
+      "duration": "2017 - 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "description_html": null,
+      "duration": "2015 - 2017",
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    }
+  ],
+  "url": "https://ch.linkedin.com/in/priyans619",
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "start_year": "2017",
+      "end_year": "2021",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2015-07",
+      "end_year": "2017-06",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQE4jJPem4JVpA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1678632524646?e=2147483647&v=beta&t=HspWOPhrh8MZb2zLX-9NjFnW0rgN_JpODxwv57oSjOk",
+  "languages": [
+    {
+      "subtitle": "-",
+      "title": "English"
+    },
+    {
+      "subtitle": "Native or bilingual proficiency",
+      "title": "Hindi"
+    }
+  ],
+  "followers": 232,
+  "connections": 234,
+  "current_company_company_id": "stashfin",
+  "current_company_name": "Stashfin",
+  "location": "Raipur",
+  "input_url": "https://in.linkedin.com/in/priyans619",
+  "linkedin_id": "priyans619",
+  "activity": [
+    {
+      "interaction": "Liked by Priyansh Bhardwaj",
+      "link": "https://www.linkedin.com/posts/khyatithakur_automation-n8n-nocode-activity-7332609026070859776-vm70",
+      "title": "\"Want to start a side hustle but feel like I have zero time?\" Here’s your unfair advantage: free automation. I’ve been exploring n8n, the…",
+      "img": null,
+      "id": "7332609026070859776"
+    }
+  ],
+  "linkedin_num_id": "715094853",
+  "banner_image": "https://static.licdn.com/aero-v1/sc/h/5q92mjc5c51bjlwaj3rs9aa82",
+  "honors_and_awards": [
+    {
+      "title": "2nd Runner-up Chess Championship (District Level)",
+      "publication": "Chattisgarh Chess Association",
+      "date": null,
+      "description": "Qualified for state championship(2016)"
+    }
+  ],
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [],
+  "first_name": "Priyansh",
+  "last_name": "Bhardwaj",
+  "timestamp": "2025-11-20T17:40:13.321Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/priyans619"
+  }
+}

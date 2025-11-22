@@ -1,0 +1,61 @@
+{
+  "id": "pkunjam",
+  "name": "Punit Kunjam",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQHdNwKxsI7rZA/profile-displayphoto-shrink_200_200/B56ZXOD4ABGcAc-/0/1742918877523?e=2147483647&v=beta&t=4npAf4jsofDxog0DjEFb-sYr-uueky1faqK8OvThMwo",
+  "position": null,
+  "current_company": {
+    "name": "JALI Research Inc.",
+    "location": null
+  },
+  "location": "Waterloo",
+  "about": "I am a Computer Science graduate with a Master of Mathematics from the University of…",
+  "education": [
+    {
+      "title": "University of Waterloo",
+      "start_year": "2022-09",
+      "end_year": "2024-09"
+    },
+    {
+      "start_year": "2017-08",
+      "end_year": "2021-08"
+    }
+  ],
+  "experience": [
+    {
+      "title": "JALI Research Inc.",
+      "company": "JALI Research Inc.",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://fr.linkedin.com/in/pkunjam",
+  "linkedin_id": "pkunjam"
+}

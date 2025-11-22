@@ -1,0 +1,61 @@
+{
+  "id": "jai-dewani",
+  "name": "✨Jai Kumar Dewani",
+  "avatar": "https://media.licdn.com/dms/image/v2/C5103AQGyyRAVB9bTPg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1583393007406?e=2147483647&v=beta&t=AF7ne8wXADSVCefVgaFBu5ujtcBH_RvUi3iE7-LbVF0",
+  "position": null,
+  "current_company": {
+    "name": "ZEISS Group",
+    "location": null
+  },
+  "location": "Chhattisgarh",
+  "about": "I am a 4th-year undergraduate student at IIIT Naya Raipur aiming to become a Software…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2003",
+      "end_year": "2017"
+    }
+  ],
+  "experience": [
+    {
+      "title": "ZEISS Group",
+      "company": "ZEISS Group",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://pt.linkedin.com/in/jai-dewani",
+  "linkedin_id": "jai-dewani"
+}

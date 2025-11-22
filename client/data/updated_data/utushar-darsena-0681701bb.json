@@ -1,0 +1,49 @@
+{
+  "id": "tushar-darsena-0681701bb",
+  "name": "Tushar Darsena",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQE1pYjCyh8wkg/profile-displayphoto-scale_200_200/B4DZex95EjGsAY-/0/1751037483662?e=2147483647&v=beta&t=oN8uC8yie_25DjaNhbaZFIlHB0UGssTkxaYtH3ABkHU",
+  "position": null,
+  "current_company": {
+    "name": "Technovate IIIT Naya Raipur",
+    "location": null
+  },
+  "location": "Naya Raipur",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2024-08",
+      "end_year": "2028-08"
+    },
+    {
+      "start_year": "2020-04",
+      "end_year": "2023-03"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Technovate IIIT Naya Raipur",
+      "company": "Technovate IIIT Naya Raipur",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://co.linkedin.com/in/tushar-darsena-0681701bb",
+  "linkedin_id": "tushar-darsena-0681701bb"
+}

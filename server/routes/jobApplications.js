@@ -1,13 +1,31 @@
 import { Router } from "express";
 import { z } from "zod";
 import { zParse } from "../utils/zParse.js";
-import { PrismaClient } from "@prisma/client";
 import { requireAuth } from "../middleware/auth.js";
 import User from "../models/User.js";
 import AlumniProfile from "../models/AlumniProfile.js";
 
+// Lazily load Prisma client at runtime. If the generated client is not present
+// (e.g. `.prisma/client` not generated), the route handlers will return 503
+// instead of crashing the whole server. This makes the feature optional during
+// local dev when Prisma client generation hasn't been run.
+let _prismaInstance = null;
+async function ensurePrisma() {
+  if (_prismaInstance) return _prismaInstance;
+  try {
+    // dynamic import so missing generated client doesn't crash module evaluation
+    const mod = await import("@prisma/client");
+    // `mod` might be the package namespace or a default wrapper
+    const PrismaClient = (mod && (mod.PrismaClient ?? mod.default?.PrismaClient ?? mod.default)) || mod.PrismaClient;
+    _prismaInstance = new PrismaClient();
+    return _prismaInstance;
+  } catch (err) {
+    console.warn("Prisma client unavailable:", err && err.message ? err.message : err);
+    return null;
+  }
+}
+
 export const jobApplicationsRouter = Router();
-const prisma = new PrismaClient();
 
 const jobApplicationSchema = z.object({
   jobListingId: z.string().nonempty(),
@@ -25,6 +43,9 @@ jobApplicationsRouter.post("/", requireAuth, async (req, res) => {
   if (!applicantId) {
     return res.status(401).json({ message: "Not authenticated" });
   }
+
+  const prisma = await ensurePrisma();
+  if (!prisma) return res.status(503).json({ message: "Prisma client unavailable" });
 
   try {
     // Check if job listing exists
@@ -95,6 +116,9 @@ jobApplicationsRouter.get("/job/:jobId", requireAuth, async (req, res) => {
   const { jobId } = req.params;
   const userId = req.user?._id?.toString();
   const isAdmin = req.user?.role === "admin";
+
+  const prisma = await ensurePrisma();
+  if (!prisma) return res.status(503).json({ message: "Prisma client unavailable" });
 
   try {
     // Check if job exists and user is authorized
@@ -175,6 +199,9 @@ jobApplicationsRouter.get("/my-applications", requireAuth, async (req, res) => {
     return res.status(401).json({ message: "Not authenticated" });
   }
 
+  const prisma = await ensurePrisma();
+  if (!prisma) return res.status(503).json({ message: "Prisma client unavailable" });
+
   try {
     const applications = await prisma.jobApplication.findMany({
       where: { applicantId },
@@ -211,6 +238,9 @@ jobApplicationsRouter.patch("/:applicationId/status", requireAuth, async (req, r
   if (!["pending", "reviewed", "accepted", "rejected"].includes(status)) {
     return res.status(400).json({ message: "Invalid status" });
   }
+
+  const prisma = await ensurePrisma();
+  if (!prisma) return res.status(503).json({ message: "Prisma client unavailable" });
 
   try {
     const application = await prisma.jobApplication.findUnique({

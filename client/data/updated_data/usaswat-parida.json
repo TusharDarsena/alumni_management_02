@@ -1,0 +1,55 @@
+{
+  "id": "saswat-parida",
+  "name": "Saswat Parida",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQG33Ob9a6AkRQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724978110521?e=2147483647&v=beta&t=vekcFUD6t6YD60Ym22Phsae6SjorCBwuPRbUC-IFKGU",
+  "position": null,
+  "current_company": {
+    "name": "Boomi",
+    "location": null
+  },
+  "location": "Bengaluru",
+  "about": "My academic journey, crowned with an MTech in Computer Science from NIT Karnataka…",
+  "education": [
+    {
+      "title": "National Institute of Technology Karnataka",
+      "start_year": "2018-06",
+      "end_year": "2020-07"
+    },
+    {
+      "start_year": "2014-06",
+      "end_year": "2018-06"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Boomi",
+      "company": "Boomi",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://sg.linkedin.com/in/saswat-parida",
+  "linkedin_id": "saswat-parida"
+}

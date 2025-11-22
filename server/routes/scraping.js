@@ -3,239 +3,367 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { seedUsers } from '../scripts/seedUser.js';
+import { AirtopClient } from '@airtop/sdk';
+import * as cheerio from 'cheerio'; // <--- NEW IMPORT
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
-const SERP_API_ENDPOINT = 'https://api.brightdata.com/request';
+// --- CONFIGURATION ---
 const LINKEDIN_COLLECTOR_ENDPOINT = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=gd_l1viktl72bvl7bjuj0&notify=false&include_errors=true';
-
+const SERP_API_ENDPOINT = 'https://api.brightdata.com/request';
 const BRIGHTDATA_API_KEY = process.env.BRIGHTDATA_API_KEY;
+const AIRTOP_API_KEY = process.env.AIRTOP_API_KEY;
 
-// Function to extract first LinkedIn URL from HTML
-function findFirstLinkedInUrl(htmlContent) {
-    if (!htmlContent || typeof htmlContent !== 'string') {
-        return null;
+// Initialize Airtop
+const airtopClient = new AirtopClient({ apiKey: AIRTOP_API_KEY });
+
+// --- UTILITY: FUZZY STRING MATCHING (Lightweight NLP) ---
+// This checks how similar two strings are (0 to 1). 
+// 1 = Exact Match, 0 = Completely Different.
+function getSimilarity(s1, s2) {
+    let longer = s1;
+    let shorter = s2;
+    if (s1.length < s2.length) {
+        longer = s2;
+        shorter = s1;
     }
-    
-    // Multiple regex patterns to find LinkedIn profile URLs
-    const patterns = [
-        // Pattern 1: href="https://in.linkedin.com/in/..."
-        /href=["'](https?:\/\/(?:www\.|in\.)?linkedin\.com\/in\/[^"']+)["']/gi,
-        // Pattern 2: Direct URL in text
-        /https?:\/\/(?:www\.|in\.)?linkedin\.com\/in\/[\w-]+\/?/gi,
-        // Pattern 3: URL encoded format
-        /(?:url=|q=)(https?%3A%2F%2F[^&"']+linkedin\.com[^&"']+)/gi
-    ];
-    
-    for (const pattern of patterns) {
-        const matches = htmlContent.matchAll(pattern);
-        for (const match of matches) {
-            let url = match[1] || match[0];
-            
-            // Decode if URL-encoded
-            try {
-                url = decodeURIComponent(url);
-            } catch (e) {
-                // Use original if decode fails
-            }
-            
-            // Clean up the URL (remove query params and fragments)
-            if (url.includes('linkedin.com/in/')) {
-                // Remove everything after ? or #
-                url = url.split('?')[0].split('#')[0].split('&')[0];
-                
-                // Ensure it's a valid linkedin.com/in/ URL
-                if (/linkedin\.com\/in\/[\w-]+\/?$/.test(url)) {
-                    console.log('Found LinkedIn URL:', url);
-                    return url;
-                }
-            }
-        }
+    const longerLength = longer.length;
+    if (longerLength === 0) {
+        return 1.0;
     }
-    
-    return null;
+    return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
 
-router.post('/get-linkedin-profile', async (req, res) => {
-    const { alumniName } = req.body;
-    if (!alumniName) {
-        return res.status(400).json({ message: 'Alumni name is required' });
+function editDistance(s1, s2) {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+    const costs = new Array();
+    for (let i = 0; i <= s1.length; i++) {
+        let lastValue = i;
+        for (let j = 0; j <= s2.length; j++) {
+            if (i == 0) costs[j] = j;
+            else {
+                if (j > 0) {
+                    let newValue = costs[j - 1];
+                    if (s1.charAt(i - 1) != s2.charAt(j - 1)) newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+                    costs[j - 1] = lastValue;
+                    lastValue = newValue;
+                }
+            }
+        }
+        if (i > 0) costs[s2.length] = lastValue;
     }
+    return costs[s2.length];
+}
 
-    console.log(`\n${'='.repeat(60)}`);
-    console.log(`Starting LinkedIn profile scraping for: ${alumniName}`);
-    console.log('='.repeat(60));
+// --- GLOBAL JOB STATE (In-Memory) ---
+let activeJob = {
+    isRunning: false,
+    total: 0,
+    processed: 0,
+    currentName: "",
+    logs: [],
+    queue: [],
+    failedQueue: [], // <--- NEW: Stores names that failed Pass 1
+    forceFallback: false, // <--- NEW: Remember if this batch is a retry
+    shouldStop: false
+};
 
+// --- HELPER 1: AIRTOP SEARCH ---
+async function findUrlWithAirtop(alumniName) {
+    console.log(`   [Primary] Trying Airtop AI Search...`);
+    let session;
     try {
-        // === STEP 1: Google Search via Bright Data ===
-        console.log('\n[STEP 1] Searching Google for LinkedIn profile...');
+        session = await airtopClient.sessions.create();
+        const sessionId = session.data.id;
         
-        const simpleQuery = encodeURIComponent(`${alumniName} and IIIT-Naya Raipur`);
-        const googleSearchUrl = `https://www.google.com/search?q=${simpleQuery}&brd_mobile=desktop`;
+        const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur")`;
+        const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
 
-        const response = await fetch(SERP_API_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`,
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'User-Agent': 'PostmanRuntime/7.49.0'
-            },
-            body: JSON.stringify({
-                "zone": "serp_api_tushar",
-                "url": googleSearchUrl,
-                "format": "raw"
-            })
+        const window = await airtopClient.windows.create(sessionId, { url: googleUrl });
+        const windowId = window.data.windowId;
+
+        const result = await airtopClient.windows.pageQuery(sessionId, windowId, {
+            prompt: `Analyze the Google Search results. Find the LinkedIn profile URL for "${alumniName}" who studied at IIIT Naya Raipur.
+            
+            Rules:
+            1. Ignore generic profiles, directory lists, or social media like Facebook/Instagram.
+            2. Look for the most likely match based on the name and university.
+            3. Return the direct profile URL (e.g., https://www.linkedin.com/in/username).
+            4. If multiple similar names exist, prefer the one mentioning "IIIT Naya Raipur" or "Student" or "Alumni".
+            5. If absolutely no valid profile is found, return empty string for url.`,
+            configuration: {
+                outputSchema: {
+                    "$schema": "http://json-schema.org/draft-07/schema#",
+                    "type": "object",
+                    "properties": { "url": { "type": "string" } },
+                    "required": ["url"]
+                }
+            }
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('❌ Google Search failed:', response.status);
-            throw new Error(`Google Search failed: ${response.status}`);
+        await airtopClient.sessions.terminate(sessionId);
+        session = null;
+
+        const content = JSON.parse(result.data.modelResponse);
+        if (content.url && content.url.includes('linkedin.com/in/')) {
+            return content.url;
         }
+        return null;
 
-        const rawHtml = await response.text();
-        console.log(`✓ Received HTML (${rawHtml.length} bytes)`);
+    } catch (error) {
+        console.log(`   [Primary] Airtop failed: ${error.message}`);
+        if (session) try { await airtopClient.sessions.terminate(session.data.id); } catch(e){}
+        return null;
+    }
+}
 
-        // === STEP 2: Extract LinkedIn URL ===
-        console.log('\n[STEP 2] Extracting LinkedIn URL from search results...');
-        
-        const foundUrl = findFirstLinkedInUrl(rawHtml);
+// --- HELPER 2: BRIGHTDATA SERP + CHEERIO (Robust Fallback) ---
+async function findUrlWithBrightDataFallback(alumniName) {
+    console.log(`   [Fallback] Switching to Bright Data SERP (HTML + Smart Check)...`);
+    
+    // 1. Use a specific query, but allow generic matches to let our logic filter them
+    const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&gl=in`; 
 
-        if (!foundUrl) {
-            console.log('❌ No LinkedIn URL found');
-            
-            // Save debug HTML
-            const debugHtmlPath = path.join(__dirname, '../../client/data/alumnidata', 
-                `${alumniName.toLowerCase().replace(/ /g, '_')}_debug.html`);
-            try {
-                const dirPath = path.join(__dirname, '../../client/data/alumnidata');
-                if (!fs.existsSync(dirPath)) {
-                    fs.mkdirSync(dirPath, { recursive: true });
-                }
-                fs.writeFileSync(debugHtmlPath, rawHtml);
-                console.log(`Debug HTML saved: ${debugHtmlPath}`);
-            } catch (err) {
-                console.error('Error saving debug HTML:', err);
-            }
-            
-            return res.status(404).json({ 
-                message: 'No LinkedIn profile found in search results.',
-                alumniName 
-            });
-        }
-
-        console.log(`✓ Found LinkedIn URL: ${foundUrl}`);
-
-        // === STEP 3: Save LinkedIn URL ===
-        console.log('\n[STEP 3] Saving LinkedIn URL...');
-        
-        const urlFileName = `${alumniName.toLowerCase().replace(/ /g, '_')}_linkedin_url.txt`;
-        const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
-        
-        if (!fs.existsSync(urlDirPath)) {
-            fs.mkdirSync(urlDirPath, { recursive: true });
-        }
-        
-        const urlFilePath = path.join(urlDirPath, urlFileName);
-        fs.writeFileSync(urlFilePath, foundUrl);
-        console.log(`✓ Saved URL to: ${urlFileName}`);
-
-        // === STEP 4: Scrape LinkedIn Profile ===
-        console.log('\n[STEP 4] Scraping LinkedIn profile data...');
-
-        const linkedinResponse = await fetch(LINKEDIN_COLLECTOR_ENDPOINT, {
+    try {
+        // Request RAW HTML (Always reliable)
+        const response = await fetch(SERP_API_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "url": foundUrl })
+            body: JSON.stringify({
+                "zone": "serp_api1",
+                "url": googleSearchUrl,
+                "format": "raw" // <--- Changed back to raw
+            })
         });
 
-        const rawLinkedinText = await linkedinResponse.text();
-        if (!linkedinResponse.ok) {
-            console.error('❌ LinkedIn scraping failed:', linkedinResponse.status);
-            throw new Error(`LinkedIn scraping failed: ${linkedinResponse.status}`);
-        }
+        if (!response.ok) throw new Error(`SERP API Error: ${response.status}`);
+        const html = await response.text();
+
+        // 2. Parse HTML with Cheerio (Like jQuery for Node.js)
+        const $ = cheerio.load(html);
+        let bestMatch = null;
+        let highestScore = 0;
+
+        console.log("   [Fallback] Parsing Search Results...");
+
+        // Loop through standard Google Search Result blocks
+        // BrightData/Google often uses class 'g' or 'MjjYud' for result containers
+        // We look for 'a' tags that contain 'h3' (titles) inside
         
-        let finalProfileJson;
-        try {
-            finalProfileJson = JSON.parse(rawLinkedinText);
-        } catch(parseError) {
-            console.error('❌ Failed to parse LinkedIn response');
-            throw new Error('Invalid LinkedIn API response');
+        $('a').each((i, el) => {
+            const link = $(el).attr('href');
+            const title = $(el).find('h3').text() || $(el).text(); // Try to get h3, else get full text
+
+            if (!link || !title) return;
+
+            // Basic Link Filters
+            if (!link.includes("linkedin.com/in/")) return;
+            if (link.includes("/posts/") || link.includes("/jobs/") || link.includes("/company/")) return;
+
+            // 3. FUZZY NAME MATCHING
+            // Compare the Google Title with the Alumni Name
+            const cleanTitle = title.toLowerCase().replace("linkedin", "").replace(" - ", " ").trim();
+            const cleanName = alumniName.toLowerCase().trim();
+            
+            const similarity = getSimilarity(cleanTitle, cleanName);
+            const isNameInTitle = cleanTitle.includes(cleanName);
+
+            // Log analysis for debugging
+            console.log(`      > Found: "${title.substring(0, 40)}..." | Score: ${(similarity*100).toFixed(0)}%`);
+
+            // 4. THRESHOLD CHECK
+            // If name is strictly inside title OR similarity > 60%
+            if (isNameInTitle || similarity > 0.6) {
+                // If this is better than previous matches, keep it
+                if (similarity > highestScore) {
+                    highestScore = similarity;
+                    bestMatch = link;
+                }
+            }
+        });
+
+        if (bestMatch) {
+            console.log(`   [Fallback] ✅ Verified Match: ${bestMatch} (Score: ${(highestScore*100).toFixed(0)}%)`);
+            return bestMatch;
         }
 
-        console.log('✓ Profile data received successfully');
-
-        // === STEP 5: Save Profile JSON ===
-        console.log('\n[STEP 5] Saving profile JSON...');
-        
-        const profileFileName = `${alumniName.toLowerCase().replace(/ /g, '_')}.json`;
-        const profileFilePath = path.join(urlDirPath, profileFileName);
-        fs.writeFileSync(profileFilePath, JSON.stringify(finalProfileJson, null, 2));
-        console.log(`✓ Saved profile to: ${profileFileName}`);
-        
-        // === STEP 6: Run seedUser.js to populate database ===
-        console.log('\n[STEP 6] Running seedUser.js to populate database...');
-        
-        try {
-            // Call seedUsers function with skipStudentsAndAdmin=true
-            // This will only process alumni JSON files
-            const seedResult = await seedUsers(true);
-            
-            console.log('✓ Database seeded successfully!');
-            console.log(`  - Processed ${seedResult.count} alumni profiles`);
-            console.log('='.repeat(60));
-            console.log('✓ COMPLETE: Profile scraped and database updated!\n');
-            
-            // Return success response
-            return res.status(200).json({ 
-                success: true,
-                message: 'Profile scraped and database updated successfully!',
-                data: {
-                    alumniName,
-                    linkedinUrl: foundUrl,
-                    profileFileName,
-                    urlFileName,
-                    processedCount: seedResult.count
-                },
-                profile: finalProfileJson
-            });
-            
-        } catch (seedError) {
-            console.error('❌ Database seeding failed:', seedError.message);
-            console.log('='.repeat(60));
-            console.log('⚠ PARTIAL SUCCESS: Profile scraped but database update failed\n');
-            
-            // Return partial success
-            return res.status(207).json({ 
-                success: false,
-                message: 'Profile scraped but database update failed',
-                error: seedError.message,
-                data: {
-                    alumniName,
-                    linkedinUrl: foundUrl,
-                    profileFileName,
-                    urlFileName
-                },
-                profile: finalProfileJson
-            });
-        }
+        console.log("   [Fallback] ❌ No result passed the name confidence check.");
+        return null;
 
     } catch (error) {
-        console.error('❌ ERROR:', error.message);
-        console.log('='.repeat(60) + '\n');
+        console.log(`   [Fallback] SERP failed: ${error.message}`);
+        return null;
+    }
+}
+
+// --- MAIN PROCESSOR (Modified for Manual Fallback) ---
+async function processSingleProfile(alumniName, forceFallback = false) {
+    console.log(`\n${'='.repeat(60)}`);
+    console.log(`Processing: ${alumniName} (Fallback Mode: ${forceFallback})`);
+    
+    let foundUrl = null;
+
+    // 1. Decide method
+    if (forceFallback) {
+        foundUrl = await findUrlWithBrightDataFallback(alumniName);
+        if (!foundUrl) throw new Error("Fallback: No confident match found. Stopping to avoid wrong person.");
+    } else {
+        foundUrl = await findUrlWithAirtop(alumniName);
+        if (!foundUrl) {
+            // THROW SPECIFIC ERROR FOR FRONTEND
+            const err = new Error("Airtop could not find URL.");
+            err.code = "AIRTOP_FAILED";
+            throw err;
+        }
+    }
+
+    console.log(`✓ Final URL to Scrape: ${foundUrl}`);
+
+    // 2. Save URL
+    const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
+    if (!fs.existsSync(urlDirPath)) fs.mkdirSync(urlDirPath, { recursive: true });
+    const safeName = alumniName.toLowerCase().replace(/ /g, '_');
+    fs.writeFileSync(path.join(urlDirPath, `${safeName}_linkedin_url.txt`), foundUrl);
+
+    // 3. Scrape Profile
+    console.log('   Scraping Profile Data...');
+    const linkedinResponse = await fetch(LINKEDIN_COLLECTOR_ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "url": foundUrl })
+    });
+
+    if (!linkedinResponse.ok) {
+        const errText = await linkedinResponse.text();
+        throw new Error(`Bright Data Collector failed: ${errText}`);
+    }
+
+    const rawText = await linkedinResponse.text();
+    const profileJson = JSON.parse(rawText);
+
+    // 4. Save & Seed
+    fs.writeFileSync(path.join(urlDirPath, `${safeName}.json`), JSON.stringify(profileJson, null, 2));
+    await seedUsers(true);
+    
+    return "Success";
+}
+
+
+// --- API ENDPOINT 1: Start Batch ---
+router.post('/start-batch', async (req, res) => {
+    const { names, forceFallback } = req.body; // Accepts forceFallback flag
+    
+    if (!names || !Array.isArray(names)) {
+        return res.status(400).json({ message: "Names array required" });
+    }
+
+    if (activeJob.isRunning) {
+        return res.status(409).json({ message: "Job already running" });
+    }
+
+    // Reset State
+    activeJob = {
+        isRunning: true,
+        total: names.length,
+        processed: 0,
+        currentName: "Initializing...",
+        logs: [],
+        queue: names,
+        failedQueue: [], // Start clean
+        forceFallback: !!forceFallback, // Set the mode
+        shouldStop: false
+    };
+
+    res.json({ success: true, message: "Batch started" });
+
+    // Start Background Loop
+    runBackgroundJob();
+});
+
+// --- API ENDPOINT 2: Get Status (Polling) ---
+router.get('/status', (req, res) => {
+    res.json(activeJob);
+});
+
+// --- API ENDPOINT 3: Stop Job ---
+router.post('/stop-batch', (req, res) => {
+    activeJob.shouldStop = true;
+    activeJob.logs.unshift("⚠️ Stop requested by user...");
+    res.json({ success: true });
+});
+
+// --- BACKGROUND WORKER (Updated for Queue Logic) ---
+async function runBackgroundJob() {
+    console.log(`Starting background batch (Fallback Mode: ${activeJob.forceFallback})...`);
+    
+    for (let i = 0; i < activeJob.queue.length; i++) {
+        if (activeJob.shouldStop) {
+            activeJob.isRunning = false;
+            activeJob.currentName = "Stopped";
+            activeJob.logs.unshift("🛑 Batch stopped by user.");
+            return;
+        }
+
+        const name = activeJob.queue[i];
+        activeJob.currentName = name;
+        activeJob.processed = i; 
+        
+        try {
+            // Pass the global forceFallback setting to the processor
+            await processSingleProfile(name, activeJob.forceFallback);
+            activeJob.logs.unshift(`✅ Success: ${name}`);
+        } catch (error) {
+            console.error(`Batch Error [${name}]:`, error.message);
+            
+            // ADD TO FAILED QUEUE (Don't stop!)
+            activeJob.failedQueue.push(name);
+            activeJob.logs.unshift(`⚠️ Skipped: ${name} (Added to Retry Queue)`);
+        }
+    }
+
+    activeJob.processed = activeJob.total;
+    activeJob.isRunning = false;
+    activeJob.currentName = "Completed";
+    
+    if (activeJob.failedQueue.length > 0) {
+        activeJob.logs.unshift(`🏁 Batch Done. ${activeJob.failedQueue.length} items failed (See Retry Option).`);
+    } else {
+        activeJob.logs.unshift("🎉 Batch Scraping Finished Successfully!");
+    }
+}
+
+router.post('/get-linkedin-profile', async (req, res) => {
+    const { alumniName, forceFallback } = req.body; // Read the flag
+    
+    if (!alumniName) return res.status(400).json({ message: 'Name required' });
+
+    try {
+        await processSingleProfile(alumniName, forceFallback);
+        return res.status(200).json({ success: true, message: `Scraped ${alumniName}` });
+    } catch (error) {
+        // Send specific error code to frontend
+        if (error.code === 'AIRTOP_FAILED') {
+            return res.status(422).json({ 
+                success: false, 
+                code: 'AIRTOP_FAILED',
+                message: 'Airtop could not find the profile.' 
+            });
+        }
         
         return res.status(500).json({ 
-            success: false,
-            message: 'Failed to scrape LinkedIn profile',
-            error: error.message,
-            alumniName
+            success: false, 
+            message: error.message 
         });
     }
 });

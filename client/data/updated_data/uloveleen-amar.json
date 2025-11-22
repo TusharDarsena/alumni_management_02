@@ -1,0 +1,65 @@
+{
+  "id": "loveleen-amar",
+  "name": "Loveleen Amar",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQF1caZY88nfmw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1695061223682?e=2147483647&v=beta&t=r5g27VLj9mA3KJsWcmVnuAsPvrZUWBDK-GZt7Q0LOtY",
+  "position": null,
+  "current_company": {
+    "name": "Intel Corporation",
+    "location": null
+  },
+  "location": "Bengaluru",
+  "about": "Recently joined Intel as an AI Solution Engineer. Working with the Habana team on AI…",
+  "education": [
+    {
+      "title": "International Institute of Information Technology, Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2016",
+      "end_year": "2017"
+    },
+    {
+      "start_year": "2014",
+      "end_year": "2015"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Intel Corporation",
+      "company": "Intel Corporation",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://ro.linkedin.com/in/loveleen-amar",
+  "linkedin_id": "loveleen-amar"
+}

@@ -1,0 +1,59 @@
+{
+  "id": "banavath-siddhu",
+  "name": "Banavath Siddhu",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQFef8uxQcd8aA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1680581896247?e=2147483647&v=beta&t=SLhyVILkcVQa4r9-tz29YQ4HoftoY3-bWEShhhUEa2A",
+  "position": null,
+  "current_company": {
+    "name": "Cognizant",
+    "location": null
+  },
+  "location": "Hyderabad",
+  "about": "Associate at Cognizant and Intern at RCI, DRDO , Graduate IIIT Naya Raipur,ECE…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2018",
+      "end_year": "2022"
+    },
+    {
+      "start_year": "2016",
+      "end_year": "2018"
+    },
+    {
+      "start_year": "2011",
+      "end_year": "2016"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Cognizant",
+      "company": "Cognizant",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://nl.linkedin.com/in/banavath-siddhu",
+  "linkedin_id": "banavath-siddhu"
+}

@@ -1,0 +1,65 @@
+{
+  "id": "aishwarya-maurya",
+  "name": "Aishwarya Maurya",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQH44O0EmzwtJA/profile-displayphoto-shrink_200_200/B56ZXTlYAvGcAc-/0/1743011547162?e=2147483647&v=beta&t=0nBg3pWxibZl1jJiYJNgdm3bcu2dUPp8pGA729eKRws",
+  "position": null,
+  "current_company": {
+    "name": "GravityONE",
+    "location": null
+  },
+  "location": "Bengaluru",
+  "about": "🚀 Frontend Developer | Angular | React Native | React JS | JavaScript | Scalable UI…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2016",
+      "end_year": "2017"
+    },
+    {
+      "start_year": "2014",
+      "end_year": "2015"
+    }
+  ],
+  "experience": [
+    {
+      "title": "GravityONE",
+      "company": "GravityONE",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://vn.linkedin.com/in/aishwarya-maurya",
+  "linkedin_id": "aishwarya-maurya"
+}

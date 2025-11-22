@@ -1,0 +1,368 @@
+{
+  "id": "pkunjam",
+  "name": "Punit Kunjam",
+  "city": "Waterloo, Ontario, Canada",
+  "country_code": "CA",
+  "about": "I am a Computer Science graduate with a Master of Mathematics from the University of…",
+  "current_company": {
+    "link": "https://ca.linkedin.com/company/jaliresearch-inc?trk=public_profile_topcard-current-company",
+    "name": "JALI Research Inc.",
+    "company_id": "jaliresearch-inc",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "JALI Research Inc.",
+      "description_html": null,
+      "company": "JALI Research Inc.",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHmTTszhSFAYQ/company-logo_100_100/company-logo_100_100/0/1630623765042?e=2147483647&v=beta&t=vXu6IbZ1PA3B_LRlQixJmxEHYfc-gYOr0f4aFz3CRdE"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHV472cn2nhMw/company-logo_100_100/B56Zb.Jn2gHwAQ-/0/1748020657900/uwaterloo_logo?e=2147483647&v=beta&t=n54wHXJJKlCLE3ZWAejmbH36gSOODrQEsBh4kYgy6uY"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGEk305uQv2Pw/company-logo_100_100/company-logo_100_100/0/1718284774378/uw_wim_logo?e=2147483647&v=beta&t=DDOTrhzE6MXkLHD4R3k8asJX-Vi5mRy9L_SB-wS7lPY"
+    },
+    {
+      "description_html": null,
+      "duration": "2022 - 2024",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHV472cn2nhMw/company-logo_100_100/B56Zb.Jn2gHwAQ-/0/1748020657900/uwaterloo_logo?e=2147483647&v=beta&t=n54wHXJJKlCLE3ZWAejmbH36gSOODrQEsBh4kYgy6uY"
+    },
+    {
+      "description_html": null,
+      "duration": "2017 - 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    }
+  ],
+  "url": "https://fr.linkedin.com/in/pkunjam",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/prachita-kotangale",
+      "name": "Prachita K.",
+      "about": null,
+      "location": "India"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/himanshupahadia",
+      "name": "Himanshu Pahadia",
+      "about": null,
+      "location": "Boston, MA"
+    },
+    {
+      "profile_link": "https://fr.linkedin.com/in/snehal-raj-ba4713161",
+      "name": "Snehal Raj",
+      "about": null,
+      "location": "Paris"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/aniruddha-s-joshi",
+      "name": null,
+      "about": null,
+      "location": null
+    }
+  ],
+  "educations_details": "University of Waterloo",
+  "education": [
+    {
+      "title": "University of Waterloo",
+      "url": "https://ca.linkedin.com/school/uwaterloo/",
+      "start_year": "2022-09",
+      "end_year": "2024-09",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2017-08",
+      "end_year": "2021-08",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQHdNwKxsI7rZA/profile-displayphoto-shrink_200_200/B56ZXOD4ABGcAc-/0/1742918877523?e=2147483647&v=beta&t=4npAf4jsofDxog0DjEFb-sYr-uueky1faqK8OvThMwo",
+  "languages": [
+    {
+      "subtitle": "Full professional proficiency",
+      "title": "English"
+    },
+    {
+      "subtitle": "Full professional proficiency",
+      "title": "Hindi"
+    }
+  ],
+  "certifications": [
+    {
+      "meta": "Issued Apr 2019 Credential ID UC-FOBGMCM8 See credential",
+      "subtitle": "Udemy",
+      "title": "Self-driving go-kart with Unity-ML",
+      "credential_url": "http://ude.my/UC-FOBGMCM8?trk=public_profile_see-credential",
+      "credential_id": "UC-FOBGMCM8"
+    },
+    {
+      "meta": "Issued Jan 2019 Credential ID QLXK5XEMZRSB See credential",
+      "subtitle": "Coursera",
+      "title": "Machine Learning",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/QLXK5XEMZRSB?trk=public_profile_see-credential",
+      "credential_id": "QLXK5XEMZRSB"
+    },
+    {
+      "meta": "Issued Jul 2018 Credential ID AU2YDKD75DTH See credential",
+      "subtitle": "Coursera",
+      "title": "Intermediate Object-Oriented Programming for Unity Games",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/AU2YDKD75DTH?trk=public_profile_see-credential",
+      "credential_id": "AU2YDKD75DTH"
+    },
+    {
+      "meta": "Issued Jul 2018 Credential ID 5ZGFNALQEE9M See credential",
+      "subtitle": "Coursera",
+      "title": "Python Data Structures",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/5ZGFNALQEE9M?trk=public_profile_see-credential",
+      "credential_id": "5ZGFNALQEE9M"
+    },
+    {
+      "meta": "Issued Jun 2018 See credential",
+      "subtitle": "DataCamp",
+      "title": "Intro to python for Data Science Course",
+      "credential_url": "https://www.datacamp.com/statement-of-accomplishment/course/8e2c4f31cb2f8b4fa82e7590f7fbda9619650dda?trk=public_profile_see-credential",
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Jun 2018 Credential ID X64UMTW8STZC See credential",
+      "subtitle": "Coursera",
+      "title": "Introduction to C# Programming and Unity",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/X64UMTW8STZC?trk=public_profile_see-credential",
+      "credential_id": "X64UMTW8STZC"
+    },
+    {
+      "meta": "Issued Jun 2018 Credential ID E7QTFK3VEV46 See credential",
+      "subtitle": "Coursera",
+      "title": "More C# Programming and Unity",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/E7QTFK3VEV46?trk=public_profile_see-credential",
+      "credential_id": "E7QTFK3VEV46"
+    },
+    {
+      "meta": "Issued Jun 2018 Credential ID ZVFF4CTBKBXM See credential",
+      "subtitle": "Coursera",
+      "title": "Programming for Everybody (Getting Started with Python)",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/ZVFF4CTBKBXM?trk=public_profile_see-credential",
+      "credential_id": "ZVFF4CTBKBXM"
+    },
+    {
+      "meta": "Issued May 2018 Credential ID UC-TM3BUW6L See credential",
+      "subtitle": "Udemy",
+      "title": "C# Fundamentals",
+      "credential_url": "http://ude.my/UC-TM3BUW6L?trk=public_profile_see-credential",
+      "credential_id": "UC-TM3BUW6L"
+    },
+    {
+      "meta": "Issued Oct 2017 Credential ID 209241",
+      "subtitle": "ROBOSAPIENS TECHNOLOGIES Pvt. Ltd.",
+      "title": "Android Apps Development",
+      "credential_url": null,
+      "credential_id": "209241"
+    }
+  ],
+  "volunteer_experience": [
+    {
+      "cause": "Science and Technology",
+      "duration": "Mar 2018 · - \nMar 2018 · \n1 month",
+      "duration_short": "- \nMar 2018",
+      "info": "Achievements/Tasks - - Planned and executed a successful LAN gaming tournament as part of a technical fest. - Oversaw all aspects of the tournament, including equipment setup, rule enforcement, and prize distribution, ensuring a smooth and fair competition for all participants. - Developed marketing strategies to attract participants and promote the tournament. - Demonstrated strong leadership, communication, and organizational skills throughout the planning and execution of the… Show more Achievements/Tasks - - Planned and executed a successful LAN gaming tournament as part of a technical fest. - Oversaw all aspects of the tournament, including equipment setup, rule enforcement, and prize distribution, ensuring a smooth and fair competition for all participants. - Developed marketing strategies to attract participants and promote the tournament. - Demonstrated strong leadership, communication, and organizational skills throughout the planning and execution of the event, receiving positive feedback from both participants and organizers. Show less",
+      "start_date": "Mar 2018",
+      "subtitle": "Technovate IIIT-NR",
+      "title": "Event Head"
+    }
+  ],
+  "followers": 1725,
+  "connections": 500,
+  "current_company_company_id": "jaliresearch-inc",
+  "current_company_name": "JALI Research Inc.",
+  "publications": [
+    {
+      "title": "Tactile Narratives in Virtual Reality",
+      "subtitle": "UWSpace (University of Waterloo)",
+      "date": "September 19, 2024",
+      "description": "This research focused on designing haptic feedback systems in virtual reality to foster relational presence, emphasizing emotional and cognitive engagement over traditional interactivity. Central to this work was the Sankofa Interface, which aligned tactile feedback with emotional and narrative arcs to create reflective and empathetic user experiences. This research contributed design principles for integrating haptics into educational and narrative-driven VR, highlighting their potential to enhance connection, learning, and engagement."
+    },
+    {
+      "title": "Virtual reality for synergistic surgical training and data generation",
+      "subtitle": "Taylor & Francis (Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization)",
+      "date": "November 26, 2021",
+      "description": "Surgical simulators not only allow planning and training of complex procedures, but also offer the ability to generate structured data for algorithm development, which may be applied in image-guided computer assisted interventions. While there have been efforts on either developing training platforms for surgeons or data generation engines, these two features, to our knowledge, have not been offered together. We present our developments of a cost-effective and synergistic framework, named Asynchronous Multibody Framework Plus (AMBF+), which generates data for downstream algorithm development simultaneously with users practicing their surgical skills. AMBF+ offers stereoscopic display on a virtual reality (VR) device and haptic feedback for immersive surgical simulation. It can also generate diverse data such as object poses and segmentation maps. AMBF+ is designed with a flexible plugin setup that allows for unobtrusive extension for simulation of different surgical procedures. We show one use case of AMBF+ as a virtual drilling simulator for lateral skull-base surgery, where users can actively modify the patient anatomy using a virtual surgical drill. We further demonstrate how the data generated can be used for validating and training downstream computer vision algorithms."
+    },
+    {
+      "title": "Pockets: User-Assigned Menus Based on Physical Buttons for Virtual Environments",
+      "subtitle": "ACM SIGGRAPH 2021 Posters",
+      "date": "August 5, 2021",
+      "description": "We present Pockets, a simple means of organizing and carrying 3D tools and other objects in virtual environments. Previous examples exist of using 3D tools with visually obvious affordances in virtual immersive environments instead of more traditional menus, however, in these applications a 2D menu is still necessary to select 3D tools from. Pockets make use of a belt with physical buttons, that objects can be assigned to. The Pockets design not only enables users to use their muscle memory to store and retrieve objects, thereby making tool use more efficient, but also solves the occlusion problem associated with state-of-the-art approaches such as 2D menus tied to the body or to the world space."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Confluent AI: AI-Driven Procedural Terrain Generator",
+      "start_date": "Aug 2024",
+      "description": "This project demonstrates a comprehensive Procedural Terrain Generator built using C++ and OpenGL. The project integrates LLM input to allow users to modify terrain parameters dynamically using natural language.Key Contributions:- Developed and integrated a custom procedural terrain generation system using Perlin noise and advanced shader techniques, incorporating LLM for dynamic terrain modifications based on high-level, natural language prompts, enhancing accessibility for non-technical users.- Enabled AI-driven terrain customization, showcasing advanced prompt engineering and LLM integration in interactive graphics.- Leveraged function-calling to extract structured data for real-time modification of terrain parameters (e.g., ruggedness, frequency).- Designed a robust system to parse complex, high-level commands from natural language into precise graphical parameter adjustments, utilizing embeddings and similarity search to interpret varied terrain modification requests.- Deployed infrastructure to locally run and fine-tune open-source LLMs for low-latency, high-efficiency interaction, optimizing prompt engineering to achieve accurate terrain representations based on vague or abstract prompts. [In Progress]"
+    },
+    {
+      "title": "EchoLore VR",
+      "start_date": "Sep 2022",
+      "description": "This research explored designing haptics for tangible interfaces tailored for virtual learning environments. Unlike traditional VR which focuses on physical immersion, this project aims to develop haptic designs that establish interpersonal connections between the user and the virtual environment, fostering a more reflective and empathetic experience.Key Contributions:- Led the design and development of a haptic interface to enhance user experience in virtual environments.- Programmed microcontrollers (Arduino, ESP32) and sensors (Hall Effect, IR, etc.) in C++, created a custom VR interface for Meta Quest using Unity and C#, and handled real-time data exchange between hardware and software layers.- Extended an open-source project with JavaScript, adding 5 new features to meet design goals.[Code will be provided upon request for review. The GitHub repository is currently private until published]"
+    },
+    {
+      "title": "Slingshot",
+      "start_date": "Jan 2023",
+      "description": "Built a top-down 2D game using Unity designed to augment visual learning with haptic feedback. We showcased Slingshot at IEEE World Haptics 2023, where over 30 attendees engaged in hands-on demonstrations and provided positive feedback on their experiences."
+    },
+    null,
+    {
+      "title": "Tower of Hanoi",
+      "start_date": "Oct 2020",
+      "description": "Developed a simulation using Unity 3D to visualize the famous mathematical problem Tower of Hanoi (TOH), ran an unofficial user study with 15 children (age less than 10 years) who tried the game and found it easier to grasp the concept of TOH through interactive learning."
+    },
+    {
+      "title": "Proxy Interpreter",
+      "start_date": "Sep 2020",
+      "description": "Built a novel immersive AR-based wearable device to solve communication issues children with hearing loss face due to deprivation of sign language education at a young age and relying upon intricate methods for communication."
+    },
+    {
+      "title": "Collision Avoidance System in Virtual Reality",
+      "start_date": "Jun 2020",
+      "description": "I worked on a system comparing different hazard indication and avoidance methods for users immersed in a virtual environment. Specifically, I developed a novel system for collision avoidance with people who may or may not be engaged in VR. I implemented this system using a machine learning-based human pose estimation framework, which tracks users in the simulated environment and offers visual and auditory feedback following different hazard indication and avoidance techniques. I used the redirected walking technique, which manipulates the scene around the users, causing them to reorient themselves in the virtual world, thus avoiding the collision. Video shows an experiment where a VR user tends to collect a specific item in the scene meanwhile the non-VR user (animated model) deliberately gets in the way of the VR user. The scene compensates itself by rotating the world so that the VR user will reposition itself accordingly in the 3D space, driving both VR and non-VR users away from each other."
+    },
+    {
+      "title": "AI Assistant JARVIS",
+      "start_date": "May 2020",
+      "description": "Created an interactive AI-powered virtual assistant, JARVIS. It incorporates an AR avatar with features like a voice-enabled chatbot to bring a human-like conversational experience."
+    }
+  ],
+  "location": "Waterloo",
+  "input_url": "https://www.linkedin.com/in/pkunjam",
+  "linkedin_id": "pkunjam",
+  "activity": [
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-facialanimation-artistcentric-activity-7396593075214671873-oDaZ",
+      "title": "We’re thrilled to celebrate two JALI customers recognized at The Game Awards! Congratulations to: DON'T NOD Montréal for Lost Records: Bloom & Rage…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQEJb1z2C-8Spw/feedshare-shrink_800/B56ZqXszKBHkAk-/0/1763481696113?e=2147483647&v=beta&t=LlilhfDjQDqeLM-mMatAx7Zuz-bgvC3ugJFL3LShldM",
+      "id": "7396593075214671873"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/jaliresearch-inc_proud-to-join-this-incredible-list-of-studios-activity-7392608259016257536-BjAO",
+      "title": "Proud to join this incredible list of studios & organizations supporting World VFX Day!",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQEwZqJQurALcg/feedshare-shrink_2048_1536/B4EZpbEuuBJgAw-/0/1762464560749?e=2147483647&v=beta&t=YSWyXQsu6QFyYCAHWtxcdgtV6jNnFMyE1xjfXoOtUU0",
+      "id": "7392608259016257536"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-artistcentric-3danimation-activity-7391889063986913280-FSpC",
+      "title": "Only a week left to register for Basic Facial Rigging for 3D Characters! In this crash course led by Lazo Poncho (JALI Tech Art Generalist and…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHMD8QJIwS9YA/feedshare-shrink_1280/B56ZpVD7b3KEAs-/0/1762363685405?e=2147483647&v=beta&t=tvlZY656NNhg1bKybzYQQ_ctoeFlPZbQ0RAnPMbLdUg",
+      "id": "7391889063986913280"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-artistcentric-facialanimation-activity-7391172572001914880-URhK",
+      "title": "JALI at GamesBeat Next | San Francisco, Nov 12–14 Our Co-Founder and CEO, Sarah Watling, is heading to GamesBeat Next joining industry leaders and…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHGQ_KkyToijw/feedshare-shrink_2048_1536/B56ZpK4SNSJYA4-/0/1762192860783?e=2147483647&v=beta&t=UAd2gfZqG-a4jUGno0v2YaV4891UFI75tpxYvaEBHWs",
+      "id": "7391172572001914880"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/andrew-spielberg-82073926a_a-slightly-belated-announcement-im-excited-activity-7384205110014443520-QiBB",
+      "title": "A slightly belated announcement --- I'm excited to announce that I've joined the faculty of Carnegie Mellon University as an Assistant Professor in…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQH_61II5PMb8w/feedshare-shrink_800/B4EZnn3atBGUAk-/0/1760531689058?e=2147483647&v=beta&t=FvG4PRbSsPSDn01-vh9OZ69W4_DhZT9u17Q-LPp8P-U",
+      "id": "7384205110014443520"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/rafael-couto-3a9b331b6_for-traditional-film-people-like-me-animations-activity-7384658085203664896--nsg",
+      "title": "For traditional film people like me, animations and their making are often quite challenging and full of mystery, that’s why I consider myself very…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQHHRuqBW5pDVQ/feedshare-shrink_800/B4DZnuTYxkKsAk-/0/1760639686220?e=2147483647&v=beta&t=PlVHFwW9AQnKeKVqvAzhODrAKpqE306ewkcjV3hAEFw",
+      "id": "7384658085203664896"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/anu7ag_last-week-i-had-the-opportunity-to-present-activity-7381043599813271553-lNuc",
+      "title": "Last week, I had the opportunity to present my research at the 2025 Cheriton Research Symposium. I’m grateful to be supported by the David R…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQEyBkQpUAKlqg/feedshare-shrink_2048_1536/B4EZm68CesIIA0-/0/1759777925783?e=2147483647&v=beta&t=42ncUDnb69Duiq2QH3b1JiLlAMzAVTQ3O6v1SPWSl5k",
+      "id": "7381043599813271553"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/tri-ngo-350b251a4_yesterday-i-had-the-chance-to-meet-pif-edwards-activity-7379962250796871680-bcIs",
+      "title": "Yesterday I had the chance to meet Pif Edwards, CTO and co-founder of JALI Research Inc., and learn more about the company’s groundbreaking software…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHB85N8zx0y_g/feedshare-shrink_800/B56ZmrkeAjI8Ag-/0/1759520111350?e=2147483647&v=beta&t=PkOJ-LD6qBb71vgxDLDG5xrvA-3Lqsx5tPjbFsnqkb0",
+      "id": "7379962250796871680"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/michael-roz_i-had-the-privilege-of-attending-a-session-activity-7379729716548653056-giqU",
+      "title": "I had the privilege of attending a session by Pif Edwards, CTO and Co-Founder of JALI Research Inc., at Humber Polytechnic, where he spoke to our…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFOYcOtqnRl_w/feedshare-shrink_2048_1536/B56ZmoREOeI0Aw-/0/1759464671856?e=2147483647&v=beta&t=vuLdlhWDX4xuyWCiNC0GbNmIUFuYzIXAo7aXG_Xs10s",
+      "id": "7379729716548653056"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/animation-world-network_jaliresearch-oiaf2025-facialanimation-activity-7377357554257108992-9tyr",
+      "title": "#JALIResearch Powers ‘When the Moon Sings’ in Competition at #OIAF2025 - Jesu Medina’s short film, selected for the Canadian Student program, is an…",
+      "img": "https://media.licdn.com/dms/image/v2/D5610AQH_YFVIf33H7w/image-shrink_800/B56ZmGjmqQHkAg-/0/1758899105135?e=2147483647&v=beta&t=t0mmslHJavJNSRzzQ4663ped5GolhfgX7gQcrnxN0d0",
+      "id": "7377357554257108992"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-webinar-facialanimation-activity-7377030518938406912-wIpt",
+      "title": "Webinar Alert: There Are No Shortcuts in Facial Animation October 15 | 1pm ET Explore why 3D facial animation remains one of the most complex…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQEcCbO1Ht36Xg/feedshare-shrink_2048_1536/B56ZmB6KPfJoAw-/0/1758821132997?e=2147483647&v=beta&t=u8oGGWWY0aPxhHSpaH6vpLzL1UpmRaTbrcK0DztlRfw",
+      "id": "7377030518938406912"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-scienceofanimation-fleetsciencecenter-activity-7375963437413232641-7Jyx",
+      "title": "Find JALI at the Science of Animation exhibit! ✨ Sept 27-28 | 10AM - 5PM | Fleet Science Center Hosted by Immersive Enterprise Laboratories - IEL…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFaJUv8dABr9w/feedshare-shrink_1280/B56ZlyvqI4J8As-/0/1758566721327?e=2147483647&v=beta&t=4WHA_x1lJZyrDVv1N-mDaBEJpzZ2S8rplHcwVBYBhis",
+      "id": "7375963437413232641"
+    }
+  ],
+  "linkedin_num_id": "659701272",
+  "banner_image": "https://media.licdn.com/dms/image/v2/D5616AQGXshJRXF4j2g/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1664468715563?e=2147483647&v=beta&t=OSmXT_Q7IEoaeUXCyIyRvToKwbGE95FwxBSyjblYC-M",
+  "honors_and_awards": [
+    {
+      "title": "Next 36 (2025 Cohort)",
+      "publication": "-",
+      "date": "2024-12-01T00:00:00.000Z",
+      "description": "Selected as one of 36 participants from 80 finalists for Canada’s prestigious program for entrepreneurial development, recognizing innovative thinking, leadership, and potential to create transformative ventures."
+    },
+    {
+      "title": "Women in Math Mentorship Award",
+      "publication": "-",
+      "date": "2024-08-01T00:00:00.000Z",
+      "description": "Mentored 4 undergraduate students on a mathematical research project."
+    },
+    {
+      "title": "Graduate Research Scholarship",
+      "publication": "-",
+      "date": "2022-09-01T00:00:00.000Z",
+      "description": "Recipient of Fully Funded Graduate Research Scholarship for Master’s degree at the University of Waterloo."
+    },
+    {
+      "title": "Outstanding Paper Award",
+      "publication": "-",
+      "date": "2021-08-01T00:00:00.000Z",
+      "description": "Outstanding Paper Award, 15th Augmented Environments for Computer-Assisted Interventions (AE-CAI) workshop."
+    }
+  ],
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [],
+  "first_name": "Punit",
+  "last_name": "Kunjam",
+  "timestamp": "2025-11-20T17:42:22.067Z",
+  "input": {
+    "url": "https://www.linkedin.com/in/pkunjam"
+  }
+}
