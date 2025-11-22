@@ -3,6 +3,8 @@
  * Used by both client and server for consistent data extraction
  */
 
+import { INSTITUTE_NAME_VARIATIONS, BRANCH_VARIATIONS } from './config.ts';
+
 export interface Education {
   title?: string;
   field?: string;
@@ -24,19 +26,6 @@ export interface CurrentCompany {
   title?: string;
   location?: string;
 }
-
-/**
- * Institute name variations for matching
- * Add more variations as needed
- */
-const INSTITUTE_NAME_VARIATIONS = [
-  "IIIT-Naya Raipur",
-  "IIIT Naya Raipur",
-  "IIIT-NR",
-  "IIIT NR",
-  "iiitnr",
-  "Dr. S.P.M. International Institute of Information Technology, Naya Raipur"
-];
 
 /**
  * Check if a degree is relevant (BTech, MTech, PhD)
@@ -76,6 +65,7 @@ export function extractBatch(education?: Education[]): string | null {
 
 /**
  * Extract branch from education array for IIIT-Naya Raipur
+ * Uses configurable branch variations for matching
  */
 export function extractBranch(education?: Education[]): string | null {
   if (!Array.isArray(education)) return null;
@@ -85,10 +75,14 @@ export function extractBranch(education?: Education[]): string | null {
   
   if (!iiitEdu?.field) return null;
   
-  const field = iiitEdu.field.toLowerCase();
-  if (field.includes("computer science") || field.includes("cse")) return "CSE";
-  if (field.includes("electronics") || field.includes("ece")) return "ECE";
-  if (field.includes("data science") || field.includes("dsai")) return "DSAI";
+  const field = iiitEdu.field.toLowerCase().trim();
+  
+  // Check against all branch variations
+  for (const [branchName, variations] of Object.entries(BRANCH_VARIATIONS)) {
+    if (variations.some(variation => field.includes(variation.toLowerCase()))) {
+      return branchName;
+    }
+  }
   
   // Return the field as-is if no match
   return iiitEdu.field;

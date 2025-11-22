@@ -33,22 +33,22 @@ export function extractBatchFromArray(education) {
 /**
  * Extract branch from education array (for LinkedIn profile format)
  * @param {Array} education - Array of education objects
- * @returns {string} Branch code (CSE, ECE, DSAI) or default CSE
+ * @returns {string|null} Branch code (CSE, ECE, DSAI) or null if not found
  */
 export function extractBranchFromArray(education) {
-  if (!Array.isArray(education)) return "CSE";
+  if (!Array.isArray(education)) return null;
   const iiitEdu = education.find(edu =>
     edu.title && edu.title.toLowerCase().includes("iiit-naya raipur") &&
     isRelevantDegree(edu.degree)
   );
-  if (!iiitEdu) return "CSE";
+  if (!iiitEdu) return null;
   const field = iiitEdu.field;
-  if (!field) return "CSE";
+  if (!field) return null;
   const f = field.toLowerCase();
   if (f.includes("computer science")) return "CSE";
   if (f.includes("electronics") && f.includes("communication")) return "ECE";
   if (f.includes("data science")) return "DSAI";
-  return "CSE";
+  return null;
 }
 
 /**
@@ -102,13 +102,13 @@ export function extractBatch(education) {
 /**
  * Extract branch from education string
  * @param {string} educationStr - Education string containing branch/major information
- * @returns {string} Branch code (CSE, ECE, DS) or default CSE
+ * @returns {string|null} Branch code (CSE, ECE, DS) or null if not found
  */
 export function extractBranch(educationStr) {
   if (educationStr.includes("Computer Science")) return "CSE";
   if (educationStr.includes("Electronics")) return "ECE";
   if (educationStr.includes("Data Science")) return "DS";
-  return "CSE"; // Default
+  return null;
 }
 
 /**
@@ -129,7 +129,7 @@ export function parseEducation(educationStr) {
   const end_year = yearMatch ? parseInt(yearMatch[2]) : null;
   const degree =
     degreeFull.replace("(BTech)", "").trim() + (branchStr ? ` in ${branchStr}` : "");
-  const field = extractBranch(educationStr) || branchStr || "CSE"; // Use extractBranch or fallback
+  const field = extractBranch(educationStr) || branchStr || null;
   return [{ field, degree, institute, start_year, end_year }];
 }
 

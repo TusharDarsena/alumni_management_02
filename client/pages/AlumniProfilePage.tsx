@@ -98,8 +98,9 @@ export default function AlumniProfilePage() {
         ? d.education.map((e: any) => ({
             degree: e.degree ? (e.field ? `${e.degree} in ${e.field}` : e.degree) : undefined,
             title: e.title || undefined,
-            start_year: e.start_year ? parseInt(e.start_year) : undefined,
-            end_year: e.end_year ? parseInt(e.end_year) : undefined,
+            field: e.field || undefined,
+            start_year: e.start_year || undefined,
+            end_year: e.end_year || undefined,
           }))
         : [],
       experience: Array.isArray(d.experience)

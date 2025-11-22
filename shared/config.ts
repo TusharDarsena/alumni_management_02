@@ -1,37 +1,11 @@
-export const allowedBranches = {
-  BTech: {
-    display: "B.Tech",
-    branches: ["CSE", "DSAI", "ECE"],
-    batches: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
-  },
-  MTech: {
-    display: "M.Tech",
-    branches: [
-      "CSE (Data Science/AI)",
-      "CSE (Information Security)",
-      "ECE (VLSI & Embedded Systems)",
-      "ECE (Communication & Signal Processing)"
-    ],
-    batches: [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
-  },
-  PhD: {
-    display: "Ph.D",
-    branches: [
-      "Computer Science and Engineering",
-      "Electronics and Communication Engineering",
-      "Mathematics",
-      "Management Studies",
-      "Physics",
-      "Humanities"
-    ],
-    batches: [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
-  }
-};
+/**
+ * Shared configuration used by both client and server
+ */
 
-export const title = "IIIT Naya Raipur";
-
-// Institute name variations for matching education entries
-export const instituteNameVariations = [
+/**
+ * Institute name variations for matching
+ */
+export const INSTITUTE_NAME_VARIATIONS = [
   "IIIT-Naya Raipur",
   "IIIT Naya Raipur",
   "IIIT-NR",
@@ -40,9 +14,11 @@ export const instituteNameVariations = [
   "Dr. S.P.M. International Institute of Information Technology, Naya Raipur"
 ];
 
-// Branch variations for matching education fields
-// Each key is the normalized branch name to return
-export const branchVariations = {
+/**
+ * Branch variations for matching education fields
+ * Each key is the normalized branch name to return
+ */
+export const BRANCH_VARIATIONS: Record<string, string[]> = {
   "CSE": [
     "computer science",
     "cse",
