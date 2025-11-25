@@ -2,12 +2,18 @@ import React, { createContext, useContext, useState, useEffect, useRef } from 'r
 import axios from 'axios';
 import { useToast } from "@/hooks/use-toast";
 
+// Define the shape of a profile
+export interface ScrapeProfile {
+  name: string;
+  batch: string;
+}
+
 interface ScrapingContextType {
   isProcessing: boolean;
   progress: { processed: number; total: number; currentName: string };
   logs: string[];
-  failedQueue: string[]; // <--- NEW
-  startScraping: (names: string[], forceFallback?: boolean) => void; // <--- Updated Signature
+  failedQueue: ScrapeProfile[]; // Now stores objects
+  startScraping: (profiles: ScrapeProfile[], forceFallback?: boolean) => void;
   cancelScraping: () => void;
 }
 
@@ -17,7 +23,7 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState({ processed: 0, total: 0, currentName: "" });
   const [logs, setLogs] = useState<string[]>([]);
-  const [failedQueue, setFailedQueue] = useState<string[]>([]); // <--- NEW
+  const [failedQueue, setFailedQueue] = useState<ScrapeProfile[]>([]);
   const { toast } = useToast();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -58,22 +64,22 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Update start function to accept fallback flag
-  const startScraping = async (names: string[], forceFallback = false) => {
+  // Update start function to accept profiles with batch info
+  const startScraping = async (profiles: ScrapeProfile[], forceFallback = false) => {
     try {
-      // Pass forceFallback to backend
-      await axios.post('/api/scrape/start-batch', { names, forceFallback });
+      // Send "profiles" instead of "names"
+      await axios.post('/api/scrape/start-batch', { profiles, forceFallback });
       
       setFailedQueue([]); // Clear old failures on new start
       toast({ 
-        title: forceFallback ? "Starting Retry Batch" : "Background Job Started", 
-        description: forceFallback ? "Using BrightData Fallback..." : "You can refresh or leave the page." 
+        title: forceFallback ? "Starting Retry Batch" : "Starting Batch", 
+        description: `Processing ${profiles.length} profiles...` 
       });
       
       // Force an immediate check
       checkStatus();
     } catch (error: any) {
-      toast({ title: "Error", description: error.response?.data?.message || "Failed to start", variant: "destructive" });
+      toast({ title: "Error", description: "Failed to start", variant: "destructive" });
     }
   };
 

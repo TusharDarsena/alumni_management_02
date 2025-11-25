@@ -4,16 +4,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, CheckCircle2, AlertCircle, AlertTriangle, Play, RotateCcw } from "lucide-react";
+import { Loader2, CheckCircle2, AlertTriangle, Play, RotateCcw } from "lucide-react";
 // IMPORT THE HOOK
-import { useScraping } from "@/context/ScrapingContext";
+import { useScraping, ScrapeProfile } from "@/context/ScrapingContext";
 
 export default function ImportUpload() {
   // Get global state instead of local state
   const { isProcessing, progress, logs, failedQueue, startScraping, cancelScraping } = useScraping();
   
+  // --- DYNAMIC BATCH GENERATOR ---
+  const batches = React.useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    const isAfterJune = new Date().getMonth() >= 6; // July or later
+    const latestYear = isAfterJune ? currentYear : currentYear - 1;
+    const startYear = 2015; // Your college start year
+    
+    const list = [];
+    for (let y = startYear; y <= latestYear; y++) {
+      list.push(`${y}-${y + 4}`);
+    }
+    return list.reverse(); // Newest first
+  }, []);
+
   // Local state just for the file reading part
   const [pendingNames, setPendingNames] = useState<string[]>([]);
+  const [selectedBatch, setSelectedBatch] = useState(batches[0]); // Automatically use newest batch
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const { toast } = useToast();
@@ -58,14 +73,20 @@ export default function ImportUpload() {
   };
 
   const handleStartConfirm = () => {
-    startScraping(pendingNames, false); // False = Use Airtop (Standard)
+    // PACKING LOGIC: Combine Name + Batch
+    const profiles: ScrapeProfile[] = pendingNames.map(name => ({
+      name: name,
+      batch: selectedBatch
+    }));
+
+    startScraping(profiles, false);
     setShowConfirmModal(false);
     setPendingNames([]);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleRetryFailed = () => {
-    // Start a new batch with only the failed names, and FORCE FALLBACK
+    // Failed queue already contains objects with batch info
     startScraping(failedQueue, true);
   };
 
@@ -90,16 +111,31 @@ export default function ImportUpload() {
             <div>
               <h3 className="text-lg font-semibold">Bulk Scrape Alumni</h3>
               <p className="text-sm text-gray-500">
-                Upload XLSX. You can navigate away while this runs.
+                Upload an Excel file (Names only) and select the batch.
               </p>
             </div>
-            <Input
-              ref={fileInputRef}
-              type="file"
-              accept=".xlsx, .xls"
-              onChange={handleFileSelect}
-              disabled={isProcessing}
-            />
+            
+            <div className="flex gap-4">
+              {/* Batch Selector */}
+              <select 
+                value={selectedBatch}
+                onChange={(e) => setSelectedBatch(e.target.value)}
+                className="h-10 px-3 rounded-md border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {batches.map(b => <option key={b} value={b}>{b}</option>)}
+              </select>
+
+              {/* File Input */}
+              <Input
+                ref={fileInputRef}
+                type="file"
+                accept=".xlsx, .xls"
+                onChange={handleFileSelect}
+                disabled={isProcessing}
+                className="flex-1"
+              />
+            </div>
+
           </div>
         </CardContent>
       </Card>
@@ -108,19 +144,15 @@ export default function ImportUpload() {
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-lg shadow-xl w-96 space-y-4 animate-in fade-in zoom-in">
-            <div className="flex items-center gap-3 text-blue-600">
-              <AlertCircle className="h-6 w-6" />
-              <h3 className="font-bold text-lg">Confirm Bulk Scrape</h3>
-            </div>
-            <p className="text-sm text-gray-600">
-              Found <strong>{pendingNames.length}</strong> names. This will run in the background.
-            </p>
-            <div className="flex justify-end gap-3 pt-2">
-              <Button variant="outline" onClick={handleCancelConfirm}>Cancel</Button>
-              <Button onClick={handleStartConfirm} className="gap-2">
-                <Play className="h-4 w-4" /> Start
-              </Button>
-            </div>
+             <h3 className="font-bold text-lg text-blue-600">Confirm Bulk Scrape</h3>
+             <div className="space-y-1 text-sm text-gray-600">
+                <p>Found <strong>{pendingNames.length}</strong> names.</p>
+                <p>Applying Batch: <strong>{selectedBatch}</strong></p>
+             </div>
+             <div className="flex justify-end gap-3">
+                <Button variant="outline" onClick={handleCancelConfirm}>Cancel</Button>
+                <Button onClick={handleStartConfirm}><Play className="h-4 w-4 mr-2" /> Start</Button>
+             </div>
           </div>
         </div>
       )}
@@ -135,7 +167,7 @@ export default function ImportUpload() {
                 {failedQueue.length} Profiles Failed
               </h4>
               <p className="text-sm text-amber-700 mt-1">
-                Airtop couldn't find these. Retry using BrightData Fallback?
+                Retry using BrightData Fallback?
               </p>
             </div>
             <Button onClick={handleRetryFailed} variant="default" className="bg-amber-600 hover:bg-amber-700 text-white">

@@ -8,6 +8,22 @@ import { Loader2, CheckCircle2, AlertTriangle, X } from "lucide-react";
 
 export default function SingleProfileScraper() {
   const [name, setName] = useState("");
+  
+  // --- DYNAMIC BATCH GENERATOR ---
+  const batches = React.useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    const isAfterJune = new Date().getMonth() >= 6; // July or later
+    const latestYear = isAfterJune ? currentYear : currentYear - 1;
+    const startYear = 2015; // Your college start year
+    
+    const list = [];
+    for (let y = startYear; y <= latestYear; y++) {
+      list.push(`${y}-${y + 4}`);
+    }
+    return list.reverse(); // Newest first
+  }, []);
+
+  const [batch, setBatch] = useState(batches[0]); // Automatically use newest batch
   const [status, setStatus] = useState<"idle" | "searching" | "scraping" | "success" | "error">("idle");
   const [logs, setLogs] = useState<string[]>([]);
   const [showFallbackModal, setShowFallbackModal] = useState(false);
@@ -26,10 +42,10 @@ export default function SingleProfileScraper() {
       setStatus("searching");
       setLogs([]);
       setShowFallbackModal(false);
-      addLog(`🚀 Starting scraping process for: "${name}"`);
+      addLog(`🚀 Starting scraping process for: "${name}" (${batch})`);
     } else {
       setStatus("searching");
-      addLog(`⚠️ Retrying with Bright Data Fallback for: "${name}"`);
+      addLog(`⚠️ Retrying with Bright Data Fallback...`);
     }
 
     try {
@@ -38,6 +54,7 @@ export default function SingleProfileScraper() {
       // 1. Send Request
       const response = await axios.post("/api/scrape/get-linkedin-profile", {
         alumniName: name,
+        batch: batch, // Sending batch info
         forceFallback: forceFallback
       });
 
@@ -71,12 +88,22 @@ export default function SingleProfileScraper() {
         
         {/* Input Section */}
         <div className="flex gap-3">
+          {/* Batch Select */}
+          <select 
+            value={batch}
+            onChange={(e) => setBatch(e.target.value)}
+            disabled={status === "searching" || status === "scraping"}
+            className="h-10 px-3 rounded-md border border-gray-300 bg-white text-sm min-w-[130px]"
+          >
+            {batches.map(b => <option key={b} value={b}>{b}</option>)}
+          </select>
+
           <Input 
-            placeholder="Enter Alumni Name (e.g. Jai Kumar Dewani)" 
+            placeholder="Enter Alumni Name" 
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={status === "searching" || status === "scraping"}
-            className="text-lg"
+            className="text-lg flex-1"
           />
           <Button 
             onClick={() => handleScrape(false)} 
@@ -94,10 +121,7 @@ export default function SingleProfileScraper() {
               <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-1" />
               <div className="space-y-2">
                 <h4 className="font-semibold text-amber-800">Airtop could not find a profile.</h4>
-                <p className="text-sm text-amber-700">
-                  Would you like to try the <strong>Bright Data Fallback</strong> method? 
-                  (Uses strict Google Search regex).
-                </p>
+                <p className="text-sm text-amber-700">Try strict fallback search?</p>
                 <div className="flex gap-2 pt-1">
                   <Button size="sm" variant="default" onClick={() => handleScrape(true)}>
                     Yes, Try Fallback

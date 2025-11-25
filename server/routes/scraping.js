@@ -66,21 +66,24 @@ let activeJob = {
     processed: 0,
     currentName: "",
     logs: [],
-    queue: [],
-    failedQueue: [], // <--- NEW: Stores names that failed Pass 1
+    queue: [], // Now stores objects: { name: "Lakshya", batch: "2021-2025" }
+    failedQueue: [], // <--- NEW: Stores profile objects that failed Pass 1
     forceFallback: false, // <--- NEW: Remember if this batch is a retry
     shouldStop: false
 };
 
-// --- HELPER 1: AIRTOP SEARCH ---
-async function findUrlWithAirtop(alumniName) {
+// --- HELPER 1: AIRTOP SEARCH (Updated for Batch) ---
+async function findUrlWithAirtop(alumniName, batch) {
     console.log(`   [Primary] Trying Airtop AI Search...`);
     let session;
     try {
         session = await airtopClient.sessions.create();
         const sessionId = session.data.id;
         
-        const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur")`;
+        // --- NEW SEARCH LOGIC ---
+        // If batch is present, force Google to find that specific year string
+        const batchQuery = batch ? `"${batch}"` : ""; 
+        const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR") ${batchQuery}`;
         const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
 
         const window = await airtopClient.windows.create(sessionId, { url: googleUrl });
@@ -89,11 +92,21 @@ async function findUrlWithAirtop(alumniName) {
         const result = await airtopClient.windows.pageQuery(sessionId, windowId, {
             prompt: `Analyze the Google Search results. Find the LinkedIn profile URL for "${alumniName}" who studied at IIIT Naya Raipur.
             
+            ${batch ? `CONTEXT: The user specifically requested the Batch of "${batch}".` : ""}
+
             Rules:
             1. Ignore generic profiles, directory lists, or social media like Facebook/Instagram.
             2. Look for the most likely match based on the name and university.
             3. Return the direct profile URL (e.g., https://www.linkedin.com/in/username).
-            4. If multiple similar names exist, prefer the one mentioning "IIIT Naya Raipur" or "Student" or "Alumni".
+            
+            // DYNAMIC RULE 4: The Smartest Part
+            // If batch exists -> Be Strict. 
+            // If no batch -> Use the old "Best Guess" logic.
+            4. ${batch 
+                ? `CRITICAL VERIFICATION: You MUST prioritize the profile that mentions the years "${batch}" (or overlapping years). If a profile has the right name but the wrong batch year, DO NOT select it.` 
+                : `If multiple similar names exist, prefer the one mentioning "IIIT Naya Raipur" or "Student" or "Alumni".`
+            }
+
             5. If absolutely no valid profile is found, return empty string for url.`,
             configuration: {
                 outputSchema: {
@@ -121,13 +134,14 @@ async function findUrlWithAirtop(alumniName) {
     }
 }
 
-// --- HELPER 2: BRIGHTDATA SERP + CHEERIO (Robust Fallback) ---
-async function findUrlWithBrightDataFallback(alumniName) {
+// --- HELPER 2: BRIGHTDATA SERP + CHEERIO (Updated for Batch) ---
+async function findUrlWithBrightDataFallback(alumniName, batch) {
     console.log(`   [Fallback] Switching to Bright Data SERP (HTML + Smart Check)...`);
     
-    // 1. Use a specific query, but allow generic matches to let our logic filter them
-    const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
-    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&gl=in`; 
+    // --- NEW SEARCH LOGIC ---
+    const batchQuery = batch ? `"${batch}"` : "";
+    const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin ${batchQuery}`;
+    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&gl=in`;
 
     try {
         // Request RAW HTML (Always reliable)
@@ -204,19 +218,23 @@ async function findUrlWithBrightDataFallback(alumniName) {
     }
 }
 
-// --- MAIN PROCESSOR (Modified for Manual Fallback) ---
-async function processSingleProfile(alumniName, forceFallback = false) {
+// --- MAIN PROCESSOR (Accepts Object with name and batch) ---
+async function processSingleProfile(profileData, forceFallback = false) {
+    // profileData can be a string (old way) or object {name, batch} (new way)
+    const alumniName = typeof profileData === 'object' ? profileData.name : profileData;
+    const batch = typeof profileData === 'object' ? profileData.batch : "";
+
     console.log(`\n${'='.repeat(60)}`);
-    console.log(`Processing: ${alumniName} (Fallback Mode: ${forceFallback})`);
+    console.log(`Processing: ${alumniName} [Batch: ${batch || "Any"}] (Fallback: ${forceFallback})`);
     
     let foundUrl = null;
 
     // 1. Decide method
     if (forceFallback) {
-        foundUrl = await findUrlWithBrightDataFallback(alumniName);
-        if (!foundUrl) throw new Error("Fallback: No confident match found. Stopping to avoid wrong person.");
+        foundUrl = await findUrlWithBrightDataFallback(alumniName, batch);
+        if (!foundUrl) throw new Error("Fallback: No confident match found.");
     } else {
-        foundUrl = await findUrlWithAirtop(alumniName);
+        foundUrl = await findUrlWithAirtop(alumniName, batch);
         if (!foundUrl) {
             // THROW SPECIFIC ERROR FOR FRONTEND
             const err = new Error("Airtop could not find URL.");
@@ -262,10 +280,11 @@ async function processSingleProfile(alumniName, forceFallback = false) {
 
 // --- API ENDPOINT 1: Start Batch ---
 router.post('/start-batch', async (req, res) => {
-    const { names, forceFallback } = req.body; // Accepts forceFallback flag
+    // profiles is now expected to be: [{ name: "X", batch: "2021-2025" }, ...]
+    const { profiles, forceFallback } = req.body; 
     
-    if (!names || !Array.isArray(names)) {
-        return res.status(400).json({ message: "Names array required" });
+    if (!profiles || !Array.isArray(profiles)) {
+        return res.status(400).json({ message: "Profiles array required" });
     }
 
     if (activeJob.isRunning) {
@@ -275,11 +294,11 @@ router.post('/start-batch', async (req, res) => {
     // Reset State
     activeJob = {
         isRunning: true,
-        total: names.length,
+        total: profiles.length,
         processed: 0,
         currentName: "Initializing...",
         logs: [],
-        queue: names,
+        queue: profiles, // Queue now holds objects
         failedQueue: [], // Start clean
         forceFallback: !!forceFallback, // Set the mode
         shouldStop: false
@@ -315,19 +334,21 @@ async function runBackgroundJob() {
             return;
         }
 
-        const name = activeJob.queue[i];
+        const item = activeJob.queue[i];
+        const name = typeof item === 'object' ? item.name : item;
+        
         activeJob.currentName = name;
         activeJob.processed = i; 
         
         try {
             // Pass the global forceFallback setting to the processor
-            await processSingleProfile(name, activeJob.forceFallback);
+            await processSingleProfile(item, activeJob.forceFallback);
             activeJob.logs.unshift(`✅ Success: ${name}`);
         } catch (error) {
             console.error(`Batch Error [${name}]:`, error.message);
             
-            // ADD TO FAILED QUEUE (Don't stop!)
-            activeJob.failedQueue.push(name);
+            // ADD TO FAILED QUEUE (Don't stop!) - Add entire object back for retry
+            activeJob.failedQueue.push(item);
             activeJob.logs.unshift(`⚠️ Skipped: ${name} (Added to Retry Queue)`);
         }
     }
@@ -337,19 +358,19 @@ async function runBackgroundJob() {
     activeJob.currentName = "Completed";
     
     if (activeJob.failedQueue.length > 0) {
-        activeJob.logs.unshift(`🏁 Batch Done. ${activeJob.failedQueue.length} items failed (See Retry Option).`);
+        activeJob.logs.unshift(`🏁 Batch Done. ${activeJob.failedQueue.length} items failed.`);
     } else {
         activeJob.logs.unshift("🎉 Batch Scraping Finished Successfully!");
     }
 }
 
 router.post('/get-linkedin-profile', async (req, res) => {
-    const { alumniName, forceFallback } = req.body; // Read the flag
+    const { alumniName, batch, forceFallback } = req.body; // Accept batch here too
     
     if (!alumniName) return res.status(400).json({ message: 'Name required' });
 
     try {
-        await processSingleProfile(alumniName, forceFallback);
+        await processSingleProfile({ name: alumniName, batch }, forceFallback);
         return res.status(200).json({ success: true, message: `Scraped ${alumniName}` });
     } catch (error) {
         // Send specific error code to frontend
