@@ -36,7 +36,7 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
     }
   ],
-  "url": "https://fr.linkedin.com/in/pkunjam",
+  "url": "https://it.linkedin.com/in/pkunjam",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/prachita-kotangale",
@@ -58,9 +58,45 @@
     },
     {
       "profile_link": "https://www.linkedin.com/in/aniruddha-s-joshi",
-      "name": null,
+      "name": "Aniruddha Joshi",
       "about": null,
-      "location": null
+      "location": "Santa Clara, CA"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shachak-15374b116",
+      "name": "Shayak Chakraborty",
+      "about": null,
+      "location": "West Godavari"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/navneel-mandal-363721172",
+      "name": "Navneel Mandal",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/mahir-shah",
+      "name": "Mahir Shah",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ajay-1997",
+      "name": "Ajay Narayanan",
+      "about": null,
+      "location": "Ernakulam"
+    },
+    {
+      "profile_link": "https://ae.linkedin.com/in/mr54",
+      "name": "Mukul Ranjan",
+      "about": null,
+      "location": "Abu Dhabi"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/swetha-sairamakrishnan-6038b2183",
+      "name": "Swetha Sairamakrishnan",
+      "about": null,
+      "location": "Redmond, WA"
     }
   ],
   "educations_details": "University of Waterloo",
@@ -168,7 +204,7 @@
   "volunteer_experience": [
     {
       "cause": "Science and Technology",
-      "duration": "Mar 2018 · - \nMar 2018 · \n1 month",
+      "duration": "Mar 2018 · - \nMar 2018 · 1 month",
       "duration_short": "- \nMar 2018",
       "info": "Achievements/Tasks - - Planned and executed a successful LAN gaming tournament as part of a technical fest. - Oversaw all aspects of the tournament, including equipment setup, rule enforcement, and prize distribution, ensuring a smooth and fair competition for all participants. - Developed marketing strategies to attract participants and promote the tournament. - Demonstrated strong leadership, communication, and organizational skills throughout the planning and execution of the… Show more Achievements/Tasks - - Planned and executed a successful LAN gaming tournament as part of a technical fest. - Oversaw all aspects of the tournament, including equipment setup, rule enforcement, and prize distribution, ensuring a smooth and fair competition for all participants. - Developed marketing strategies to attract participants and promote the tournament. - Demonstrated strong leadership, communication, and organizational skills throughout the planning and execution of the event, receiving positive feedback from both participants and organizers. Show less",
       "start_date": "Mar 2018",
@@ -216,7 +252,7 @@
       "start_date": "Jan 2023",
       "description": "Built a top-down 2D game using Unity designed to augment visual learning with haptic feedback. We showcased Slingshot at IEEE World Haptics 2023, where over 30 attendees engaged in hands-on demonstrations and provided positive feedback on their experiences."
     },
-    null,
+    {},
     {
       "title": "Tower of Hanoi",
       "start_date": "Oct 2020",
@@ -239,7 +275,7 @@
     }
   ],
   "location": "Waterloo",
-  "input_url": "https://www.linkedin.com/in/pkunjam",
+  "input_url": "https://ca.linkedin.com/in/pkunjam",
   "linkedin_id": "pkunjam",
   "activity": [
     {
@@ -361,8 +397,8 @@
   "bio_links": [],
   "first_name": "Punit",
   "last_name": "Kunjam",
-  "timestamp": "2025-11-20T17:42:22.067Z",
+  "timestamp": "2025-11-25T21:24:04.654Z",
   "input": {
-    "url": "https://www.linkedin.com/in/pkunjam"
+    "url": "https://ca.linkedin.com/in/pkunjam"
   }
 }

@@ -4,7 +4,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { seedUsers } from '../scripts/seedUser.js';
 import { AirtopClient } from '@airtop/sdk';
-import * as cheerio from 'cheerio'; // <--- NEW IMPORT
+import * as cheerio from 'cheerio';
+import pLimit from 'p-limit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,29 +18,20 @@ const SERP_API_ENDPOINT = 'https://api.brightdata.com/request';
 const BRIGHTDATA_API_KEY = process.env.BRIGHTDATA_API_KEY;
 const AIRTOP_API_KEY = process.env.AIRTOP_API_KEY;
 
-// Initialize Airtop
 const airtopClient = new AirtopClient({ apiKey: AIRTOP_API_KEY });
 
-// --- UTILITY: FUZZY STRING MATCHING (Lightweight NLP) ---
-// This checks how similar two strings are (0 to 1). 
-// 1 = Exact Match, 0 = Completely Different.
+// --- UTILITY: FUZZY STRING MATCHING ---
 function getSimilarity(s1, s2) {
     let longer = s1;
     let shorter = s2;
-    if (s1.length < s2.length) {
-        longer = s2;
-        shorter = s1;
-    }
+    if (s1.length < s2.length) { longer = s2; shorter = s1; }
     const longerLength = longer.length;
-    if (longerLength === 0) {
-        return 1.0;
-    }
+    if (longerLength === 0) return 1.0;
     return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
 
 function editDistance(s1, s2) {
-    s1 = s1.toLowerCase();
-    s2 = s2.toLowerCase();
+    s1 = s1.toLowerCase(); s2 = s2.toLowerCase();
     const costs = new Array();
     for (let i = 0; i <= s1.length; i++) {
         let lastValue = i;
@@ -59,55 +51,44 @@ function editDistance(s1, s2) {
     return costs[s2.length];
 }
 
-// --- GLOBAL JOB STATE (In-Memory) ---
+// --- GLOBAL JOB STATE ---
 let activeJob = {
-    isRunning: false,
-    total: 0,
-    processed: 0,
-    currentName: "",
-    logs: [],
-    queue: [], // Now stores objects: { name: "Lakshya", batch: "2021-2025" }
-    failedQueue: [], // <--- NEW: Stores profile objects that failed Pass 1
-    forceFallback: false, // <--- NEW: Remember if this batch is a retry
-    shouldStop: false
+    isRunning: false, total: 0, processed: 0, currentName: "",
+    logs: [], queue: [], failedQueue: [], forceFallback: false, shouldStop: false
 };
 
-// --- HELPER 1: AIRTOP SEARCH (Updated for Batch) ---
+// --- HELPER 1: AIRTOP SEARCH (Updated) ---
 async function findUrlWithAirtop(alumniName, batch) {
-    console.log(`   [Primary] Trying Airtop AI Search...`);
+    console.log(`\n   [Primary] 🤖 Starting Airtop AI Search...`);
+    console.log(`   [Primary] 👤 Target: "${alumniName}"${batch ? ` | Batch: ${batch}` : ''}`);
     let session;
     try {
+        console.log(`   [Primary] 🔄 Creating Airtop session...`);
         session = await airtopClient.sessions.create();
         const sessionId = session.data.id;
+        console.log(`   [Primary] ✅ Session created: ${sessionId}`);
         
-        // --- NEW SEARCH LOGIC ---
-        // If batch is present, force Google to find that specific year string
-        const batchQuery = batch ? `"${batch}"` : ""; 
-        const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR") ${batchQuery}`;
+        // FIX: Relaxed query - NO batch in search query to avoid missing results
+        // We search only for Name + College, let AI filter by batch if needed
+        const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
         const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+        console.log(`   [Primary] 🔍 Search Query: ${searchQuery}`);
+        console.log(`   [Primary] 🌐 Google URL: ${googleUrl}`);
 
+        console.log(`   [Primary] 🪟 Opening browser window...`);
         const window = await airtopClient.windows.create(sessionId, { url: googleUrl });
         const windowId = window.data.windowId;
+        console.log(`   [Primary] ✅ Browser ready, querying AI...`);
 
         const result = await airtopClient.windows.pageQuery(sessionId, windowId, {
-            prompt: `Analyze the Google Search results. Find the LinkedIn profile URL for "${alumniName}" who studied at IIIT Naya Raipur.
-            
-            ${batch ? `CONTEXT: The user specifically requested the Batch of "${batch}".` : ""}
+            prompt: `Find the LinkedIn Profile URL for "${alumniName}" from IIIT Naya Raipur.
+            ${batch ? `CONTEXT: The target user is likely from the batch/year "${batch}" (e.g., Class of ${batch}).` : ""}
 
             Rules:
-            1. Ignore generic profiles, directory lists, or social media like Facebook/Instagram.
-            2. Look for the most likely match based on the name and university.
-            3. Return the direct profile URL (e.g., https://www.linkedin.com/in/username).
-            
-            // DYNAMIC RULE 4: The Smartest Part
-            // If batch exists -> Be Strict. 
-            // If no batch -> Use the old "Best Guess" logic.
-            4. ${batch 
-                ? `CRITICAL VERIFICATION: You MUST prioritize the profile that mentions the years "${batch}" (or overlapping years). If a profile has the right name but the wrong batch year, DO NOT select it.` 
-                : `If multiple similar names exist, prefer the one mentioning "IIIT Naya Raipur" or "Student" or "Alumni".`
-            }
-
-            5. If absolutely no valid profile is found, return empty string for url.`,
+            1. Find the best matching LinkedIn profile for "${alumniName}".
+            2. ${batch ? `PRIORITY: If you see multiple people with this name, pick the one matching year "${batch}".` : ""}
+            3. ACCEPTANCE: If you find a matching Name + College but NO batch year is visible, ACCEPT IT (It is better to guess than to fail).
+            4. Return the URL string only. If nothing found, return empty string.`,
             configuration: {
                 outputSchema: {
                     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -118,33 +99,44 @@ async function findUrlWithAirtop(alumniName, batch) {
             }
         });
 
+        console.log(`   [Primary] 🧹 Terminating session...`);
         await airtopClient.sessions.terminate(sessionId);
         session = null;
 
         const content = JSON.parse(result.data.modelResponse);
+        console.log(`   [Primary] 📦 AI Response:`, content);
+        
         if (content.url && content.url.includes('linkedin.com/in/')) {
+            console.log(`   [Primary] ✅ Valid LinkedIn URL found: ${content.url}`);
             return content.url;
         }
+        
+        console.log(`   [Primary] ❌ No valid URL in AI response`);
         return null;
 
     } catch (error) {
-        console.log(`   [Primary] Airtop failed: ${error.message}`);
-        if (session) try { await airtopClient.sessions.terminate(session.data.id); } catch(e){}
+        console.log(`   [Primary] ❌ Airtop Error: ${error.message}`);
+        console.log(`   [Primary] 📊 Error Stack:`, error.stack);
+        if (session) {
+            console.log(`   [Primary] 🧹 Cleaning up failed session...`);
+            try { await airtopClient.sessions.terminate(session.data.id); } catch(e){}
+        }
         return null;
     }
 }
 
-// --- HELPER 2: BRIGHTDATA SERP + CHEERIO (Updated for Batch) ---
+// --- HELPER 2: BRIGHTDATA SERP + ROBUST PARSING (Fixed) ---
 async function findUrlWithBrightDataFallback(alumniName, batch) {
-    console.log(`   [Fallback] Switching to Bright Data SERP (HTML + Smart Check)...`);
+    console.log(`\n   [Fallback] 🔄 Switching to Bright Data SERP...`);
+    console.log(`   [Fallback] 👤 Target: "${alumniName}"${batch ? ` | Batch: ${batch}` : ''}`);
     
-    // --- NEW SEARCH LOGIC ---
-    const batchQuery = batch ? `"${batch}"` : "";
-    const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin ${batchQuery}`;
+    // Query: Name + College (Relaxed - NO batch to avoid missing results)
+    const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
     const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&gl=in`;
+    console.log(`   [Fallback] 🔍 Search Query: ${query}`);
 
     try {
-        // Request RAW HTML (Always reliable)
+        console.log(`   [Fallback] 📡 Sending request to Bright Data...`);
         const response = await fetch(SERP_API_ENDPOINT, {
             method: 'POST',
             headers: {
@@ -154,66 +146,128 @@ async function findUrlWithBrightDataFallback(alumniName, batch) {
             body: JSON.stringify({
                 "zone": "serp_api1",
                 "url": googleSearchUrl,
-                "format": "raw" // <--- Changed back to raw
+                "format": "raw"
             })
         });
 
-        if (!response.ok) throw new Error(`SERP API Error: ${response.status}`);
+        if (!response.ok) {
+            console.log(`   [Fallback] ❌ SERP API Error: ${response.status}`);
+            throw new Error(`SERP API Error: ${response.status}`);
+        }
+        
+        console.log(`   [Fallback] ✅ Response received, parsing HTML...`);
         const html = await response.text();
-
-        // 2. Parse HTML with Cheerio (Like jQuery for Node.js)
+        console.log(`   [Fallback] 📄 HTML Length: ${html.length} characters`);
+        
         const $ = cheerio.load(html);
+        
         let bestMatch = null;
         let highestScore = 0;
 
-        console.log("   [Fallback] Parsing Search Results...");
+        // Prepare batch tokens
+        const batchYears = batch ? batch.split(/[-/]/).map(y => y.trim()) : [];
+        if (batchYears.length > 0) {
+            console.log(`   [Fallback] 📅 Batch Years to Match: [${batchYears.join(', ')}]`);
+        }
 
-        // Loop through standard Google Search Result blocks
-        // BrightData/Google often uses class 'g' or 'MjjYud' for result containers
-        // We look for 'a' tags that contain 'h3' (titles) inside
-        
-        $('a').each((i, el) => {
+        // --- FIX: USE 'a' TAG SELECTOR (Robust - works regardless of Google's div structure) ---
+        // 'div.g' is fragile and Google changes it frequently. Scanning 'a' tags with 'h3' is robust.
+        const allLinks = $('a');
+        console.log(`   [Fallback] 🔎 Scanning ${allLinks.length} links for candidates...`);
+
+        let candidateCount = 0;
+        allLinks.each((i, el) => {
             const link = $(el).attr('href');
-            const title = $(el).find('h3').text() || $(el).text(); // Try to get h3, else get full text
+            // Try to find h3 inside the a, or just use the a text
+            const title = $(el).find('h3').text() || $(el).text(); 
+            
+            // Get full text of the parent container for context (snippet)
+            const snippet = $(el).parent().text().toLowerCase();
 
             if (!link || !title) return;
-
-            // Basic Link Filters
             if (!link.includes("linkedin.com/in/")) return;
             if (link.includes("/posts/") || link.includes("/jobs/") || link.includes("/company/")) return;
 
-            // 3. FUZZY NAME MATCHING
-            // Compare the Google Title with the Alumni Name
+            candidateCount++;
+            console.log(`\n      [${candidateCount}] 📋 Candidate: "${title.substring(0, 40)}..."`);
+            console.log(`      [${candidateCount}] 🔗 Link: ${link.substring(0, 60)}...`);
+
+            // --- SCORING LOGIC ---
             const cleanTitle = title.toLowerCase().replace("linkedin", "").replace(" - ", " ").trim();
             const cleanName = alumniName.toLowerCase().trim();
             
+            // 1. Name Match
             const similarity = getSimilarity(cleanTitle, cleanName);
             const isNameInTitle = cleanTitle.includes(cleanName);
+            
+            console.log(`      [${candidateCount}] 👤 Name in Title: ${isNameInTitle ? '✅ YES' : '❌ NO'}`);
+            console.log(`      [${candidateCount}] 🔢 Name Similarity: ${(similarity*100).toFixed(0)}%`);
+            
+            // Filter: Must have some name resemblance
+            if (!isNameInTitle && similarity < 0.5) {
+                console.log(`      [${candidateCount}] ❌ Rejected: Name similarity too low (< 50%)`);
+                return;
+            }
 
-            // Log analysis for debugging
-            console.log(`      > Found: "${title.substring(0, 40)}..." | Score: ${(similarity*100).toFixed(0)}%`);
+            let score = isNameInTitle ? 0.8 : similarity;
 
-            // 4. THRESHOLD CHECK
-            // If name is strictly inside title OR similarity > 60%
-            if (isNameInTitle || similarity > 0.6) {
-                // If this is better than previous matches, keep it
-                if (similarity > highestScore) {
-                    highestScore = similarity;
-                    bestMatch = link;
+            // 2. College Boost (Soft check)
+            const hasCollege = snippet.includes("iiitnr") || 
+                               snippet.includes("naya raipur") || 
+                               snippet.includes("iiit-nr") ||
+                               snippet.includes("iiit - naya raipur");
+            
+            if (hasCollege) {
+                score += 0.3;
+                console.log(`      [${candidateCount}] 🏫 College Found: +30% boost`);
+            } else {
+                console.log(`      [${candidateCount}] 🏫 College Not Found: No boost`);
+            }
+
+            // 3. Batch Boost (Tie-breaker)
+            let batchBonus = 0;
+            if (batchYears.length > 0) {
+                const yearsFound = [];
+                batchYears.forEach(year => {
+                    if (snippet.includes(year)) {
+                        yearsFound.push(year);
+                        batchBonus += 0.25;
+                    }
+                });
+                if (yearsFound.length > 0) {
+                    score += batchBonus;
+                    console.log(`      [${candidateCount}] 📅 Batch Years Found: [${yearsFound.join(', ')}] +${(batchBonus*100).toFixed(0)}%`);
+                } else {
+                    console.log(`      [${candidateCount}] 📅 Batch Years Not Found: No boost`);
                 }
+            }
+
+            console.log(`      [${candidateCount}] 🎯 Final Score: ${(score*100).toFixed(0)}%`);
+
+            // Save best match
+            if (score > highestScore) {
+                console.log(`      [${candidateCount}] 🏆 NEW BEST MATCH! (Previous: ${(highestScore*100).toFixed(0)}%)`);
+                highestScore = score;
+                bestMatch = link;
             }
         });
 
-        if (bestMatch) {
-            console.log(`   [Fallback] ✅ Verified Match: ${bestMatch} (Score: ${(highestScore*100).toFixed(0)}%)`);
+        console.log(`\n   [Fallback] 📊 Analysis Complete: ${candidateCount} candidates evaluated`);
+        
+        if (bestMatch && highestScore > 0.6) {
+            console.log(`   [Fallback] ✅ MATCH FOUND!`);
+            console.log(`   [Fallback] 🔗 URL: ${bestMatch}`);
+            console.log(`   [Fallback] 🎯 Confidence Score: ${(highestScore*100).toFixed(0)}%`);
             return bestMatch;
         }
 
-        console.log("   [Fallback] ❌ No result passed the name confidence check.");
+        console.log(`   [Fallback] ❌ No confident match found`);
+        console.log(`   [Fallback] 📉 Highest Score: ${(highestScore*100).toFixed(0)}% (Required: 60%)`);
         return null;
 
     } catch (error) {
-        console.log(`   [Fallback] SERP failed: ${error.message}`);
+        console.log(`   [Fallback] ❌ SERP Error: ${error.message}`);
+        console.log(`   [Fallback] 📊 Error Stack:`, error.stack);
         return null;
     }
 }
@@ -224,35 +278,52 @@ async function processSingleProfile(profileData, forceFallback = false) {
     const alumniName = typeof profileData === 'object' ? profileData.name : profileData;
     const batch = typeof profileData === 'object' ? profileData.batch : "";
 
-    console.log(`\n${'='.repeat(60)}`);
-    console.log(`Processing: ${alumniName} [Batch: ${batch || "Any"}] (Fallback: ${forceFallback})`);
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`🚀 PROCESSING PROFILE`);
+    console.log(`   👤 Name: ${alumniName}`);
+    console.log(`   📅 Batch: ${batch || "Any"}`);
+    console.log(`   🔄 Mode: ${forceFallback ? 'FALLBACK (Bright Data)' : 'PRIMARY (Airtop AI)'}`);
+    console.log(`${'='.repeat(80)}`);
     
     let foundUrl = null;
 
-    // 1. Decide method
     if (forceFallback) {
+        console.log(`\n🔄 STEP 1: URL Discovery (Fallback Mode)`);
         foundUrl = await findUrlWithBrightDataFallback(alumniName, batch);
-        if (!foundUrl) throw new Error("Fallback: No confident match found.");
+        if (!foundUrl) {
+            console.log(`\n❌ FAILED: Fallback could not find confident match`);
+            throw new Error("Fallback: No confident match found (College/Batch mismatch).");
+        }
     } else {
+        console.log(`\n🔄 STEP 1: URL Discovery (Primary Mode)`);
         foundUrl = await findUrlWithAirtop(alumniName, batch);
         if (!foundUrl) {
-            // THROW SPECIFIC ERROR FOR FRONTEND
+            console.log(`\n❌ FAILED: Airtop could not find URL`);
             const err = new Error("Airtop could not find URL.");
             err.code = "AIRTOP_FAILED";
             throw err;
         }
     }
 
-    console.log(`✓ Final URL to Scrape: ${foundUrl}`);
+    console.log(`\n✅ STEP 1 COMPLETE: Profile URL Found`);
+    console.log(`   🔗 ${foundUrl}`);
 
-    // 2. Save URL
+    console.log(`\n🔄 STEP 2: Saving URL to File System`);
     const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
-    if (!fs.existsSync(urlDirPath)) fs.mkdirSync(urlDirPath, { recursive: true });
+    if (!fs.existsSync(urlDirPath)) {
+        console.log(`   📁 Creating directory: ${urlDirPath}`);
+        fs.mkdirSync(urlDirPath, { recursive: true });
+    }
+    
     const safeName = alumniName.toLowerCase().replace(/ /g, '_');
-    fs.writeFileSync(path.join(urlDirPath, `${safeName}_linkedin_url.txt`), foundUrl);
+    const urlFilePath = path.join(urlDirPath, `${safeName}_linkedin_url.txt`);
+    fs.writeFileSync(urlFilePath, foundUrl);
+    console.log(`   ✅ URL saved: ${urlFilePath}`);
 
-    // 3. Scrape Profile
-    console.log('   Scraping Profile Data...');
+    console.log(`\n🔄 STEP 3: Scraping Full Profile Data from LinkedIn`);
+    console.log(`   📡 Calling Bright Data Collector API...`);
+    console.log(`   🔗 Target URL: ${foundUrl}`);
+    
     const linkedinResponse = await fetch(LINKEDIN_COLLECTOR_ENDPOINT, {
         method: 'POST',
         headers: {
@@ -263,130 +334,139 @@ async function processSingleProfile(profileData, forceFallback = false) {
     });
 
     if (!linkedinResponse.ok) {
-        const errText = await linkedinResponse.text();
-        throw new Error(`Bright Data Collector failed: ${errText}`);
+        console.log(`   ❌ Bright Data Collector Error: ${linkedinResponse.status}`);
+        throw new Error(`Bright Data Collector failed with status ${linkedinResponse.status}`);
     }
 
+    console.log(`   ✅ Profile data received`);
     const rawText = await linkedinResponse.text();
+    console.log(`   📦 Response size: ${rawText.length} characters`);
+    
     const profileJson = JSON.parse(rawText);
+    console.log(`   ✅ JSON parsed successfully`);
 
-    // 4. Save & Seed
-    fs.writeFileSync(path.join(urlDirPath, `${safeName}.json`), JSON.stringify(profileJson, null, 2));
-    await seedUsers(true);
+    console.log(`\n🔄 STEP 4: Saving Profile Data`);
+    const jsonFilePath = path.join(urlDirPath, `${safeName}.json`);
+    fs.writeFileSync(jsonFilePath, JSON.stringify(profileJson, null, 2));
+    console.log(`   ✅ Profile saved: ${jsonFilePath}`);
+    
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`🎉 SUCCESS: ${alumniName} - Profile fully scraped and saved!`);
+    console.log(`${'='.repeat(80)}\n`);
     
     return "Success";
 }
 
 
-// --- API ENDPOINT 1: Start Batch ---
+// --- ROUTES ---
+
 router.post('/start-batch', async (req, res) => {
-    // profiles is now expected to be: [{ name: "X", batch: "2021-2025" }, ...]
     const { profiles, forceFallback } = req.body; 
-    
-    if (!profiles || !Array.isArray(profiles)) {
-        return res.status(400).json({ message: "Profiles array required" });
-    }
+    if (!profiles || !Array.isArray(profiles)) return res.status(400).json({ message: "Profiles array required" });
+    if (activeJob.isRunning) return res.status(409).json({ message: "Job already running" });
 
-    if (activeJob.isRunning) {
-        return res.status(409).json({ message: "Job already running" });
-    }
-
-    // Reset State
     activeJob = {
-        isRunning: true,
-        total: profiles.length,
-        processed: 0,
-        currentName: "Initializing...",
-        logs: [],
-        queue: profiles, // Queue now holds objects
-        failedQueue: [], // Start clean
-        forceFallback: !!forceFallback, // Set the mode
-        shouldStop: false
+        isRunning: true, total: profiles.length, processed: 0,
+        currentName: "Initializing...", logs: [], queue: profiles,
+        failedQueue: [], forceFallback: !!forceFallback, shouldStop: false
     };
 
     res.json({ success: true, message: "Batch started" });
-
-    // Start Background Loop
     runBackgroundJob();
 });
 
-// --- API ENDPOINT 2: Get Status (Polling) ---
-router.get('/status', (req, res) => {
-    res.json(activeJob);
-});
+router.get('/status', (req, res) => { res.json(activeJob); });
 
-// --- API ENDPOINT 3: Stop Job ---
 router.post('/stop-batch', (req, res) => {
     activeJob.shouldStop = true;
     activeJob.logs.unshift("⚠️ Stop requested by user...");
     res.json({ success: true });
 });
 
-// --- BACKGROUND WORKER (Updated for Queue Logic) ---
-async function runBackgroundJob() {
-    console.log(`Starting background batch (Fallback Mode: ${activeJob.forceFallback})...`);
-    
-    for (let i = 0; i < activeJob.queue.length; i++) {
-        if (activeJob.shouldStop) {
-            activeJob.isRunning = false;
-            activeJob.currentName = "Stopped";
-            activeJob.logs.unshift("🛑 Batch stopped by user.");
-            return;
-        }
-
-        const item = activeJob.queue[i];
-        const name = typeof item === 'object' ? item.name : item;
-        
-        activeJob.currentName = name;
-        activeJob.processed = i; 
-        
-        try {
-            // Pass the global forceFallback setting to the processor
-            await processSingleProfile(item, activeJob.forceFallback);
-            activeJob.logs.unshift(`✅ Success: ${name}`);
-        } catch (error) {
-            console.error(`Batch Error [${name}]:`, error.message);
-            
-            // ADD TO FAILED QUEUE (Don't stop!) - Add entire object back for retry
-            activeJob.failedQueue.push(item);
-            activeJob.logs.unshift(`⚠️ Skipped: ${name} (Added to Retry Queue)`);
-        }
-    }
-
-    activeJob.processed = activeJob.total;
-    activeJob.isRunning = false;
-    activeJob.currentName = "Completed";
-    
-    if (activeJob.failedQueue.length > 0) {
-        activeJob.logs.unshift(`🏁 Batch Done. ${activeJob.failedQueue.length} items failed.`);
-    } else {
-        activeJob.logs.unshift("🎉 Batch Scraping Finished Successfully!");
-    }
-}
-
 router.post('/get-linkedin-profile', async (req, res) => {
-    const { alumniName, batch, forceFallback } = req.body; // Accept batch here too
-    
+    const { alumniName, batch, forceFallback } = req.body;
     if (!alumniName) return res.status(400).json({ message: 'Name required' });
 
     try {
         await processSingleProfile({ name: alumniName, batch }, forceFallback);
         return res.status(200).json({ success: true, message: `Scraped ${alumniName}` });
     } catch (error) {
-        // Send specific error code to frontend
         if (error.code === 'AIRTOP_FAILED') {
-            return res.status(422).json({ 
-                success: false, 
-                code: 'AIRTOP_FAILED',
-                message: 'Airtop could not find the profile.' 
-            });
+            return res.status(422).json({ success: false, code: 'AIRTOP_FAILED', message: 'Airtop failed.' });
         }
-        
-        return res.status(500).json({ 
-            success: false, 
-            message: error.message 
-        });
+        return res.status(500).json({ success: false, message: error.message });
     }
 });
+
+async function runBackgroundJob() {
+    console.log(`🚀 Starting Parallel Batch (Limit: 3 concurrent tasks)...`);
+    console.log(`📊 Total profiles to process: ${activeJob.queue.length}`);
+    console.log(`🔄 Mode: ${activeJob.forceFallback ? 'FALLBACK (Bright Data)' : 'PRIMARY (Airtop AI)'}`);
+    
+    // 1. Create a limiter that only allows 3 promises to run at once
+    // We choose 3 because Airtop Free/Starter allows max 3 sessions.
+    const limit = pLimit(3);
+    
+    // 2. Map every profile to a limited promise
+    const tasks = activeJob.queue.map((item, index) => {
+        return limit(async () => {
+            if (activeJob.shouldStop) {
+                console.log(`⏸️ Stop signal received, skipping remaining tasks...`);
+                return;
+            }
+
+            const name = typeof item === 'object' ? item.name : item;
+            
+            // Update status (approximate since they run in parallel)
+            activeJob.currentName = `Processing: ${name}`;
+            
+            try {
+                await processSingleProfile(item, activeJob.forceFallback);
+                activeJob.processed++;
+                activeJob.logs.unshift(`✅ Success: ${name}`);
+                console.log(`📊 Progress: ${activeJob.processed}/${activeJob.total} completed`);
+            } catch (error) {
+                activeJob.processed++;
+                console.error(`❌ Error [${name}]:`, error.message);
+                activeJob.failedQueue.push(item);
+                activeJob.logs.unshift(`⚠️ Failed: ${name} - ${error.message}`);
+            }
+        });
+    });
+
+    // 3. Wait for ALL of them to finish
+    console.log(`⏳ Waiting for all parallel tasks to complete...`);
+    await Promise.all(tasks);
+
+    // 4. Sync Database ONCE at the end
+    if (activeJob.processed > 0) {
+        console.log(`\n🔄 Batch complete. Syncing ${activeJob.processed} profiles to Database...`);
+        try {
+            activeJob.currentName = "Syncing Database...";
+            await seedUsers(true);
+            activeJob.logs.unshift("💾 Database Synced Successfully.");
+            console.log(`✅ Database updated successfully with all profiles`);
+        } catch (error) {
+            console.error("❌ Database seeding error:", error.message);
+            activeJob.logs.unshift("⚠️ Data saved to JSON, but Database Sync failed.");
+        }
+    }
+
+    activeJob.isRunning = false;
+    activeJob.currentName = "Completed";
+    
+    if (activeJob.failedQueue.length > 0) {
+        activeJob.logs.unshift(`🏁 Parallel Batch Done. ${activeJob.failedQueue.length} items failed.`);
+    } else {
+        activeJob.logs.unshift("🎉 Parallel Batch Scraping Finished Successfully!");
+    }
+    
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`🎉 PARALLEL BATCH COMPLETE`);
+    console.log(`   ✅ Successful: ${activeJob.processed - activeJob.failedQueue.length}`);
+    console.log(`   ❌ Failed: ${activeJob.failedQueue.length}`);
+    console.log(`   📊 Total: ${activeJob.total}`);
+    console.log(`${'='.repeat(80)}\n`);
+}
 
 export default router;
