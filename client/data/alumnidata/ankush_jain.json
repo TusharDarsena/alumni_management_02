@@ -1,0 +1,314 @@
+{
+  "id": "ankush-jain-22313a20",
+  "name": "Ankush Jain",
+  "city": "Chhattisgarh, India",
+  "country_code": "IN",
+  "current_company": {
+    "link": "https://in.linkedin.com/company/apra-labs?trk=public_profile_topcard-current-company",
+    "name": "Apra Labs.",
+    "company_id": "apra-labs",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "Apra Labs.",
+      "description_html": null,
+      "company": "Apra Labs.",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQEQCRJCQmwpww/company-logo_100_100/company-logo_100_100/0/1631301207958?e=2147483647&v=beta&t=0ilJ1hiOEgxNfY70GxppMv6Wna2viuGs8Nm1r7YoXng"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGeN8E4W5rnrQ/company-logo_100_100/company-logo_100_100/0/1667422004502/bytelearn_logo?e=2147483647&v=beta&t=zmue_iamPFnVj9UAlhJmdYG7pKkaEBQYGoSRCDIsBUQ"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGNtpblgQpJoQ/company-logo_100_100/company-logo_100_100/0/1662120928214/deloitte_logo?e=2147483647&v=beta&t=OSF8M5LreT0Sf2F-JcNk6XMT0ArCuPfDmRR-knCC4HY"
+    },
+    {
+      "description_html": null,
+      "duration": "2017 - 2021",
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    },
+    {
+      "description_html": null,
+      "duration": "2020 - 2020",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHiNYfm0YHKrg/company-logo_100_100/company-logo_100_100/0/1656621848677/udacity_logo?e=2147483647&v=beta&t=rBDM1CPEsOBCa2fb8gqoV3tj_uKoWwlVeElKBui3f6w"
+    }
+  ],
+  "url": "https://vn.linkedin.com/in/Ankush-jain-22313a20",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/parth-chokhra",
+      "name": "Parth Chokhra",
+      "about": null,
+      "location": "Pune"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/akhilagrawalkaneki",
+      "name": "Akhil Agrawal",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shivangi-singh-8256bb153",
+      "name": "Shivangi Singh",
+      "about": null,
+      "location": "Pune"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/ashwani-varshney",
+      "name": "Ashwani Varshney",
+      "about": null,
+      "location": "New York, NY"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/abhimanyu-tiwari100",
+      "name": "Abhimanyu Tiwari",
+      "about": null,
+      "location": "New Delhi"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/shradha-pruthi",
+      "name": "Shradha Pruthi",
+      "about": null,
+      "location": "United States"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sagarkar10",
+      "name": "Sagar Kar",
+      "about": null,
+      "location": "New Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shubham-sharma-3b7a18150",
+      "name": "Shubham Sharma",
+      "about": null,
+      "location": "Himachal Pradesh, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/muskan-shakyavar-79a4a0148",
+      "name": "Muskan Shakyavar",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ishaan-farooq",
+      "name": "Ishaan Farooq",
+      "about": null,
+      "location": "Lucknow"
+    }
+  ],
+  "educations_details": "IIIT Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2020",
+      "end_year": "2020",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2019",
+      "end_year": "2019",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/C5603AQG0QGzZ2wPA_Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1647603231170?e=2147483647&v=beta&t=MofFFkRJJU8UDzW84CnUh4b_cHApAy88y865Ne2qgAI",
+  "courses": [
+    {
+      "subtitle": "-",
+      "title": "Coursera - Mathematics for Machine Learning: PCA (Audit), Imperial College London"
+    },
+    {
+      "subtitle": "ud595",
+      "title": "Udacity - Linux Command Line Basics"
+    }
+  ],
+  "languages": [
+    {
+      "subtitle": "Professional working proficiency",
+      "title": "English"
+    },
+    {
+      "subtitle": "Native or bilingual proficiency",
+      "title": "Hindi"
+    }
+  ],
+  "certifications": [
+    {
+      "meta": "Issued Feb 2019 Credential ID 409750e3624343688ca7327b4295fbc1 See credential",
+      "subtitle": "Cognitive Class",
+      "title": "Blockchain Essentials",
+      "credential_url": "https://courses.cognitiveclass.ai/certificates/409750e3624343688ca7327b4295fbc1?trk=public_profile_see-credential",
+      "credential_id": "409750e3624343688ca7327b4295fbc1"
+    },
+    {
+      "meta": "Issued Feb 2019 Credential ID NITRR(CODEUTSAVA-3.0/009)",
+      "subtitle": "NIT Raipur's Codeutsava",
+      "title": "Hackathon - Certificate of Participation",
+      "credential_url": null,
+      "credential_id": "NITRR(CODEUTSAVA-3.0/009)"
+    },
+    {
+      "meta": "Issued Jan 2019 Credential ID 282e66beb52a4790b49165be7e09725a See credential",
+      "subtitle": "Cognitive Class",
+      "title": "Big data 101",
+      "credential_url": "https://courses.cognitiveclass.ai/certificates/282e66beb52a4790b49165be7e09725a?trk=public_profile_see-credential",
+      "credential_id": "282e66beb52a4790b49165be7e09725a"
+    },
+    {
+      "meta": "Issued Jan 2019 Credential ID 5540340 See credential",
+      "subtitle": "DataCamp",
+      "title": "Intro to SQL for Data Science",
+      "credential_url": "https://www.datacamp.com/statement-of-accomplishment/course/f8683f565ffa4f6dd6cdd0d37174e6b40793e8c3?trk=public_profile_see-credential",
+      "credential_id": "5540340"
+    },
+    {
+      "meta": "Issued Jan 2019 Credential ID 556f8606fe32435f848846a32d35b5dd See credential",
+      "subtitle": "Cognitive Class",
+      "title": "SQL and Relational Databases 101",
+      "credential_url": "https://courses.cognitiveclass.ai/certificates/556f8606fe32435f848846a32d35b5dd?trk=public_profile_see-credential",
+      "credential_id": "556f8606fe32435f848846a32d35b5dd"
+    },
+    {
+      "meta": "Issued Nov 2018 Credential ID UC-DVMB1G0N See credential",
+      "subtitle": "Gregory Caremans - Brain Academy",
+      "title": "Meet your brain: a short introduction to neuroscience",
+      "credential_url": "https://www.udemy.com/certificate/UC-DVMB1G0N/?trk=public_profile_see-credential",
+      "credential_id": "UC-DVMB1G0N"
+    },
+    {
+      "meta": "Issued Oct 2018 See credential",
+      "subtitle": "ICPC - International Collegiate Programming Contest",
+      "title": "ICPCID",
+      "credential_url": "https://icpc.baylor.edu/ICPCID/OZG881KHHTBF?trk=public_profile_see-credential",
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Jul 2018 Credential ID UC-N1MJL46S See credential",
+      "subtitle": "LazyProgrammer.me",
+      "title": "Deep Learning Prerequisites: The Numpy Stack in Python",
+      "credential_url": "https://www.udemy.com/certificate/UC-N1MJL46S/?trk=public_profile_see-credential",
+      "credential_id": "UC-N1MJL46S"
+    },
+    {
+      "meta": "Issued Jul 2018 See credential",
+      "subtitle": "University of Helsinki and Reactor",
+      "title": "Elements of AI",
+      "credential_url": "https://certificates.mooc.fi/validate/zffz2o2w9w?trk=public_profile_see-credential",
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Jan 2018 Credential ID 4,869,458 See credential",
+      "subtitle": "DataCamp",
+      "title": "Intro to Python for Data Science",
+      "credential_url": "https://www.datacamp.com/statement-of-accomplishment/course/53f533c3d3679aa18dbd3e2f078f1a1a7cda8494?trk=public_profile_see-credential",
+      "credential_id": "4,869,458"
+    }
+  ],
+  "volunteer_experience": [
+    {
+      "cause": "Education",
+      "duration": "Feb 2018 · - Present · \n\n7 years 10 months",
+      "duration_short": "- Present",
+      "info": "In the annual event SCInTFIC of my college, I volunteered in the lecture series and delivered a lecture on applications of AI to young minds from school.",
+      "start_date": "Feb 2018",
+      "subtitle": "IIIT-Naya Raipur",
+      "title": "Lecturer"
+    }
+  ],
+  "followers": 1416,
+  "connections": 500,
+  "current_company_company_id": "apra-labs",
+  "current_company_name": "Apra Labs.",
+  "location": "Chhattisgarh",
+  "input_url": "https://in.linkedin.com/in/ankush-jain-22313a20",
+  "linkedin_id": "ankush-jain-22313a20",
+  "activity": [
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/varmakvl_it-was-an-incredible-experience-at-blub%C3%B8x-activity-7381677541910241280-yia6",
+      "title": "It was an incredible experience at BluBØX HQ! Not only did I get the opportunity to collaborate with talented people from around the globe, but I…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7381677541910241280"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/jingtang_introducing-kotlin-fhir-a-new-library-to-activity-7374034043895558144-wf5-",
+      "title": "Thrilled to announce our new open-source library: Kotlin FHIR! 🚀 Built on Kotlin Multiplatform (KMP), this library is a game-changer for health…",
+      "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQE3azsnt8GQ8Q/articleshare-shrink_1280_800/B56ZlTx3ZFHQAQ-/0/1758047205629?e=2147483647&v=beta&t=UEVXhKkMIyPiuwG8BfD2f3-WBVuKjOr9212InCDfEgs",
+      "id": "7374034043895558144"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/arpitbhayani_yes-cdn-improves-latencies-by-caching-things-activity-7371893436385386496-HgTB",
+      "title": "Yes, CDN improves latencies by caching things closer to the users, but here's an interesting optimization they do to optimize on latencies... TCP…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7371893436385386496"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/arpitbhayani_dns-is-perhaps-the-largest-eventually-consistent-activity-7368853183340695553-KGVR",
+      "title": "DNS is perhaps the largest eventually consistent system in the world. A single request travels through recursive resolvers, root servers, TLDs, and…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7368853183340695553"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/arpitbhayani_99-of-the-code-that-i-wrote-in-the-last-activity-7368634805585915904-P4dB",
+      "title": "99% of the code that I wrote in the last 3 months has been AI-generated. Now, I spend time building clarity of what needs to be done and why…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7368634805585915904"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/arpitbhayani_python-supports-really-long-integers-practically-activity-7367577350143680512-Se5B",
+      "title": "Python supports really long integers, practically infinite, but when it comes to adding two such long integers, what Python does is something really…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHfXCXgYhB6wg/feedshare-shrink_1280/B56Zj7kjlEHQAs-/0/1756567321548?e=2147483647&v=beta&t=as_oPnKQJp2cHzDxvkovu6IcXZmBOOZeM4pBlWZ8ucU",
+      "id": "7367577350143680512"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/ashish-marisetty_as-nvidia-hit-a-4t-market-cap-this-past-activity-7367156595069280256--Hc5",
+      "title": "As NVIDIA hit a $4T market cap this past week, my internship at the HQ has officially wrapped up! Coincidence… although I may have pushed a PR a few…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGd5CoMFYWeYg/feedshare-shrink_800/B4DZj003q0HsAg-/0/1756454159632?e=2147483647&v=beta&t=9uNM9qiuaaVEzPNU-sKdEs1zU39j4svzG6mmisd_oAc",
+      "id": "7367156595069280256"
+    },
+    {
+      "interaction": "Liked by Ankush Jain",
+      "link": "https://www.linkedin.com/posts/rajstriver_piracy-on-browsers-looks-simple-to-solve-activity-7366338728040062976-oEF8",
+      "title": "Piracy on browsers looks simple to solve, but every fix creates 10 new problems. - IP blocking: easy to bypass with VPN rotation, plus you end up…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFzDs58YcQBsQ/feedshare-shrink_2048_1536/B4DZjp7CuYH4A0-/0/1756271442121?e=2147483647&v=beta&t=XRoPICuD4RAOK4RH9XOj7nXjp2IBi0LWcRyMcgBANdg",
+      "id": "7366338728040062976"
+    }
+  ],
+  "linkedin_num_id": "71992251",
+  "banner_image": "https://static.licdn.com/aero-v1/sc/h/5q92mjc5c51bjlwaj3rs9aa82",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [
+    {
+      "title": "Other",
+      "link": "https://github.com/ankush17100"
+    }
+  ],
+  "first_name": "Ankush",
+  "last_name": "Jain",
+  "timestamp": "2025-11-25T22:46:13.939Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/ankush-jain-22313a20"
+  },
+  "batch": "2017-2021"
+}

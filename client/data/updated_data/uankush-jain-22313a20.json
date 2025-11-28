@@ -1,29 +1,33 @@
 {
-  "id": "shubham-anand-3455b6189",
-  "name": "Shubham Anand",
-  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQFFVNHqLdqy3A/profile-displayphoto-scale_200_200/B4DZllglR2JAAY-/0/1758344668610?e=2147483647&v=beta&t=DB3S8_dbWFDGCNDDx_10iwU-EIZfhqGd43ZRkJCITMU",
+  "id": "ankush-jain-22313a20",
+  "name": "Ankush Jain",
+  "avatar": "https://media.licdn.com/dms/image/v2/C5603AQG0QGzZ2wPA_Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1647603231170?e=2147483647&v=beta&t=MofFFkRJJU8UDzW84CnUh4b_cHApAy88y865Ne2qgAI",
   "position": null,
   "current_company": {
-    "name": "Bharat Electronics Limited",
+    "name": "Apra Labs.",
     "location": null
   },
-  "location": "Bengaluru",
+  "location": "Chhattisgarh",
   "about": null,
   "education": [
     {
-      "title": "IIIT-Naya Raipur",
+      "title": "IIIT Naya Raipur",
       "start_year": "2017",
       "end_year": "2021"
     },
     {
-      "start_year": "2003",
-      "end_year": "2017"
+      "start_year": "2020",
+      "end_year": "2020"
+    },
+    {
+      "start_year": "2019",
+      "end_year": "2019"
     }
   ],
   "experience": [
     {
-      "title": "Bharat Electronics Limited",
-      "company": "Bharat Electronics Limited",
+      "title": "Apra Labs.",
+      "company": "Apra Labs.",
       "location": null,
       "start_date": null,
       "end_date": null
@@ -56,6 +60,6 @@
   "batch": null,
   "branch": "CSE",
   "graduationYear": null,
-  "url": "https://pl.linkedin.com/in/shubham-anand-3455b6189",
-  "linkedin_id": "shubham-anand-3455b6189"
+  "url": "https://vn.linkedin.com/in/Ankush-jain-22313a20",
+  "linkedin_id": "ankush-jain-22313a20"
 }

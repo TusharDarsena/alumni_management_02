@@ -26,7 +26,7 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQG3xbDI4b6TUg/company-logo_100_100/company-logo_100_100/0/1721103758839/op_jindal_university_logo?e=2147483647&v=beta&t=IrzKAQ9rcRrKU8dxiutCtGKm_Gs2IOH6fjBwEtm_yEA"
     }
   ],
-  "url": "https://my.linkedin.com/in/shashank-barle-bb1630167",
+  "url": "https://nl.linkedin.com/in/Shashank-barle-bb1630167",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/durgesh-sahu-701187137",
@@ -79,6 +79,60 @@
     {
       "profile_link": "https://in.linkedin.com/in/nadeem-mir-khan-b0a674b1",
       "name": "Nadeem Mir Khan",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/irinpatel",
+      "name": "Irin Patel",
+      "about": null,
+      "location": "Ahmedabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/siyedrazul-n-384b324b",
+      "name": "Siyedrazul N",
+      "about": null,
+      "location": "Tamil Nadu, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/abhinavchokhavatia",
+      "name": "Abhinav Chokhavatia / Shivani Chokhavatia",
+      "about": null,
+      "location": "Ahmedabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/prasad-rao-p-a1b12916",
+      "name": "PRASAD RAO P",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/brinda-ganesan-7a82052b",
+      "name": "Brinda Ganesan",
+      "about": null,
+      "location": "Chennai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ceo-bpawan1970",
+      "name": "pawan kumar",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sl-solanki-4373141b",
+      "name": "SL Solanki",
+      "about": null,
+      "location": "Dhanbad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/annadurai-chenniappan-7a67792b",
+      "name": "Annadurai Chenniappan",
+      "about": null,
+      "location": "Dharmapuri district"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/gauravkamboj",
+      "name": "Gaurav Kamboj",
       "about": null,
       "location": "Mumbai"
     }
@@ -240,8 +294,9 @@
   "bio_links": [],
   "first_name": "Shashank",
   "last_name": "Barle",
-  "timestamp": "2025-11-25T21:41:42.211Z",
+  "timestamp": "2025-11-26T15:42:21.815Z",
   "input": {
     "url": "https://in.linkedin.com/in/shashank-barle-bb1630167"
-  }
+  },
+  "batch": "2017-2021"
 }

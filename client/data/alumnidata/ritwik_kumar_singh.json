@@ -1,4 +1,8 @@
 {
-  "snapshot_id": "s_mi6flva42n78z6tijb",
-  "message": "Your request is still in progress and cannot be retrieved in this call. Use the provided Snapshot ID to track progress via the Monitor Snapshot endpoint and download it once ready via the Download Snapshot endpoint. More information on https://docs.brightdata.com/api-reference/web-scraper-api/management-apis/monitor-progress"
+  "input": {
+    "url": "https://www.linkedin.com/in/ritwik-kumar-singh-iiitnr"
+  },
+  "warning": "The profile is hidden or private.",
+  "warning_code": "dead_page",
+  "batch": "2017-2021"
 }

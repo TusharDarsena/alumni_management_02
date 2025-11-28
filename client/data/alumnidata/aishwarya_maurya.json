@@ -36,7 +36,7 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGkKERzK_zxTw/company-logo_100_100/company-logo_100_100/0/1630579358736?e=2147483647&v=beta&t=owD0DK3JbBaKVFHK1amj1O2G53rjfHNn_oyi6asXcLc"
     }
   ],
-  "url": "https://qa.linkedin.com/in/aishwarya-maurya",
+  "url": "https://www.linkedin.com/in/aishwarya-maurya",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/namanjain-spjimr",
@@ -138,14 +138,14 @@
       "interaction": "Liked by Aishwarya Maurya",
       "link": "https://www.linkedin.com/posts/kavyansh-chourasia-821476167_at-project-gecko-were-pushing-the-boundaries-activity-7394366183883329537-wdTW",
       "title": "At Project Gecko, we’re pushing the boundaries of AI adaptability to empower farmers across India and Kenya. It’s not often that complex technical…",
-      "img": null,
+      "img": "https://media.licdn.com/dms/image/v2/D4E10AQHPdP1BkBa9Eg/image-shrink_1280/B4EZp38pADHcAM-/0/1762948977191?e=2147483647&v=beta&t=dE9f-zNpUxxh-Zb9xHsq0PKXhwITMdujMFZnz06Z1Mc",
       "id": "7394366183883329537"
     },
     {
       "interaction": "Liked by Aishwarya Maurya",
       "link": "https://www.linkedin.com/posts/careexpand_careexpand-proudly-wore-pink-in-recognition-activity-7389426997581529088-NaXo",
       "title": "Careexpand proudly wore pink in recognition of Breast Cancer Awareness Month. This month, we stand in solidarity with our colleagues, families, and…",
-      "img": null,
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFzEN3eKQTN7g/feedshare-shrink_800/B56ZoyEsdnG4Ag-/0/1761776684178?e=2147483647&v=beta&t=2rDK0DZrLQS6675HkA5M47P6K2KE0wj2mxkUfPtEROg",
       "id": "7389426997581529088"
     },
     {
@@ -200,8 +200,9 @@
   "bio_links": [],
   "first_name": "Aishwarya",
   "last_name": "Maurya",
-  "timestamp": "2025-11-25T21:22:58.698Z",
+  "timestamp": "2025-11-26T15:42:08.719Z",
   "input": {
     "url": "https://in.linkedin.com/in/aishwarya-maurya"
-  }
+  },
+  "batch": "2017-2021"
 }

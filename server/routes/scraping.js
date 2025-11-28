@@ -125,18 +125,15 @@ async function findUrlWithAirtop(alumniName, batch) {
     }
 }
 
-// --- HELPER 2: BRIGHTDATA SERP + ROBUST PARSING (Fixed) ---
+// --- HELPER 2: BRIGHTDATA SERP + AGGRESSIVE SEARCH (Fixed) ---
 async function findUrlWithBrightDataFallback(alumniName, batch) {
     console.log(`\n   [Fallback] 🔄 Switching to Bright Data SERP...`);
-    console.log(`   [Fallback] 👤 Target: "${alumniName}"${batch ? ` | Batch: ${batch}` : ''}`);
     
-    // Query: Name + College (Relaxed - NO batch to avoid missing results)
+    // Query: Name + College
     const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
     const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&gl=in`;
-    console.log(`   [Fallback] 🔍 Search Query: ${query}`);
 
     try {
-        console.log(`   [Fallback] 📡 Sending request to Bright Data...`);
         const response = await fetch(SERP_API_ENDPOINT, {
             method: 'POST',
             headers: {
@@ -150,103 +147,69 @@ async function findUrlWithBrightDataFallback(alumniName, batch) {
             })
         });
 
-        if (!response.ok) {
-            console.log(`   [Fallback] ❌ SERP API Error: ${response.status}`);
-            throw new Error(`SERP API Error: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`SERP API Error: ${response.status}`);
         
-        console.log(`   [Fallback] ✅ Response received, parsing HTML...`);
         const html = await response.text();
-        console.log(`   [Fallback] 📄 HTML Length: ${html.length} characters`);
-        
         const $ = cheerio.load(html);
         
         let bestMatch = null;
         let highestScore = 0;
 
-        // Prepare batch tokens
         const batchYears = batch ? batch.split(/[-/]/).map(y => y.trim()) : [];
-        if (batchYears.length > 0) {
-            console.log(`   [Fallback] 📅 Batch Years to Match: [${batchYears.join(', ')}]`);
-        }
-
-        // --- FIX: USE 'a' TAG SELECTOR (Robust - works regardless of Google's div structure) ---
-        // 'div.g' is fragile and Google changes it frequently. Scanning 'a' tags with 'h3' is robust.
         const allLinks = $('a');
         console.log(`   [Fallback] 🔎 Scanning ${allLinks.length} links for candidates...`);
 
         let candidateCount = 0;
         allLinks.each((i, el) => {
             const link = $(el).attr('href');
-            // Try to find h3 inside the a, or just use the a text
             const title = $(el).find('h3').text() || $(el).text(); 
-            
-            // Get full text of the parent container for context (snippet)
             const snippet = $(el).parent().text().toLowerCase();
 
             if (!link || !title) return;
             if (!link.includes("linkedin.com/in/")) return;
             if (link.includes("/posts/") || link.includes("/jobs/") || link.includes("/company/")) return;
 
-            candidateCount++;
-            console.log(`\n      [${candidateCount}] 📋 Candidate: "${title.substring(0, 40)}..."`);
-            console.log(`      [${candidateCount}] 🔗 Link: ${link.substring(0, 60)}...`);
-
             // --- SCORING LOGIC ---
             const cleanTitle = title.toLowerCase().replace("linkedin", "").replace(" - ", " ").trim();
             const cleanName = alumniName.toLowerCase().trim();
-            
-            // 1. Name Match
             const similarity = getSimilarity(cleanTitle, cleanName);
             const isNameInTitle = cleanTitle.includes(cleanName);
             
-            console.log(`      [${candidateCount}] 👤 Name in Title: ${isNameInTitle ? '✅ YES' : '❌ NO'}`);
-            console.log(`      [${candidateCount}] 🔢 Name Similarity: ${(similarity*100).toFixed(0)}%`);
-            
             // Filter: Must have some name resemblance
-            if (!isNameInTitle && similarity < 0.5) {
-                console.log(`      [${candidateCount}] ❌ Rejected: Name similarity too low (< 50%)`);
-                return;
-            }
+            if (!isNameInTitle && similarity < 0.5) return;
 
-            let score = isNameInTitle ? 0.8 : similarity;
+            candidateCount++;
 
-            // 2. College Boost (Soft check)
+            // FIX: Start LOW (0.5). 
+            let score = isNameInTitle ? 0.5 : 0.3; 
+            let baseScore = score;
+
+            // 1. College Boost
             const hasCollege = snippet.includes("iiitnr") || 
                                snippet.includes("naya raipur") || 
                                snippet.includes("iiit-nr") ||
                                snippet.includes("iiit - naya raipur");
             
-            if (hasCollege) {
-                score += 0.3;
-                console.log(`      [${candidateCount}] 🏫 College Found: +30% boost`);
-            } else {
-                console.log(`      [${candidateCount}] 🏫 College Not Found: No boost`);
-            }
+            if (hasCollege) score += 0.4; 
 
-            // 3. Batch Boost (Tie-breaker)
+            // 2. Batch Boost
             let batchBonus = 0;
             if (batchYears.length > 0) {
-                const yearsFound = [];
                 batchYears.forEach(year => {
-                    if (snippet.includes(year)) {
-                        yearsFound.push(year);
-                        batchBonus += 0.25;
-                    }
+                    if (snippet.includes(year)) batchBonus = 0.3; 
                 });
-                if (yearsFound.length > 0) {
-                    score += batchBonus;
-                    console.log(`      [${candidateCount}] 📅 Batch Years Found: [${yearsFound.join(', ')}] +${(batchBonus*100).toFixed(0)}%`);
-                } else {
-                    console.log(`      [${candidateCount}] 📅 Batch Years Not Found: No boost`);
-                }
+                score += batchBonus; 
             }
 
-            console.log(`      [${candidateCount}] 🎯 Final Score: ${(score*100).toFixed(0)}%`);
+            // Log good candidates for debugging
+            if (score >= 0.5) {
+                console.log(`\n      [${candidateCount}] 📋 Candidate: "${cleanTitle.substring(0, 40)}..."`);
+                console.log(`      [${candidateCount}] 🔗 Link: ${link.substring(0, 60)}...`);
+                console.log(`      [${candidateCount}] 🎯 Score: ${(score*100).toFixed(0)}% (Base:${(baseScore*100).toFixed(0)}% + College:${hasCollege?40:0}% + Batch:${(batchBonus*100).toFixed(0)}%)`);
+            }
 
-            // Save best match
+            // Save best
             if (score > highestScore) {
-                console.log(`      [${candidateCount}] 🏆 NEW BEST MATCH! (Previous: ${(highestScore*100).toFixed(0)}%)`);
                 highestScore = score;
                 bestMatch = link;
             }
@@ -254,7 +217,10 @@ async function findUrlWithBrightDataFallback(alumniName, batch) {
 
         console.log(`\n   [Fallback] 📊 Analysis Complete: ${candidateCount} candidates evaluated`);
         
-        if (bestMatch && highestScore > 0.6) {
+        // --- CRITICAL UPDATE: LOWER THRESHOLD TO 0.45 ---
+        // This allows "Name Only" (0.5) to pass.
+        // We rely on the scraping step to validate the education.
+        if (bestMatch && highestScore >= 0.45) {
             console.log(`   [Fallback] ✅ MATCH FOUND!`);
             console.log(`   [Fallback] 🔗 URL: ${bestMatch}`);
             console.log(`   [Fallback] 🎯 Confidence Score: ${(highestScore*100).toFixed(0)}%`);
@@ -262,12 +228,11 @@ async function findUrlWithBrightDataFallback(alumniName, batch) {
         }
 
         console.log(`   [Fallback] ❌ No confident match found`);
-        console.log(`   [Fallback] 📉 Highest Score: ${(highestScore*100).toFixed(0)}% (Required: 60%)`);
+        console.log(`   [Fallback] 📉 Highest Score: ${(highestScore*100).toFixed(0)}% (Required: 45%)`);
         return null;
 
     } catch (error) {
         console.log(`   [Fallback] ❌ SERP Error: ${error.message}`);
-        console.log(`   [Fallback] 📊 Error Stack:`, error.stack);
         return null;
     }
 }
@@ -308,19 +273,8 @@ async function processSingleProfile(profileData, forceFallback = false) {
     console.log(`\n✅ STEP 1 COMPLETE: Profile URL Found`);
     console.log(`   🔗 ${foundUrl}`);
 
-    console.log(`\n🔄 STEP 2: Saving URL to File System`);
-    const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
-    if (!fs.existsSync(urlDirPath)) {
-        console.log(`   📁 Creating directory: ${urlDirPath}`);
-        fs.mkdirSync(urlDirPath, { recursive: true });
-    }
-    
-    const safeName = alumniName.toLowerCase().replace(/ /g, '_');
-    const urlFilePath = path.join(urlDirPath, `${safeName}_linkedin_url.txt`);
-    fs.writeFileSync(urlFilePath, foundUrl);
-    console.log(`   ✅ URL saved: ${urlFilePath}`);
-
-    console.log(`\n🔄 STEP 3: Scraping Full Profile Data from LinkedIn`);
+    // STEP 2: SCRAPE DATA
+    console.log(`\n🔄 STEP 2: Scraping Full Profile Data from LinkedIn`);
     console.log(`   📡 Calling Bright Data Collector API...`);
     console.log(`   🔗 Target URL: ${foundUrl}`);
     
@@ -345,7 +299,71 @@ async function processSingleProfile(profileData, forceFallback = false) {
     const profileJson = JSON.parse(rawText);
     console.log(`   ✅ JSON parsed successfully`);
 
+    // ==================================================================
+    // 🚨 STEP 3: CONDITIONAL VALIDATION 🚨
+    // Fallback = STRICT (Must verify IIITNR)
+    // Airtop   = LENIENT (Trust the AI, even if Education is empty)
+    // ==================================================================
+    console.log(`\n🛡️ STEP 3: Validating University in Scraped Data...`);
+    
+    const educationList = profileJson.education || [];
+    let isIIITNR = false;
+    const validKeywords = ["iiitnr", "iiit - naya raipur", "international institute of information technology", "naya raipur", "iiit-nr"];
+
+    educationList.forEach(edu => {
+        const schoolName = (
+            edu.school || 
+            edu.school_name || 
+            edu.name || 
+            edu.institute_name || 
+            edu.institution_name || 
+            edu.title || 
+            ""
+        ).toLowerCase();
+
+        const description = (edu.description || "").toLowerCase(); 
+        
+        if (validKeywords.some(key => schoolName.includes(key) || description.includes(key))) {
+            isIIITNR = true;
+            console.log(`   ✅ Verified Education: ${schoolName}`);
+        }
+    });
+
+    if (!isIIITNR) {
+        console.log(`   ⚠️ VALIDATION FAILED: Profile scraped, but no IIITNR education found.`);
+        
+        if (forceFallback) {
+            // STRICT MODE: If we used Fallback (Regex), we MUST verify. 
+            // If verification fails, we assume it's a False Positive (like Saswat from OP Jindal).
+            console.log(`   ❌ BLOCKING SAVE: In Fallback mode, verification is mandatory.`);
+            throw new Error("Validation Failed: Profile scraped, but user did not study at IIITNR.");
+        } else {
+            // LENIENT MODE: If we used Airtop (AI), we trust the search result.
+            // We save the profile even if the Education section is hidden/empty.
+            console.log(`   ⚠️ ALLOWING SAVE: In Airtop mode, we trust the AI match despite missing verification.`);
+        }
+    } else {
+        console.log(`   ✅ Validation Passed: User studied at IIITNR.`);
+    }
+    // ==================================================================
+
+    // STEP 4: SAVE TO FILE
     console.log(`\n🔄 STEP 4: Saving Profile Data`);
+    const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
+    if (!fs.existsSync(urlDirPath)) {
+        console.log(`   📁 Creating directory: ${urlDirPath}`);
+        fs.mkdirSync(urlDirPath, { recursive: true });
+    }
+    
+    const safeName = alumniName.toLowerCase().replace(/ /g, '_');
+    
+    // Save URL text
+    const urlFilePath = path.join(urlDirPath, `${safeName}_linkedin_url.txt`);
+    fs.writeFileSync(urlFilePath, foundUrl);
+    console.log(`   ✅ URL saved: ${urlFilePath}`);
+
+    // Save JSON (Add batch tag)
+    if (batch) profileJson.batch = batch;
     const jsonFilePath = path.join(urlDirPath, `${safeName}.json`);
     fs.writeFileSync(jsonFilePath, JSON.stringify(profileJson, null, 2));
     console.log(`   ✅ Profile saved: ${jsonFilePath}`);

@@ -37,7 +37,7 @@
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
-  "url": "https://jp.linkedin.com/in/rajkush",
+  "url": "https://pk.linkedin.com/in/Rajkush",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/ankush-jain-22313a20",
@@ -98,6 +98,66 @@
       "name": "Arpit N. Verma",
       "about": null,
       "location": "United Kingdom"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/sitanshukushwaha",
+      "name": "Sitanshu Kushwaha",
+      "about": null,
+      "location": "New York, NY"
+    },
+    {
+      "profile_link": "https://nl.linkedin.com/in/saahil-ali-290399",
+      "name": "Saahil Ali",
+      "about": null,
+      "location": "Amsterdam"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ketan-dhumal-884414180",
+      "name": "Ketan Dhumal",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/ketaki-kolhatkar",
+      "name": "Ketaki Kolhatkar",
+      "about": null,
+      "location": "Boston, MA"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/urvashi-ramdasani",
+      "name": "Urvashi Ramdasani",
+      "about": null,
+      "location": "Ahmedabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sakshamv30",
+      "name": "Saksham Varshney",
+      "about": null,
+      "location": "Prayagraj"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/rishabh-singh-362445143",
+      "name": "Rishabh Singh",
+      "about": null,
+      "location": "West Delhi"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/sreejith99",
+      "name": "Sreejith Sivan",
+      "about": null,
+      "location": "Bentonville, AR"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/vinayak19th",
+      "name": "Vinayak Sharma",
+      "about": null,
+      "location": "Tempe, AZ"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/anjali-jangid-415285169",
+      "name": "Anjali Jangid",
+      "about": null,
+      "location": "Delhi, India"
     }
   ],
   "educations_details": "IIIT-Naya Raipur",
@@ -306,7 +366,7 @@
       "interaction": "Liked by Rituraj kushwaha",
       "link": "https://www.linkedin.com/posts/surjyaswain_stars-align-evergreen-ai-and-data-management-activity-7036934247340802048-ONDk",
       "title": "Know that feeling when the last piece of a jigsaw puzzle slips into place? Find that satisfaction from your data with effective #DataOps. Follow the…",
-      "img": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFYfREbaCgWVg/articleshare-shrink_800/articleshare-shrink_800/0/1711113419434?e=2147483647&v=beta&t=q4wKVo1LG5JN8i9FbXG-bCVt6IVoKRwU7fTeUR1hwWU",
+      "img": null,
       "id": "7036934247340802048"
     },
     {
@@ -354,8 +414,9 @@
   "bio_links": [],
   "first_name": "Rituraj",
   "last_name": "kushwaha",
-  "timestamp": "2025-11-25T21:21:11.932Z",
+  "timestamp": "2025-11-26T15:40:53.703Z",
   "input": {
     "url": "https://in.linkedin.com/in/rajkush"
-  }
+  },
+  "batch": "2017-2021"
 }
