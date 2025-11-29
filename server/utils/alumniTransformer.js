@@ -5,10 +5,11 @@
 
 import { 
   extractBatchFromArray, 
-  extractBranchFromArray, 
   extractGraduationYear,
   extractCurrentCompany 
 } from './alumniHelpers.js';
+
+import { extractBatch, extractBranch, extractGraduationYear as extractGradYear } from '../../shared/alumniUtils.ts';
 
 /**
  * Transform a single alumni entry from LinkedIn format to our schema
@@ -19,9 +20,9 @@ export function transformAlumniEntry(entry) {
   if (!entry.url) return null;
   
   const name = entry.name || "Unknown";
-  const batch = extractBatchFromArray(entry.education);
-  const branch = extractBranchFromArray(entry.education);
-  const graduationYear = extractGraduationYear(entry.education);
+  const batch = extractBatch(entry.education) || extractBatchFromArray(entry.education);
+  const branch = extractBranch(entry.education); // Use the new shared function with config variations
+  const graduationYear = extractGradYear(entry.education) || extractGraduationYear(entry.education);
   const current_company = extractCurrentCompany(entry);
   
   return {

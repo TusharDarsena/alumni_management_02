@@ -5,6 +5,7 @@ import AlumniProfile from '../models/AlumniProfile.js';
 import fs from 'fs';
 import path from 'path';
 import { transformAlumniEntry } from '../utils/alumniTransformer.js';
+import { normalizeAlumniEntry } from '../utils/alumniNormalizer.js';
 
 dotenv.config();
 
@@ -29,11 +30,13 @@ const admin = {
 
 // Main seeding function that can be called from anywhere
 export const seedUsers = async (skipStudentsAndAdmin = false) => {
+  console.log('🚀 Starting seeding process...\n');
   try{
     // Connect to MongoDB if not already connected
     if (mongoose.connection.readyState === 0) {
+      console.log('Connecting to MongoDB...');
       await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser:true, useUnifiedTopology:true });
-      console.log('MongoDB connected for seeding');
+      console.log('✅ MongoDB connected for seeding\n');
     }
 
     if (!skipStudentsAndAdmin) {
@@ -76,6 +79,7 @@ export const seedUsers = async (skipStudentsAndAdmin = false) => {
     }
     
     const files = fs.readdirSync(alumniDataDir).filter(file => file.endsWith('.json'));
+    console.log(`📁 Found ${files.length} JSON files in alumnidata\n`);
     
     for (const file of files) {
       const filePath = path.join(alumniDataDir, file);
@@ -89,13 +93,16 @@ export const seedUsers = async (skipStudentsAndAdmin = false) => {
       }
       const entries = Array.isArray(data) ? data : [data];
       for (const entry of entries) {
-        const updatedEntry = transformAlumniEntry(entry);
-        if (!updatedEntry) continue;
+        const transformedEntry = transformAlumniEntry(entry);
+        if (!transformedEntry) {
+          console.log(`⚠️  Skipped entry (no URL): ${entry.name || 'Unknown'} from ${file}`);
+          continue;
+        }
         
         const updatedFileName = `u${entry.id}.json`;
         const updatedFilePath = path.join(updatedDataDir, updatedFileName);
-        fs.writeFileSync(updatedFilePath, JSON.stringify(updatedEntry, null, 2));
-        console.log(`Created updated JSON: ${updatedFileName}`);
+        fs.writeFileSync(updatedFilePath, JSON.stringify(transformedEntry, null, 2));
+        console.log(`✅ Created: ${updatedFileName} - ${transformedEntry.name}`);
       }
     }
     
@@ -113,8 +120,17 @@ export const seedUsers = async (skipStudentsAndAdmin = false) => {
     });
     
     for (const entry of linkedinData) {
-      await AlumniProfile.updateOne({ id: entry.id }, entry, { upsert: true });
-      console.log(`Seeded/Updated alumni: ${entry.name} (Batch: ${entry.batch}, Branch: ${entry.branch})`);
+      // Normalize the entry before inserting to ensure proper structure
+      const normalized = normalizeAlumniEntry(entry);
+      
+      const filter = normalized.linkedin_id 
+        ? { linkedin_id: normalized.linkedin_id }
+        : { id: normalized.id };
+
+      await AlumniProfile.updateOne(filter, { $set: normalized }, { upsert: true });
+      
+      console.log(`✅ ${normalized.name}`);
+      console.log(`   Branch: ${normalized.branch || 'null'} | Batch: ${normalized.batch || 'null'}`);
     }
 
     console.log('Seeding complete');
@@ -126,11 +142,16 @@ export const seedUsers = async (skipStudentsAndAdmin = false) => {
 };
 
 // When run directly from command line
-if (import.meta.url === `file://${process.argv[1]}`) {
-  seedUsers().then(() => {
-    process.exit();
-  }).catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
-}
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+
+seedUsers().then((result) => {
+  console.log('\n========================================');
+  console.log('✅ SEEDING COMPLETED SUCCESSFULLY');
+  console.log(`Total alumni profiles: ${result.count}`);
+  console.log('========================================\n');
+  mongoose.disconnect().then(() => process.exit(0));
+}).catch(err => {
+  console.error('❌ Error during seeding:', err);
+  mongoose.disconnect().then(() => process.exit(1));
+});

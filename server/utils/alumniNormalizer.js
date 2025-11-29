@@ -72,27 +72,16 @@ export function normalizeAlumniEntry(entry) {
     input: entry.input || (input_url ? { url: input_url } : undefined),
   };
 
-  // Extract batch, branch, and graduation year from education if not already set
+  // Always re-extract batch, branch, and graduation year from education data
+  // This ensures they stay in sync when extraction logic changes
   const educationData = doc.education || entry.education;
   if (Array.isArray(educationData)) {
-    if (!entry.batch) {
-      doc.batch = extractBatch(educationData) || undefined;
-    } else {
-      doc.batch = entry.batch;
-    }
-    
-    if (!entry.branch) {
-      doc.branch = extractBranch(educationData) || undefined;
-    } else {
-      doc.branch = entry.branch;
-    }
-    
-    if (!entry.graduationYear) {
-      doc.graduationYear = extractGraduationYear(educationData) || undefined;
-    } else {
-      doc.graduationYear = entry.graduationYear;
-    }
+    // Re-extract from education array (source of truth)
+    doc.batch = extractBatch(educationData) || undefined;
+    doc.branch = extractBranch(educationData) || undefined;
+    doc.graduationYear = extractGraduationYear(educationData) || undefined;
   } else {
+    // Fallback to existing values only if education data is not available
     doc.batch = entry.batch || undefined;
     doc.branch = entry.branch || undefined;
     doc.graduationYear = entry.graduationYear || undefined;

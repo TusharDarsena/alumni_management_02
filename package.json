@@ -20,6 +20,7 @@
     "start": "node server/node-build.js && node server/dist/server.js",
     "seed": "tsx server/scripts/seedUser.js",
     "seed:jobs": "tsx server/scripts/seedJobListings.js",
+    "update:branches": "tsx server/scripts/updateAlumniBranches.js",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
     "typecheck": "tsc"
