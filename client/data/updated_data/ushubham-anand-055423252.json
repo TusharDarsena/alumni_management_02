@@ -1,0 +1,59 @@
+{
+  "id": "shubham-anand-055423252",
+  "name": "Shubham Anand",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQFJNL7YMZBUxg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1702980827690?e=2147483647&v=beta&t=hYpBckvv4NhLW1SC8P5QDEwJEA6_iEYMJNTdfcCMty4",
+  "position": null,
+  "current_company": {
+    "name": "Sharang Shakti",
+    "location": null
+  },
+  "location": "Hauz Khas",
+  "about": "Passionate about electronics",
+  "education": [
+    {
+      "title": "Indian Institute of Technology, Delhi",
+      "start_year": "2021",
+      "end_year": "2025"
+    },
+    {
+      "start_year": "2019",
+      "end_year": "2021"
+    },
+    {
+      "start_year": "2018",
+      "end_year": "2019"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Sharang Shakti",
+      "company": "Sharang Shakti",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://uk.linkedin.com/in/Shubham-anand-055423252",
+  "linkedin_id": "shubham-anand-055423252"
+}

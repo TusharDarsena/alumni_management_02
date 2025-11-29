@@ -1,360 +1,118 @@
 {
-  "id": "shubham-anand-3455b6189",
+  "id": "shubham-anand-055423252",
   "name": "Shubham Anand",
-  "city": "Bengaluru, Karnataka, India",
+  "city": "Hauz Khas, Delhi, India",
   "country_code": "IN",
+  "about": "Passionate about electronics",
   "current_company": {
-    "link": "https://in.linkedin.com/company/bharat-electronics-limited?trk=public_profile_topcard-current-company",
-    "name": "Bharat Electronics Limited",
-    "company_id": "bharat-electronics-limited",
+    "link": "https://in.linkedin.com/company/sharang-shakti-private-limited?trk=public_profile_topcard-current-company",
+    "name": "Sharang Shakti",
+    "company_id": "sharang-shakti-private-limited",
     "location": null
   },
   "experience": [
     {
-      "title": "Bharat Electronics Limited",
+      "title": "Sharang Shakti",
       "description_html": null,
-      "company": "Bharat Electronics Limited",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEoT1DsKihRxQ/company-logo_100_100/company-logo_100_100/0/1725596070207/bharat_electronics_limited_logo?e=2147483647&v=beta&t=-k8FhUgaagjCQL57w7aJaC0tXhOgg09myme9IOjqs38"
+      "company": "Sharang Shakti",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQFoVViTrkkuDA/company-logo_100_100/company-logo_100_100/0/1730979416095/sharang_shakti_private_limited_logo?e=2147483647&v=beta&t=Mvt5zcKqIO4z1CWVuqJlFeKbN_OEQMSrNi-ROCIcDB4"
     },
     {
       "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGNtpblgQpJoQ/company-logo_100_100/company-logo_100_100/0/1662120928214/deloitte_logo?e=2147483647&v=beta&t=OSF8M5LreT0Sf2F-JcNk6XMT0ArCuPfDmRR-knCC4HY"
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHAPco-16UQ1w/company-logo_100_100/B56ZiKcLnLG4AY-/0/1754669300814/samaritan_ai_logo?e=2147483647&v=beta&t=r2Dq-9bdzJEvAneMxV5KluVfVTFcX4DQhwc3ERQhaZI"
     },
     {
       "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQHgBH3P-LNYTA/company-logo_100_100/company-logo_100_100/0/1630580624264/bfactoryindia_logo?e=2147483647&v=beta&t=UqdkPxqKEUKkDY-EpUR8Mho7F6bNrC-hao45gC0f4iY"
+      "duration": "2021 - 2025",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQHQ5bnnnSexWg/company-logo_100_100/company-logo_100_100/0/1710919737785/iitdelhi_logo?e=2147483647&v=beta&t=lOCJ2p0onNcFUfNxviPZJZVz_CcK9RIVlV-qcefzIlU"
     },
     {
       "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    },
-    {
-      "description_html": null,
-      "duration": "2003 - 2017",
+      "duration": "2019 - 2021",
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
-  "url": "https://pl.linkedin.com/in/shubham-anand-3455b6189",
-  "people_also_viewed": [
-    {
-      "profile_link": "https://www.linkedin.com/in/sakshi-naik-cmu",
-      "name": "Sakshi Naik",
-      "about": null,
-      "location": "Pittsburgh, PA"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/sai-teja-padmam-6622a9186",
-      "name": "Sai Teja Padmam",
-      "about": null,
-      "location": "Gurugram"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/mohikadhawan",
-      "name": "Mohika Dhawan",
-      "about": null,
-      "location": "Mumbai"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/aayush-sudhakar-75323814a",
-      "name": "Aayush Sudhakar",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/srirammahalingam02",
-      "name": "Sriram Mahalingam",
-      "about": null,
-      "location": "Navi Mumbai"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/rani-sangwan",
-      "name": "Rani Sangwan",
-      "about": null,
-      "location": "Charkhi Dadri"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/shubham-kumar-agrawal-45311b171",
-      "name": "Shubham Kumar Agrawal",
-      "about": null,
-      "location": "India"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/shivanjaliyadav",
-      "name": "Shivanjali Yadav",
-      "about": null,
-      "location": "Gurugram"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/chhavi-shukla-b649591b1",
-      "name": "Chhavi Shukla",
-      "about": null,
-      "location": "Delhi, India"
-    },
-    {
-      "profile_link": "https://www.linkedin.com/in/mansi-shah-2701",
-      "name": "MANSI SHAH",
-      "about": null,
-      "location": "Milpitas, CA"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/tanya-taneja163",
-      "name": "Tanya Taneja",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/swarnaawasthy",
-      "name": "Swarna Awasthy",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/palash-jain-291120171",
-      "name": "Palash Jain",
-      "about": null,
-      "location": "Nagpur"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/sourav-mandal-130b99176",
-      "name": "SOURAV MANDAL",
-      "about": null,
-      "location": "Varanasi"
-    },
-    {
-      "profile_link": "https://ae.linkedin.com/in/ahmad-saud-jawed-a22359137",
-      "name": "Ahmad Saud Jawed",
-      "about": null,
-      "location": "Abu Dhabi"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/rijul-sindhyan",
-      "name": "Rijul Sindhyan",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/subam-ganguly-11b830193",
-      "name": "Subam Ganguly",
-      "about": null,
-      "location": "Chennai"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/ashrita-samal-5b423816a",
-      "name": "Ashrita Samal",
-      "about": null,
-      "location": "Pune"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/pragya-aggarwal09",
-      "name": "Pragya Aggarwal",
-      "about": null,
-      "location": "Dehradun"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/utkarsh-singh-2b930916b",
-      "name": "Utkarsh Singh",
-      "about": null,
-      "location": "Bengaluru"
-    }
-  ],
-  "educations_details": "IIIT-Naya Raipur",
+  "url": "https://uk.linkedin.com/in/Shubham-anand-055423252",
+  "educations_details": "Indian Institute of Technology, Delhi",
   "education": [
     {
-      "title": "IIIT-Naya Raipur",
-      "url": "https://in.linkedin.com/school/iiitnrofficial/",
-      "start_year": "2017",
+      "title": "Indian Institute of Technology, Delhi",
+      "url": "https://in.linkedin.com/school/iitdelhi/",
+      "start_year": "2021",
+      "end_year": "2025",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2019",
       "end_year": "2021",
       "description": null,
       "description_html": null,
       "institute_logo_url": null
     },
     {
-      "start_year": "2003",
-      "end_year": "2017",
+      "start_year": "2018",
+      "end_year": "2019",
       "description": null,
       "description_html": null,
       "institute_logo_url": null
     }
   ],
-  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQFFVNHqLdqy3A/profile-displayphoto-scale_200_200/B4DZllglR2JAAY-/0/1758344668610?e=2147483647&v=beta&t=DB3S8_dbWFDGCNDDx_10iwU-EIZfhqGd43ZRkJCITMU",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQFJNL7YMZBUxg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1702980827690?e=2147483647&v=beta&t=hYpBckvv4NhLW1SC8P5QDEwJEA6_iEYMJNTdfcCMty4",
   "courses": [
     {
-      "subtitle": "-",
-      "title": "Analog and Digital Electronics"
+      "subtitle": "ELL304",
+      "title": "Analog Electronics"
     },
     {
-      "subtitle": "-",
-      "title": "VLSI Physical Design"
+      "subtitle": "MTL100",
+      "title": "Calculus"
+    },
+    {
+      "subtitle": "COL106",
+      "title": "Data Structures and Algorithms"
+    },
+    {
+      "subtitle": "ELL201",
+      "title": "Digital Electronics"
+    },
+    {
+      "subtitle": "Signals and Systems",
+      "title": "ELL205"
+    },
+    {
+      "subtitle": "ELL365",
+      "title": "Embedded Systems"
+    },
+    {
+      "subtitle": "MTL101",
+      "title": "Linear Algebra and Differential Equations"
+    },
+    {
+      "subtitle": "MTL106",
+      "title": "Probability and Stochastic Processes"
     }
   ],
-  "languages": [
+  "certifications": [
     {
-      "subtitle": "Professional working proficiency",
-      "title": "English"
-    },
-    {
-      "subtitle": "Professional working proficiency",
-      "title": "Hindi"
+      "meta": "Issued Jun 2024 Credential ID L4U6TZ38Q8SS See credential",
+      "subtitle": "Stanford University",
+      "title": "Supervised Machine Learning: Regression and Classification",
+      "credential_url": "https://www.coursera.org/account/accomplishments/records/L4U6TZ38Q8SS?trk=public_profile_see-credential",
+      "credential_id": "L4U6TZ38Q8SS"
     }
   ],
-  "volunteer_experience": [
-    {
-      "subtitle": "National Cadet Corps",
-      "title": "Cadet"
-    }
-  ],
-  "followers": 339,
-  "connections": 339,
-  "current_company_company_id": "bharat-electronics-limited",
-  "current_company_name": "Bharat Electronics Limited",
-  "projects": [
-    {
-      "title": "TSV based 3D IC Designing",
-      "start_date": "Jan 2021",
-      "description": "Analyzing the effects of different shapes of TSV(Through Silicon Vias) on 3D IC fabrication using copper,carbon nanotube(CNT) and graphene as filler material."
-    }
-  ],
-  "location": "Bengaluru",
-  "input_url": "https://in.linkedin.com/in/shubham-anand-3455b6189",
-  "linkedin_id": "shubham-anand-3455b6189",
-  "activity": [
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/rishi-sharma-278999152_india-education-innovation-activity-7394954298318688256-9E7k",
-      "title": "🚨 Truth Bomb: India isn’t built by IITs. It’s built by Tier-2/3 graduates. 💡 While Tier-1 talent often fuels the West, India’s backbone—ISRO…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGVaAbGwGG8kA/feedshare-shrink_2048_1536/B4DZqAnvv1GkAw-/0/1763094494986?e=2147483647&v=beta&t=J0l9D92VOyU_Gy87-VFUgTi56niIJNAVKLbJC_fk6O8",
-      "id": "7394954298318688256"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/satyam453_bharatelectronicslimited-bel-crl-activity-7394812727573159937-RHtA",
-      "title": "A new chapter begins✨ I’m happy to share that I’ve joined Central Research Laboratory at Bharat Electronics Limited (CRL-BEL), Bangalore, a Navratna…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEL72VUupz84A/feedshare-shrink_800/B4DZp.m84rH4Ag-/0/1763060741206?e=2147483647&v=beta&t=z6OGjFUqa9n3QmtDdnJT-DgP8GozxLzWIL3b-p6pd98",
-      "id": "7394812727573159937"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_curtains-rose-on-quality-month-celebrations-activity-7392533118169227264-EizW",
-      "title": "Curtains rose on Quality Month celebrations at BEL with the hoisting of the Quality Flag by Mr Manoj Jain, CMD, in the presence of Mr Damodar Bhattad…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQHJcQx0epTptw/feedshare-shrink_2048_1536/B56ZpeNrbTJQAw-/0/1762517239847?e=2147483647&v=beta&t=MACP_f810oIIzRc_DnniivqPeulTlM5PTBGIX-Zurqw",
-      "id": "7392533118169227264"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_patriotism-took-centre-stage-as-employees-activity-7392513296366694400-s-dW",
-      "title": "Patriotism took centre stage as employees, trainees and contract staff across the Units of BEL joined the mass singing of “Vande Mataram” at a…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQGz8pc29vN1rg/feedshare-shrink_1280/B56Zpd7nCgJoAs-/0/1762512514546?e=2147483647&v=beta&t=eDpIClrrW164fjvnULCtDl1F_i0haN0IjbsxiyFXNIU",
-      "id": "7392513296366694400"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/sakthivel-perumal-13342463_dear-all-after-a-long-and-challenging-journey-activity-7391693485910712320-E5-G",
-      "title": "Dear All, After a long and challenging journey, we were finally able to secure gene therapy medication in August 2025 for our daughter Shathvika (2…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQE_1RGDquB7Kg/feedshare-shrink_800/B56ZpSSCP.JoAg-/0/1762317057132?e=2147483647&v=beta&t=szUR5TRCdN2kSsuEtMTCheuE-w-XJfFGWLC1eLEp_CI",
-      "id": "7391693485910712320"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/ntpc_raisingday-50yearsofinfinitepossibilities-activity-7392245241468092416-qVB7",
-      "title": "Tonight, the glow says it all. The night shines NTPC Blue. A symbol of five decades of pride, purpose and progress. #RaisingDay…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQFCS03_ujE96Q/feedshare-shrink_800/B56ZpaH2q8IYAg-/0/1762448604632?e=2147483647&v=beta&t=LWypgbxLbj9_iewl3D8bvXBgkbAHvehjUmhAk515LuE",
-      "id": "7392245241468092416"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/prashantadvait_this-is-a-scene-rarely-witnessed-on-indian-activity-7390589725411160064-pcxx",
-      "title": "This is a scene rarely witnessed on Indian roads. An ambulance glides smoothly through traffic, every vehicle automatically moves aside. This is…",
-      "img": "https://media.licdn.com/dms/image/v2/D5605AQGtz87_F9Fp5g/videocover-high/B56ZpBKyj1HYCI-/0/1762029949225?e=2147483647&v=beta&t=ypjTPGS7u3l3yZEQosOypc5rbNAPyhuDA6yzdlw1QQM",
-      "id": "7390589725411160064"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_as-part-of-vigilance-awareness-week-2025-activity-7389690110927298560-Cg6L",
-      "title": "As part of Vigilance Awareness Week 2025, BEL-Ghaziabad organised a Walkathon to promote social harmony and spread the message of anti-corruption and…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQGyA27QmGIR3A/feedshare-shrink_800/B56Zo1z.53HQAk-/0/1761839414116?e=2147483647&v=beta&t=_fhEX2vWl5wNPisPsuNJt4iLlOmFlHbXtzvGcr_AMCo",
-      "id": "2025"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_specialcampaign5-activity-7387865658291695617--CZe",
-      "title": "As part of #SpecialCampaign5.0, BEL-Panchkula staged a “Nukkad Natak” (street play) on Swachhata. Enacted by apprentices, the play aimed at…",
-      "img": "https://media.licdn.com/dms/image/v2/D5605AQH5foFFiGCbqQ/videocover-high/B56Zob4nQnI8B8-/0/1761404427544?e=2147483647&v=beta&t=_LXVil9W7KfSGgQPRiM_c34Ebjf0cIQzaXAizuUUgRY",
-      "id": "7387865658291695617"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/kuldeep-singh-rathore-90b3b4108_motivation-inspiration-ese-activity-7380122844279730176-Umqz",
-      "title": "💫 The Single Hand Story — Haree Shankar (UPSC AIR 82, ESE) Life was never easy for Haree Shankar. Born in a kacha house in rural India, he grew up…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQHG5mrmDG4DOQ/feedshare-shrink_1280/B56Zmt2jNQH8As-/0/1759558398399?e=2147483647&v=beta&t=eNaeRXx2iWmMavqqotPy3ZOsvSSoQoh_C5SLEkJ9iIM",
-      "id": "7380122844279730176"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/sanjeevsingh38_teacher-guru-respect-activity-7381271376344768512-aaOw",
-      "title": "In 1994, The President of India, Shri Shankar Dayal Sharma visited Muscat on an official trip :- When the flight landed, 3 very unusual incidents…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQHZqdzrplJjdg/feedshare-shrink_2048_1536/B56Zm.LMioKEAw-/0/1759832231903?e=2147483647&v=beta&t=mBN2t0R2zGDJbfJTKX-mGMRSbguBpcdV3IrDxArx5dI",
-      "id": "7381271376344768512"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/alumni-relations-iitd_iitdelhi-alumniexcellence-leadership-activity-7378744276744048641-H5zD",
-      "title": "Celebrating the Legacy of Excellence at IIT Delhi! ✨ We are proud to honour our remarkable Alumni Awardees whose leadership, groundbreaking…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D05AQFRf8zzFqf2cA/videocover-high/B4DZmaQnUPGQCA-/0/1759229703929?e=2147483647&v=beta&t=ArfcTzJLx6gbQGZu5YS9ZYXbIxijhenzi36Y6WfJbyg",
-      "id": "7378744276744048641"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/gandavadi-santhi-swaroop_gail-gate-energysector-activity-7379870925107712000-apm5",
-      "title": "After getting good rank in GATE 2025, I have been selected for appearing NPCIL interview As it's my first PSU interview I got tensed in the…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQG40WffguiXAg/feedshare-shrink_2048_1536/B56ZmqRfMEHAAw-/0/1759498338003?e=2147483647&v=beta&t=ziqydawwy4ZQnSCEQw8QQZywHHdjMLovI0jhQv9cJoA",
-      "id": "7379870925107712000"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/ravi-narayanan-p-r-0a235b58_motherhood-sacrifice-leadership-activity-7379704332620894208-sfgL",
-      "title": "As a child, I never really noticed it. I thought life was just… normal. Meals on the table. Clothes neatly folded. Someone always there when I…",
-      "img": "https://media.licdn.com/dms/image/v2/D5605AQG9h2AeWKhRpw/videocover-high/B56Zmn57BaHQB8-/0/1759458615343?e=2147483647&v=beta&t=IyKRZbVl-hJoDte1enJzZHOcNwGp8C-SwDgqsWthLyU",
-      "id": "7379704332620894208"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/indian-institute-of-science_gandhijayanti2025-activity-7379380442656866304-emwt",
-      "title": "Mahatma Gandhi visited IISc twice, in 1927 and 1936. During his first visit on 12 July 1927, he gave a speech outlining his vision for research at…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQE0Ol7ggSHcqw/feedshare-shrink_2048_1536/B56ZmjTaCKIYA8-/0/1759381398263?e=2147483647&v=beta&t=111gYUqlb_rP9v_LhQ0QrNqpHVdlwvK6vZSVo5jeFEY",
-      "id": "7379380442656866304"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/manoj-kuamr-majumder-3b15b823_iiitnr-semiconductor-ideathon-activity-7377912711810113536-wBPn",
-      "title": "We had the privilege to meet the Chief Minister of Chhattisgarh at his official residence on September 25, 2025 for an official invitation as Chief…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEdXv5TlbpvaQ/feedshare-shrink_800/B4DZmOceheJcAg-/0/1759031462994?e=2147483647&v=beta&t=zHYTQiU2VeMEhD-CBeBImUiW3OrmvjdzoexoO2dgAEE",
-      "id": "7377912711810113536"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/prajwal-malsure_bel-defence-activity-7376909876423200769-1RiJ",
-      "title": "Honoured to be felicitated by Bharat Electronics Limited for my contribution to Operation Sindoor. Grateful for the opportunity to gain such…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQF3WIPWyNJaNg/feedshare-shrink_800/B4DZmAMHs7JYAg-/0/1758792368946?e=2147483647&v=beta&t=jXr5_wIYvxTD2e0xBDL-HS0hUGuX8LBestV77lVMOQs",
-      "id": "7376909876423200769"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_bel-has-bagged-five-awards-in-the-public-activity-7377700114615881728-XDuY",
-      "title": "BEL has bagged five awards in the Public Relations Council of India (PRCI) Annual Corporate Collateral Awards - for Customer Service Excellence…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQGh2GO6LULJJg/feedshare-shrink_800/B56ZmLbJqFHUAk-/0/1758980775965?e=2147483647&v=beta&t=0JFhpyNdjTvMlKN_w8xQiURQKPfeLdH0RoP_rn_kVKo",
-      "id": "7377700114615881728"
-    },
-    {
-      "interaction": "Liked by Shubham Anand",
-      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_shs2025-swacchotsav-swacchatahiseva2025-activity-7377603792365801472-e9nK",
-      "title": "As part of the ongoing Swachhata Hi Seva campaign, BEL's Ghaziabad Unit organised a \"Community Awareness Walkathon\". The walkathon aimed at…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQH3YgSPWVihEg/feedshare-shrink_2048_1536/B56ZmKDi2zJ4Aw-/0/1758957811689?e=2147483647&v=beta&t=QIp3eUKb1Mo8QleAZdBsskiBHoiMBgolfvz_S3KG7x4",
-      "id": "7377603792365801472"
-    }
-  ],
-  "linkedin_num_id": "744993125",
-  "banner_image": "https://static.licdn.com/aero-v1/sc/h/5q92mjc5c51bjlwaj3rs9aa82",
+  "followers": 289,
+  "connections": 290,
+  "current_company_company_id": "sharang-shakti-private-limited",
+  "current_company_name": "Sharang Shakti",
+  "location": "Hauz Khas",
+  "input_url": "https://in.linkedin.com/in/shubham-anand-055423252",
+  "linkedin_id": "shubham-anand-055423252",
+  "activity": null,
+  "linkedin_num_id": "1046136449",
+  "banner_image": "https://media.licdn.com/dms/image/v2/D5616AQHZNDOWMqbLkw/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1735013138924?e=2147483647&v=beta&t=SCUV0exhF9rcNKDC-i_kFt2wfb_F8vAyT-YHZrCfprw",
   "honors_and_awards": null,
   "similar_profiles": [],
   "default_avatar": false,
@@ -362,9 +120,9 @@
   "bio_links": [],
   "first_name": "Shubham",
   "last_name": "Anand",
-  "timestamp": "2025-11-26T15:41:51.631Z",
+  "timestamp": "2025-11-28T13:26:34.666Z",
   "input": {
-    "url": "https://in.linkedin.com/in/shubham-anand-3455b6189"
+    "url": "https://in.linkedin.com/in/shubham-anand-055423252"
   },
-  "batch": "2017-2021"
+  "batch": "2025-2029"
 }
