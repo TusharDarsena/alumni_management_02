@@ -1,213 +1,314 @@
 import express from "express";
-import { requireAuth, requireRole } from "../middleware/auth.js";
-import PendingUser from "../models/PendingUser.js";
+import { requireAuth, requireRole, syncRoleToClerk } from "../middleware/clerkAuth.js";
 import User from "../models/User.js";
 import { allowedBranches } from "../config/config.js";
-import { sendMail } from "../utils/mailer.js";
-import { isStrongPassword } from "../controllers/AuthController.js";
-import { generateToken, hashToken } from "../utils/token.js";
-
-const DEFAULT_PASS = process.env.DEFAULT_PASSWORD || "Welcome@123";
-
-const createUserWithEmail = async (userData) => {
-  const { email, username, password, role, phone, branch, isVerified = false } = userData;
-  const isDefaultPassword = !password;
-  const finalPassword = password || DEFAULT_PASS;
-
-  // Create user as unverified. They'll receive a verification link to set their password.
-  const user = await User.create({
-    email,
-    username,
-    password: finalPassword,
-    role,
-    phone,
-    branch,
-    isApproved: true,
-    isVerified: false,
-    mustChangePassword: isDefaultPassword,
-    defaultPassword: isDefaultPassword,
-  });
-
-  // Generate verification token and save its hash
-  const token = generateToken();
-  user.verificationTokenHash = hashToken(token);
-  user.verificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
-  user.verificationLastSentAt = new Date();
-  await user.save();
-
-  const base = process.env.FRONTEND_URL || process.env.APP_URL || "http://localhost:8080";
-  const link = `${base.replace(/\/$/, "")}/verify?token=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}`;
-
-  // Send verification email containing only the link
-  const mailRes = await sendMail({
-    to: email,
-    subject: "Activate your account",
-    text: `Please verify your email and set a password by visiting: ${link}`,
-    html: `<p>Please verify your email and set a password by clicking the link below:</p><p><a href=\"${link}\">Verify and set password</a></p>`,
-  });
-
-  if (!mailRes.ok) {
-    // If mail sending failed, remove the created user to avoid inactive account buildup
-    await User.findByIdAndDelete(user._id);
-    throw new Error("Failed to send welcome email");
-  }
-
-  return user;
-};
+import {
+  getAllowedDomains,
+  addAllowedDomain,
+  removeAllowedDomain,
+} from "../utils/domainValidator.js";
 
 const router = express.Router();
 
-// Fetch all pending user requests
+// ==========================================
+// ALLOWED DOMAINS MANAGEMENT
+// ==========================================
+
+/**
+ * GET /api/admin/allowed-domains
+ * Fetch all allowed email domains
+ */
 router.get(
-  "/pending-users",
+  "/allowed-domains",
   requireAuth,
   requireRole("admin"),
   async (_req, res) => {
     try {
-      const pending = await PendingUser.find({ status: "pending" })
-        .sort({ createdAt: -1 })
-        .select("email username role status createdAt");
-      res.json({ success: true, data: pending });
+      const domains = await getAllowedDomains();
+      res.json({ success: true, data: domains });
     } catch (err) {
-      console.error("Fetch pending users error", err);
+      console.error("Fetch allowed domains error:", err);
       res.status(500).json({ success: false, message: "Server error" });
     }
-  },
+  }
 );
 
-// Approve a pending user
+/**
+ * POST /api/admin/allowed-domains
+ * Add a new allowed email domain
+ */
 router.post(
-  "/approve/:id",
+  "/allowed-domains",
+  requireAuth,
+  requireRole("admin"),
+  async (req, res) => {
+    try {
+      const { domain, description } = req.body || {};
+      
+      if (!domain || typeof domain !== "string") {
+        return res.status(400).json({ success: false, message: "Domain is required" });
+      }
+
+      // Basic domain validation
+      const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]*\.[a-zA-Z]{2,}$/;
+      if (!domainRegex.test(domain.trim())) {
+        return res.status(400).json({ success: false, message: "Invalid domain format" });
+      }
+
+      const newDomain = await addAllowedDomain(
+        domain,
+        req.user.clerkId || req.user._id.toString(),
+        description || ""
+      );
+
+      res.status(201).json({ success: true, data: newDomain });
+    } catch (err) {
+      if (err.message === "Domain already exists") {
+        return res.status(400).json({ success: false, message: err.message });
+      }
+      console.error("Add allowed domain error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  }
+);
+
+/**
+ * DELETE /api/admin/allowed-domains/:id
+ * Remove (deactivate) an allowed domain
+ */
+router.delete(
+  "/allowed-domains/:id",
   requireAuth,
   requireRole("admin"),
   async (req, res) => {
     try {
       const { id } = req.params;
-      const pending = await PendingUser.findById(id);
-      if (!pending || pending.status !== "pending") {
-        return res.status(404).json({ success: false, message: "Pending user not found" });
+      const success = await removeAllowedDomain(id);
+      
+      if (!success) {
+        return res.status(404).json({ success: false, message: "Domain not found" });
       }
 
-      const exists = await User.findOne({ email: pending.email });
-      if (exists) {
-        // Cleanup duplicate pending
-        await PendingUser.findByIdAndDelete(id);
-        return res.status(400).json({ success: false, message: "User already exists" });
+      res.json({ success: true, message: "Domain removed" });
+    } catch (err) {
+      console.error("Remove allowed domain error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  }
+);
+
+// ==========================================
+// USER MANAGEMENT
+// ==========================================
+
+/**
+ * GET /api/admin/users
+ * Fetch all users with optional filtering
+ */
+router.get(
+  "/users",
+  requireAuth,
+  requireRole("admin"),
+  async (req, res) => {
+    try {
+      const { role, search, page = 1, limit = 50 } = req.query;
+      
+      const query = {};
+      if (role) query.role = role;
+      if (search) {
+        query.$or = [
+          { email: { $regex: search, $options: "i" } },
+          { username: { $regex: search, $options: "i" } },
+        ];
       }
 
-      if (pending.phone) {
-        const phoneExists =
-          (await User.findOne({ phone: pending.phone })) ||
-          (await PendingUser.findOne({ phone: pending.phone, _id: { $ne: id } }));
-        if (phoneExists) {
-          return res.status(400).json({ success: false, message: "Phone number already in use" });
-        }
-      }
+      const skip = (parseInt(page) - 1) * parseInt(limit);
+      
+      const [users, total] = await Promise.all([
+        User.find(query)
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(parseInt(limit))
+          .select("-__v"),
+        User.countDocuments(query),
+      ]);
 
-      const allBranches = Object.values(allowedBranches).flatMap(d => d.branches);
-      if (pending.branch && !allBranches.includes(pending.branch)) {
-        return res.status(400).json({ success: false, message: "Invalid branch" });
-      }
-
-      // Create user with email verification link
-      const user = await createUserWithEmail({
-        email: pending.email,
-        username: pending.username,
-        password: pending.password || undefined,
-        role: pending.role,
-        phone: pending.phone,
-        branch: pending.branch,
-        isVerified: Boolean(pending.isVerified),
-      });
-
-      await PendingUser.findByIdAndDelete(id);
-
-      return res.json({
+      res.json({
         success: true,
-        message: "User approved — verification email sent",
-        user: {
-          id: user._id,
-          email: user.email,
-          username: user.username,
-          role: user.role,
+        data: users,
+        pagination: {
+          page: parseInt(page),
+          limit: parseInt(limit),
+          total,
+          pages: Math.ceil(total / parseInt(limit)),
         },
       });
     } catch (err) {
-      console.error("Approve user error", err);
-      if (err.message === "Failed to send welcome email") {
-        return res.status(400).json({ success: false, message: "Failed to send welcome email; user not created" });
-      }
-      return res.status(500).json({ success: false, message: "Server error" });
+      console.error("Fetch users error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
     }
-  },
+  }
 );
 
-// Reject a pending user
-router.post(
-  "/reject/:id",
+/**
+ * GET /api/admin/users/:id
+ * Get single user details
+ */
+router.get(
+  "/users/:id",
   requireAuth,
   requireRole("admin"),
   async (req, res) => {
     try {
-      const { id } = req.params;
-      const removed = await PendingUser.findByIdAndDelete(id);
-      if (!removed) {
-        return res.status(404).json({ success: false, message: "Pending user not found" });
+      const user = await User.findById(req.params.id).select("-__v");
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
       }
-      return res.json({ success: true, message: "User request rejected" });
+      res.json({ success: true, data: user });
     } catch (err) {
-      console.error("Reject user error", err);
-      return res.status(500).json({ success: false, message: "Server error" });
+      console.error("Fetch user error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
     }
-  },
+  }
 );
 
-// Admin: add user directly
-router.post(
-  "/add-user",
+/**
+ * PATCH /api/admin/users/:id
+ * Update user (role, approval status, etc.)
+ */
+router.patch(
+  "/users/:id",
   requireAuth,
   requireRole("admin"),
   async (req, res) => {
     try {
-      const { email, username, password, role, phone, branch } = req.body || {};
-      if (!email || !username || !role || !phone || !branch) {
-        return res.status(400).json({ success: false, message: "Missing required fields" });
+      const { role, isApproved, phone, branch, location } = req.body || {};
+      const user = await User.findById(req.params.id);
+      
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
       }
-      const allBranches = Object.values(allowedBranches).flatMap(d => d.branches);
-      if (!allBranches.includes(branch)) {
-        return res.status(400).json({ success: false, message: "Invalid branch" });
+
+      // Update fields
+      if (role && ["student", "faculty", "alumni", "admin"].includes(role)) {
+        user.role = role;
+        // Sync role to Clerk if user has clerkId
+        if (user.clerkId) {
+          await syncRoleToClerk(user.clerkId, role);
+        }
+      }
+      
+      if (typeof isApproved === "boolean") {
+        user.isApproved = isApproved;
+      }
+      
+      if (phone !== undefined) {
+        // Check for duplicate phone
+        if (phone) {
+          const phoneExists = await User.findOne({ 
+            phone, 
+            _id: { $ne: user._id } 
+          });
+          if (phoneExists) {
+            return res.status(400).json({ success: false, message: "Phone number already in use" });
+          }
+        }
+        user.phone = phone;
+      }
+      
+      if (branch !== undefined) {
+        const allBranches = Object.values(allowedBranches).flatMap(d => d.branches);
+        if (branch && !allBranches.includes(branch)) {
+          return res.status(400).json({ success: false, message: "Invalid branch" });
+        }
+        user.branch = branch;
+      }
+      
+      if (location !== undefined) {
+        user.location = location;
+      }
+
+      await user.save();
+
+      res.json({ success: true, data: user });
+    } catch (err) {
+      console.error("Update user error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
     }
+  }
+);
 
-      if (password && !isStrongPassword(password)) {
-        return res.status(400).json({ success: false, message: "Password must be strong (8+ chars, upper, lower, digit, special)" });
+/**
+ * DELETE /api/admin/users/:id
+ * Delete a user
+ */
+router.delete(
+  "/users/:id",
+  requireAuth,
+  requireRole("admin"),
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
       }
 
-      const normalizedEmail = email.toLowerCase();
-      const exists = await User.findOne({ email: normalizedEmail });
-      if (exists) return res.status(400).json({ success: false, message: "User already exists" });
+      // Don't allow deleting self
+      if (user._id.toString() === req.user._id.toString()) {
+        return res.status(400).json({ success: false, message: "Cannot delete your own account" });
+      }
 
-      const phoneExists = (await User.findOne({ phone })) || (await PendingUser.findOne({ phone }));
-      if (phoneExists) return res.status(400).json({ success: false, message: "Phone number already in use" });
+      await User.findByIdAndDelete(req.params.id);
 
-      // Create user with email verification
-      const user = await createUserWithEmail({
-        email: normalizedEmail,
-        username,
-        password,
-        role,
-        phone,
-        branch,
+      res.json({ success: true, message: "User deleted" });
+    } catch (err) {
+      console.error("Delete user error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  }
+);
+
+/**
+ * GET /api/admin/stats
+ * Get admin dashboard statistics
+ */
+router.get(
+  "/stats",
+  requireAuth,
+  requireRole("admin"),
+  async (_req, res) => {
+    try {
+      const [totalUsers, roleStats, recentUsers] = await Promise.all([
+        User.countDocuments(),
+        User.aggregate([
+          { $group: { _id: "$role", count: { $sum: 1 } } },
+        ]),
+        User.find()
+          .sort({ createdAt: -1 })
+          .limit(5)
+          .select("email username role createdAt"),
+      ]);
+
+      const domains = await getAllowedDomains();
+
+      res.json({
+        success: true,
+        data: {
+          totalUsers,
+          roleStats: roleStats.reduce((acc, r) => {
+            acc[r._id] = r.count;
+            return acc;
+          }, {}),
+          recentUsers,
+          allowedDomainsCount: domains.length,
+        },
       });
-
-      return res.json({ success: true, message: "User created inactive — verification email sent", user: { id: user._id, email: user.email } });
     } catch (err) {
-      console.error("Add user error", err);
-      if (err.message === "Failed to send welcome email") {
-        return res.status(400).json({ success: false, message: "Invalid email entered. User not created." });
-      }
-      return res.status(500).json({ success: false, message: "Server error" });
+      console.error("Fetch admin stats error:", err);
+      res.status(500).json({ success: false, message: "Server error" });
     }
-  },
+  }
 );
 
 export default router;

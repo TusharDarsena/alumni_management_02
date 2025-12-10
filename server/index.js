@@ -4,14 +4,15 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
-import authRoute from "./routes/AuthRoute.js";
+import { clerkMiddleware } from "@clerk/express";
 import { jobListingsRouter } from "./routes/jobListings.js";
 import { jobApplicationsRouter } from "./routes/jobApplications.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
-
+import clerkWebhooks from "./routes/clerkWebhooks.js";
 import scrapingRoutes from './routes/scraping.js';
+import { seedInitialDomain } from "./utils/domainValidator.js";
 
 
 dotenv.config();
@@ -19,9 +20,22 @@ dotenv.config();
 export function createServer() {
   const app = express();
 
+  // Clerk webhook route MUST be before express.json() middleware
+  // because it needs raw body for signature verification
+  app.use("/api/webhooks/clerk", clerkWebhooks);
+
   // Middlewares
   app.use(express.json());
   app.use(cookieParser());
+
+  // Clerk middleware - adds auth to all requests
+  // Requires CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY env vars
+  if (process.env.CLERK_SECRET_KEY && process.env.CLERK_PUBLISHABLE_KEY) {
+    app.use(clerkMiddleware());
+  } else {
+    console.warn("Clerk keys not configured. Authentication will not work.");
+    console.warn("Set CLERK_SECRET_KEY and CLERK_PUBLISHABLE_KEY in your .env file.");
+  }
 
   app.use(
     cors({
@@ -51,7 +65,11 @@ export function createServer() {
   if (uri && mongoose.connection.readyState === 0) {
     mongoose
       .connect(uri)
-      .then(() => console.log("MongoDB connected"))
+      .then(async () => {
+        console.log("MongoDB connected");
+        // Seed initial allowed domain if needed
+        await seedInitialDomain();
+      })
       .catch((err) => console.error("MongoDB connection error:", err));
   }
 
@@ -69,14 +87,11 @@ export function createServer() {
         uriPresent,
         readyState: mongoState,
       },
-      jwtSecretPresent: Boolean(process.env.JWT_SECRET),
+      clerkConfigured: Boolean(process.env.CLERK_SECRET_KEY),
       clientOrigin: process.env.CLIENT_ORIGIN ?? null,
       portDefault: process.env.PORT ?? 8080,
     });
   });
-
-  // Routes
-  app.use("/api/auth", authRoute);
 
   // Protected portal and admin routes
   app.use("/api/portal", portalRoutes);

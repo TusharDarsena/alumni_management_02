@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
 import { allowedBranches } from "../config/config.js";
 
-
-
 const userSchema = new mongoose.Schema({
+  // Clerk integration
+  clerkId: {
+    type: String,
+    unique: true,
+    sparse: true, // Allow null values, only enforce uniqueness when set
+    index: true,
+  },
   email: {
     type: String,
     required: true,
@@ -13,51 +17,34 @@ const userSchema = new mongoose.Schema({
     trim: true,
   },
   username: { type: String, required: true, trim: true },
-  password: { type: String, required: true },
   role: {
     type: String,
     enum: ["student", "faculty", "alumni", "admin"],
-    default: "student",
+    default: "alumni",
   },
   isApproved: { type: Boolean, default: true },
-  isVerified: { type: Boolean, default: false },
-  mustChangePassword: { type: Boolean, default: false },
-  defaultPassword: { type: Boolean, default: false },
-  resetOtpHash: String,
-  resetOtpExpiry: Date,
-  // OTP fields
-  otp: String,
-  otpExpiresAt: Date,
-  otpAttempts: { type: Number, default: 0 },
-  otpLockedUntil: Date,
-  lastOtpSentAt: Date,
-  // Email verification token fields
-  verificationTokenHash: { type: String, default: null },
-  verificationExpires: { type: Date, default: null },
-  verificationLastSentAt: { type: Date, default: null },
   // Phone and branch
-  phone: { type: String, unique: true, required: true, trim: true },
-  branch: { type: String, enum: Object.values(allowedBranches).flatMap(d => d.branches), required: true },
+  phone: { type: String, unique: true, sparse: true, trim: true },
+  branch: { 
+    type: String, 
+    enum: [...Object.values(allowedBranches).flatMap(d => d.branches), ""], 
+    default: "CSE",
+  },
   location: { type: String, trim: true },
-  // Token invalidation
-  tokenVersion: { type: Number, default: 0 },
+  // Avatar URL from Clerk
+  avatarUrl: { type: String, trim: true },
   createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
-// TTL index for otpExpiresAt to allow automatic expiry
-userSchema.index({ otpExpiresAt: 1 }, { expireAfterSeconds: 0 });
-
-// Hash password before save
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  const salt = await bcrypt.genSalt(12);
-  this.password = await bcrypt.hash(this.password, salt);
+// Update the updatedAt field on save
+userSchema.pre("save", function (next) {
+  this.updatedAt = new Date();
   next();
 });
 
-// Compare password
-userSchema.methods.comparePassword = function (candidate) {
-  return bcrypt.compare(candidate, this.password);
-};
+// Index for common queries
+userSchema.index({ email: 1 });
+userSchema.index({ role: 1, isApproved: 1 });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

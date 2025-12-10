@@ -3,7 +3,7 @@ import { z } from "zod";
 import { zParse } from "../utils/zParse.js";
 // `@prisma/client` may export a default interop object depending on installation and Node resolution.
 // Use a safe default import and extract `PrismaClient` so both ESM/CJS shapes work.
-import { requireAuth } from "../middleware/auth.js";
+import { requireAuth } from "../middleware/clerkAuth.js";
 import User from "../models/User.js";
 
 // Lazily load Prisma client at runtime. If the generated client is not present

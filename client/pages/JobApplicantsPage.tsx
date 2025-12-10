@@ -5,7 +5,7 @@ import { JobListing } from "@/features/job-listing";
 import { JobApplicantsList } from "@/features/job-listing/components/JobApplicantsList";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserSummary } from "@/components/DashboardLayout";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useClerkAuth";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";

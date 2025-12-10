@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useFavorites } from "@/hooks/useFavorites";
-import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { useAuth } from "@/hooks/useClerkAuth";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 async function fetchAlumniProfile(id: string) {

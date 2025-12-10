@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED UserSummary
-import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { useAuth } from "@/hooks/useClerkAuth";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 export default function MyJobListingsPage() {

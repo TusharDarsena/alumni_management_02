@@ -6,8 +6,9 @@ import ProfileSettingsModal, {
   type ModalInitialTab,
   type ProfileUser,
 } from "@/components/ProfileSettingsModal";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useClerkAuth";
 import { useTheme } from "@/context/ThemeContext";
+import { UserButton } from "@clerk/clerk-react";
 
 export interface UserSummary {
   name: string;
@@ -38,7 +39,7 @@ export default function DashboardLayout({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalInitialTab, setModalInitialTab] =
     useState<ModalInitialTab>("profile");
-  const { logout, refresh } = useAuth();
+  const { signOut, refresh } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   // Refs for click-outside detection
@@ -206,12 +207,12 @@ export default function DashboardLayout({
                       onClick={async () => {
                         setProfileOpen(false);
                         try {
-                          await logout();
+                          await signOut();
                         } catch (e) {
                           // ignore
                         }
                         // hard redirect to avoid bfcache
-                        window.location.replace("/login");
+                        window.location.replace("/");
                       }}
                       className={cn(
                         "w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-slate-50",

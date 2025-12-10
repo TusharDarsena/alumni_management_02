@@ -7,7 +7,7 @@ import { useFavorites } from "@/hooks/useFavorites";
 import AutocompleteSearch from "@/components/AutocompleteSearch";
 import AlumniFilterBar from "@/components/AlumniFilterBar";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { useAuth } from "@/hooks/useClerkAuth";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 interface AlumniFilters {

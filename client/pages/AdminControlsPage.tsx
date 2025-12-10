@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import DashboardLayout from "@/components/DashboardLayout";
-import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED UserSummary
+import { type UserSummary } from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import PendingUsersTable from "@/components/PendingUsersTable";
+import AllowedDomainsManager from "@/components/AllowedDomainsManager";
 import { useToast } from "@/hooks/use-toast";
 import ImportUpload from "@/components/ImportUpload";
 import SingleProfileScraper from "@/components/SingleProfileScraper";
-import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
-import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
+import { useAuth } from "@/hooks/useClerkAuth";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 interface NewUser {
   name: string;
@@ -45,7 +45,7 @@ export default function AdminControlsPage() {
     photo: null,
   });
 
-  const [mode, setMode] = useState<"add" | "requests">("add");
+  const [mode, setMode] = useState<"add" | "domains">("add");
   const { toast } = useToast();
 
   const handleChange = (key: keyof NewUser, value: string | File | null) => {
@@ -145,7 +145,7 @@ export default function AdminControlsPage() {
 
       <div className="mt-6 flex items-center justify-between">
         <h2 className="text-xl font-semibold">
-          {mode === "add" ? "Add User" : "Requests"}
+          {mode === "add" ? "Add User" : "Allowed Domains"}
         </h2>
         <div className="flex items-center gap-3">
           <Button
@@ -155,10 +155,10 @@ export default function AdminControlsPage() {
             Add User
           </Button>
           <Button
-            variant={mode === "requests" ? "secondary" : "ghost"}
-            onClick={() => setMode("requests")}
+            variant={mode === "domains" ? "secondary" : "ghost"}
+            onClick={() => setMode("domains")}
           >
-            Requests
+            Domains
           </Button>
         </div>
       </div>
@@ -293,7 +293,7 @@ export default function AdminControlsPage() {
           </CardContent>
         </Card>
       ) : (
-        <PendingUsersTable />
+        <AllowedDomainsManager />
       )}
     </DashboardLayout>
   );

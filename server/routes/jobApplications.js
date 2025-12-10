@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { zParse } from "../utils/zParse.js";
-import { requireAuth } from "../middleware/auth.js";
+import { requireAuth } from "../middleware/clerkAuth.js";
 import User from "../models/User.js";
 import AlumniProfile from "../models/AlumniProfile.js";
 

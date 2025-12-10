@@ -5,7 +5,7 @@ import { type UserSummary } from "@/components/DashboardLayout"; // ✅ IMPORTED
 import AlumniCard from "@/components/AlumniCard";
 import { Input } from "@/components/ui/input";
 import { useFavorites } from "@/hooks/useFavorites";
-import { useAuth } from "@/context/AuthContext"; // ✅ IMPORTED useAuth
+import { useAuth } from "@/hooks/useClerkAuth";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ IMPORTED LoadingSpinner
 
 export default function SearchFavouritesPage() {

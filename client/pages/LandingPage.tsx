@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Plus, Minus } from "lucide-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -15,12 +16,26 @@ export default function LandingPage() {
           <div className="w-[100px] h-[100px] rounded-full bg-gray-200 flex items-center justify-center">
             <div className="w-16 h-16 rounded-full bg-gray-300"></div>
           </div>
-          <Button
-            onClick={() => navigate("/login")}
-            className="bg-black text-white px-8 py-3 text-base font-semibold hover:bg-gray-800"
-          >
-            SIGN IN
-          </Button>
+          <div className="flex items-center gap-4">
+            <SignedOut>
+              <Button
+                onClick={() => navigate("/sign-in")}
+                className="bg-black text-white px-8 py-3 text-base font-semibold hover:bg-gray-800"
+              >
+                SIGN IN
+              </Button>
+            </SignedOut>
+            <SignedIn>
+              <Button
+                onClick={() => navigate("/dashboard")}
+                variant="outline"
+                className="px-8 py-3 text-base font-semibold"
+              >
+                Dashboard
+              </Button>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+          </div>
         </div>
       </header>
 
@@ -31,12 +46,22 @@ export default function LandingPage() {
             <h1 className="text-5xl font-semibold text-[#262626] leading-tight mb-10" style={{ fontFamily: 'Poppins, sans-serif' }}>
               The only Alumni Management Cell of IIIT Naya Raipur
             </h1>
-            <Button
-              onClick={() => navigate("/signup")}
-              className="bg-black text-white px-8 py-4 text-xl font-semibold hover:bg-gray-800"
-            >
-              Register
-            </Button>
+            <SignedOut>
+              <Button
+                onClick={() => navigate("/sign-up")}
+                className="bg-black text-white px-8 py-4 text-xl font-semibold hover:bg-gray-800"
+              >
+                Register
+              </Button>
+            </SignedOut>
+            <SignedIn>
+              <Button
+                onClick={() => navigate("/dashboard")}
+                className="bg-black text-white px-8 py-4 text-xl font-semibold hover:bg-gray-800"
+              >
+                Go to Dashboard
+              </Button>
+            </SignedIn>
           </div>
         </div>
         <div className="flex-1">

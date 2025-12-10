@@ -11,7 +11,7 @@ import JobListingFilterForm from "@/features/job-listing/components/JobListingFi
 import { useJobListingFilterForm } from "@/features/job-listing";
 import DashboardLayout from "@/components/DashboardLayout";
 import { type UserSummary } from "@/components/DashboardLayout"; // ✅ Added UserSummary type
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useClerkAuth";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   AlertDialog,

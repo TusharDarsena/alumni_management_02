@@ -35,7 +35,7 @@ export const seedUsers = async (skipStudentsAndAdmin = false) => {
     // Connect to MongoDB if not already connected
     if (mongoose.connection.readyState === 0) {
       console.log('Connecting to MongoDB...');
-      await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser:true, useUnifiedTopology:true });
+      await mongoose.connect(process.env.MONGO_URI);
       console.log('✅ MongoDB connected for seeding\n');
     }
 
@@ -144,14 +144,18 @@ export const seedUsers = async (skipStudentsAndAdmin = false) => {
 // When run directly from command line
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-seedUsers().then((result) => {
-  console.log('\n========================================');
-  console.log('✅ SEEDING COMPLETED SUCCESSFULLY');
-  console.log(`Total alumni profiles: ${result.count}`);
-  console.log('========================================\n');
-  mongoose.disconnect().then(() => process.exit(0));
-}).catch(err => {
-  console.error('❌ Error during seeding:', err);
-  mongoose.disconnect().then(() => process.exit(1));
-});
+// Check if this file is being run directly (not imported)
+if (process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('seedUser.js')) {
+  seedUsers().then((result) => {
+    console.log('\n========================================');
+    console.log('✅ SEEDING COMPLETED SUCCESSFULLY');
+    console.log(`Total alumni profiles: ${result.count}`);
+    console.log('========================================\n');
+    mongoose.disconnect().then(() => process.exit(0));
+  }).catch(err => {
+    console.error('❌ Error during seeding:', err);
+    mongoose.disconnect().then(() => process.exit(1));
+  });
+}
