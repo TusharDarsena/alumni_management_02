@@ -13,7 +13,8 @@
     {
       "title": "International Institute of Information Technology Naya Raipur",
       "start_year": "2024",
-      "end_year": "2028"
+      "end_year": "2028",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -22,13 +23,15 @@
       "company": "Inquizitive",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQHdp1GsceoJkA/company-logo_100_100/company-logo_100_100/0/1689362338110/inquizitive44_logo?e=2147483647&v=beta&t=uPFkj6HYTPpcGtfQVUqn7cN-wVqEaKu8Un-UTH4I3wA"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
   "batch": null,

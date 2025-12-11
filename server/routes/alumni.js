@@ -112,7 +112,7 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
     const limit = 10;
 
     const cacheKey = `autocomplete:${branch || "all"}:${q.toLowerCase()}`;
-    
+
     // Attempt to read from cache
     const cachedData = await getCached(cacheKey);
     if (cachedData) {
@@ -122,7 +122,7 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
         cached: true,
       });
     }
-    
+
     // Preferred: Atlas Search autocomplete aggregation
     const pipeline = [
       {
@@ -225,22 +225,22 @@ router.get("/", async (req, res) => {
 
     const pipeline = [];
 
-// --- AFTER (Correct) ---
-if (search && String(search).trim() !== "") {
-  pipeline.push({
-    $search: {
-      index: "default", // Uses your main search index
-      text: {
-        query: String(search),
-        // Searches across all important fields at once
-        path: ["name", "position", "current_company.name", "location"],
-        fuzzy: {
-          maxEdits: 1, // Allows for one typo
+    // --- AFTER (Correct) ---
+    if (search && String(search).trim() !== "") {
+      pipeline.push({
+        $search: {
+          index: "default", // Uses your main search index
+          text: {
+            query: String(search),
+            // Searches across all important fields at once
+            path: ["name", "position", "current_company.name", "location"],
+            fuzzy: {
+              maxEdits: 1, // Allows for one typo
+            },
+          },
         },
-      },
-    },
-  });
-}
+      });
+    }
 
     const match = {};
     if (branch) match.branch = String(branch);
@@ -336,7 +336,7 @@ router.get("/:id", async (req, res) => {
 
     const doc = await AlumniProfile.findOne({ id })
       .select(
-        "id name about avatar position current_company experience education batch branch graduationYear updatedAt",
+        "id name about avatar position current_company experience education batch branch graduationYear updatedAt honors_and_awards url input_url",
       )
       .lean();
 

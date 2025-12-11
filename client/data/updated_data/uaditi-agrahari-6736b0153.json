@@ -13,7 +13,8 @@
     {
       "title": "IIIT Naya Raipur",
       "start_year": "2017",
-      "end_year": "2021"
+      "end_year": "2021",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -22,28 +23,27 @@
       "company": "Microsoft",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQH32RJQCl3dDQ/company-logo_100_100/B56ZYQ0mrGGoAU-/0/1744038948046/microsoft_logo?e=2147483647&v=beta&t=rr_7_bFRKp6umQxIHErPOZHtR8dMPIYeTjlKFdotJBY"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQHQlMSi8l6reA/company-logo_100_100/company-logo_100_100/0/1631340427369?e=2147483647&v=beta&t=crNRuEDwB6KLjHP3pSZfbYWa1y8-rhGyMTHIkBT59yc"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-<<<<<<< HEAD
-  "url": "https://sa.linkedin.com/in/aditi-agrahari-6736b0153",
-=======
   "url": "https://uk.linkedin.com/in/Aditi-agrahari-6736b0153",
->>>>>>> e293a4c27dd16c74259926e08be0701b17f85290
   "linkedin_id": "aditi-agrahari-6736b0153"
 }

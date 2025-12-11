@@ -12,7 +12,8 @@
     {
       "title": "IIIT Naya Raipur",
       "start_year": "2017",
-      "end_year": "2022"
+      "end_year": "2022",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -21,16 +22,13 @@
       "company": "IIIT Naya Raipur",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2022",
-<<<<<<< HEAD
-  "url": "https://ar.linkedin.com/in/vishwastoppo",
-=======
   "url": "https://nl.linkedin.com/in/Vishwastoppo",
->>>>>>> e293a4c27dd16c74259926e08be0701b17f85290
   "linkedin_id": "vishwastoppo"
 }

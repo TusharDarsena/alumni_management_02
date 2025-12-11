@@ -126,6 +126,7 @@ export default function AlumniProfilePage() {
           field: e.field || undefined,
           start_year: e.start_year || undefined,
           end_year: e.end_year || undefined,
+          logoUrl: e.institute_logo_url || undefined,
         }))
         : [],
       experience: Array.isArray(d.experience)
@@ -136,6 +137,7 @@ export default function AlumniProfilePage() {
           start_date: e.start_date || undefined,
           end_date: e.end_date || (e.end_date === "Present" ? "Present" : undefined),
           duration: e.duration || undefined,
+          company_logo_url: e.company_logo_url || undefined,
         }))
         : [],
       position: d.position || d.current_company?.title || undefined,

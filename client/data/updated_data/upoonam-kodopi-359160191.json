@@ -12,7 +12,8 @@
     {
       "title": "International Institute of Information Technology Naya Raipur,India",
       "start_year": "2017",
-      "end_year": "2021"
+      "end_year": "2021",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -21,7 +22,8 @@
       "company": "International Institute of Information Technology Naya Raipur,India",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": null
     }
   ],
   "batch": null,

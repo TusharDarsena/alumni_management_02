@@ -13,15 +13,18 @@
     {
       "title": "International Institute of Information Technology, Naya Raipur",
       "start_year": "2017",
-      "end_year": "2021"
+      "end_year": "2021",
+      "institute_logo_url": null
     },
     {
       "start_year": "2016",
-      "end_year": "2017"
+      "end_year": "2017",
+      "institute_logo_url": null
     },
     {
       "start_year": "2014",
-      "end_year": "2015"
+      "end_year": "2015",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -30,31 +33,36 @@
       "company": "Intel Corporation",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGpvWtEtj9oTQ/company-logo_100_100/company-logo_100_100/0/1630663244736/intel_corporation_logo?e=2147483647&v=beta&t=ossYk2TZYS8UvUN3s4WS7ZaXqgKph-ue7DFGNXO4-0U"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQF44VAW2ygFJQ/company-logo_100_100/company-logo_100_100/0/1729158400860/lt_technology_services_limited_logo?e=2147483647&v=beta&t=tJgB-csuFJ-smAdeR08b9didgNs_DAOYlXp-NP4jgnA"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQH2nyLQLodbbg/company-logo_100_100/company-logo_100_100/0/1630644414960/utopia_inc_logo?e=2147483647&v=beta&t=CcpcXDIe3LthhLTz0U4MGh_up1elUWiPyEZEaWlAPTo"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
   "batch": null,

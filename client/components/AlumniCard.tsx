@@ -1,7 +1,5 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Heart, ArrowRight } from "lucide-react";
 import { extractBatch, extractBranch, extractCurrentCompany } from "@shared/alumniUtils";
 
 export interface AlumniItem {
@@ -41,15 +39,16 @@ interface AlumniCardProps {
   isFavourite?: boolean;
   onViewProfile?: (id: string) => void;
   onToggleFavourite?: (id: string) => void;
-  // compatibility with older usage
   onClick?: (id: string) => void;
 }
 
 export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile, onToggleFavourite, onClick }: AlumniCardProps) {
-  // Extract batch, branch, and company from education/experience arrays
   const batch = alumnus.batch || extractBatch(alumnus.education);
   const branch = alumnus.branch || extractBranch(alumnus.education);
   const currentCompanyName = extractCurrentCompany(alumnus.current_company, alumnus.experience);
+
+  // Get current role/title
+  const currentRole = alumnus.position || alumnus.experience?.[0]?.title;
 
   const handleView = () => {
     onViewProfile?.(alumnus.id);
@@ -61,50 +60,98 @@ export default function AlumniCard({ alumnus, isFavourite = false, onViewProfile
     onToggleFavourite?.(alumnus.id);
   };
 
-  // Build subtitle with batch, branch, and current company
-  const subtitleParts: string[] = [];
-  
-  if (batch && batch !== "N/A" && batch !== "") {
-    subtitleParts.push(`Batch: ${batch}`);
-  }
-  
-  if (branch && branch !== "N/A" && branch !== "") {
-    subtitleParts.push(`Branch: ${branch}`);
-  }
-  
-  if (currentCompanyName && currentCompanyName !== "N/A" && currentCompanyName !== "") {
-    subtitleParts.push(`${currentCompanyName}`);
-  }
-  
-  const subtitle = subtitleParts.length > 0 
-    ? subtitleParts.join(" | ") 
-    : "Information not available";
+  // Get initials for avatar fallback
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
-    <Card className="rounded-lg overflow-hidden hover:shadow-xl transition-shadow cursor-default">
-      
-      <CardContent className="pt-6 text-center">
-        <div className="mx-auto h-16 w-16 rounded-full bg-white p-0.5 overflow-hidden border-2 border-white">
-          {alumnus.avatar ? (
-            <img src={alumnus.avatar} alt={alumnus.name} className="h-full w-full object-cover rounded-full" />
-          ) : (
-            <div className="h-full w-full bg-slate-200 rounded-full flex items-center justify-center text-gray-500">
-              <span>No Image</span>
+    <div
+      className="group relative bg-card rounded-xl border border-border/50 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden cursor-pointer"
+      onClick={handleView}
+    >
+      {/* Ghost heart button - top right */}
+      <button
+        onClick={handleToggle}
+        aria-label="Toggle favourite"
+        className={`absolute top-2.5 right-2.5 z-10 p-1.5 rounded-full transition-all duration-150 ${isFavourite
+            ? "text-red-500 bg-red-500/10"
+            : "text-muted-foreground/50 hover:text-red-500 hover:bg-red-500/10"
+          }`}
+      >
+        <Heart className={`h-4 w-4 ${isFavourite ? "fill-current" : ""}`} />
+      </button>
+
+      <div className="p-4">
+        {/* Avatar + Name/Role block */}
+        <div className="flex items-start gap-3 mb-3">
+          {/* Avatar */}
+          <div className="flex-shrink-0">
+            <div className="h-12 w-12 rounded-full bg-muted overflow-hidden ring-2 ring-border/30">
+              {alumnus.avatar ? (
+                <img
+                  src={alumnus.avatar}
+                  alt={alumnus.name}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                  <span className="text-sm font-semibold text-primary">
+                    {getInitials(alumnus.name || "NA")}
+                  </span>
+                </div>
+              )}
             </div>
+          </div>
+
+          {/* Name + Role */}
+          <div className="flex-1 min-w-0 pt-0.5">
+            <h3 className="font-semibold text-foreground text-sm leading-tight truncate group-hover:text-primary transition-colors">
+              {alumnus.name || "Name not available"}
+            </h3>
+            {(currentRole || currentCompanyName) && (
+              <p className="text-xs text-muted-foreground mt-0.5 truncate">
+                {currentRole && currentRole !== "N/A" ? currentRole : ""}
+                {currentRole && currentCompanyName && currentCompanyName !== "N/A" ? " · " : ""}
+                {currentCompanyName && currentCompanyName !== "N/A" ? currentCompanyName : ""}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Pill badges row */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {batch && batch !== "N/A" && batch !== "" && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-700 dark:text-amber-400">
+              {batch}
+            </span>
+          )}
+          {branch && branch !== "N/A" && branch !== "" && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-teal-500/10 text-teal-700 dark:text-teal-400">
+              {branch}
+            </span>
+          )}
+          {currentCompanyName && currentCompanyName !== "N/A" && currentCompanyName !== "" && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-500/10 text-slate-600 dark:text-slate-400 truncate max-w-[120px]">
+              {currentCompanyName}
+            </span>
           )}
         </div>
-        <div className="mt-3 font-semibold text-slate-800">{alumnus.name || "Name not available"}</div>
-        <div className="text-sm text-slate-500">{subtitle}</div>
 
-        <div className="mt-4 flex items-center justify-center gap-3">
-          <Button size="sm" variant="default" onClick={handleView} className="bg-[#3B82F6] text-white hover:bg-[#2563EB]">
-            View Profile
-          </Button>
-          <button onClick={handleToggle} aria-label="Toggle favourite" className="p-2">
-            <Heart className={isFavourite ? "h-5 w-5 text-red-600" : "h-5 w-5 text-slate-500"} />
-          </button>
-        </div>
-      </CardContent>
-    </Card>
+        {/* View Profile link - left aligned, subtle */}
+        <button
+          onClick={handleView}
+          className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+        >
+          View Profile
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
+    </div>
   );
 }

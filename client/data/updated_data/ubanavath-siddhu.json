@@ -13,15 +13,18 @@
     {
       "title": "IIIT-Naya Raipur",
       "start_year": "2018",
-      "end_year": "2022"
+      "end_year": "2022",
+      "institute_logo_url": null
     },
     {
       "start_year": "2016",
-      "end_year": "2018"
+      "end_year": "2018",
+      "institute_logo_url": null
     },
     {
       "start_year": "2011",
-      "end_year": "2016"
+      "end_year": "2016",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -30,25 +33,29 @@
       "company": "Cognizant",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQFZH4svu5BTZA/company-logo_100_100/B4EZk_EfNgHgAU-/0/1757699778309/cognizant_logo?e=2147483647&v=beta&t=pEIgD9-D_EFoL3rsreK0H2EZEcsXWdZSN64-dV7VrSU"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQEKixvpP6uLPA/company-logo_100_100/company-logo_100_100/0/1631405104190/defence_research_and_development_organisation_drdo_logo?e=2147483647&v=beta&t=npvPal_5fDsO6sBnlZbzAa3lHrombTL5SuCENOVFv9E"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
   "batch": "2018",

@@ -3,10 +3,10 @@
  * Transforms raw LinkedIn profile data into structured alumni profiles
  */
 
-import { 
-  extractBatchFromArray, 
+import {
+  extractBatchFromArray,
   extractGraduationYear,
-  extractCurrentCompany 
+  extractCurrentCompany
 } from './alumniHelpers.js';
 
 import { extractBatch, extractBranch, extractGraduationYear as extractGradYear } from '../../shared/alumniUtils.ts';
@@ -18,13 +18,13 @@ import { extractBatch, extractBranch, extractGraduationYear as extractGradYear }
  */
 export function transformAlumniEntry(entry) {
   if (!entry.url) return null;
-  
+
   const name = entry.name || "Unknown";
   const batch = extractBatch(entry.education) || extractBatchFromArray(entry.education);
   const branch = extractBranch(entry.education); // Use the new shared function with config variations
   const graduationYear = extractGradYear(entry.education) || extractGraduationYear(entry.education);
   const current_company = extractCurrentCompany(entry);
-  
+
   return {
     id: entry.id,
     name,
@@ -39,6 +39,7 @@ export function transformAlumniEntry(entry) {
       field: edu.field,
       start_year: edu.start_year,
       end_year: edu.end_year,
+      institute_logo_url: edu.institute_logo_url || null,
     })),
     experience: (entry.experience || []).map(exp => {
       const firstPosition = exp.positions && exp.positions.length > 0 ? exp.positions[0] : null;
@@ -48,6 +49,7 @@ export function transformAlumniEntry(entry) {
         location: exp.location || (firstPosition ? firstPosition.location : null),
         start_date: exp.start_date || (firstPosition ? firstPosition.start_date : null),
         end_date: exp.end_date || (firstPosition ? firstPosition.end_date : null),
+        company_logo_url: exp.company_logo_url || null,
       };
     }),
     batch,
@@ -65,7 +67,7 @@ export function transformAlumniEntry(entry) {
  */
 export function transformAlumniEntries(entries) {
   if (!Array.isArray(entries)) return [];
-  
+
   return entries
     .map(transformAlumniEntry)
     .filter(entry => entry !== null);

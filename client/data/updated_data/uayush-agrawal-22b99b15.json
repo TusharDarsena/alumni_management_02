@@ -16,42 +16,48 @@
       "degree": "Doctor's Degree",
       "field": "Chemical Engineering",
       "start_year": "2009",
-      "end_year": "2016"
+      "end_year": "2016",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHlKBtJ82x7_Q/company-logo_100_100/company-logo_100_100/0/1630652697970/indian_institute_of_science_logo?e=2147483647&v=beta&t=Bloj4lWRvTwTP33DOHAMdMPi8zTrGNAGgh9nupuiNMs"
     },
     {
       "title": "Indian Institute of Science (IISc)",
       "degree": "Doctor's Degree",
       "field": "Chemical Engineering",
       "start_year": "2009",
-      "end_year": "2016"
+      "end_year": "2016",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHlKBtJ82x7_Q/company-logo_100_100/company-logo_100_100/0/1630652697970/indian_institute_of_science_logo?e=2147483647&v=beta&t=Bloj4lWRvTwTP33DOHAMdMPi8zTrGNAGgh9nupuiNMs"
     },
     {
       "title": "Indian Institute of Science",
       "degree": "PhD",
       "field": "Biophysics (Lipid Bilayer System)",
       "start_year": "2009",
-      "end_year": "2016"
+      "end_year": "2016",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHlKBtJ82x7_Q/company-logo_100_100/company-logo_100_100/0/1630652697970/indian_institute_of_science_logo?e=2147483647&v=beta&t=Bloj4lWRvTwTP33DOHAMdMPi8zTrGNAGgh9nupuiNMs"
     },
     {
       "title": "Indian Institute of Science (IISc)",
       "degree": "Master's degree",
       "field": "Chemical Engineering",
       "start_year": "2009",
-      "end_year": "2010"
+      "end_year": "2010",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHlKBtJ82x7_Q/company-logo_100_100/company-logo_100_100/0/1630652697970/indian_institute_of_science_logo?e=2147483647&v=beta&t=Bloj4lWRvTwTP33DOHAMdMPi8zTrGNAGgh9nupuiNMs"
     },
     {
       "title": "National Institute of Technology Raipur",
       "degree": "Bachelor's degree",
       "field": "Chemical Engineering",
       "start_year": "2005",
-      "end_year": "2009"
+      "end_year": "2009",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQEmnf_TbU9v6g/company-logo_100_100/company-logo_100_100/0/1631308631378?e=2147483647&v=beta&t=jS2BWugHicp1XpzoObEJgJUE9VK0CohMIwZZAzDGP-g"
     },
     {
       "title": "National Institute of Technology Raipur",
       "degree": "Bachelor's degree",
       "field": "Chemical Engineering",
       "start_year": "2005",
-      "end_year": "2009"
+      "end_year": "2009",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQEmnf_TbU9v6g/company-logo_100_100/company-logo_100_100/0/1631308631378?e=2147483647&v=beta&t=jS2BWugHicp1XpzoObEJgJUE9VK0CohMIwZZAzDGP-g"
     }
   ],
   "experience": [
@@ -60,21 +66,24 @@
       "company": "Raman Research Institute",
       "location": "Bangalore-560080, India",
       "start_date": "May 2017",
-      "end_date": "Aug 2021"
+      "end_date": "Aug 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQF-CvZTypa7eg/company-logo_100_100/company-logo_100_100/0/1643791352710/raman_research_institute_logo?e=2147483647&v=beta&t=0dsnYtBbsd316ZGfg00DggD8D3hVaD6s-XMLm-GAL70"
     },
     {
       "title": "Research Scholar",
       "company": "Indian Institute of Science",
       "location": "Bengaluru Area, India",
       "start_date": "Aug 2009",
-      "end_date": "Jul 2016"
+      "end_date": "Jul 2016",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHlKBtJ82x7_Q/company-logo_100_100/company-logo_100_100/0/1630652697970/indian_institute_of_science_logo?e=2147483647&v=beta&t=Bloj4lWRvTwTP33DOHAMdMPi8zTrGNAGgh9nupuiNMs"
     },
     {
       "title": "B. Tech",
       "company": "National Institute of Technology, Raipur",
       "location": null,
       "start_date": "Aug 2005",
-      "end_date": "Jul 2009"
+      "end_date": "Jul 2009",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQEmnf_TbU9v6g/company-logo_100_100/company-logo_100_100/0/1631308631378?e=2147483647&v=beta&t=jS2BWugHicp1XpzoObEJgJUE9VK0CohMIwZZAzDGP-g"
     }
   ],
   "batch": null,

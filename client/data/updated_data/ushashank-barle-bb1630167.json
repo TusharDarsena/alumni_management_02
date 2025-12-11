@@ -13,7 +13,8 @@
     {
       "title": "OP Jindal University",
       "start_year": "2017",
-      "end_year": "2021"
+      "end_year": "2021",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -22,19 +23,22 @@
       "company": "Pandrol",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQFIX90Wo4YzYg/company-logo_100_100/company-logo_100_100/0/1631351522934?e=2147483647&v=beta&t=lF8G8ueVALSwcvhgh7jGe6P0yqP8TR3Q4OxZo2dGjlg"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQHDV-O8Ousd0g/company-logo_100_100/B4DZg3IHQFHwAQ-/0/1753271531294/jindalsteel_ltd_logo?e=2147483647&v=beta&t=RVhbPQZNoqf_2A48xH-10llVhGC0BBLwRmwOBzbEPN4"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQG3xbDI4b6TUg/company-logo_100_100/company-logo_100_100/0/1721103758839/op_jindal_university_logo?e=2147483647&v=beta&t=IrzKAQ9rcRrKU8dxiutCtGKm_Gs2IOH6fjBwEtm_yEA"
     }
   ],
   "batch": null,

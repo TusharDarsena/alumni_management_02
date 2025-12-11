@@ -9,7 +9,8 @@ import {
   Linkedin,
   Heart,
   MessageCircle,
-  UserPlus
+  UserPlus,
+  Building2
 } from "lucide-react";
 
 export interface UserProfileData {
@@ -25,6 +26,7 @@ export interface UserProfileData {
     field?: string;
     start_year?: string;
     end_year?: string;
+    logoUrl?: string;
   }>;
   experience?: Array<{
     title?: string;
@@ -33,6 +35,7 @@ export interface UserProfileData {
     start_date?: string;
     end_date?: string;
     duration?: string;
+    company_logo_url?: string;
   }>;
   position?: string;
   about?: string;
@@ -97,38 +100,53 @@ function InfoPill({ children, variant = "default" }: { children: React.ReactNode
   );
 }
 
-// Timeline item component with improved spacing and alignment
+// Timeline item component with logo support
 function TimelineItem({
   title,
   subtitle,
   meta,
   dateRange,
+  logoUrl,
+  fallbackIcon: FallbackIcon = Building2,
   isLast = false
 }: {
   title: string;
   subtitle?: string;
   meta?: string;
   dateRange?: string;
+  logoUrl?: string;
+  fallbackIcon?: React.ElementType;
   isLast?: boolean;
 }) {
   return (
-    <div className="relative flex gap-5 group">
-      {/* Timeline rail */}
-      <div className="flex flex-col items-center pt-1.5">
-        <div className="w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20 z-10 group-hover:ring-primary/40 transition-all" />
-        {!isLast && (
-          <div className="w-0.5 flex-1 mt-2 bg-gradient-to-b from-primary/30 via-primary/20 to-border min-h-[40px]" />
-        )}
+    <div className="relative flex gap-4 group">
+      {/* Logo or fallback icon */}
+      <div className="flex-shrink-0 pt-0.5">
+        <div className="w-10 h-10 rounded-lg bg-muted/50 border border-border/50 overflow-hidden flex items-center justify-center">
+          {logoUrl ? (
+            <img
+              src={logoUrl}
+              alt=""
+              className="w-full h-full object-contain p-1"
+              onError={(e) => {
+                // Hide broken image and show fallback
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.nextElementSibling?.classList.remove('hidden');
+              }}
+            />
+          ) : null}
+          <FallbackIcon className={`w-5 h-5 text-muted-foreground ${logoUrl ? 'hidden' : ''}`} />
+        </div>
       </div>
 
       {/* Content */}
-      <div className={`flex-1 ${isLast ? 'pb-0' : 'pb-6'}`}>
-        <div className="flex flex-col gap-1.5">
+      <div className={`flex-1 min-w-0 ${isLast ? 'pb-0' : 'pb-5'}`}>
+        <div className="flex flex-col gap-0.5">
           {/* Title row with date */}
-          <div className="flex items-start justify-between gap-4">
-            <h4 className="font-semibold text-foreground text-base leading-tight">{title}</h4>
+          <div className="flex items-start justify-between gap-3">
+            <h4 className="font-semibold text-foreground text-sm leading-tight">{title}</h4>
             {dateRange && (
-              <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground whitespace-nowrap bg-muted/80 px-2.5 py-1 rounded-md border border-border/50 flex-shrink-0">
+              <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground whitespace-nowrap bg-muted/60 px-2 py-0.5 rounded border border-border/40 flex-shrink-0">
                 <Calendar className="w-3 h-3" />
                 {dateRange}
               </span>
@@ -136,11 +154,11 @@ function TimelineItem({
           </div>
           {/* Subtitle */}
           {subtitle && (
-            <p className="text-sm font-medium text-primary">{subtitle}</p>
+            <p className="text-sm text-primary/80">{subtitle}</p>
           )}
           {/* Meta info */}
           {meta && (
-            <p className="text-sm text-muted-foreground">{meta}</p>
+            <p className="text-xs text-muted-foreground">{meta}</p>
           )}
         </div>
       </div>
@@ -329,6 +347,8 @@ export default function UserProfile({ data, isFavorite, onToggleFavorite }: User
                       ? `${exp.start_date || "?"} - ${exp.end_date || "Present"}`
                       : undefined
                   }
+                  logoUrl={exp.company_logo_url}
+                  fallbackIcon={Building2}
                   isLast={index === (data.experience?.length ?? 0) - 1}
                 />
               ))}
@@ -353,6 +373,8 @@ export default function UserProfile({ data, isFavorite, onToggleFavorite }: User
                       ? `${edu.start_year || "?"} - ${edu.end_year || "?"}`
                       : undefined
                   }
+                  logoUrl={edu.logoUrl}
+                  fallbackIcon={GraduationCap}
                   isLast={index === (data.education?.length ?? 0) - 1}
                 />
               ))}

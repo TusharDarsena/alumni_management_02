@@ -13,15 +13,18 @@
     {
       "title": "IIIT Naya Raipur",
       "start_year": "2017",
-      "end_year": "2021"
+      "end_year": "2021",
+      "institute_logo_url": null
     },
     {
       "start_year": "2020",
-      "end_year": "2020"
+      "end_year": "2020",
+      "institute_logo_url": null
     },
     {
       "start_year": "2019",
-      "end_year": "2019"
+      "end_year": "2019",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -30,31 +33,36 @@
       "company": "Apra Labs.",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQEQCRJCQmwpww/company-logo_100_100/company-logo_100_100/0/1631301207958?e=2147483647&v=beta&t=0ilJ1hiOEgxNfY70GxppMv6Wna2viuGs8Nm1r7YoXng"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGeN8E4W5rnrQ/company-logo_100_100/company-logo_100_100/0/1667422004502/bytelearn_logo?e=2147483647&v=beta&t=zmue_iamPFnVj9UAlhJmdYG7pKkaEBQYGoSRCDIsBUQ"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGNtpblgQpJoQ/company-logo_100_100/company-logo_100_100/0/1662120928214/deloitte_logo?e=2147483647&v=beta&t=OSF8M5LreT0Sf2F-JcNk6XMT0ArCuPfDmRR-knCC4HY"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHiNYfm0YHKrg/company-logo_100_100/company-logo_100_100/0/1656621848677/udacity_logo?e=2147483647&v=beta&t=rBDM1CPEsOBCa2fb8gqoV3tj_uKoWwlVeElKBui3f6w"
     }
   ],
   "batch": "2017",

@@ -13,15 +13,18 @@
     {
       "title": "Indian Institute of Technology, Kharagpur",
       "start_year": "2009-07",
-      "end_year": "2014-05"
+      "end_year": "2014-05",
+      "institute_logo_url": null
     },
     {
       "start_year": "2007-07",
-      "end_year": "2009-06"
+      "end_year": "2009-06",
+      "institute_logo_url": null
     },
     {
       "start_year": "2001",
-      "end_year": "2005"
+      "end_year": "2005",
+      "institute_logo_url": null
     }
   ],
   "experience": [
@@ -30,25 +33,29 @@
       "company": "National Institute of Technology Raipur",
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQEmnf_TbU9v6g/company-logo_100_100/company-logo_100_100/0/1631308631378?e=2147483647&v=beta&t=jS2BWugHicp1XpzoObEJgJUE9VK0CohMIwZZAzDGP-g"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQE0lxIeTKBTAw/company-logo_100_100/company-logo_100_100/0/1661239083431/indian_institute_of_technology_kharagpur_logo?e=2147483647&v=beta&t=_h6-w6rNruPbgClAH5UKN2HNvMwrBPmOVsCLIM-9SAg"
     },
     {
       "title": null,
       "location": null,
       "start_date": null,
-      "end_date": null
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQE0lxIeTKBTAw/company-logo_100_100/company-logo_100_100/0/1661239083431/indian_institute_of_technology_kharagpur_logo?e=2147483647&v=beta&t=_h6-w6rNruPbgClAH5UKN2HNvMwrBPmOVsCLIM-9SAg"
     }
   ],
   "batch": null,
