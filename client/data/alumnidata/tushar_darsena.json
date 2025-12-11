@@ -1,4 +1,308 @@
 {
-  "snapshot_id": "sd_mi9d42s91js8soe6ey",
-  "message": "Your request is still in progress and cannot be retrieved in this call. Use the provided Snapshot ID to track progress via the Monitor Snapshot endpoint and download it once ready via the Download Snapshot endpoint. More information on https://docs.brightdata.com/api-reference/web-scraper-api/management-apis/monitor-progress"
+  "id": "tushar-darsena-0681701bb",
+  "name": "Tushar Darsena",
+  "city": "Naya Raipur, India",
+  "country_code": "IN",
+  "current_company": {
+    "link": "https://in.linkedin.com/company/technovate_iiitnr?trk=public_profile_topcard-current-company",
+    "name": "Technovate IIIT Naya Raipur",
+    "company_id": "technovate_iiitnr",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "Technovate IIIT Naya Raipur",
+      "description_html": null,
+      "company": "Technovate IIIT Naya Raipur",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQHlbUD6T-pNtw/company-logo_100_100/company-logo_100_100/0/1630586553618/technovate_iiitnr_logo?e=2147483647&v=beta&t=YgVldipN9CRrwfYM51YFTb4ao4sXk1OcMKPhA4JBxaU"
+    },
+    {
+      "description_html": null,
+      "duration": "2024 - 2028",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "description_html": null,
+      "duration": "2020 - 2023",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQFJWBCrV-fjMg/company-logo_100_100/company-logo_100_100/0/1630577490421/delhi_public_school___india_logo?e=2147483647&v=beta&t=bourcohj6hTRSeQVnw5dzmwVQ9UHpYq98pq4g1-sHy0"
+    }
+  ],
+  "url": "https://sg.linkedin.com/in/tushar-darsena-0681701bb",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/ajay-singh-07983628",
+      "name": "Ajay Singh",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/singhtanya89",
+      "name": "Tanya Singh",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/dhanesh-gopalakrishnan-16b02429",
+      "name": "Dhanesh Gopalakrishnan",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/veeravalli",
+      "name": "Veeravalli Satya Sai Babu",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/deepti1",
+      "name": "Deepti Mendiratta",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/samchopra",
+      "name": "Samir Chopra",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://de.linkedin.com/in/riturajtpatil",
+      "name": "Dr. Rituraj Patil",
+      "about": null,
+      "location": "Berlin Metropolitan Area"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/rekhadp",
+      "name": "Rekha D.",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ranjan-sarkar-hr-gcc",
+      "name": "Ranjan Sarkar",
+      "about": null,
+      "location": "Kolkata"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/pratibha-mishra-hr-manager-61543629",
+      "name": "Pratibha Mishra HR Manager",
+      "about": null,
+      "location": "Ahmedabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/anil-kumar-singh-52b17229",
+      "name": "Anil Kumar Singh",
+      "about": null,
+      "location": "Patna"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/mahak-maheshwari-310b8028",
+      "name": "Mahak Maheshwari",
+      "about": null,
+      "location": "Gurugram"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/drshellyahmed",
+      "name": "Dr. Shelly Ahmed (LION)",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ritika-chhetry-0a380128",
+      "name": "Ritika Chhetry",
+      "about": null,
+      "location": "New Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/mathewkunnil",
+      "name": "Mathew George",
+      "about": null,
+      "location": "Chennai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/swapnali-m-236b3b28",
+      "name": "Swapnali M.",
+      "about": null,
+      "location": "Pune"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ivan-d-souza-29400929",
+      "name": "Ivan D'souza",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/msengar",
+      "name": "Mahendra Sengar",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://de.linkedin.com/in/aakashragr",
+      "name": "Aakashkumar Agrawal",
+      "about": null,
+      "location": "Düsseldorf"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ashokbhatotia",
+      "name": "Ashok Bhatotia",
+      "about": null,
+      "location": "Pune"
+    }
+  ],
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "start_year": "2024-08",
+      "end_year": "2028-08",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2020-04",
+      "end_year": "2023-03",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQE1pYjCyh8wkg/profile-displayphoto-scale_200_200/B4DZex95EjGsAY-/0/1751037483662?e=2147483647&v=beta&t=oN8uC8yie_25DjaNhbaZFIlHB0UGssTkxaYtH3ABkHU",
+  "followers": 748,
+  "connections": 500,
+  "current_company_company_id": "technovate_iiitnr",
+  "current_company_name": "Technovate IIIT Naya Raipur",
+  "location": "Naya Raipur",
+  "input_url": "https://www.linkedin.com/in/tushar-darsena-0681701bb",
+  "linkedin_id": "tushar-darsena-0681701bb",
+  "activity": [
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/nishthagoyall_excited-to-share-that-ive-achieved-the-oracle-activity-7390783638352769024-YVXd",
+      "title": "Excited to share that I’ve achieved the Oracle Certified Architect Associate 2025 certification! Each milestone is a reminder that consistent…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFLmRxQO7Pjcg/feedshare-shrink_800/B4DZpFWi9fIAAg-/0/1762100132053?e=2147483647&v=beta&t=trDxhOF64t6VpyxWTRozBJ7ONt8_A0zVkNK1Q6MnlKg",
+      "id": "7390783638352769024"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/perlin-rhooney-b0a877371_genai-rag-healthcareai-activity-7390880327193497600-YIIx",
+      "title": "🚀 Built Clinical AI — a Retrieval-Augmented Generation (RAG)-powered clinical reasoning system that transforms raw medical notes into structured…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQG6_7bcYiAxtw/feedshare-shrink_2048_1536/B4EZpGufOaJ0Aw-/0/1762123183795?e=2147483647&v=beta&t=AyaNv-IpOyb3Kx2HeQc7fLXebURQum2w8Md8QKrnxWg",
+      "id": "7390880327193497600"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/ujjwal-nishad-5b2722253_hackhatch-iiitdelhi-iiitnr-activity-7399003080425385984-8QFA",
+      "title": "𝐏𝐫𝐨𝐮𝐝 𝐭𝐨 𝐛𝐞 𝐢𝐧 𝐭𝐡𝐞 𝐓𝐨𝐩 6 𝐨𝐮𝐭 𝐨𝐟 2500+ 𝐭𝐞𝐚𝐦𝐬 at 𝐈𝐈𝐈𝐓 𝐃𝐞𝐥𝐡𝐢 𝐇𝐚𝐜𝐤𝐚𝐭𝐡𝐨𝐧 (HackHatch) by E-Cell…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQHPBD71OoS1Iw/feedshare-shrink_800/B4DZq6F6zOGwAg-/0/1764059798926?e=2147483647&v=beta&t=wrBrrUTH_0WvvSdyQVBcZ4CctgIpsVVYTaJhQjkU-ko",
+      "id": "7399003080425385984"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/mayank-dixit-cse_github-mayank270906opentender-activity-7392211043910979584-4LNv",
+      "title": "🚀 Introducing OpenTender – A Decentralized Online Tender System built on Stellar using Rust 💻 I recently built a blockchain-based project called…",
+      "img": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFfA2oKGNy07A/articleshare-shrink_800/B4DZpZkBErGQAI-/0/1762439205755?e=2147483647&v=beta&t=yDtih3eJ0lec3fXmIHd1u6A-4Lmkg93RDHZ3QACleX4",
+      "id": "7392211043910979584"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/ayush-rai-48b645376_hackathon-iiitdelhi-hackhatch-activity-7398996524149641216-edtl",
+      "title": "𝐏𝐫𝐨𝐮𝐝 𝐭𝐨 𝐛𝐞 𝐢𝐧 𝐭𝐡𝐞 𝐓𝐨𝐩 6 𝐨𝐮𝐭 𝐨𝐟 2500+ teams at 𝐈𝐈𝐈𝐓 𝐃𝐞𝐥𝐡𝐢 𝐇𝐚𝐜𝐤𝐚𝐭𝐡𝐨𝐧 (𝐇𝐚𝐜𝐤𝐇𝐚𝐭𝐜𝐡) by E-Cell IIITD…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFacGeXD3N0mg/feedshare-shrink_800/B4DZq5ryTYJcAg-/0/1764058185427?e=2147483647&v=beta&t=Dzw-niWUCywnyy_OjRbJ4qyLiokHzHzDRp4ARpsFjKs",
+      "id": "7398996524149641216"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/rounak-chandrakar-13a897244_hackathon-iiitdelhi-hackhatch-activity-7399005652355936256-F1uA",
+      "title": "Thrilled to share that our team secured a 𝘁𝗼𝗽 𝟲 𝗽𝗼𝘀𝗶𝘁𝗶𝗼𝗻 𝗼𝘂𝘁 𝗼𝗳 𝟮𝟱𝟬𝟬+ 𝘁𝗲𝗮𝗺𝘀 𝗮𝘁 𝗛𝗮𝗰𝗸𝗛𝗮𝘁𝗰𝗵, 𝗜𝗜𝗜𝗧…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGmGTEW63K_Ew/feedshare-shrink_800/B56Zq6MPgmIcAg-/0/1764060377452?e=2147483647&v=beta&t=9mA3IBgudBVIxdWpAheWmtg7vrwErtaD1qAQnt_6Ols",
+      "id": "7399005652355936256"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/sumit-kumar-sahoo-772sk1109_hackathon-iiitnayaraipur-ecell-activity-7398949446417408000-0qrt",
+      "title": "𝐏𝐫𝐨𝐮𝐝 𝐭𝐨 𝐛𝐞 𝐢𝐧 𝐭𝐡𝐞 𝐓𝐨𝐩 6 𝐨𝐮𝐭 𝐨𝐟 2500+ 𝐭𝐞𝐚𝐦𝐬 𝐚𝐭 𝐈𝐈𝐈𝐓 𝐃𝐞𝐥𝐡𝐢 𝐇𝐚𝐜𝐤𝐚𝐭𝐡𝐨𝐧 (𝐇𝐚𝐜𝐤𝐇𝐚𝐭𝐜𝐡) 𝐛𝐲 E-Cell…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGT-ZmWiHY_3g/feedshare-shrink_1280/B56Zq5ZQhOJoAs-/0/1764046998881?e=2147483647&v=beta&t=HUgXqLiDg4TMKRrIgnNvbpG4xZcwqWXf0gAn5E5MTRA",
+      "id": "7398949446417408000"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/aayushkulkarni-_sigmoyd-isnt-stopping-were-leveling-activity-7398153905005731840-KNdL",
+      "title": "🚀 Sigmoyd isn’t stopping ... we’re leveling up the game with our own Android App! Here’s what you’ll get 👇 📲 VERSION 1 ✨ Access any tool on your…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGt1SGLkTApJQ/feedshare-shrink_1280/B4DZquFwSCGQA0-/0/1763857339974?e=2147483647&v=beta&t=OqgMqPB-MrNwbLLePsGBirQZBji0OB8dtE1t1s1Oprk",
+      "id": "7398153905005731840"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/md-athar-sharif-ba90a630a_unity-web-player-pocket-cannons-activity-7398423181826494464-yC5P",
+      "title": "🚀 What can you build in a weekend? Here is Pocket Cannons! I spent this past weekend challenging myself to build and ship a complete game from…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7398423181826494464"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/moneymatters-zerodha_moneymatters-workshop3-technicalanalysis-activity-7398045442212548608-Pguo",
+      "title": "🚀 Thank You for Joining Us at Workshop 3! Have you ever seen moments like these in the markets? 💭 NIFTY bouncing from the same level again and…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFNqGBo322RBA/feedshare-shrink_800/B56ZqsjE9YH8Ak-/0/1763831477625?e=2147483647&v=beta&t=31_RR3JPWKj3XUOSC4Q-4oEIRg3DWaQ9vwOAt9_qQMA",
+      "id": "7398045442212548608"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/shashank-verma-919490327_hackasol-hackathon-hackathonwinner-activity-7396623407452426241-Gh_z",
+      "title": "🏆 Thrilled to Share: We Secured 2nd Place at a National-Level Hackathon! 🚀 Super excited to announce that our team grabbed 2nd place overall at…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7396623407452426241"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/anwita-chakraborty-76aa59296_sre-intern-google-activity-7392101357664530433-qhnP",
+      "title": "I’m excited to share that I’ll be joining Google as a Site Reliability Engineering Intern in the Summer of 2026. This opportunity marks a major…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGpyaBglhmAfw/feedshare-shrink_1280/B4DZpYFAyYHsAs-/0/1762414300814?e=2147483647&v=beta&t=VoP-cobZKVIYs-tPjJuhaen8CRIN6LEZX15QoKrvbrE",
+      "id": "7392101357664530433"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/parthsarthi-dutt-b32886189_icpc-teamnimbus-competitiveprogramming-activity-7397376974538739713-cCFg",
+      "title": "I’m very happy to share that our team 𝐍𝐢𝐦𝐛𝐮𝐬 has made to the 𝐈𝐂𝐏𝐂 𝐑𝐞𝐠𝐢𝐨𝐧𝐚𝐥𝐬, qualifying for both the 𝐂𝐡𝐞𝐧𝐧𝐚𝐢 and…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQECBJgFQxkvPA/feedshare-shrink_800/B4DZqjDJ4JKIAk-/0/1763672104980?e=2147483647&v=beta&t=KlFgkqLklkxFG5jxvOwv2h0u7kssaDq2wKfvE93YW9w",
+      "id": "7397376974538739713"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/menon710_this-past-week-our-team-railneer-participated-activity-7397709502080499712-kKrD",
+      "title": "This past week, our team Rail_Neer participated in Hack-a-Sol 4.0 held at IIIT-Naya Raipur , and we’re excited to share that we secured the Overall…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQESWtFds9_GYQ/feedshare-shrink_2048_1536/B4DZqnxk8FKQAw-/0/1763751384458?e=2147483647&v=beta&t=yuXqyfU8ILw7NwEWfez-tLGMuByR8g3XnogzZMLnVmQ",
+      "id": "7397709502080499712"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/krishna-sharma-967767369_new-skills-unlocked-blockchain-rust-activity-7391905282114736128-s9V1",
+      "title": "🤩 New Skills Unlocked: Blockchain & Rust! Thrilled to share that I've successfully completed the Stellar Bootcamp hosted by [Tag Rise In here]! As a…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQF5K5E2CkYk-g/feedshare-shrink_800/B4EZpVSrtSHMAg-/0/1762367553111?e=2147483647&v=beta&t=Gr1yXJyioNZLRCVHEuJh6aPAhXlaXoXPinCU0tTvolc",
+      "id": "7391905282114736128"
+    },
+    {
+      "interaction": "Liked by Tushar Darsena",
+      "link": "https://www.linkedin.com/posts/siddharth-a35a36324_hackathon-ai-fastapi-activity-7395808386241531904-zDmw",
+      "title": "🚀 Presenting our Hack-A-Sol project — LUMEN: The AI Financial Intelligence Layer. After 24 hours of intense building, we’re excited to share a demo…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D05AQEduAMwMrG-_w/feedshare-thumbnail_720_1280/B4DZqMwTdMIMA0-/0/1763298064441?e=2147483647&v=beta&t=kZJokm0_RxNVdI8oRKzhXUHDgfBiKklWEHIKBKlkhbI",
+      "id": "7395808386241531904"
+    }
+  ],
+  "linkedin_num_id": "857371472",
+  "banner_image": "https://media.licdn.com/dms/image/v2/D4D16AQGfmw7QR76p_Q/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1730079983399?e=2147483647&v=beta&t=sSVYVzatomdJeng_fNdwjQXKK6C3awMaRqspFZ1bnT8",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [],
+  "first_name": "Tushar",
+  "last_name": "Darsena",
+  "timestamp": "2025-11-28T12:05:41.466Z",
+  "input": {
+    "url": "https://www.linkedin.com/in/tushar-darsena-0681701bb"
+  },
+  "batch": "2024-2028"
 }

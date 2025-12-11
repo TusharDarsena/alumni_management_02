@@ -36,7 +36,7 @@
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
-  "url": "https://ro.linkedin.com/in/loveleen-amar",
+  "url": "https://www.linkedin.com/in/Loveleen-amar",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/ankush-jain-22313a20",
@@ -97,66 +97,6 @@
       "name": "Kshitiz Verma",
       "about": null,
       "location": "Lucknow"
-    },
-    {
-      "profile_link": "https://www.linkedin.com/in/chaitanyachadha12",
-      "name": "Chaitanya Chadha",
-      "about": null,
-      "location": "Washington, DC"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/sufbhura",
-      "name": "Sufiyaan Bhura",
-      "about": null,
-      "location": "Pune"
-    },
-    {
-      "profile_link": "https://www.linkedin.com/in/yeswanthreddybr",
-      "name": "Yeswanth Reddy",
-      "about": null,
-      "location": "San Diego, CA"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/harshabommana",
-      "name": "Harsha Bommana",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://nl.linkedin.com/in/saahil-ali-290399",
-      "name": "Saahil Ali",
-      "about": null,
-      "location": "Amsterdam"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/g-mothy",
-      "name": "G Mothy",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/sumit-rathor",
-      "name": "Sumit Rathore",
-      "about": null,
-      "location": "New Delhi"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/urvashi-ramdasani",
-      "name": "Urvashi Ramdasani",
-      "about": null,
-      "location": "Ahmedabad"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/vrunda2909",
-      "name": "Vrunda Patel",
-      "about": null,
-      "location": "Bengaluru"
-    },
-    {
-      "profile_link": "https://in.linkedin.com/in/bhartendu-singh-a08a6a15a",
-      "name": "Bhartendu Singh",
-      "about": null,
-      "location": "Hyderabad"
     }
   ],
   "educations_details": "International Institute of Information Technology, Naya Raipur",
@@ -281,7 +221,7 @@
       "credential_id": null
     }
   ],
-  "followers": 2861,
+  "followers": 2860,
   "connections": 500,
   "current_company_company_id": "intel-corporation",
   "current_company_name": "Intel Corporation",
@@ -498,8 +438,9 @@
   "bio_links": [],
   "first_name": "Loveleen",
   "last_name": "Amar",
-  "timestamp": "2025-11-20T17:41:30.661Z",
+  "timestamp": "2025-11-25T23:33:45.178Z",
   "input": {
     "url": "https://in.linkedin.com/in/loveleen-amar"
-  }
+  },
+  "batch": "2017-2021"
 }

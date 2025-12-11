@@ -15,15 +15,15 @@
       "title": "Stashfin",
       "description_html": null,
       "company": "Stashfin",
-      "company_logo_url": null
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQEyBjKMCOhmhg/company-logo_100_100/B4DZop_XQCH4AQ-/0/1761641068179/stashfin_logo?e=2147483647&v=beta&t=bF62Jqnbg34n8yA6x8Q0l3MUASxKWId7dlEO_jigfY8"
     },
     {
       "description_html": null,
-      "company_logo_url": null
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHxbR20oGIx9g/company-logo_100_100/company-logo_100_100/0/1631384889565?e=2147483647&v=beta&t=IvLnpAnyFIczERQjMNRBpoFaN5THl_jY2vQFa0mZCYk"
     },
     {
       "description_html": null,
-      "company_logo_url": null
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     },
     {
       "description_html": null,
@@ -36,7 +36,69 @@
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
-  "url": "https://ch.linkedin.com/in/priyans619",
+  "url": "https://cz.linkedin.com/in/priyans619",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/deepakkumar-singh-943971127",
+      "name": "Deepakkumar Singh",
+      "about": null,
+      "location": "Vadodara"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/saurabhagrawal0",
+      "name": "Saurabh Agrawal",
+      "about": null,
+      "location": "Rajasthan, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shreya-singh-3a0472b9",
+      "name": "Shreya Singh",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sowmya-narayani-h-050b47150",
+      "name": "Sowmya Narayani H",
+      "about": null,
+      "location": "Erode"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/mandeep-kaur-sehmi-574548122",
+      "name": "Mandeep Kaur Sehmi",
+      "about": null,
+      "location": "Gurgaon"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/anupama-gulia-4524b660",
+      "name": "Anupama Gulia",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/pallavi-sinha-5a5486142",
+      "name": "Pallavi Sinha",
+      "about": null,
+      "location": "Gurugram"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/manvirsimpligrab",
+      "name": "Manvir Singh",
+      "about": null,
+      "location": "South Delhi"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/arpit-sharma-88176597",
+      "name": "Arpit Sharma",
+      "about": null,
+      "location": "United States"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/amit-upadhyay",
+      "name": "Amit Upadhyay",
+      "about": null,
+      "location": "Noida"
+    }
+  ],
   "educations_details": "IIIT-Naya Raipur",
   "education": [
     {
@@ -79,7 +141,7 @@
       "interaction": "Liked by Priyansh Bhardwaj",
       "link": "https://www.linkedin.com/posts/khyatithakur_automation-n8n-nocode-activity-7332609026070859776-vm70",
       "title": "\"Want to start a side hustle but feel like I have zero time?\" Here’s your unfair advantage: free automation. I’ve been exploring n8n, the…",
-      "img": null,
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
       "id": "7332609026070859776"
     }
   ],
@@ -99,8 +161,9 @@
   "bio_links": [],
   "first_name": "Priyansh",
   "last_name": "Bhardwaj",
-  "timestamp": "2025-11-20T17:40:13.321Z",
+  "timestamp": "2025-11-25T23:33:07.694Z",
   "input": {
     "url": "https://in.linkedin.com/in/priyans619"
-  }
+  },
+  "batch": "2017-2021"
 }

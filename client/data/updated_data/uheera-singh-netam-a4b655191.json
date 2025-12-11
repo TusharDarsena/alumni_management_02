@@ -1,0 +1,32 @@
+{
+  "id": "heera-singh-netam-a4b655191",
+  "name": "heera singh Netam",
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "position": null,
+  "current_company": {
+    "location": null
+  },
+  "location": "Raipur",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021"
+    }
+  ],
+  "experience": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://de.linkedin.com/in/heera-singh-netam-a4b655191",
+  "linkedin_id": "heera-singh-netam-a4b655191"
+}

@@ -1,4 +1,208 @@
 {
-  "status": "starting",
-  "message": "Snapshot is not ready yet, try again in 30s"
+  "id": "aishwarya-maurya",
+  "name": "Aishwarya Maurya",
+  "city": "Bengaluru, Karnataka, India",
+  "country_code": "IN",
+  "about": "🚀 Frontend Developer | Angular | React Native | React JS | JavaScript | Scalable UI…",
+  "current_company": {
+    "link": "https://ae.linkedin.com/company/gravityoneai?trk=public_profile_topcard-current-company",
+    "name": "GravityONE",
+    "company_id": "gravityoneai",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "GravityONE",
+      "description_html": null,
+      "company": "GravityONE",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQEsITuLLHVDEA/company-logo_100_100/company-logo_100_100/0/1737360040681/gravityilabs_logo?e=2147483647&v=beta&t=1cr_bkXbsyes6ErD872THWcvIJQchu58pELxMG9cMYc"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHCD5I79KeWtw/company-logo_100_100/company-logo_100_100/0/1643005714860/krayonnz_logo?e=2147483647&v=beta&t=h-gDYy2qIWZ-ci5RDgGQmBhP8qyE3HABFwYWkeyHOnM"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHCD5I79KeWtw/company-logo_100_100/company-logo_100_100/0/1643005714860/krayonnz_logo?e=2147483647&v=beta&t=h-gDYy2qIWZ-ci5RDgGQmBhP8qyE3HABFwYWkeyHOnM"
+    },
+    {
+      "description_html": null,
+      "duration": "2017 - 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "description_html": null,
+      "duration": "2016 - 2017",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGkKERzK_zxTw/company-logo_100_100/company-logo_100_100/0/1630579358736?e=2147483647&v=beta&t=owD0DK3JbBaKVFHK1amj1O2G53rjfHNn_oyi6asXcLc"
+    }
+  ],
+  "url": "https://www.linkedin.com/in/aishwarya-maurya",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/namanjain-spjimr",
+      "name": "Naman Jain",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/alokikkanchan",
+      "name": "Alokik Kanchan",
+      "about": null,
+      "location": "Uttar Pradesh, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/antara-phukan-1ba777164",
+      "name": "Antara Phukan",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://ie.linkedin.com/in/eshapanwar90",
+      "name": "Esha Panwar",
+      "about": null,
+      "location": "Greater Dublin"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shivam-patel-1b955b64",
+      "name": "Shivam Patel",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/swetha-pantham-75213114b",
+      "name": "Swetha Pantham",
+      "about": null,
+      "location": "Telangana, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/harsh-srivastava-05205a17b",
+      "name": "Harsh Srivastava",
+      "about": null,
+      "location": "Lucknow"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/divyanshi-pandita-905617177",
+      "name": "Divyanshi Pandita",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shah-nayan",
+      "name": "Nayan Shah",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/divy-kala",
+      "name": "Divy Kala",
+      "about": null,
+      "location": "Hyderabad"
+    }
+  ],
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "start_year": "2017",
+      "end_year": "2021",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2016",
+      "end_year": "2017",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2014",
+      "end_year": "2015",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQH44O0EmzwtJA/profile-displayphoto-shrink_200_200/B56ZXTlYAvGcAc-/0/1743011547162?e=2147483647&v=beta&t=0nBg3pWxibZl1jJiYJNgdm3bcu2dUPp8pGA729eKRws",
+  "followers": 339,
+  "connections": 336,
+  "current_company_company_id": "gravityoneai",
+  "current_company_name": "GravityONE",
+  "location": "Bengaluru",
+  "input_url": "https://in.linkedin.com/in/aishwarya-maurya",
+  "linkedin_id": "aishwarya-maurya",
+  "activity": [
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/kavyansh-chourasia-821476167_at-project-gecko-were-pushing-the-boundaries-activity-7394366183883329537-wdTW",
+      "title": "At Project Gecko, we’re pushing the boundaries of AI adaptability to empower farmers across India and Kenya. It’s not often that complex technical…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E10AQHPdP1BkBa9Eg/image-shrink_1280/B4EZp38pADHcAM-/0/1762948977191?e=2147483647&v=beta&t=dE9f-zNpUxxh-Zb9xHsq0PKXhwITMdujMFZnz06Z1Mc",
+      "id": "7394366183883329537"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/careexpand_careexpand-proudly-wore-pink-in-recognition-activity-7389426997581529088-NaXo",
+      "title": "Careexpand proudly wore pink in recognition of Breast Cancer Awareness Month. This month, we stand in solidarity with our colleagues, families, and…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFzEN3eKQTN7g/feedshare-shrink_800/B56ZoyEsdnG4Ag-/0/1761776684178?e=2147483647&v=beta&t=2rDK0DZrLQS6675HkA5M47P6K2KE0wj2mxkUfPtEROg",
+      "id": "7389426997581529088"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/gravityoneai_diwali2025-officecelebration-festiveseason-activity-7387359708128538624-uQQs",
+      "title": "Festive energy, vibrant rangolis, delicious treats, and endless laughter - that’s how we celebrated Diwali at GravityONE India! 🌸 Here’s to shared…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGhw2rkole_1Q/feedshare-shrink_800/B56ZoSeVhnHQAg-/0/1761246550247?e=2147483647&v=beta&t=IdkBTSqcE7kum0imdN8e2uVHo8GHVLiMZCKXGNpjSjw",
+      "id": "7387359708128538624"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/gravityoneai_happydiwali-gravityone-festivaloflights-activity-7385525105440980992-AqJ1",
+      "title": "From all of us at GravityONE, wishing you a Diwali filled with light, inspiration, and new beginnings ✨ #HappyDiwali #GravityONE #FestivalOfLights",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQF1kPp8mpUX3A/feedshare-shrink_2048_1536/B56Zn4aC8LHAAw-/0/1760809206063?e=2147483647&v=beta&t=GKUChSV4NHO3pgqphVwHi53sGhoIvpFRjpXIKbbpE-U",
+      "id": "7385525105440980992"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/varmakvl_it-was-an-incredible-experience-at-blub%C3%B8x-activity-7381677541910241280-yia6",
+      "title": "It was an incredible experience at BluBØX HQ! Not only did I get the opportunity to collaborate with talented people from around the globe, but I…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7381677541910241280"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/iiitnrofficial_iiitnr-celonis-processintelligence-activity-7370735711362314240-gqB4",
+      "title": "🚀 Bridging Academia & Industry!🚀 We were honoured to host Ms. Poornima Dhall, Lead Partner Manager, Academic Alliance at Celonis—a global pioneer…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEuk-EU4BWqPg/feedshare-shrink_800/B4DZkoc_6HJgAg-/0/1757320332658?e=2147483647&v=beta&t=EptGwo_8OqnqPKs-w-jtkIhpIWkFQBtvxtqq0JHgurQ",
+      "id": "7370735711362314240"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/kapish-garg-8335a0282_ai-aiineducation-edtech-activity-7370147688228573184-D4PY",
+      "title": "Attended a focused Masterclass by Anurag Shukla on the Impact of AI on Learning for Bharat, hosted by Rishihood University and Newton School of…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFCQ2c4yusPqA/feedshare-shrink_2048_1536/B4DZkgGPZUJQAw-/0/1757180136047?e=2147483647&v=beta&t=Hk2pyg3Wl4uCkTOhKL3gs9hHab33XxkqQCYxnlZiNv8",
+      "id": "7370147688228573184"
+    },
+    {
+      "interaction": "Liked by Aishwarya Maurya",
+      "link": "https://www.linkedin.com/posts/deepank-joshi-a66216216_nextjs-pwas-webperformance-activity-7367394549138141184-cMA-",
+      "title": "🚀 Excited to share my latest project: PostOfficeHub.in I recently completed a full-stack project where I applied my skills in Next.js, PWA…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGhj1p1eCoNFg/feedshare-shrink_800/B56Zj4.SLjHQAk-/0/1756523737290?e=2147483647&v=beta&t=NcRnr_QEJpMqSozZA_1wOHBRNljRfFprieWitsLRgtE",
+      "id": "7367394549138141184"
+    }
+  ],
+  "linkedin_num_id": "727858123",
+  "banner_image": "https://media.licdn.com/dms/image/v2/C4E16AQEEXio78h6Pgg/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1627843270859?e=2147483647&v=beta&t=3kfuNxrAqWGUakdJicyxlOm-yErLiFx8eUX2krYdZbc",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [],
+  "first_name": "Aishwarya",
+  "last_name": "Maurya",
+  "timestamp": "2025-11-26T15:42:08.719Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/aishwarya-maurya"
+  },
+  "batch": "2017-2021"
 }

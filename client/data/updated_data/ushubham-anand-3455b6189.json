@@ -53,9 +53,16 @@
       "end_date": null
     }
   ],
+<<<<<<< HEAD
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
   "url": "https://ca.linkedin.com/in/shubham-anand-3455b6189",
+=======
+  "batch": null,
+  "branch": "CSE",
+  "graduationYear": null,
+  "url": "https://pl.linkedin.com/in/shubham-anand-3455b6189",
+>>>>>>> e293a4c27dd16c74259926e08be0701b17f85290
   "linkedin_id": "shubham-anand-3455b6189"
 }

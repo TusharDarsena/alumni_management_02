@@ -1,0 +1,282 @@
+{
+  "id": "lakshya-garg23",
+  "name": "Lakshya Garg",
+  "city": "Meerut, Uttar Pradesh, India",
+  "country_code": "IN",
+  "about": "I’m a Computer Science undergraduate (B.Tech, CSE ’27, CGPA 9.17/10) at IIIT Naya Raipur…",
+  "current_company": {
+    "link": "https://in.linkedin.com/company/daphnis-labs?trk=public_profile_topcard-current-company",
+    "name": "Daphnis Labs",
+    "company_id": "daphnis-labs",
+    "location": null
+  },
+  "experience": [
+    {
+      "title": "Daphnis Labs",
+      "description_html": null,
+      "company": "Daphnis Labs",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQE4YfgEesuOGg/company-logo_100_100/company-logo_100_100/0/1631327751917?e=2147483647&v=beta&t=YrOHN6Cv3ICtjbNXogc-fRHxKBMRBmykCLjr2vlgv2w"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQFhkwNLmYJr9A/company-logo_100_100/company-logo_100_100/0/1725008298192/samsungrndindiabangalore_logo?e=2147483647&v=beta&t=GLa8CdusiLO6WR3mgZwzg267MgSrSsRR3vEVVUuDWxA"
+    },
+    {
+      "description_html": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQHrWs9wJzz1Rw/company-logo_100_100/B4EZZo6J12HMAY-/0/1745516798832/cognito1_logo?e=2147483647&v=beta&t=XeX-JpfLNl2qkR_bXpBOxD_vTmGNpXvGEh-KKI3u7IM"
+    },
+    {
+      "description_html": null,
+      "duration": "2023 - 2027",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "description_html": null,
+      "duration": "2022 - 2023",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHv6n-zfXxBWA/company-logo_100_100/company-logo_100_100/0/1630654752018/dmameerut_logo?e=2147483647&v=beta&t=PZ38Jb1jrW3kH37scjJLFxNtlgA7HwXimHppLNMvf0o"
+    }
+  ],
+  "url": "https://www.linkedin.com/in/lakshya-garg23",
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "start_year": "2023-08",
+      "end_year": "2027",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2022",
+      "end_year": "2023",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2020",
+      "end_year": "2021",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQHsmQ5RGFWhLA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1692552688827?e=2147483647&v=beta&t=uUT7hm5L7pMcVx4r4NM9lg2gJkWCKNG2QH22NsHjqDk",
+  "languages": [
+    {
+      "subtitle": "Full professional proficiency",
+      "title": "English"
+    },
+    {
+      "subtitle": "Native or bilingual proficiency",
+      "title": "Hindi"
+    }
+  ],
+  "certifications": [
+    {
+      "meta": "Issued Oct 2024 See credential",
+      "subtitle": "Google",
+      "title": "Prompt Design in Vertex AI Skill Badge",
+      "credential_url": "https://www.credly.com/badges/9210e6e5-9cb1-4d94-9bc3-5184a8e58208/linked_in_profile?trk=public_profile_see-credential",
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Apr 2024",
+      "subtitle": "IEEE",
+      "title": "IEEE English for Technical Professionals",
+      "credential_url": null,
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Apr 2024 Credential ID UC-d1fbc61c-760f-463a-8a9c-b11d74ac1065 See credential",
+      "subtitle": "Udemy",
+      "title": "Machine Learning A-Z: AI, Python & R",
+      "credential_url": "https://www.udemy.com/certificate/UC-d1fbc61c-760f-463a-8a9c-b11d74ac1065/?trk=public_profile_see-credential",
+      "credential_id": "UC-d1fbc61c-760f-463a-8a9c-b11d74ac1065"
+    },
+    {
+      "meta": "Issued Feb 2024 Credential ID 9e7a1d95-56a0-4d92-bb49-1392df866a31& See credential",
+      "subtitle": "MathWorks",
+      "title": "MATLAB Onramp",
+      "credential_url": "https://matlabacademy.mathworks.com/progress/share/certificate.html?id=9e7a1d95-56a0-4d92-bb49-1392df866a31&&trk=public_profile_see-credential",
+      "credential_id": "9e7a1d95-56a0-4d92-bb49-1392df866a31&"
+    },
+    {
+      "meta": "Issued Feb 2024 Credential ID NF4LQYPPFVPV See credential",
+      "subtitle": "DeepLearning.AI",
+      "title": "Supervised Machine Learning: Regression and Classification",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/NF4LQYPPFVPV?trk=public_profile_see-credential",
+      "credential_id": "NF4LQYPPFVPV"
+    },
+    {
+      "meta": "Issued May 2021",
+      "subtitle": "Indian Institute of Science (IISc), Bengaluru",
+      "title": "KVPY (Kishore Vaigyanik Protsahan Yojana) Aptitude Test",
+      "credential_url": null,
+      "credential_id": null
+    },
+    {
+      "meta": "Issued Sep 2020 Credential ID 22J3YTQTNNFN See credential",
+      "subtitle": "Macquarie University",
+      "title": "Excel Skills for Business: Essentials",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/22J3YTQTNNFN?trk=public_profile_see-credential",
+      "credential_id": "22J3YTQTNNFN"
+    },
+    {
+      "meta": "Issued Sep 2020 Credential ID QGK4NTMLQK6J See credential",
+      "subtitle": "University of Michigan",
+      "title": "Introduction to HTML5",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/QGK4NTMLQK6J?trk=public_profile_see-credential",
+      "credential_id": "QGK4NTMLQK6J"
+    },
+    {
+      "meta": "Issued Sep 2020 Credential ID X235J32ETK9X See credential",
+      "subtitle": "University of Michigan",
+      "title": "Programming for Everybody (Getting Started with Python)",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/X235J32ETK9X?trk=public_profile_see-credential",
+      "credential_id": "X235J32ETK9X"
+    },
+    {
+      "meta": "Issued Aug 2020 Credential ID 72KXB3JLSZ9X See credential",
+      "subtitle": "Georgia Institute of Technology",
+      "title": "Speak English Professionally: In Person, Online & On the Phone",
+      "credential_url": "https://www.coursera.org/account/accomplishments/verify/72KXB3JLSZ9X?trk=public_profile_see-credential",
+      "credential_id": "72KXB3JLSZ9X"
+    }
+  ],
+  "volunteer_experience": [
+    {
+      "cause": "Science and Technology",
+      "duration": "Aug 2024 · - \nJul 2025 · \n1 year",
+      "duration_short": "- \nJul 2025",
+      "start_date": "Aug 2024",
+      "subtitle": "AIML Club - IIITNR",
+      "title": "Core Member"
+    }
+  ],
+  "followers": 1874,
+  "connections": 500,
+  "current_company_company_id": "daphnis-labs",
+  "current_company_name": "Daphnis Labs",
+  "projects": [
+    {
+      "title": "MindCare: AI-powered Mental Health Platform",
+      "start_date": "Sep 2025",
+      "description": "• Engineered an AI-driven mental wellness assistant for youth, integrating Gemini AI, crisis detection, and gamifiedtracking, expected to improve engagement by ∼30%. .• Built an immersive chat system with a React.js + VRM avatar frontend and a Node.js/Express + PostgreSQL backendfor reliable, low-latency performance.• Leveraged GCP (Cloud Run, Cloud SQL) for secure data management, and ensuring scalability and performance."
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+      "title": "MailWise: AI-Powered Email Management System",
+      "start_date": "Jan 2025",
+      "description": "• Conceived and led development of an AI-powered web platform that automates Gmail categorization and analysis with Gemini AI + OAuth, cutting manual sorting time by ∼60%.• Designed React.js frontend with UX-focused previews and AI-assisted drafting, enhancing efficiency by ∼40%.• Designed and deployed a secure, scalable, and reliable cloud infrastructure on AWS (EC2, RDS, Amplify). Optimized backend components (Node.js/PostgreSQL) to achieve >3× speedup in data processing."
+    },
+    {},
+    {},
+    {
+      "title": "CrowdScope: AI-powered Market Insights Platform",
+      "start_date": "Feb 2025",
+      "description": "• Built a solution that analyzes community discussions (Reddit) to extract real-time market/consumer insights using Gemini AI and Python — reducing manual research by ∼70%.• Developed scalable backend with Node.js/Python for optimized data retrieval/analysis.• Delivered business-oriented reports through an intuitive React UI, useful for market analysis and client decision-making."
+    },
+    {},
+    {}
+  ],
+  "location": "Meerut",
+  "input_url": "https://in.linkedin.com/in/lakshya-garg23",
+  "linkedin_id": "lakshya-garg23",
+  "activity": [
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/preethi-somu-113a4a258_amazon-amazoninternship-sdeintern-activity-7399002939299831808-Kzyi",
+      "title": "After sharing the exciting news about my Amazon SDE Internship, I wanted to take a moment to share my complete interview journey. My journey began…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGFKot2A7uUXQ/feedshare-shrink_1280/B56Zq6J9M8I8As-/0/1764059765880?e=2147483647&v=beta&t=RhRknI-I-JsRs9WzCxm7U_E2pygFfr-Y3a_xzy6fIuU",
+      "id": "7399002939299831808"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/abhay-yadav-iiitnr_internship-winterarc-activity-7389475881343328256-zzZJ",
+      "title": "I am thrilled to announce that I am starting an Internship at KEPLIX. Really grateful to Vardan Chaturvedi for giving me this opportunity. Thanks a…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFy5Ik227JeCA/feedshare-shrink_2048_1536/B4DZoyxJ3CJAAw-/0/1761788338787?e=2147483647&v=beta&t=9b66i_VNUq6vAgy6Wn7-68wh3yF8DJv0bSPr3dxwlWo",
+      "id": "7389475881343328256"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/varshil-pandey-526793326_lld-softwarearchitecture-takeuforward-activity-7397338680169750529-Jh-v",
+      "title": "I am excited to share what I have been doing for the past few months, I have successfully completed the Low Level Design (LLD) course on TUF+ by…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7397338680169750529"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/kartikey-wariyal-20630b273_from-searching-how-to-crack-google-to-activity-7396420504942907392-lJRC",
+      "title": "“From searching ‘How to crack Google?’ to finally cracking Google.” 🚀✨ I’m beyond excited to share that I’ve secured the Google SWE Summer…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQHKqAKa0O8GYQ/feedshare-shrink_1280/B56ZqVdO0OKAAs-/0/1763444063602?e=2147483647&v=beta&t=nlMYbdVdxDwQg-kepYzoaUQP33LrWcFIaeusS4D7YJg",
+      "id": "7396420504942907392"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/ankit-sisodya_i-got-the-offer-for-%F0%9D%97%9A%F0%9D%97%BC%F0%9D%97%BC%F0%9D%97%B4%F0%9D%97%B9%F0%9D%97%B2-%F0%9D%97%A6%F0%9D%98%82%F0%9D%97%BA%F0%9D%97%BA-activity-7396389208254242817-rx2w",
+      "title": "I got the offer for 𝗚𝗼𝗼𝗴𝗹𝗲 𝗦𝘂𝗺𝗺𝗲𝗿 𝗦𝗗𝗘 𝗶𝗻𝘁𝗲𝗿𝗻 𝟮𝟬𝟮6 through off-campus. There were two interviews. • In the f𝗶𝗿𝘀𝘁…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQEo5a9X3000rg/feedshare-shrink_2048_1536/B56ZqTfbyhJsAw-/0/1763411083532?e=2147483647&v=beta&t=8bTbATs1yZKpxuW4ZmmG0zNnq5_HtJ_KnlFH4PEGBwo",
+      "id": "7396389208254242817"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/vansh-goel-0756ab27a_cloudflaredown-techhumor-outage-activity-7396649206108803072-btHU",
+      "title": "Cloudflare went down today.. and it felt like the whole internet took an unexpected coffee break ☕😂. Meanwhile, LinkedIn engagement boosted to 200%.…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7396649206108803072"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/shashank-verma-919490327_hackasol-hackathon-hackathonwinner-activity-7396623407452426241-Gh_z",
+      "title": "🏆 Thrilled to Share: We Secured 2nd Place at a National-Level Hackathon! 🚀 Super excited to announce that our team grabbed 2nd place overall at…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7396623407452426241"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/-manas-choudhary-_hackasol-ai-machinelearning-activity-7396619232932732928-jKra",
+      "title": "🏆 We just won 𝟭𝘀𝘁 𝗣𝗹𝗮𝗰𝗲 in the 𝗔𝗜/𝗠𝗟 𝗧𝗿𝗮𝗰𝗸 𝗮𝘁 𝗛𝗮𝗰𝗸-𝗮-𝗦𝗼𝗹! And yes we 𝗳𝗶𝗻𝗲-𝘁𝘂𝗻𝗲𝗱 𝗮 𝗳𝘂𝗹𝗹 𝗟𝗟𝗠 during the…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGDLg04eCJWGQ/feedshare-shrink_800/B56ZqYR_nZJYAg-/0/1763491446270?e=2147483647&v=beta&t=LF-pamfoVuLCiggvuoL-cfDU5kvNDTjDcN_P-ll0nk8",
+      "id": "7396619232932732928"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/manisha-a4a01022b_meesho-sde1-ppo-activity-7395481491331440640-cVMg",
+      "title": "✨𝐀 𝐍𝐞𝐰 𝐂𝐡𝐚𝐩𝐭𝐞𝐫 𝐁𝐞𝐠𝐢𝐧𝐬: 𝐒𝐃𝐄-1 𝐚𝐭 𝐌𝐞𝐞𝐬𝐡𝐨 🚀 Six months ago, I walked into Meesho as an SDE Trainee—curious, hopeful, and…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGxV4EP2zdajQ/feedshare-shrink_800/B56ZqIHN6VHYAg-/0/1763220186999?e=2147483647&v=beta&t=yZoT-QkrBz5l7hIoaXisyxREQnqnvfQi1xQZLPDybBs",
+      "id": "7395481491331440640"
+    },
+    {
+      "interaction": "Liked by Lakshya Garg",
+      "link": "https://www.linkedin.com/posts/aditya-singh-204a27289_hackathon-innovation-nocode-activity-7389614114496581632-h6kr",
+      "title": "⭐️Cheers to a New Milestone! Team Circuit Breakers secured 1st Place at Hackathon 3.0 – IdeatorX 2025! 🎯 I’m incredibly excited to share that I…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGQzUCYZQQazg/feedshare-shrink_1280/B4DZo0u36cGsAs-/0/1761821294886?e=2147483647&v=beta&t=JhSfW487Pyl1t3bqliJ4BUuN8K6dwYUJEC3Zz0PNwtw",
+      "id": "7389614114496581632"
+    }
+  ],
+  "linkedin_num_id": "1143941103",
+  "banner_image": "https://media.licdn.com/dms/image/v2/D5616AQGIZwiXesaZqg/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1724954880103?e=2147483647&v=beta&t=ucInDKYo4ziFG83Wm8s1639SmGHtx4y2cN1iBlzjKIk",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": false,
+  "memorialized_account": false,
+  "bio_links": [
+    {
+      "title": "Portfolio",
+      "link": "https://www.lakshyagarg.me/"
+    }
+  ],
+  "first_name": "Lakshya",
+  "last_name": "Garg",
+  "timestamp": "2025-11-25T22:37:21.394Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/lakshya-garg23"
+  },
+  "batch": "2023-2027"
+}

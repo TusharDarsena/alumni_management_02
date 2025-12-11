@@ -1,0 +1,51 @@
+{
+  "id": "himanshukhairajani",
+  "name": "Himanshu Khairajani",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQG-_KSy2JudfQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718253226690?e=2147483647&v=beta&t=ZlZeKwtAFQCyfArZTMoxp1-AKFjEj-EcqBvR5i__NpE",
+  "position": null,
+  "current_company": {
+    "name": "Collate",
+    "location": null
+  },
+  "location": "Chhattisgarh",
+  "about": "Adaptable Software Engineer carrying along with implementation skills and ability to…",
+  "education": [
+    {
+      "title": "IIIT NAYA RAIPUR",
+      "start_year": "2017-08",
+      "end_year": "2021-07"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Collate",
+      "company": "Collate",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": "2017-08",
+  "branch": null,
+  "graduationYear": "2021-07",
+  "url": "https://pl.linkedin.com/in/himanshukhairajani",
+  "linkedin_id": "himanshukhairajani"
+}

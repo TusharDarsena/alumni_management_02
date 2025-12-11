@@ -1,0 +1,65 @@
+{
+  "id": "lakshya-garg23",
+  "name": "Lakshya Garg",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQHsmQ5RGFWhLA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1692552688827?e=2147483647&v=beta&t=uUT7hm5L7pMcVx4r4NM9lg2gJkWCKNG2QH22NsHjqDk",
+  "position": null,
+  "current_company": {
+    "name": "Daphnis Labs",
+    "location": null
+  },
+  "location": "Meerut",
+  "about": "I’m a Computer Science undergraduate (B.Tech, CSE ’27, CGPA 9.17/10) at IIIT Naya Raipur…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2023-08",
+      "end_year": "2027"
+    },
+    {
+      "start_year": "2022",
+      "end_year": "2023"
+    },
+    {
+      "start_year": "2020",
+      "end_year": "2021"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Daphnis Labs",
+      "company": "Daphnis Labs",
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ],
+  "batch": "2023-08",
+  "branch": null,
+  "graduationYear": "2027",
+  "url": "https://www.linkedin.com/in/lakshya-garg23",
+  "linkedin_id": "lakshya-garg23"
+}

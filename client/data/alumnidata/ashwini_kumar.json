@@ -37,7 +37,7 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQFiB3Otc6s1Mw/company-logo_100_100/company-logo_100_100/0/1631344654761?e=2147483647&v=beta&t=AIfEyEG6cEClJz2VcqW6L99hulc82QT-10k-KJfhFN4"
     }
   ],
-  "url": "https://www.linkedin.com/in/ashwini-kumar-261919183",
+  "url": "https://tr.linkedin.com/in/Ashwini-kumar-261919183",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/kartik8800",
@@ -192,7 +192,7 @@
       "title": "Event Head"
     }
   ],
-  "followers": 7982,
+  "followers": 8006,
   "connections": 500,
   "current_company_company_id": "avalara",
   "current_company_name": "Avalara",
@@ -204,21 +204,21 @@
       "interaction": "Liked by Ashwini Kumar",
       "link": "https://www.linkedin.com/posts/ksairaju_ever-since-i-joined-rippling-ive-seen-activity-7373874305744429056-oG8B",
       "title": "Ever since I joined Rippling , I’ve seen the power of the product firsthand. For years, companies have been stuck juggling endless software systems…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQHUILTzgeac6w/feedshare-shrink_800/B56ZlVDgg1H8Ak-/0/1758068632987?e=2147483647&v=beta&t=2-Srgv8k_qCsecZiHwAAtbUGRCUwtDHCdlrj6oRj7A8",
+      "img": null,
       "id": "7373874305744429056"
     },
     {
       "interaction": "Liked by Ashwini Kumar",
       "link": "https://www.linkedin.com/posts/ekta-navani-b5082961_campusrecruitment-avalara-sribalajiuniversity-activity-7373272644269334528-TZqU",
       "title": "🚀 Campus Recruitment @ Sri Balaji University 🎓 Last Friday, team Avalara had the incredible opportunity to visit Sri Balaji University, Pune…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQF3TRdusyLcvQ/feedshare-shrink_800/B4DZlMf73WJIAg-/0/1757925179209?e=2147483647&v=beta&t=t08pBYPKQMXYk23Vzwh9MAyOgrWircwP5U5QVd-suB4",
+      "img": null,
       "id": "7373272644269334528"
     },
     {
       "interaction": "Liked by Ashwini Kumar",
       "link": "https://www.linkedin.com/posts/rajivnayanc_webdevelopment-security-encryption-activity-7365084799679549443--NTb",
       "title": "A little story about a decade-old side project and a simple, modern solution. About 10 years ago, I built a simple HTML/JS website for my dad to…",
-      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "img": null,
       "id": "7365084799679549443"
     },
     {
@@ -238,8 +238,9 @@
   "bio_links": [],
   "first_name": "Ashwini",
   "last_name": "Kumar",
-  "timestamp": "2025-11-21T22:10:27.638Z",
+  "timestamp": "2025-11-28T13:26:32.056Z",
   "input": {
     "url": "https://in.linkedin.com/in/ashwini-kumar-261919183"
-  }
+  },
+  "batch": "2025-2029"
 }
