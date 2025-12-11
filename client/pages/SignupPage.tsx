@@ -61,7 +61,7 @@ export default function SignUpPage() {
             Contact admin if you need access with a different email.
           </p>
         </div>
-=======
+
       </div>
     </div>
   );
