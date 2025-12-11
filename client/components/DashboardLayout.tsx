@@ -101,33 +101,33 @@ export default function DashboardLayout({
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
 
-      <div className="flex-1 flex flex-col bg-white overflow-auto">
+      <div className="flex-1 flex flex-col bg-background overflow-auto">
         {/* TopBar */}
-        <div className="sticky top-0 z-20 bg-white border-b">
+        <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-lg border-b border-border">
           <div className="px-6 h-16 flex items-center justify-between">
-            <div className="text-lg font-semibold text-slate-800">
+            <div className="text-lg font-display font-semibold text-foreground">
               {activePage}
             </div>
             <div className="flex items-center gap-4 relative">
               <div ref={notifRef} className="relative">
                 <button
                   aria-label="Notifications"
-                  className="relative p-2 rounded-md hover:bg-slate-50"
+                  className="relative p-2 rounded-lg hover:bg-muted transition-colors"
                   onClick={() => setNotifOpen((v) => !v)}
                 >
-                  <Bell className="h-5 w-5 text-slate-600" />
+                  <Bell className="h-5 w-5 text-muted-foreground" />
                   {user.notificationCount ? (
                     <span className="absolute -top-0.5 -right-0.5 inline-flex h-2.5 w-2.5 rounded-full bg-red-600" />
                   ) : null}
                 </button>
 
                 {notifOpen && (
-                  <div className="absolute right-0 mt-2 w-80 rounded-md border bg-white shadow-lg">
-                    <div className="p-3 text-sm font-medium border-b">
+                  <div className="absolute right-0 mt-2 w-80 rounded-xl border border-border bg-card shadow-xl">
+                    <div className="p-3 text-sm font-medium border-b border-border text-foreground">
                       Notifications
                     </div>
                     <div className="max-h-56 overflow-auto">
-                      <div className="p-3 text-sm text-slate-600">
+                      <div className="p-3 text-sm text-muted-foreground">
                         No new notifications
                       </div>
                     </div>
@@ -137,22 +137,22 @@ export default function DashboardLayout({
 
               <button
                 aria-label="Toggle theme"
-                className="p-2 rounded-md hover:bg-slate-50"
+                className="p-2 rounded-lg hover:bg-muted transition-colors"
                 onClick={toggleTheme}
               >
                 {theme === "light" ? (
-                  <Moon className="h-5 w-5 text-slate-600" />
+                  <Moon className="h-5 w-5 text-muted-foreground" />
                 ) : (
-                  <Sun className="h-5 w-5 text-slate-600" />
+                  <Sun className="h-5 w-5 text-amber-400" />
                 )}
               </button>
 
               <div ref={profileRef} className="relative">
                 <button
-                  className="flex items-center gap-3 rounded-md p-1 hover:bg-slate-50"
+                  className="flex items-center gap-3 rounded-lg p-1 hover:bg-muted transition-colors"
                   onClick={() => setProfileOpen((v) => !v)}
                 >
-                  <div className="h-8 w-8 rounded-full bg-slate-200 overflow-hidden">
+                  <div className="h-8 w-8 rounded-full bg-muted overflow-hidden ring-2 ring-primary/20">
                     {user.avatarUrl ? (
                       <img
                         src={user.avatarUrl}
@@ -160,23 +160,23 @@ export default function DashboardLayout({
                         className="h-full w-full object-cover"
                       />
                     ) : (
-                      <UserIcon className="h-4 w-4 text-slate-600" />
+                      <UserIcon className="h-4 w-4 text-muted-foreground" />
                     )}
                   </div>
-                  <div className="hidden sm:block text-sm text-slate-700">
+                  <div className="hidden sm:block text-sm font-medium text-foreground">
                     {user.name}
                   </div>
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 mt-2 w-44 rounded-md border bg-white shadow-lg">
+                  <div className="absolute right-0 mt-2 w-48 rounded-xl border border-border bg-card shadow-xl overflow-hidden">
                     <button
                       onClick={() => {
                         handleOpenProfile();
                         setProfileOpen(false);
                       }}
                       className={cn(
-                        "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
+                        "w-full text-left px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors",
                       )}
                     >
                       My Profile
@@ -187,7 +187,7 @@ export default function DashboardLayout({
                         setProfileOpen(false);
                       }}
                       className={cn(
-                        "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
+                        "w-full text-left px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors",
                       )}
                     >
                       Settings
@@ -198,11 +198,12 @@ export default function DashboardLayout({
                         setProfileOpen(false);
                       }}
                       className={cn(
-                        "w-full text-left px-3 py-2 text-sm hover:bg-slate-50",
+                        "w-full text-left px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors",
                       )}
                     >
                       Notification
                     </button>
+                    <div className="h-px bg-border my-1" />
                     <button
                       onClick={async () => {
                         setProfileOpen(false);
@@ -215,7 +216,7 @@ export default function DashboardLayout({
                         window.location.replace("/");
                       }}
                       className={cn(
-                        "w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-slate-50",
+                        "w-full text-left px-4 py-2.5 text-sm text-destructive hover:bg-destructive/10 transition-colors",
                       )}
                     >
                       Log Out
@@ -230,12 +231,12 @@ export default function DashboardLayout({
         {/* Welcome Section */}
         <div className="px-6 py-6">
           <div className="flex items-center gap-2 mb-6">
-            <span className="text-xl">👋</span>
-            <span className="text-[#0C1E33] text-xl font-normal">
+            <span className="text-2xl">👋</span>
+            <span className="text-foreground text-xl font-display">
               Welcome, {user.name}!
             </span>
           </div>
-          <div className="h-px bg-[#CED8E5] mb-6" />
+          <div className="h-px bg-border mb-6" />
         </div>
 
         {/* Content area */}
