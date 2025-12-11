@@ -151,24 +151,7 @@ const AppRoutes = () => (
       path="/user-profile"
       element={
         <ProtectedRoute>
-          <UserProfilePage
-            alumnus={{
-              username: "john-doe",
-              name: "John Doe",
-              graduationYear: "2020",
-              major: "CSE",
-              company: "Acme Corp",
-              bio: "Passionate engineer",
-              skills: ["React", "Node.js"],
-              experience: [
-                {
-                  company: "Acme Corp",
-                  title: "Engineer",
-                  from: "2021",
-                },
-              ],
-            }}
-          />
+          <UserProfilePage />
         </ProtectedRoute>
       }
     />

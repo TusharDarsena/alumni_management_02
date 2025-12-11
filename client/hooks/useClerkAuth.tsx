@@ -2,6 +2,16 @@ import { useUser, useAuth as useClerkAuthBase, useClerk } from "@clerk/clerk-rea
 import { useState, useEffect, useCallback, createContext, useContext, ReactNode } from "react";
 
 /**
+ * Experience type for work history
+ */
+export type Experience = {
+  company: string;
+  title: string;
+  from: string;
+  to?: string;
+};
+
+/**
  * Extended user type that includes MongoDB profile data
  */
 export type UserProfile = {
@@ -21,6 +31,15 @@ export type UserProfile = {
   isApproved?: boolean;
   avatarUrl?: string;
   notificationCount?: number;
+  // Extended profile fields
+  bio?: string;
+  graduationYear?: string;
+  major?: string;
+  company?: string;
+  jobTitle?: string;
+  skills?: string[];
+  experience?: Experience[];
+  linkedinUrl?: string;
 } | null;
 
 type AuthContextType = {
@@ -30,6 +49,7 @@ type AuthContextType = {
   loading: boolean;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
+  updateProfile: (data: Partial<UserProfile>) => Promise<boolean>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -52,7 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { user: clerkUser, isLoaded: isClerkLoaded, isSignedIn } = useUser();
   const { signOut: clerkSignOut } = useClerk();
   const { getToken } = useClerkAuthBase();
-  
+
   const [profile, setProfile] = useState<UserProfile>(null);
   const [isProfileLoaded, setIsProfileLoaded] = useState(false);
 
@@ -89,6 +109,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           location: data.location,
           isApproved: data.isApproved,
           _id: data._id,
+          avatarUrl: data.avatarUrl || clerkUser.imageUrl,
+          // Extended profile fields
+          bio: data.bio,
+          graduationYear: data.graduationYear,
+          major: data.major,
+          company: data.company,
+          jobTitle: data.jobTitle,
+          skills: data.skills || [],
+          experience: data.experience || [],
+          linkedinUrl: data.linkedinUrl,
         });
       } else {
         // Fallback to Clerk data only
@@ -100,6 +130,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           imageUrl: clerkUser.imageUrl,
           username: clerkUser.firstName || clerkUser.primaryEmailAddress?.emailAddress?.split("@")[0] || "User",
           role: (clerkUser.publicMetadata?.role as string) || "alumni",
+          skills: [],
+          experience: [],
         });
       }
     } catch (err) {
@@ -113,6 +145,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         imageUrl: clerkUser.imageUrl,
         username: clerkUser.firstName || "User",
         role: (clerkUser.publicMetadata?.role as string) || "alumni",
+        skills: [],
+        experience: [],
       });
     } finally {
       setIsProfileLoaded(true);
@@ -137,6 +171,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await fetchProfile();
   };
 
+  /**
+   * Update user profile
+   */
+  const updateProfile = async (data: Partial<UserProfile>): Promise<boolean> => {
+    try {
+      const token = await getToken();
+      const res = await fetch("/api/portal", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        // Refresh profile to get updated data
+        await fetchProfile();
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error("Failed to update profile:", err);
+      return false;
+    }
+  };
+
   const isLoaded = isClerkLoaded && isProfileLoaded;
 
   return (
@@ -148,6 +209,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         loading: !isLoaded,
         signOut,
         refresh,
+        updateProfile,
       }}
     >
       {children}
@@ -160,7 +222,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
  */
 export function useAuthToken() {
   const { getToken } = useClerkAuthBase();
-  
+
   const getAuthHeaders = useCallback(async (): Promise<Record<string, string>> => {
     const token = await getToken();
     if (token) {

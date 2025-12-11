@@ -1,12 +1,19 @@
 import mongoose from "mongoose";
 import { allowedBranches } from "../config/config.js";
 
+const experienceSchema = new mongoose.Schema({
+  company: { type: String, trim: true },
+  title: { type: String, trim: true },
+  from: { type: String, trim: true },
+  to: { type: String, trim: true },
+}, { _id: false });
+
 const userSchema = new mongoose.Schema({
   // Clerk integration
   clerkId: {
     type: String,
     unique: true,
-    sparse: true, // Allow null values, only enforce uniqueness when set
+    sparse: true,
     index: true,
   },
   email: {
@@ -23,16 +30,28 @@ const userSchema = new mongoose.Schema({
     default: "alumni",
   },
   isApproved: { type: Boolean, default: true },
-  // Phone and branch
+
+  // Basic profile fields
   phone: { type: String, unique: true, sparse: true, trim: true },
-  branch: { 
-    type: String, 
-    enum: [...Object.values(allowedBranches).flatMap(d => d.branches), ""], 
+  branch: {
+    type: String,
+    enum: [...Object.values(allowedBranches).flatMap(d => d.branches), ""],
     default: "CSE",
   },
   location: { type: String, trim: true },
-  // Avatar URL from Clerk
   avatarUrl: { type: String, trim: true },
+
+  // Extended profile fields
+  bio: { type: String, trim: true, maxlength: 500 },
+  graduationYear: { type: String, trim: true },
+  major: { type: String, trim: true },
+  company: { type: String, trim: true },
+  jobTitle: { type: String, trim: true },
+  skills: [{ type: String, trim: true }],
+  experience: [experienceSchema],
+  linkedinUrl: { type: String, trim: true },
+
+  // Timestamps
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
