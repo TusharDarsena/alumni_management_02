@@ -214,6 +214,69 @@ router.get("/autocomplete", rateLimiter, async (req, res) => {
   }
 });
 
+// GET /batch-stats - Get batch and branch distribution for visualization
+router.get("/batch-stats", async (req, res) => {
+  try {
+    const total = await AlumniProfile.countDocuments();
+
+    // Aggregate by batch and branch
+    const stats = await AlumniProfile.aggregate([
+      {
+        $group: {
+          _id: {
+            batch: { $ifNull: ["$batch", "No Batch"] },
+            branch: { $ifNull: ["$branch", "No Branch"] }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { "_id.batch": 1, "_id.branch": 1 } }
+    ]);
+
+    // Organize by batch (only year portion for cleaner display)
+    const batchData = {};
+    const branches = new Set();
+
+    stats.forEach(s => {
+      // Extract year from batch (e.g., "2019-08" -> "2019")
+      const rawBatch = s._id.batch;
+      const batch = rawBatch === "No Batch" ? "No Batch" : rawBatch.split("-")[0];
+      const branch = s._id.branch;
+
+      branches.add(branch);
+
+      if (!batchData[batch]) {
+        batchData[batch] = { total: 0, branches: {} };
+      }
+      batchData[batch].branches[branch] = (batchData[batch].branches[branch] || 0) + s.count;
+      batchData[batch].total += s.count;
+    });
+
+    // Convert to array format
+    const result = Object.entries(batchData)
+      .map(([batch, data]) => ({
+        batch,
+        total: data.total,
+        branches: data.branches
+      }))
+      .sort((a, b) => {
+        if (a.batch === "No Batch") return 1;
+        if (b.batch === "No Batch") return -1;
+        return a.batch.localeCompare(b.batch);
+      });
+
+    res.json({
+      success: true,
+      totalAlumni: total,
+      batches: result,
+      allBranches: Array.from(branches).sort()
+    });
+  } catch (error) {
+    console.error("Batch stats error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 router.get("/", async (req, res) => {
   try {
     const { search, branch, degree, batch } = req.query;
@@ -254,7 +317,7 @@ router.get("/", async (req, res) => {
     pipeline.push({
       $facet: {
         data: [
-          { $sort: { name: 1 } },
+          { $sort: { experienceScore: -1, name: 1 } },
           { $skip: skip },
           { $limit: limit },
           {
@@ -270,6 +333,7 @@ router.get("/", async (req, res) => {
               batch: 1,
               branch: 1,
               graduationYear: 1,
+              experienceScore: 1,
             },
           },
         ],

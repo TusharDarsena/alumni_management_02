@@ -1,0 +1,87 @@
+{
+  "id": "yogesh-kumar-89b675191",
+  "name": "Yogesh Kumar",
+  "avatar": "https://media.licdn.com/dms/image/v2/C4E03AQEpbiSE-Aj7Kg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1639074429025?e=2147483647&v=beta&t=N1M5JQqHc7FzmQthVxeD7FFx6V17Ofr4svHLv_MVyew",
+  "position": null,
+  "current_company": {
+    "name": "Google",
+    "location": null
+  },
+  "location": "South Delhi",
+  "about": "I have a keen curiosity about the origin and development of computers. The clock cycle…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2019",
+      "end_year": "2023",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2018",
+      "end_year": "2019",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2011",
+      "end_year": "2018",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2009",
+      "end_year": "2011",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2003",
+      "end_year": "2009",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [
+    {
+      "title": "Google",
+      "company": "Google",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQGv3cqOuUMY7g/company-logo_100_100/B4EZmhegXHGcAU-/0/1759350753990/google_logo?e=2147483647&v=beta&t=zYekdwB_mnXarr4wa4kw8w3Jikm8YaakM5aiDyAyvP0"
+    },
+    {
+      "title": "****",
+      "company": "****",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEPwqmPxxkksg/company-logo_100_100/company-logo_100_100/0/1719820330164/zetasuite_logo?e=2147483647&v=beta&t=0kqtd1BlET6xF-TdNmY40MzjoCADrqf4Y5L5DkWZ1go"
+    },
+    {
+      "title": "****",
+      "company": "****",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEPwqmPxxkksg/company-logo_100_100/company-logo_100_100/0/1719820330164/zetasuite_logo?e=2147483647&v=beta&t=0kqtd1BlET6xF-TdNmY40MzjoCADrqf4Y5L5DkWZ1go"
+    },
+    {
+      "title": "****-**** ******",
+      "company": "****-**** ******",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "****** ******* ***. ***. ****",
+      "company": "****** ******* ***. ***. ****",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    }
+  ],
+  "batch": "2019",
+  "branch": null,
+  "graduationYear": "2023",
+  "url": "https://my.linkedin.com/in/Yogesh-kumar-89b675191",
+  "linkedin_id": "yogesh-kumar-89b675191"
+}

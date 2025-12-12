@@ -1,0 +1,84 @@
+{
+  "id": "sakshi-verma-2a12551b2",
+  "name": "Sakshi Verma",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQG3610zUCJAQg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1673539696474?e=2147483647&v=beta&t=uWgsXurud6RDml3A_3QhcNh4HDSlPc732X9au1_klmM",
+  "position": "American Express | JustDial | IIIT-NR",
+  "current_company": {
+    "name": "American Express",
+    "title": "Senior Business Analyst",
+    "location": "Gurugram, Haryana, India"
+  },
+  "location": "Gurugram",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "B.Tech",
+      "field": "Electronics and Communication Engineering",
+      "start_year": "2019",
+      "end_year": "2023",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Delhi Public School, Durg",
+      "start_year": "2005",
+      "end_year": "2019",
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    }
+  ],
+  "experience": [
+    {
+      "title": "American Express",
+      "company": "American Express",
+      "location": "Gurugram, Haryana, India",
+      "start_date": "Oct 2024",
+      "end_date": "Present",
+      "company_logo_url": null
+    },
+    {
+      "title": "Data Analyst",
+      "company": "Justdial",
+      "location": null,
+      "start_date": "Jun 2022",
+      "end_date": "Jul 2022",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGInzgJ4DBnKg/company-logo_100_100/company-logo_100_100/0/1682493026473/justdial_logo?e=2147483647&v=beta&t=V52IGAZaWyBO_26TDlkgLGIG9dq7pbQO1faFuTgAxxQ"
+    },
+    {
+      "title": "IIIT-Naya Raipur",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": "May 2021",
+      "end_date": "May 2022",
+      "company_logo_url": null
+    },
+    {
+      "title": "Software Engineer Intern",
+      "company": "CGNet Swara",
+      "location": null,
+      "start_date": "Sep 2021",
+      "end_date": "Dec 2021",
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    },
+    {
+      "title": "Contributor",
+      "company": "GirlScript Winter of Contributing",
+      "location": null,
+      "start_date": "Sep 2021",
+      "end_date": "Nov 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGElhoksb5zYw/company-logo_100_100/company-logo_100_100/0/1630643121482/girlscript_winter_of_contributing_logo?e=2147483647&v=beta&t=FGJziFODc4JyP0utukupUzMsFkSwDvgzocOv3tsJqhk"
+    },
+    {
+      "title": "Coordinator",
+      "company": "SCInTFIC - IIIT Naya Raipur",
+      "location": null,
+      "start_date": "Oct 2020",
+      "end_date": "Jan 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQEr0Vl6boRTjQ/company-logo_100_100/company-logo_100_100/0/1630599845130?e=2147483647&v=beta&t=xN9BK3G6Uz4jp-QLk7ZPkZNui8fyrfNCGwC8iyOGw74"
+    }
+  ],
+  "batch": "2019",
+  "branch": "CSE",
+  "graduationYear": "2023",
+  "url": "https://hu.linkedin.com/in/Sakshi-verma-2a12551b2",
+  "linkedin_id": "sakshi-verma-2a12551b2"
+}

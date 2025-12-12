@@ -1,0 +1,31 @@
+{
+  "id": "garimagupta--",
+  "name": "Garima Gupta",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQHvUXGsHXRVLw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1690593476349?e=2147483647&v=beta&t=G0-EtGKg_CGcPV4tXd2TmziDFjAVRSUiScUWaem_e2s",
+  "position": null,
+  "current_company": {
+    "name": "PCGI Consulting",
+    "location": null
+  },
+  "location": null,
+  "about": null,
+  "education": [
+    {
+      "title": "New York University",
+      "start_year": "2021-09",
+      "end_year": "2023-05",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2017-08",
+      "end_year": "2021-05",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [],
+  "batch": null,
+  "branch": null,
+  "graduationYear": null,
+  "url": "https://nl.linkedin.com/in/garimagupta--",
+  "linkedin_id": "garimagupta--"
+}

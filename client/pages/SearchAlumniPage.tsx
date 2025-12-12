@@ -17,7 +17,7 @@ interface AlumniFilters {
   branch?: string;
 }
 
-const ITEMS_PER_PAGE = 24;
+const ITEMS_PER_PAGE = 12;
 
 export default function SearchAlumniPage() {
   const navigate = useNavigate();

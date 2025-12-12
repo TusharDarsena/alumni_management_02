@@ -1,0 +1,36 @@
+{
+  "id": "ayushbatwada",
+  "name": "Ayush kumar Batwara",
+  "avatar": "https://media.licdn.com/dms/image/v2/C5603AQG5PEjbTBPkjg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1588560027898?e=2147483647&v=beta&t=Wkuu5P3Z5ydKsHynDVcszKVw-YSIFkAk6eEDp77mmBY",
+  "position": null,
+  "current_company": {
+    "name": "CareExpand",
+    "location": null
+  },
+  "location": "Jaipur",
+  "about": "Experienced Software Developer with a strong background in backend development, mobile…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2015",
+      "end_year": "2016",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2013",
+      "end_year": "2014",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://jp.linkedin.com/in/Ayushbatwada",
+  "linkedin_id": "ayushbatwada"
+}

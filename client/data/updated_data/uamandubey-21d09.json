@@ -1,0 +1,117 @@
+{
+  "id": "amandubey-21d09",
+  "name": "Aman Dubey",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQFe_MGOc-FDHg/profile-displayphoto-shrink_200_200/B4EZYYSFheHUAY-/0/1744164117010?e=2147483647&v=beta&t=uABuX18Qu86G4q-ct5NTWKkXOqyyHbTwZbOaq60LcpY",
+  "position": "Quality Analyst - TCS Canada | Masters CS LU | Ex-SOTI | Btech ECE IIITNR",
+  "current_company": {
+    "name": "Tata Consultancy Services",
+    "title": "Quality Analyst",
+    "location": "Toronto, Ontario, Canada"
+  },
+  "location": "Toronto",
+  "about": "MSc graduate @ Laurentian University | Ex - QA- SOTI | B.Tech IIIT NR | Intern - Netweb Technologies",
+  "education": [
+    {
+      "title": "Laurentian University/Université Laurentienne",
+      "degree": "Masters",
+      "field": "Computational Science",
+      "start_year": "2023",
+      "end_year": "2025",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQHreb5UVJSsqw/company-logo_100_100/company-logo_100_100/0/1631318953792?e=2147483647&v=beta&t=nZFOuuaDc4A3DBOuyu6q6O8fYtC3mKEIZkhnnV4MY80"
+    },
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology - BTech",
+      "field": "Electrical, Electronics and Communications Engineering",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Delhi Public School (DPS)",
+      "degree": "High school",
+      "start_year": "2005",
+      "end_year": "2016",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQEwp53olQB03Q/company-logo_100_100/company-logo_100_100/0/1697306519695?e=2147483647&v=beta&t=p05Frx-l5OH6A-lADHcVtCtAY1-rE0gMOtLk5hG0TKE"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Quality Analyst",
+      "company": "Tata Consultancy Services",
+      "location": "Toronto, Ontario, Canada",
+      "start_date": "Apr 2025",
+      "end_date": "Present",
+      "company_logo_url": null
+    },
+    {
+      "title": "Brand Ambassador",
+      "company": "Embr",
+      "location": "Sudbury, Ontario, Canada",
+      "start_date": "Sep 2023",
+      "end_date": "Present",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGTe2WXXtPP5w/company-logo_100_100/company-logo_100_100/0/1720193410789/embr_logo?e=2147483647&v=beta&t=6WOoVtozav5J0PXQ-VaBIoCwzS55ftBjw_5vhB2W5mo"
+    },
+    {
+      "title": "Test Administrator",
+      "company": "Pearson",
+      "location": "Sudbury, Ontario, Canada",
+      "start_date": "Jan 2024",
+      "end_date": "Feb 2025",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQG9W4lfcWc9dQ/company-logo_100_100/B4EZYPofEYHkAQ-/0/1744018993869/pearson_logo?e=2147483647&v=beta&t=tatnP8PCFOON7lKpbmG0JRCF4QYNwFaondEAOnunhUs"
+    },
+    {
+      "title": "QA Specialist",
+      "company": "SOTI",
+      "location": "Gurugram, Haryana, India",
+      "start_date": "Sep 2021",
+      "end_date": "Aug 2023",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEzfFl7k46uKA/company-logo_100_100/company-logo_100_100/0/1726593370297/soti_logo?e=2147483647&v=beta&t=96ta6boA-YanmMMZ6de-9PuiynuT6IKLPPbG6yujaOo"
+    },
+    {
+      "title": "Student",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": "Aug 2017",
+      "end_date": "Nov 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Jr. Developer – HPC",
+      "company": "NetWeb Technologies",
+      "location": "Faridabad, Haryana, India",
+      "start_date": "Jan 2021",
+      "end_date": "Sep 2021",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGYnxmmBr4q5w/company-logo_100_100/company-logo_100_100/0/1712390039280/netweb_technologies_logo?e=2147483647&v=beta&t=o7DAZhrhYCpJKpWrmFdAV-lJstDMyfVDlRyR7CFkCDY"
+    },
+    {
+      "title": "Summer Intern",
+      "company": "NTPC Limited",
+      "location": "Noida Area, India",
+      "start_date": "Jun 2019",
+      "end_date": "Jul 2019",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQE8gNecsDrsRg/company-logo_100_100/company-logo_100_100/0/1731218341294/ntpc_logo?e=2147483647&v=beta&t=qgjfLeEWHQLJ82yb3uy4epKfdhipRst4wcjRU9jWKxI"
+    },
+    {
+      "title": "Summer Intern",
+      "company": "Vodafone Idea Limited",
+      "location": "Noida Area, India",
+      "start_date": "May 2019",
+      "end_date": "Jun 2019",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQEevoyea-becQ/company-logo_100_100/company-logo_100_100/0/1681969720316/vodafone_idea_limited_logo?e=2147483647&v=beta&t=2wsMPxZb0N69kvl51mHAOJtxdM2DCJpVlK11GhgTRD4"
+    },
+    {
+      "title": "Event organizer",
+      "company": "Technovate IIIT Naya Raipur",
+      "location": "IIIT naya raipur",
+      "start_date": "Mar 2018",
+      "end_date": "Apr 2018",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQHlbUD6T-pNtw/company-logo_100_100/company-logo_100_100/0/1630586553618/technovate_iiitnr_logo?e=2147483647&v=beta&t=YgVldipN9CRrwfYM51YFTb4ao4sXk1OcMKPhA4JBxaU"
+    }
+  ],
+  "batch": "2017",
+  "branch": "CSE",
+  "graduationYear": "2021",
+  "url": "https://cl.linkedin.com/in/amandubey-21d09",
+  "linkedin_id": "amandubey-21d09"
+}

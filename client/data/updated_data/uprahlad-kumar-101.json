@@ -1,0 +1,63 @@
+{
+  "id": "prahlad-kumar-101",
+  "name": "PRAHLAD KUMAR",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4E03AQGUqlzWbe7K0w/profile-displayphoto-shrink_200_200/B4EZZn2y9TH0AY-/0/1745499140643?e=2147483647&v=beta&t=_ZOto_lIyZdMJEVTNZAf-BRkRYFHDDLVZfwHA5ONNY4",
+  "position": null,
+  "current_company": {
+    "name": "Glance",
+    "location": null
+  },
+  "location": "Bangalore Urban",
+  "about": "I am a SDE 2 at Glance (InMobi), one of the world's leading mobile advertising platforms,…",
+  "education": [
+    {
+      "title": "International Institute of Information Technology, Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [
+    {
+      "title": "Glance",
+      "company": "Glance",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHMp9AZDrl6-w/company-logo_100_100/B56ZnxdPefJQAQ-/0/1760692599376/glancescreen_logo?e=2147483647&v=beta&t=Lq1HjA_sIDhWp2cVUfQL0ur5H0Y5qVGBK-fepkZsJvU"
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQHKJRmSET8ysQ/company-logo_100_100/company-logo_100_100/0/1644136924729/turtlemint_logo?e=2147483647&v=beta&t=qTpZDlPVUA_y7OH28mWcfr83d16O_bKbc8jk6rabcU8"
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQESykWFiZeMSQ/company-logo_100_100/company-logo_100_100/0/1689827442599?e=2147483647&v=beta&t=oH7flbEsgBUXu01t5KLbNH6M7AbAWrBletKkjOQAHn8"
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    },
+    {
+      "title": null,
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    }
+  ],
+  "batch": null,
+  "branch": null,
+  "graduationYear": null,
+  "url": "https://eg.linkedin.com/in/Prahlad-kumar-101",
+  "linkedin_id": "prahlad-kumar-101"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "akhilkumardonka",
+  "name": "Akhil Kumar Donka",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQEgesEWwwwxTw/profile-displayphoto-shrink_200_200/B4DZTl5NWdG4AY-/0/1739023767561?e=2147483647&v=beta&t=ZeV4JiehEDtnCfgqUnbmNdL_IDkLOPZFtBLY8aqDcS0",
+  "position": "Audio ML, Qualcomm | Signal Processing, IIT Hyderabad | ECE, IIIT Naya Raipur",
+  "current_company": {
+    "location": null
+  },
+  "location": "Hyderabad",
+  "about": null,
+  "education": [
+    {
+      "title": "Indian Institute of Technology, Hyderabad",
+      "degree": "Master of Technology - MTech",
+      "field": "Communication and Signal Processing",
+      "start_year": "2022",
+      "end_year": "2024",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQF4UTIU_pr10A/company-logo_100_100/company-logo_100_100/0/1707976518475/iithyderabad_logo?e=2147483647&v=beta&t=VAX3EJEUt86E1CurZuA8DI7cGOzYcjx7vXx-o2QAO18"
+    },
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology",
+      "field": "Electrical, Electronics and Communications Engineering",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Delhi Public School - India",
+      "degree": "DPS Durg | CBSE AISSCE (12th)",
+      "field": "High School/Secondary Certificate Programs",
+      "start_year": "2015",
+      "end_year": "2017",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQFJWBCrV-fjMg/company-logo_100_100/company-logo_100_100/0/1630577490421/delhi_public_school___india_logo?e=2147483647&v=beta&t=bourcohj6hTRSeQVnw5dzmwVQ9UHpYq98pq4g1-sHy0"
+    },
+    {
+      "title": "Delhi Public School - India",
+      "degree": "DPS Durg | CBSE AlSSC (10th)",
+      "field": "Junior High/Intermediate/Middle School Education and Teaching",
+      "start_year": "2014",
+      "end_year": "2015",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQFJWBCrV-fjMg/company-logo_100_100/company-logo_100_100/0/1630577490421/delhi_public_school___india_logo?e=2147483647&v=beta&t=bourcohj6hTRSeQVnw5dzmwVQ9UHpYq98pq4g1-sHy0"
+    }
+  ],
+  "experience": [],
+  "batch": "2017",
+  "branch": "CSE",
+  "graduationYear": "2021",
+  "url": "https://cl.linkedin.com/in/akhilkumardonka",
+  "linkedin_id": "akhilkumardonka"
+}

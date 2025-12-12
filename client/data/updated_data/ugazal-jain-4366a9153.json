@@ -1,0 +1,100 @@
+{
+  "id": "gazal-jain-4366a9153",
+  "name": "Gazal Jain",
+  "avatar": "https://media.licdn.com/dms/image/v2/D5603AQGkG0gIIEFb1w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1709548589839?e=2147483647&v=beta&t=MjJhOYa0sujnEmHkt2GSEnrOUi7QdTJcpZpyxAJEXco",
+  "position": "Engineering @Adobe | Ex- SDE @Microsoft Research, @PayPal, @Nasdaq| Full Stack Development",
+  "current_company": {
+    "name": "Adobe",
+    "title": "Computer Scientist - 1",
+    "location": "Greater Bengaluru Area"
+  },
+  "location": "Raipur",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT NAYA RAIPUR",
+      "degree": "Bachelor of Technology",
+      "field": "Computer Science",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    },
+    {
+      "title": "Delhi public school,bhilai",
+      "start_year": "2015",
+      "end_year": "2017",
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Computer Scientist - 1",
+      "company": "Adobe",
+      "location": "Greater Bengaluru Area",
+      "start_date": "Apr 2025",
+      "end_date": "Present",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQFrtK-ioO1rsQ/company-logo_100_100/company-logo_100_100/0/1630645864762/adobe_logo?e=2147483647&v=beta&t=Vg0IkCp055jxAgqs_f7eIDMneyo1NkTWSvyAMoqnhd8"
+    },
+    {
+      "title": "Full Stack Engineer (Contingent)",
+      "company": "Microsoft",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Mar 2024",
+      "end_date": "Apr 2025",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQH32RJQCl3dDQ/company-logo_100_100/B56ZYQ0mrGGoAU-/0/1744038948046/microsoft_logo?e=2147483647&v=beta&t=rr_7_bFRKp6umQxIHErPOZHtR8dMPIYeTjlKFdotJBY"
+    },
+    {
+      "title": "PayPal",
+      "company": "PayPal",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Feb 2024",
+      "end_date": "Mar 2024",
+      "company_logo_url": null
+    },
+    {
+      "title": "Nasdaq",
+      "company": "Nasdaq",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Jul 2021",
+      "end_date": "Jun 2022",
+      "company_logo_url": null
+    },
+    {
+      "title": "Market Technology Engineering Intern",
+      "company": "Nasdaq",
+      "location": "Bengaluru, Karnataka, India",
+      "start_date": "Jun 2020",
+      "end_date": "Aug 2020",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQHa5sYUYvnOfw/company-logo_100_100/company-logo_100_100/0/1651501366522/nasdaq_logo?e=2147483647&v=beta&t=4gEIxXOxQH_tGRLSht_gmn9hlyf48htX2ZZh6YFmRxs"
+    },
+    {
+      "title": "Dare in reality challenge",
+      "company": "Genpact",
+      "location": "Bangalore",
+      "start_date": "Sep 2019",
+      "end_date": "Feb 2020",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQFIjOdiff8hjA/company-logo_100_100/company-logo_100_100/0/1736265728917/genpact_logo?e=2147483647&v=beta&t=Jm64InCy2eaPouk0Sx0XC-HIfv3mrdSUoF4zOkk7SKQ"
+    },
+    {
+      "title": "Published Research Paper Author",
+      "company": "IIT Patna",
+      "location": "Patna, Bihar, India",
+      "start_date": "Sep 2019",
+      "end_date": "Sep 2019",
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    },
+    {
+      "title": "AI and ML Research Intern at ROBITA Lab, IIIT Allahabad",
+      "company": "ROBITA lab, IIIT Allahabad",
+      "location": "India",
+      "start_date": "May 2019",
+      "end_date": "Jul 2019",
+      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
+    }
+  ],
+  "batch": "2017",
+  "branch": "CSE",
+  "graduationYear": "2021",
+  "url": "https://be.linkedin.com/in/Gazal-jain-4366a9153",
+  "linkedin_id": "gazal-jain-4366a9153"
+}

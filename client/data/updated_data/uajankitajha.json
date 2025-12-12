@@ -1,0 +1,41 @@
+{
+  "id": "ajankitajha",
+  "name": "Ankita Jha",
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "position": "Power Solutions Intern @ INTEL",
+  "current_company": {
+    "location": null
+  },
+  "location": "Mangaluru",
+  "about": null,
+  "education": [
+    {
+      "title": "National Institute of Technology Karnataka",
+      "degree": "Master of Technology - MTech",
+      "field": "Communication Engineering & Networks (ECE)",
+      "start_year": "2024",
+      "end_year": "2026",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQELOxKVJQ1O1Q/company-logo_100_100/company-logo_100_100/0/1630582637661/national_institute_of_technology_karnataka_logo?e=2147483647&v=beta&t=sZFt2zCizY0J46CGs_AFYNbqDIld9uPTdCWr0jMro54"
+    },
+    {
+      "title": "IIIT NAYA RAIPUR",
+      "degree": "Bachelor of Technology - BTech",
+      "field": "ECE",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    },
+    {
+      "title": "FIITJEE",
+      "start_year": "2015",
+      "end_year": "2017",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQE9d_SBZk1M2g/company-logo_100_100/company-logo_100_100/0/1631339786430?e=2147483647&v=beta&t=Hbejm-b2n-b4krU5cSlB_H6Fx33NtcndJfCJTezQHyg"
+    }
+  ],
+  "experience": [],
+  "batch": "2017",
+  "branch": "ECE",
+  "graduationYear": "2021",
+  "url": "https://za.linkedin.com/in/ajankitajha",
+  "linkedin_id": "ajankitajha"
+}

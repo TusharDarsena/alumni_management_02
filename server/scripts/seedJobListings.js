@@ -92,7 +92,7 @@ const jobTemplates = [
     eligibleBranches: ["CSE (Data Science/AI)", "DSAI"],
     eligibleRoles: ["Alumni", "PhD", "M.Tech"],
   },
-  
+
   // Part Time Jobs - Various levels
   {
     title: "Part-Time React Developer",
@@ -146,7 +146,7 @@ const jobTemplates = [
     eligibleBranches: ["All Branches"],
     eligibleRoles: ["B.Tech", "Open for all"],
   },
-  
+
   // Internships - Mostly Junior level
   {
     title: "Software Engineering Intern",
@@ -213,7 +213,7 @@ const jobTemplates = [
     eligibleBranches: ["CSE (Data Science/AI)", "DSAI", "Mathematics"],
     eligibleRoles: ["M.Tech", "PhD"],
   },
-  
+
   // More Full Time - Different salary ranges and locations
   {
     title: "Cloud Architect",
@@ -293,7 +293,7 @@ const jobTemplates = [
     eligibleBranches: ["All Branches"],
     eligibleRoles: ["Alumni"],
   },
-  
+
   // More variety in locations and salaries
   {
     title: "QA Engineer",
@@ -360,7 +360,7 @@ const jobTemplates = [
     eligibleBranches: ["CSE", "ECE", "DSAI"],
     eligibleRoles: ["B.Tech", "Alumni"],
   },
-  
+
   // Additional Internships
   {
     title: "UI/UX Design Intern",
@@ -401,7 +401,7 @@ const jobTemplates = [
     eligibleBranches: ["All Branches"],
     eligibleRoles: ["M.Tech", "Open for all"],
   },
-  
+
   // More Full Time variety
   {
     title: "Site Reliability Engineer",
@@ -519,16 +519,17 @@ async function seedJobListings() {
       console.log("✅ MongoDB connected");
     }
 
-    // Find an admin or alumni user to assign as poster
-    const adminUser = await User.findOne({ role: "admin" });
-    const alumniUsers = await User.find({ role: "alumni" }).limit(5);
+    // Find Tushar Darsena by email to assign as poster
+    const tusharUser = await User.findOne({ email: "tdarsena05@gmail.com" });
 
-    if (!adminUser && alumniUsers.length === 0) {
-      console.error("❌ No users found. Please create at least one user first.");
+    if (!tusharUser) {
+      console.error("❌ Tushar Darsena user not found (tdarsena05@gmail.com). Please create this user first.");
       process.exit(1);
     }
 
-    const posterUsers = alumniUsers.length > 0 ? alumniUsers : [adminUser];
+    console.log(`✅ Found poster: ${tusharUser.username || tusharUser.email}`);
+
+    const posterUsers = [tusharUser];
     let posterIndex = 0;
 
     // Delete existing job listings

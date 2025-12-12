@@ -1,0 +1,34 @@
+{
+  "id": "shivam-singh-608086348",
+  "name": "Shivam Singh",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQFeRkKOsS1nIg/profile-displayphoto-shrink_400_400/B4DZR_ukLlHcAg-/0/1737309701048?e=2147483647&v=beta&t=smoNJ5d309rH04p1BRrrt6xYmsYrWvIQmBsreQaRnfA",
+  "position": null,
+  "current_company": {
+    "location": null
+  },
+  "location": "Raipur",
+  "about": null,
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": null,
+      "end_date": null,
+      "company_logo_url": null
+    }
+  ],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://cn.linkedin.com/in/shivam-singh-608086348",
+  "linkedin_id": "shivam-singh-608086348"
+}

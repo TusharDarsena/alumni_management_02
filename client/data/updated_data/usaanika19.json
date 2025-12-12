@@ -1,0 +1,36 @@
+{
+  "id": "saanika19",
+  "name": "Saanika Gupta",
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "position": null,
+  "current_company": {
+    "name": "Microsoft",
+    "location": null
+  },
+  "location": null,
+  "about": "Working as a Software Engineer-2 at Amazon. Focused Professional with a demonstrated…",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2015",
+      "end_year": "2017",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2014",
+      "end_year": "2015",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://il.linkedin.com/in/saanika19",
+  "linkedin_id": "saanika19"
+}

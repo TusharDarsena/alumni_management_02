@@ -1,0 +1,60 @@
+{
+  "id": "avani-p-gajallewar-644a9a257",
+  "name": "Avani P. Gajallewar",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQH7A7hFxPH4LA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1689921188672?e=2147483647&v=beta&t=uzNH_ul7R1qzsARgqxB4actxpOo4edC5Pl5RP6A5QXU",
+  "position": "Final Year IIIT-NR || PUF DESIGN || GATE(ECE) AIR 1218 || Front End Developer || Kaggle Contributor",
+  "current_company": {
+    "name": "IIIT-Naya Raipur",
+    "title": "Final Year IIIT-NR || PUF DESIGN || GATE(ECE) AIR 1218 || Front End Developer || Kaggle Contributor",
+    "location": null
+  },
+  "location": "Raipur",
+  "about": "Passionate Electronics and Communication Engineering (ECE) student at IIIT Naya Raipur with a strong interdisciplinary focus bridging hardware systems, VLSI design, and AI-driven software solutions. My experience spans spintronics-based hardware security (PUFs), antenna optimization, and CAD/EDA simulations, alongside deep learning applications in medical imaging and LLM-powered hardware verification automation. With a GATE (ECE) qualification (AIR-1218) and hands-on projects in ResNet(2+1)D-based brain tumor classification, Verilog-to-testbench automation using Transformers, and CST-driven RF optimization, I bring expertise in both circuit-level innovation and AI-driven computational modeling. Skilled in Verilog, Python, C++, TensorFlow, and Cadence Virtuoso, I am passionate about building solutions at the intersection of electronics, computer science, and machine intelligence to advance healthcare, hardware security, and next-gen communication systems.",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology",
+      "field": "Electrical, Electronics and Communications Engineering",
+      "start_year": "2022",
+      "end_year": "2026",
+      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Ryan International School, Raipur",
+      "degree": "95.4%",
+      "start_year": "2020",
+      "end_year": "2022",
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    },
+    {
+      "title": "Bhartiya Vidya Bhavans Raipur",
+      "degree": "93.8%",
+      "start_year": "2015",
+      "end_year": "2020",
+      "institute_logo_url": "https://static.licdn.com/aero-v1/sc/h/6qpnald1ddva78jx4bnnl3vw"
+    }
+  ],
+  "experience": [
+    {
+      "title": "VLSI Design Engineer Intern",
+      "company": "IIIT-Naya Raipur",
+      "location": null,
+      "start_date": "May 2025",
+      "end_date": "Jul 2025",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+    },
+    {
+      "title": "Information Technology Network Specialist",
+      "company": "NTPC Limited",
+      "location": null,
+      "start_date": "May 2024",
+      "end_date": "Jul 2024",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQE8gNecsDrsRg/company-logo_100_100/company-logo_100_100/0/1731218341294/ntpc_logo?e=2147483647&v=beta&t=qgjfLeEWHQLJ82yb3uy4epKfdhipRst4wcjRU9jWKxI"
+    }
+  ],
+  "batch": "2022",
+  "branch": "CSE",
+  "graduationYear": "2026",
+  "url": "https://au.linkedin.com/in/avani-p-gajallewar-644a9a257",
+  "linkedin_id": "avani-p-gajallewar-644a9a257"
+}

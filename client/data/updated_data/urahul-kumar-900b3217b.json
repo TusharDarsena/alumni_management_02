@@ -1,0 +1,31 @@
+{
+  "id": "rahul-kumar-900b3217b",
+  "name": "Rahul Kumar",
+  "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQFZvUUICY3Kyg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1722830120323?e=2147483647&v=beta&t=vpL9NyMpdqsT8u7ZtnMU5MwxqqyLKLBaz0XqIZbmfr8",
+  "position": null,
+  "current_company": {
+    "name": "Citi",
+    "location": null
+  },
+  "location": "Pune",
+  "about": null,
+  "education": [
+    {
+      "title": "Indian Institute of Technology, Kharagpur",
+      "start_year": "2021",
+      "end_year": "2023",
+      "institute_logo_url": null
+    },
+    {
+      "start_year": "2017",
+      "end_year": "2021",
+      "institute_logo_url": null
+    }
+  ],
+  "experience": [],
+  "batch": null,
+  "branch": null,
+  "graduationYear": null,
+  "url": "https://fr.linkedin.com/in/rahul-kumar-900b3217b",
+  "linkedin_id": "rahul-kumar-900b3217b"
+}

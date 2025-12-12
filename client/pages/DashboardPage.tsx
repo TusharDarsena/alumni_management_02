@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Briefcase, MapPin } from "lucide-react";
 import { getPublishedListings } from "@/features/job-listing/services/jobs";
+import BatchStatsChart from "@/components/BatchStatsChart";
 
 // Types for data
 interface JobListing {
@@ -187,6 +188,9 @@ export default function DashboardPage() {
           </h2>
           <DashboardStatsGrid stats={stats} />
         </div>
+
+        {/* Batch Statistics Chart */}
+        <BatchStatsChart />
 
         {/* Recent Job Postings & Recommended Connections */}
         <div className="grid md:grid-cols-2 gap-6">
