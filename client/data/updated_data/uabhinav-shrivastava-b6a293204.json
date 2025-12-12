@@ -7,7 +7,7 @@
     "name": "Club Dé Théâtre, IIITNR",
     "location": null
   },
-  "location": "Rajnandgaon",
+  "location": null,
   "about": "2nd-year DSAI student @ IIIT Naya Raipur, focused on the complete development…",
   "education": [
     {
@@ -15,6 +15,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "Club Dé Théâtre, IIITNR",
@@ -39,9 +40,12 @@
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": null,
   "branch": null,
   "graduationYear": null,
-  "url": "https://pe.linkedin.com/in/Abhinav-shrivastava-b6a293204",
+  "url": "https://at.linkedin.com/in/abhinav-shrivastava-b6a293204",
   "linkedin_id": "abhinav-shrivastava-b6a293204"
 }

@@ -22,6 +22,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "Stashfin",
@@ -64,5 +65,12 @@
   "branch": null,
   "graduationYear": "2021",
   "url": "https://cz.linkedin.com/in/priyans619",
+=======
+  "experience": [],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://bd.linkedin.com/in/priyans619",
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "linkedin_id": "priyans619"
 }

@@ -17,6 +17,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "Collate",
@@ -48,9 +49,12 @@
       "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": "2017-08",
   "branch": null,
   "graduationYear": "2021-07",
-  "url": "https://pl.linkedin.com/in/himanshukhairajani",
+  "url": "https://id.linkedin.com/in/Himanshukhairajani",
   "linkedin_id": "himanshukhairajani"
 }

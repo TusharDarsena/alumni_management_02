@@ -20,49 +20,10 @@
       "end_year": "2016"
     }
   ],
-  "experience": [
-    {
-      "title": "Deloitte",
-      "company": "Deloitte",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
-<<<<<<< HEAD
+  "experience": [],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-  "url": "https://nz.linkedin.com/in/Rajkush",
-=======
-  "batch": null,
-  "branch": "CSE",
-  "graduationYear": null,
-  "url": "https://pk.linkedin.com/in/Rajkush",
->>>>>>> e293a4c27dd16c74259926e08be0701b17f85290
+  "url": "https://ph.linkedin.com/in/rajkush",
   "linkedin_id": "rajkush"
 }

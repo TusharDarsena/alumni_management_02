@@ -16,6 +16,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "International Institute of Information Technology Naya Raipur,India",
@@ -26,9 +27,12 @@
       "company_logo_url": null
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": null,
   "branch": null,
   "graduationYear": null,
-  "url": "https://qa.linkedin.com/in/poonam-kodopi-359160191",
+  "url": "https://it.linkedin.com/in/poonam-kodopi-359160191",
   "linkedin_id": "poonam-kodopi-359160191"
 }

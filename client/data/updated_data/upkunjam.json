@@ -22,6 +22,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "JALI Research Inc.",
@@ -60,9 +61,12 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": null,
   "branch": null,
   "graduationYear": null,
-  "url": "https://it.linkedin.com/in/pkunjam",
+  "url": "https://ph.linkedin.com/in/Pkunjam",
   "linkedin_id": "pkunjam"
 }

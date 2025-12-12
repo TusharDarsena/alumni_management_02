@@ -6,16 +6,8 @@
   "current_company": {
     "location": null
   },
-  "experience": [
-    {
-      "title": "IIIT-Naya Raipur",
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company": "IIIT-Naya Raipur",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    }
-  ],
-  "url": "https://de.linkedin.com/in/heera-singh-netam-a4b655191",
+  "experience": null,
+  "url": "https://pl.linkedin.com/in/Heera-singh-netam-a4b655191",
   "educations_details": "IIIT-Naya Raipur",
   "education": [
     {
@@ -39,14 +31,14 @@
       "interaction": "Liked by heera singh Netam",
       "link": "https://www.linkedin.com/posts/rajeev-bharwan_problem-insight-solution-activity-7142761453404553217-JQKd",
       "title": "BREAK THE ADDICTION OF CRYING OVER PROBLEMS. THE BEST ESCAPE TO EVERY PROBLEM IS TO ‘SOLVE IT’. REMEMBER, EVERY LOCK HAS A KEY. THE DISTANCE BETWEEN…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D05AQH_hcO0UVMCPw/videocover-high/videocover-high/0/1702967035094?e=2147483647&v=beta&t=o-IVRFOa02U8w9WOI14-HjRWMQyPwvZGhuCFPBVZPz8",
+      "img": null,
       "id": "7142761453404553217"
     },
     {
       "interaction": "Liked by heera singh Netam",
       "link": "https://www.linkedin.com/posts/saanika19_amazon-promotion-sde-activity-7080787254612283392-nMhL",
       "title": "I'm delighted to share that I've been promoted to SDE-2 at Amazon! ✨ I am incredibly grateful for this milestone in my career, and would like to…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQEAsJ2QwWJRFQ/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1688191234740?e=2147483647&v=beta&t=6klugVzZDIlZeYC4Crh3b9OXv6yrsNvvbk9KTneO9e0",
+      "img": null,
       "id": "7080787254612283392"
     },
     {
@@ -136,7 +128,7 @@
   "bio_links": [],
   "first_name": "heera",
   "last_name": "singh Netam",
-  "timestamp": "2025-11-25T23:38:09.538Z",
+  "timestamp": "2025-12-11T22:02:29.550Z",
   "input": {
     "url": "https://in.linkedin.com/in/heera-singh-netam-a4b655191"
   },

@@ -10,33 +10,8 @@
     "company_id": "jaliresearch-inc",
     "location": null
   },
-  "experience": [
-    {
-      "title": "JALI Research Inc.",
-      "description_html": null,
-      "company": "JALI Research Inc.",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHmTTszhSFAYQ/company-logo_100_100/company-logo_100_100/0/1630623765042?e=2147483647&v=beta&t=vXu6IbZ1PA3B_LRlQixJmxEHYfc-gYOr0f4aFz3CRdE"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHV472cn2nhMw/company-logo_100_100/B56Zb.Jn2gHwAQ-/0/1748020657900/uwaterloo_logo?e=2147483647&v=beta&t=n54wHXJJKlCLE3ZWAejmbH36gSOODrQEsBh4kYgy6uY"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGEk305uQv2Pw/company-logo_100_100/company-logo_100_100/0/1718284774378/uw_wim_logo?e=2147483647&v=beta&t=DDOTrhzE6MXkLHD4R3k8asJX-Vi5mRy9L_SB-wS7lPY"
-    },
-    {
-      "description_html": null,
-      "duration": "2022 - 2024",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHV472cn2nhMw/company-logo_100_100/B56Zb.Jn2gHwAQ-/0/1748020657900/uwaterloo_logo?e=2147483647&v=beta&t=n54wHXJJKlCLE3ZWAejmbH36gSOODrQEsBh4kYgy6uY"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    }
-  ],
-  "url": "https://it.linkedin.com/in/pkunjam",
+  "experience": null,
+  "url": "https://ph.linkedin.com/in/Pkunjam",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/prachita-kotangale",
@@ -201,18 +176,7 @@
       "credential_id": "209241"
     }
   ],
-  "volunteer_experience": [
-    {
-      "cause": "Science and Technology",
-      "duration": "Mar 2018 · - \nMar 2018 · 1 month",
-      "duration_short": "- \nMar 2018",
-      "info": "Achievements/Tasks - - Planned and executed a successful LAN gaming tournament as part of a technical fest. - Oversaw all aspects of the tournament, including equipment setup, rule enforcement, and prize distribution, ensuring a smooth and fair competition for all participants. - Developed marketing strategies to attract participants and promote the tournament. - Demonstrated strong leadership, communication, and organizational skills throughout the planning and execution of the… Show more Achievements/Tasks - - Planned and executed a successful LAN gaming tournament as part of a technical fest. - Oversaw all aspects of the tournament, including equipment setup, rule enforcement, and prize distribution, ensuring a smooth and fair competition for all participants. - Developed marketing strategies to attract participants and promote the tournament. - Demonstrated strong leadership, communication, and organizational skills throughout the planning and execution of the event, receiving positive feedback from both participants and organizers. Show less",
-      "start_date": "Mar 2018",
-      "subtitle": "Technovate IIIT-NR",
-      "title": "Event Head"
-    }
-  ],
-  "followers": 1725,
+  "followers": 1726,
   "connections": 500,
   "current_company_company_id": "jaliresearch-inc",
   "current_company_name": "JALI Research Inc.",
@@ -252,7 +216,7 @@
       "start_date": "Jan 2023",
       "description": "Built a top-down 2D game using Unity designed to augment visual learning with haptic feedback. We showcased Slingshot at IEEE World Haptics 2023, where over 30 attendees engaged in hands-on demonstrations and provided positive feedback on their experiences."
     },
-    {},
+    null,
     {
       "title": "Tower of Hanoi",
       "start_date": "Oct 2020",
@@ -280,9 +244,16 @@
   "activity": [
     {
       "interaction": "Liked by Punit Kunjam",
+      "link": "https://www.linkedin.com/posts/assad-quraishi_businessdevelopment-salesleadership-gamingindustry-activity-7404248494330429440-fjRe",
+      "title": "I’ve never done this before… but this conversation deserved it. I sat down with David Bossin-Hardy, Director of Sales & Partnerships at JALI…",
+      "img": null,
+      "id": "7404248494330429440"
+    },
+    {
+      "interaction": "Liked by Punit Kunjam",
       "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-facialanimation-artistcentric-activity-7396593075214671873-oDaZ",
       "title": "We’re thrilled to celebrate two JALI customers recognized at The Game Awards! Congratulations to: DON'T NOD Montréal for Lost Records: Bloom & Rage…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQEJb1z2C-8Spw/feedshare-shrink_800/B56ZqXszKBHkAk-/0/1763481696113?e=2147483647&v=beta&t=LlilhfDjQDqeLM-mMatAx7Zuz-bgvC3ugJFL3LShldM",
+      "img": null,
       "id": "7396593075214671873"
     },
     {
@@ -340,27 +311,6 @@
       "title": "I had the privilege of attending a session by Pif Edwards, CTO and Co-Founder of JALI Research Inc., at Humber Polytechnic, where he spoke to our…",
       "img": "https://media.licdn.com/dms/image/v2/D5622AQFOYcOtqnRl_w/feedshare-shrink_2048_1536/B56ZmoREOeI0Aw-/0/1759464671856?e=2147483647&v=beta&t=vuLdlhWDX4xuyWCiNC0GbNmIUFuYzIXAo7aXG_Xs10s",
       "id": "7379729716548653056"
-    },
-    {
-      "interaction": "Liked by Punit Kunjam",
-      "link": "https://www.linkedin.com/posts/animation-world-network_jaliresearch-oiaf2025-facialanimation-activity-7377357554257108992-9tyr",
-      "title": "#JALIResearch Powers ‘When the Moon Sings’ in Competition at #OIAF2025 - Jesu Medina’s short film, selected for the Canadian Student program, is an…",
-      "img": "https://media.licdn.com/dms/image/v2/D5610AQH_YFVIf33H7w/image-shrink_800/B56ZmGjmqQHkAg-/0/1758899105135?e=2147483647&v=beta&t=t0mmslHJavJNSRzzQ4663ped5GolhfgX7gQcrnxN0d0",
-      "id": "7377357554257108992"
-    },
-    {
-      "interaction": "Liked by Punit Kunjam",
-      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-webinar-facialanimation-activity-7377030518938406912-wIpt",
-      "title": "Webinar Alert: There Are No Shortcuts in Facial Animation October 15 | 1pm ET Explore why 3D facial animation remains one of the most complex…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQEcCbO1Ht36Xg/feedshare-shrink_2048_1536/B56ZmB6KPfJoAw-/0/1758821132997?e=2147483647&v=beta&t=u8oGGWWY0aPxhHSpaH6vpLzL1UpmRaTbrcK0DztlRfw",
-      "id": "7377030518938406912"
-    },
-    {
-      "interaction": "Liked by Punit Kunjam",
-      "link": "https://www.linkedin.com/posts/jaliresearch-inc_jalipowered-scienceofanimation-fleetsciencecenter-activity-7375963437413232641-7Jyx",
-      "title": "Find JALI at the Science of Animation exhibit! ✨ Sept 27-28 | 10AM - 5PM | Fleet Science Center Hosted by Immersive Enterprise Laboratories - IEL…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQFaJUv8dABr9w/feedshare-shrink_1280/B56ZlyvqI4J8As-/0/1758566721327?e=2147483647&v=beta&t=4WHA_x1lJZyrDVv1N-mDaBEJpzZ2S8rplHcwVBYBhis",
-      "id": "7375963437413232641"
     }
   ],
   "linkedin_num_id": "659701272",
@@ -397,8 +347,9 @@
   "bio_links": [],
   "first_name": "Punit",
   "last_name": "Kunjam",
-  "timestamp": "2025-11-25T21:24:04.654Z",
+  "timestamp": "2025-12-11T22:13:53.154Z",
   "input": {
     "url": "https://ca.linkedin.com/in/pkunjam"
-  }
+  },
+  "batch": "2017-2021"
 }

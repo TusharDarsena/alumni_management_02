@@ -16,6 +16,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "IIIT-Naya Raipur",
@@ -26,9 +27,12 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-  "url": "https://de.linkedin.com/in/heera-singh-netam-a4b655191",
+  "url": "https://pl.linkedin.com/in/Heera-singh-netam-a4b655191",
   "linkedin_id": "heera-singh-netam-a4b655191"
 }

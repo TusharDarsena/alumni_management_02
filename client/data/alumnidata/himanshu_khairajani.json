@@ -10,28 +10,8 @@
     "company_id": "collateinc",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Collate",
-      "description_html": null,
-      "company": "Collate",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGW7tTqxIJ81A/company-logo_100_100/company-logo_100_100/0/1643177354617/collateinc_logo?e=2147483647&v=beta&t=TlsDlVdNmLn9R0UxwCsuBCPv1y-7MmNGOZimT8dAExo"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGpw3_jyNMH4A/company-logo_100_100/company-logo_100_100/0/1641200361763/clootrack_logo?e=2147483647&v=beta&t=kMsasmuWpSOXN1JvKmQB3MBTMesjrWUQV3llv0royqY"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQH2nyLQLodbbg/company-logo_100_100/company-logo_100_100/0/1630644414960/utopia_inc_logo?e=2147483647&v=beta&t=CcpcXDIe3LthhLTz0U4MGh_up1elUWiPyEZEaWlAPTo"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    }
-  ],
-  "url": "https://pl.linkedin.com/in/himanshukhairajani",
+  "experience": null,
+  "url": "https://id.linkedin.com/in/Himanshukhairajani",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/darshita-shukla-679286198",
@@ -212,7 +192,7 @@
       "interaction": "Liked by Himanshu Khairajani",
       "link": "https://www.linkedin.com/posts/mayur-singal-477a76141_im-excited-to-be-speaking-at-hasgeek-the-activity-7397892187801403392-2XR4",
       "title": "I’m excited to be speaking at Hasgeek The Fifth Elephant – Winter Edition on 4 December in Bengaluru on a topic that’s becoming foundational for…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFAPIR1XOkJYA/feedshare-shrink_800/B4DZqqXvMRHsAk-/0/1763794941871?e=2147483647&v=beta&t=_DeedeVMUvw-Guj3fR5DzPOLA_eN-sia6VjtzvAJmKE",
+      "img": null,
       "id": "7397892187801403392"
     },
     {
@@ -231,7 +211,7 @@
     },
     {
       "interaction": "Liked by Himanshu Khairajani",
-      "link": "https://www.linkedin.com/posts/juhi-bhatia-473142108_i-had-7-interviews-today-for-the-same-role-activity-7378411327809130496-PhPs",
+      "link": "https://www.linkedin.com/posts/juhibhatiacreator_i-had-7-interviews-today-for-the-same-role-activity-7378411327809130496-jgEe",
       "title": "I had 7 interviews today for the same role- and every candidate’s expectations were higher than the budget we set. After the interviews, I called…",
       "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
       "id": "7"
@@ -298,20 +278,6 @@
       "title": "𝑾𝒆’𝒓𝒆 𝒉𝒊𝒓𝒊𝒏𝒈 𝒂𝒕 𝑫𝒆𝒖𝒆𝒙 𝑺𝒐𝒍𝒖𝒕𝒊𝒐𝒏𝒔! 𝘓𝘰𝘰𝘬𝘪𝘯𝘨 𝘧𝘰𝘳 𝘦𝘹𝘱𝘦𝘳𝘪𝘦𝘯𝘤𝘦𝘥 𝘱𝘳𝘰𝘧𝘦𝘴𝘴𝘪𝘰𝘯𝘢𝘭𝘴 𝘧𝘰𝘳: 👨‍💻…",
       "img": "https://media.licdn.com/dms/image/v2/D4D22AQHc5eCptmYAKg/feedshare-shrink_1280/B4DZh0hEOqHsAk-/0/1754301483571?e=2147483647&v=beta&t=6ZKFBYrOxRzfyCAWAGNWn_iBr8uqkrXUPmapleOQ7lk",
       "id": "7358073733808381953"
-    },
-    {
-      "interaction": "Liked by Himanshu Khairajani",
-      "link": "https://www.linkedin.com/posts/shameelabdulla_im-in-india-right-now-and-people-keep-asking-activity-7354495681924870144-6atU",
-      "title": "I'm in India right now, and people keep asking me: \"What’s one thing you miss about India when you're in the US?\" Of course, there’s the usual…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQHpC9rgWnL-3w/feedshare-shrink_2048_1536/B4DZgdVI4IHAAs-/0/1752838739259?e=2147483647&v=beta&t=FmsRQWfGYHI2RFV_L76RtYD9Y-nOs-135RpCyv_WLsY",
-      "id": "7354495681924870144"
-    },
-    {
-      "interaction": "Liked by Himanshu Khairajani",
-      "link": "https://www.linkedin.com/posts/collateinc_openmetadata-opensource-community-activity-7354188567641772033-6Unr",
-      "title": "OpenMetadata is thrilled to announce that our Slack community has surpassed 10,000 members! Since launching in 2021, OpenMetadata has leveraged…",
-      "img": "https://media.licdn.com/dms/image/v2/D5622AQG3GIFDTcPJ6A/feedshare-shrink_800/B56Zg9Th8FHcAs-/0/1753375187248?e=2147483647&v=beta&t=7OVlTso4DSCvwUxnHbVppUND1VPU1tp0X7cHkM42jyk",
-      "id": "7354188567641772033"
     }
   ],
   "linkedin_num_id": "728981682",
@@ -328,7 +294,7 @@
   ],
   "first_name": "Himanshu",
   "last_name": "Khairajani",
-  "timestamp": "2025-11-25T22:46:50.855Z",
+  "timestamp": "2025-12-11T22:15:45.603Z",
   "input": {
     "url": "https://in.linkedin.com/in/himanshukhairajani"
   },

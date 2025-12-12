@@ -6,16 +6,8 @@
   "current_company": {
     "location": null
   },
-  "experience": [
-    {
-      "title": "IIIT Naya Raipur",
-      "description_html": null,
-      "duration": "2017 - 2022",
-      "company": "IIIT Naya Raipur",
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    }
-  ],
-  "url": "https://nl.linkedin.com/in/Vishwastoppo",
+  "experience": null,
+  "url": "https://fr.linkedin.com/in/vishwastoppo",
   "people_also_viewed": [
     {
       "profile_link": "https://www.linkedin.com/in/anirudh-singla-3a1844137",
@@ -76,6 +68,66 @@
       "name": "Priyanka Sharma",
       "about": null,
       "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/radhika-bajaj",
+      "name": "Radhika Bajaj",
+      "about": null,
+      "location": "Gurugram"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/praval",
+      "name": "Praval Singh",
+      "about": null,
+      "location": "New Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/pramod29feb",
+      "name": "Pramod Kumar",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/aayushaskj",
+      "name": "Aayush Jain",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/lishasimran",
+      "name": "Lisha Simran Shaik",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/dhara-narola-73376a121",
+      "name": "Dhara Narola",
+      "about": null,
+      "location": "Surat"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/mrroshana",
+      "name": "Roshan Agarwal",
+      "about": null,
+      "location": "San Francisco, CA"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/smrititomar",
+      "name": "Smriti Tomar",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/msengar",
+      "name": "Mahendra Sengar",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/nagesh-singh-chauhan",
+      "name": "Nagesh Singh Chauhan",
+      "about": null,
+      "location": "Gurugram"
     }
   ],
   "educations_details": "IIIT Naya Raipur",
@@ -127,7 +179,7 @@
   "bio_links": [],
   "first_name": "Vishwas",
   "last_name": "Toppo",
-  "timestamp": "2025-11-25T23:36:32.884Z",
+  "timestamp": "2025-12-11T22:01:35.920Z",
   "input": {
     "url": "https://in.linkedin.com/in/vishwastoppo"
   },

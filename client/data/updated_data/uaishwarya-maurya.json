@@ -27,6 +27,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "GravityONE",
@@ -65,9 +66,12 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGkKERzK_zxTw/company-logo_100_100/company-logo_100_100/0/1630579358736?e=2147483647&v=beta&t=owD0DK3JbBaKVFHK1amj1O2G53rjfHNn_oyi6asXcLc"
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-  "url": "https://www.linkedin.com/in/aishwarya-maurya",
+  "url": "https://ca.linkedin.com/in/aishwarya-maurya",
   "linkedin_id": "aishwarya-maurya"
 }

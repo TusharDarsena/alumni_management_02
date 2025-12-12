@@ -22,6 +22,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "Avalara",
@@ -64,5 +65,12 @@
   "branch": null,
   "graduationYear": "2021",
   "url": "https://tr.linkedin.com/in/Ashwini-kumar-261919183",
+=======
+  "experience": [],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://br.linkedin.com/in/ashwini-kumar-261919183",
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "linkedin_id": "ashwini-kumar-261919183"
 }

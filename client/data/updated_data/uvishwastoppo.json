@@ -16,6 +16,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "IIIT Naya Raipur",
@@ -30,5 +31,12 @@
   "branch": null,
   "graduationYear": "2022",
   "url": "https://nl.linkedin.com/in/Vishwastoppo",
+=======
+  "experience": [],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2022",
+  "url": "https://fr.linkedin.com/in/vishwastoppo",
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "linkedin_id": "vishwastoppo"
 }

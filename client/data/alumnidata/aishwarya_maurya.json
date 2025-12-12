@@ -10,33 +10,8 @@
     "company_id": "gravityoneai",
     "location": null
   },
-  "experience": [
-    {
-      "title": "GravityONE",
-      "description_html": null,
-      "company": "GravityONE",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQEsITuLLHVDEA/company-logo_100_100/company-logo_100_100/0/1737360040681/gravityilabs_logo?e=2147483647&v=beta&t=1cr_bkXbsyes6ErD872THWcvIJQchu58pELxMG9cMYc"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHCD5I79KeWtw/company-logo_100_100/company-logo_100_100/0/1643005714860/krayonnz_logo?e=2147483647&v=beta&t=h-gDYy2qIWZ-ci5RDgGQmBhP8qyE3HABFwYWkeyHOnM"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHCD5I79KeWtw/company-logo_100_100/company-logo_100_100/0/1643005714860/krayonnz_logo?e=2147483647&v=beta&t=h-gDYy2qIWZ-ci5RDgGQmBhP8qyE3HABFwYWkeyHOnM"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    },
-    {
-      "description_html": null,
-      "duration": "2016 - 2017",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGkKERzK_zxTw/company-logo_100_100/company-logo_100_100/0/1630579358736?e=2147483647&v=beta&t=owD0DK3JbBaKVFHK1amj1O2G53rjfHNn_oyi6asXcLc"
-    }
-  ],
-  "url": "https://www.linkedin.com/in/aishwarya-maurya",
+  "experience": null,
+  "url": "https://ca.linkedin.com/in/aishwarya-maurya",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/namanjain-spjimr",
@@ -97,6 +72,66 @@
       "name": "Divy Kala",
       "about": null,
       "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sahajk",
+      "name": "Sahaj Khandelwal",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/anshu-jhalani-0a1709182",
+      "name": "Anshu Jhalani",
+      "about": null,
+      "location": "Tonk"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/riteeka-purnekar-0039851a9",
+      "name": "Riteeka Purnekar",
+      "about": null,
+      "location": "Chicago, IL"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sayan-de-bhowmick-885b82156",
+      "name": "Sayan De Bhowmick",
+      "about": null,
+      "location": "South Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/hardiksoni11",
+      "name": "Hardik Soni",
+      "about": null,
+      "location": "Navi Mumbai"
+    },
+    {
+      "profile_link": "https://ca.linkedin.com/in/arham-m-shah",
+      "name": "Arham Shah",
+      "about": null,
+      "location": "Scarborough, ON"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/gokul-giju",
+      "name": "Gokul Giju",
+      "about": null,
+      "location": "Kerala, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/chelsi-mundra-88361a157",
+      "name": "Chelsi Mundra",
+      "about": null,
+      "location": "Rajasthan, India"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/himaja-chandaluri",
+      "name": "Himaja Chandaluri",
+      "about": null,
+      "location": "San Jose, CA"
+    },
+    {
+      "profile_link": "https://lu.linkedin.com/in/ayushagg28",
+      "name": "Ayush Aggarwal",
+      "about": null,
+      "location": "Luxembourg"
     }
   ],
   "educations_details": "IIIT-Naya Raipur",
@@ -200,7 +235,7 @@
   "bio_links": [],
   "first_name": "Aishwarya",
   "last_name": "Maurya",
-  "timestamp": "2025-11-26T15:42:08.719Z",
+  "timestamp": "2025-12-11T19:23:49.600Z",
   "input": {
     "url": "https://in.linkedin.com/in/aishwarya-maurya"
   },

@@ -17,6 +17,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "Microsoft",
@@ -45,5 +46,12 @@
   "branch": null,
   "graduationYear": "2021",
   "url": "https://uk.linkedin.com/in/Aditi-agrahari-6736b0153",
+=======
+  "experience": [],
+  "batch": "2017",
+  "branch": null,
+  "graduationYear": "2021",
+  "url": "https://no.linkedin.com/in/Aditi-agrahari-6736b0153",
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "linkedin_id": "aditi-agrahari-6736b0153"
 }

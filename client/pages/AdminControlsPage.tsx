@@ -10,6 +10,8 @@ import AllowedDomainsManager from "@/components/AllowedDomainsManager";
 import { useToast } from "@/hooks/use-toast";
 import ImportUpload from "@/components/ImportUpload";
 import SingleProfileScraper from "@/components/SingleProfileScraper";
+import DirectProfileScraper from "@/components/DirectProfileScraper";
+// import DirectBatchScraper from "@/components/DirectBatchScraper";
 import { useAuth } from "@/hooks/useClerkAuth";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
@@ -136,8 +138,10 @@ export default function AdminControlsPage() {
       fullWidth
     >
       {/* --- NEW: Single Profile Scraper Component --- */}
-      <div className="mt-6 mb-8">
+      <div className="mt-6 mb-8 space-y-6">
         <SingleProfileScraper />
+        <DirectProfileScraper />
+        {/* <DirectBatchScraper /> */}
       </div>
       
       {/* --- Divider --- */}

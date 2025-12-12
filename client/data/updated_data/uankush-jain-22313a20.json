@@ -27,6 +27,7 @@
       "institute_logo_url": null
     }
   ],
+<<<<<<< HEAD
   "experience": [
     {
       "title": "Apra Labs.",
@@ -65,9 +66,12 @@
       "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHiNYfm0YHKrg/company-logo_100_100/company-logo_100_100/0/1656621848677/udacity_logo?e=2147483647&v=beta&t=rBDM1CPEsOBCa2fb8gqoV3tj_uKoWwlVeElKBui3f6w"
     }
   ],
+=======
+  "experience": [],
+>>>>>>> abe4b5d3b489e4dea7371e65f8269d9121d42667
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-  "url": "https://vn.linkedin.com/in/Ankush-jain-22313a20",
+  "url": "https://pl.linkedin.com/in/Ankush-jain-22313a20",
   "linkedin_id": "ankush-jain-22313a20"
 }
