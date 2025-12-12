@@ -10,46 +10,8 @@
     "company_id": "google",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Google",
-      "subtitle": "******** ******** ***",
-      "description_html": null,
-      "company": "Google",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4E0BAQGv3cqOuUMY7g/company-logo_100_100/B4EZmhegXHGcAU-/0/1759350753990/google_logo?e=2147483647&v=beta&t=zYekdwB_mnXarr4wa4kw8w3Jikm8YaakM5aiDyAyvP0"
-    },
-    {
-      "title": "****",
-      "subtitle": "******** *********** ********",
-      "description_html": null,
-      "company": "****",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEPwqmPxxkksg/company-logo_100_100/company-logo_100_100/0/1719820330164/zetasuite_logo?e=2147483647&v=beta&t=0kqtd1BlET6xF-TdNmY40MzjoCADrqf4Y5L5DkWZ1go"
-    },
-    {
-      "title": "****",
-      "subtitle": "******** *********** ******** ******",
-      "description_html": null,
-      "company": "****",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQEPwqmPxxkksg/company-logo_100_100/company-logo_100_100/0/1719820330164/zetasuite_logo?e=2147483647&v=beta&t=0kqtd1BlET6xF-TdNmY40MzjoCADrqf4Y5L5DkWZ1go"
-    },
-    {
-      "title": "****-**** ******",
-      "subtitle": "******** ** ********** - ***** ******** ******* *** ***********",
-      "description_html": null,
-      "duration": "2019 - 2023",
-      "company": "****-**** ******",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    },
-    {
-      "title": "****** ******* ***. ***. ****",
-      "subtitle": "***",
-      "description_html": null,
-      "duration": "2018 - 2019",
-      "company": "****** ******* ***. ***. ****",
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    }
-  ],
-  "url": "https://my.linkedin.com/in/Yogesh-kumar-89b675191",
+  "experience": null,
+  "url": "https://sa.linkedin.com/in/yogesh-kumar-89b675191",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/sneha-gupta-89830357",
@@ -72,7 +34,7 @@
     {
       "profile_link": "https://in.linkedin.com/in/amaresh-anuj-7370677b",
       "name": "Amaresh Anuj",
-      "about": "Software Engineer at Technochords Software Pvt. Ltd.",
+      "about": null,
       "location": "West Delhi"
     },
     {
@@ -110,6 +72,66 @@
       "name": "Sanu Das",
       "about": null,
       "location": "Howrah"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/richa-t-00117195",
+      "name": "Richa T.",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/poonam-sharma-279739b9",
+      "name": "Poonam Sharma",
+      "about": null,
+      "location": "Hisar"
+    },
+    {
+      "profile_link": "https://uk.linkedin.com/in/rohit-agarwal-8a22a372",
+      "name": "Rohit Agarwal",
+      "about": null,
+      "location": "London"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/asna-farooqui-0314b7a4",
+      "name": "Asna Farooqui",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/adish-agarwal-202657146",
+      "name": "Adish Agarwal",
+      "about": null,
+      "location": "Agra"
+    },
+    {
+      "profile_link": "https://kr.linkedin.com/in/dhairya-sandhyana-29505978",
+      "name": "Dhairya Sandhyana",
+      "about": null,
+      "location": "Seoul, South Korea"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/nirajsavaliya1",
+      "name": "Niraj Savaliya",
+      "about": null,
+      "location": "Ahmedabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/kanchan-yadav007",
+      "name": "Kanchan Y.",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/srishti7337",
+      "name": "Srishti Sharma",
+      "about": null,
+      "location": "New York, NY"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ashismartin",
+      "name": "Ashis Martin Monteiro",
+      "about": null,
+      "location": "India"
     }
   ],
   "educations_details": "IIIT-Naya Raipur",
@@ -157,7 +179,7 @@
   "recommendations": [
     "Nityam Parakh “Yogesh is a kind of person one would love to work with. He is dedicated, hard working and passionate about getting things done. In a very short span of time we worked together I have seen him grow from a college student to a confident professional. He is ready to take down any challenge and has the zeal to overcome all the obstacles that may cross his way. He has been a great asset to our team and I am quite confident that he will add a lot of value where ever he goes. Wishing him all the best for future endorsements.”"
   ],
-  "followers": 6150,
+  "followers": 6183,
   "connections": 500,
   "current_company_company_id": "google",
   "current_company_name": "Google",
@@ -183,7 +205,7 @@
       "interaction": "Liked by Yogesh Kumar",
       "link": "https://www.linkedin.com/posts/roseyao_rose-yao-dozenrose-on-x-activity-7361786440189419520-DzAu",
       "title": "So proud of my team for today’s launch of Flight Deals, the new, AI-powered search tool we’re testing within Google Flights. If you’re a flexible…",
-      "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQEBx3_VphYoPQ/articleshare-shrink_1280_800/B56ZjyfRImHMAQ-/0/1760632554849?e=2147483647&v=beta&t=XGHzhoDkybTTAYQZIOGbN3DlMIY-VsJm9Y1Zwqfergk",
+      "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQEBx3_VphYoPQ/articleshare-shrink_1280_800/B56ZjyfRImHMAQ-/0/1765301062695?e=2147483647&v=beta&t=rT562wJxpJfowIuihE1CJURFuho-B2ZZJJpw0Ukev1Q",
       "id": "7361786440189419520"
     },
     {
@@ -295,8 +317,9 @@
   "bio_links": [],
   "first_name": "Yogesh",
   "last_name": "Kumar",
-  "timestamp": "2025-10-26T20:14:14.653Z",
+  "timestamp": "2025-12-12T05:24:15.936Z",
   "input": {
     "url": "https://in.linkedin.com/in/yogesh-kumar-89b675191"
-  }
+  },
+  "batch": "2019-2023"
 }

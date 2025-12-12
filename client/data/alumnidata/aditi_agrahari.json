@@ -9,24 +9,8 @@
     "company_id": "microsoft",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Microsoft",
-      "description_html": null,
-      "company": "Microsoft",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQH32RJQCl3dDQ/company-logo_100_100/B56ZYQ0mrGGoAU-/0/1744038948046/microsoft_logo?e=2147483647&v=beta&t=rr_7_bFRKp6umQxIHErPOZHtR8dMPIYeTjlKFdotJBY"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQHQlMSi8l6reA/company-logo_100_100/company-logo_100_100/0/1631340427369?e=2147483647&v=beta&t=crNRuEDwB6KLjHP3pSZfbYWa1y8-rhGyMTHIkBT59yc"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    }
-  ],
-  "url": "https://uk.linkedin.com/in/Aditi-agrahari-6736b0153",
+  "experience": null,
+  "url": "https://no.linkedin.com/in/Aditi-agrahari-6736b0153",
   "educations_details": "IIIT Naya Raipur",
   "education": [
     {
@@ -51,14 +35,14 @@
       "interaction": "Liked by Aditi Agrahari",
       "link": "https://www.linkedin.com/posts/rushil-sanghavi-946b4019a_multi-view-multi-label-canonical-correlation-activity-7371921497029955584-sTYE",
       "title": "Excited to share another paper on Multi-View Multi-Label CCA accepted at Springer Nature Journal. Many kudos to the coauthors Asha Rani & Dr. Verma…",
-      "img": "https://media.licdn.com/dms/image/sync/v2/D4D27AQFvQlXv4WsaDA/articleshare-shrink_800/B4DZk5TSmYJIAI-/0/1757602983132?e=2147483647&v=beta&t=t5Jc1KvXUz7V_4ObYJcdeE3Ycd4DGIQhrH-YDif1xdM",
+      "img": null,
       "id": "7371921497029955584"
     },
     {
       "interaction": "Liked by Aditi Agrahari",
       "link": "https://www.linkedin.com/posts/siddharth-singh-79b0b5190_risingstaraward-gratitude-teamwork-activity-7262869063092105218-oTL5",
       "title": "🌟 I am thrilled to announce that I have received the Rising Star Award from Miguel Gonzalez at ZEISS India during the annual ZEISS Vision India…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQFK1SB5ZX4GvA/feedshare-shrink_800/feedshare-shrink_800/0/1731602920034?e=2147483647&v=beta&t=pwTZqGPp8P6g2-15SiFrXzggVUAFIHMKKaou5DCwpqw",
+      "img": null,
       "id": "7262869063092105218"
     },
     {
@@ -134,9 +118,9 @@
   "bio_links": [],
   "first_name": "Aditi",
   "last_name": "Agrahari",
-  "timestamp": "2025-11-28T13:25:09.745Z",
+  "timestamp": "2025-12-11T22:01:30.700Z",
   "input": {
     "url": "https://in.linkedin.com/in/aditi-agrahari-6736b0153"
   },
-  "batch": "2025-2029"
+  "batch": "2017-2021"
 }

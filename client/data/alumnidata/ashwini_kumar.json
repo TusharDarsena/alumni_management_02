@@ -10,34 +10,8 @@
     "company_id": "avalara",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Avalara",
-      "description_html": null,
-      "company": "Avalara",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQESWKy4lzl4qg/company-logo_100_100/company-logo_100_100/0/1656685915550/avalara_logo?e=2147483647&v=beta&t=CiYPjwE6T5A5R5jkm8yl9Ci3-EtxYaRHfBTDlcZVJog"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQF1_JfgwEpWrA/company-logo_100_100/company-logo_100_100/0/1709565326515/yext_logo?e=2147483647&v=beta&t=6641Yz4zwmGm7O2yPxfAihTX_C-UPHVm4ZxhgHSPIRw"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQF44VAW2ygFJQ/company-logo_100_100/company-logo_100_100/0/1729158400860/lt_technology_services_limited_logo?e=2147483647&v=beta&t=tJgB-csuFJ-smAdeR08b9didgNs_DAOYlXp-NP4jgnA"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    },
-    {
-      "subtitle": "-",
-      "description_html": null,
-      "duration": "2004 - 2016",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQFiB3Otc6s1Mw/company-logo_100_100/company-logo_100_100/0/1631344654761?e=2147483647&v=beta&t=AIfEyEG6cEClJz2VcqW6L99hulc82QT-10k-KJfhFN4"
-    }
-  ],
-  "url": "https://tr.linkedin.com/in/Ashwini-kumar-261919183",
+  "experience": null,
+  "url": "https://br.linkedin.com/in/ashwini-kumar-261919183",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/kartik8800",
@@ -192,7 +166,7 @@
       "title": "Event Head"
     }
   ],
-  "followers": 8006,
+  "followers": 8119,
   "connections": 500,
   "current_company_company_id": "avalara",
   "current_company_name": "Avalara",
@@ -211,14 +185,14 @@
       "interaction": "Liked by Ashwini Kumar",
       "link": "https://www.linkedin.com/posts/ekta-navani-b5082961_campusrecruitment-avalara-sribalajiuniversity-activity-7373272644269334528-TZqU",
       "title": "🚀 Campus Recruitment @ Sri Balaji University 🎓 Last Friday, team Avalara had the incredible opportunity to visit Sri Balaji University, Pune…",
-      "img": null,
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQF3TRdusyLcvQ/feedshare-shrink_800/B4DZlMf73WJIAg-/0/1757925179209?e=2147483647&v=beta&t=t08pBYPKQMXYk23Vzwh9MAyOgrWircwP5U5QVd-suB4",
       "id": "7373272644269334528"
     },
     {
       "interaction": "Liked by Ashwini Kumar",
       "link": "https://www.linkedin.com/posts/rajivnayanc_webdevelopment-security-encryption-activity-7365084799679549443--NTb",
       "title": "A little story about a decade-old side project and a simple, modern solution. About 10 years ago, I built a simple HTML/JS website for my dad to…",
-      "img": null,
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
       "id": "7365084799679549443"
     },
     {
@@ -238,9 +212,9 @@
   "bio_links": [],
   "first_name": "Ashwini",
   "last_name": "Kumar",
-  "timestamp": "2025-11-28T13:26:32.056Z",
+  "timestamp": "2025-12-11T22:03:11.856Z",
   "input": {
     "url": "https://in.linkedin.com/in/ashwini-kumar-261919183"
   },
-  "batch": "2025-2029"
+  "batch": "2017-2021"
 }

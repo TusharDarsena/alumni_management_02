@@ -20,46 +20,10 @@
       "end_year": "2016"
     }
   ],
-  "experience": [
-    {
-      "title": "Avalara",
-      "company": "Avalara",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
+  "experience": [],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-<<<<<<< HEAD
-  "url": "https://www.linkedin.com/in/ashwini-kumar-261919183",
-=======
-  "url": "https://tr.linkedin.com/in/Ashwini-kumar-261919183",
->>>>>>> e293a4c27dd16c74259926e08be0701b17f85290
+  "url": "https://br.linkedin.com/in/ashwini-kumar-261919183",
   "linkedin_id": "ashwini-kumar-261919183"
 }

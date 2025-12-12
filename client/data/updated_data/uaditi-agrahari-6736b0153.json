@@ -16,34 +16,10 @@
       "end_year": "2021"
     }
   ],
-  "experience": [
-    {
-      "title": "Microsoft",
-      "company": "Microsoft",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
+  "experience": [],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-<<<<<<< HEAD
-  "url": "https://sa.linkedin.com/in/aditi-agrahari-6736b0153",
-=======
-  "url": "https://uk.linkedin.com/in/Aditi-agrahari-6736b0153",
->>>>>>> e293a4c27dd16c74259926e08be0701b17f85290
+  "url": "https://no.linkedin.com/in/Aditi-agrahari-6736b0153",
   "linkedin_id": "aditi-agrahari-6736b0153"
 }

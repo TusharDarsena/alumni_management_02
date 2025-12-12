@@ -20,42 +20,10 @@
       "end_year": "2021-08"
     }
   ],
-  "experience": [
-    {
-      "title": "JALI Research Inc.",
-      "company": "JALI Research Inc.",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
+  "experience": [],
   "batch": null,
   "branch": null,
   "graduationYear": null,
-  "url": "https://it.linkedin.com/in/pkunjam",
+  "url": "https://ph.linkedin.com/in/Pkunjam",
   "linkedin_id": "pkunjam"
 }

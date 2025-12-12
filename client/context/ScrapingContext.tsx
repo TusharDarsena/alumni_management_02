@@ -6,6 +6,8 @@ import { useToast } from "@/hooks/use-toast";
 export interface ScrapeProfile {
   name: string;
   batch: string;
+  linkedinUrl?: string;
+  url?: string; // Added for compatibility with new ImportUpload logic
 }
 
 interface ScrapingContextType {

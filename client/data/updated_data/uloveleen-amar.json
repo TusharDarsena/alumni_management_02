@@ -24,42 +24,10 @@
       "end_year": "2015"
     }
   ],
-  "experience": [
-    {
-      "title": "Intel Corporation",
-      "company": "Intel Corporation",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
+  "experience": [],
   "batch": null,
   "branch": null,
   "graduationYear": null,
-  "url": "https://www.linkedin.com/in/Loveleen-amar",
+  "url": "https://es.linkedin.com/in/Loveleen-amar",
   "linkedin_id": "loveleen-amar"
 }

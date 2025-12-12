@@ -24,42 +24,10 @@
       "end_year": "2015"
     }
   ],
-  "experience": [
-    {
-      "title": "GravityONE",
-      "company": "GravityONE",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
+  "experience": [],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-  "url": "https://www.linkedin.com/in/aishwarya-maurya",
+  "url": "https://ca.linkedin.com/in/aishwarya-maurya",
   "linkedin_id": "aishwarya-maurya"
 }

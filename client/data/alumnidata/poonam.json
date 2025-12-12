@@ -6,16 +6,8 @@
   "current_company": {
     "location": null
   },
-  "experience": [
-    {
-      "title": "International Institute of Information Technology Naya Raipur,India",
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company": "International Institute of Information Technology Naya Raipur,India",
-      "company_logo_url": null
-    }
-  ],
-  "url": "https://qa.linkedin.com/in/poonam-kodopi-359160191",
+  "experience": null,
+  "url": "https://it.linkedin.com/in/poonam-kodopi-359160191",
   "educations_details": "International Institute of Information Technology Naya Raipur,India",
   "education": [
     {
@@ -43,7 +35,7 @@
   "bio_links": [],
   "first_name": "Poonam",
   "last_name": "Kodopi",
-  "timestamp": "2025-11-25T22:46:05.537Z",
+  "timestamp": "2025-12-11T22:03:17.396Z",
   "input": {
     "url": "https://in.linkedin.com/in/poonam-kodopi-359160191"
   },

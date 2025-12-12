@@ -9,33 +9,8 @@
     "company_id": "apra-labs",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Apra Labs.",
-      "description_html": null,
-      "company": "Apra Labs.",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQEQCRJCQmwpww/company-logo_100_100/company-logo_100_100/0/1631301207958?e=2147483647&v=beta&t=0ilJ1hiOEgxNfY70GxppMv6Wna2viuGs8Nm1r7YoXng"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQGeN8E4W5rnrQ/company-logo_100_100/company-logo_100_100/0/1667422004502/bytelearn_logo?e=2147483647&v=beta&t=zmue_iamPFnVj9UAlhJmdYG7pKkaEBQYGoSRCDIsBUQ"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQGNtpblgQpJoQ/company-logo_100_100/company-logo_100_100/0/1662120928214/deloitte_logo?e=2147483647&v=beta&t=OSF8M5LreT0Sf2F-JcNk6XMT0ArCuPfDmRR-knCC4HY"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    },
-    {
-      "description_html": null,
-      "duration": "2020 - 2020",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHiNYfm0YHKrg/company-logo_100_100/company-logo_100_100/0/1656621848677/udacity_logo?e=2147483647&v=beta&t=rBDM1CPEsOBCa2fb8gqoV3tj_uKoWwlVeElKBui3f6w"
-    }
-  ],
-  "url": "https://vn.linkedin.com/in/Ankush-jain-22313a20",
+  "experience": null,
+  "url": "https://pl.linkedin.com/in/Ankush-jain-22313a20",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/parth-chokhra",
@@ -96,6 +71,66 @@
       "name": "Ishaan Farooq",
       "about": null,
       "location": "Lucknow"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shubhambhatnagar2022",
+      "name": "Shubham Bhatnagar",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/kiran-muthigi",
+      "name": "Kiran Muthigi",
+      "about": null,
+      "location": "Washington, DC"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/vishnu-bharadwaj-suresh-796877175",
+      "name": "Vishnu Bharadwaj Suresh",
+      "about": null,
+      "location": "New York City Metropolitan Area"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ketan-chandak",
+      "name": "Ketan Chandak",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/dhanu-pandey-44b63113a",
+      "name": "Dhanu Pandey",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/nikita-sharma-44805915a",
+      "name": "Nikita Sharma",
+      "about": null,
+      "location": "Gwalior"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shivam-vatshayan",
+      "name": "Shivam Vatshayan",
+      "about": null,
+      "location": "Delhi, India"
+    },
+    {
+      "profile_link": "https://lu.linkedin.com/in/nishtha-khurana",
+      "name": "Nishtha Khurana",
+      "about": null,
+      "location": "Luxembourg"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/vaibhav-singh-815241117",
+      "name": "Vaibhav Singh",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ks1912",
+      "name": "Kunal Singh",
+      "about": null,
+      "location": "Hyderabad"
     }
   ],
   "educations_details": "IIIT Naya Raipur",
@@ -216,17 +251,6 @@
       "credential_id": "4,869,458"
     }
   ],
-  "volunteer_experience": [
-    {
-      "cause": "Education",
-      "duration": "Feb 2018 · - Present · \n\n7 years 10 months",
-      "duration_short": "- Present",
-      "info": "In the annual event SCInTFIC of my college, I volunteered in the lecture series and delivered a lecture on applications of AI to young minds from school.",
-      "start_date": "Feb 2018",
-      "subtitle": "IIIT-Naya Raipur",
-      "title": "Lecturer"
-    }
-  ],
   "followers": 1416,
   "connections": 500,
   "current_company_company_id": "apra-labs",
@@ -239,21 +263,21 @@
       "interaction": "Liked by Ankush Jain",
       "link": "https://www.linkedin.com/posts/varmakvl_it-was-an-incredible-experience-at-blub%C3%B8x-activity-7381677541910241280-yia6",
       "title": "It was an incredible experience at BluBØX HQ! Not only did I get the opportunity to collaborate with talented people from around the globe, but I…",
-      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "img": null,
       "id": "7381677541910241280"
     },
     {
       "interaction": "Liked by Ankush Jain",
       "link": "https://www.linkedin.com/posts/jingtang_introducing-kotlin-fhir-a-new-library-to-activity-7374034043895558144-wf5-",
       "title": "Thrilled to announce our new open-source library: Kotlin FHIR! 🚀 Built on Kotlin Multiplatform (KMP), this library is a game-changer for health…",
-      "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQE3azsnt8GQ8Q/articleshare-shrink_1280_800/B56ZlTx3ZFHQAQ-/0/1758047205629?e=2147483647&v=beta&t=UEVXhKkMIyPiuwG8BfD2f3-WBVuKjOr9212InCDfEgs",
+      "img": null,
       "id": "7374034043895558144"
     },
     {
       "interaction": "Liked by Ankush Jain",
       "link": "https://www.linkedin.com/posts/arpitbhayani_yes-cdn-improves-latencies-by-caching-things-activity-7371893436385386496-HgTB",
       "title": "Yes, CDN improves latencies by caching things closer to the users, but here's an interesting optimization they do to optimize on latencies... TCP…",
-      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "img": null,
       "id": "7371893436385386496"
     },
     {
@@ -306,7 +330,7 @@
   ],
   "first_name": "Ankush",
   "last_name": "Jain",
-  "timestamp": "2025-11-25T22:46:13.939Z",
+  "timestamp": "2025-12-11T22:14:33.576Z",
   "input": {
     "url": "https://in.linkedin.com/in/ankush-jain-22313a20"
   },

@@ -1,4 +1,312 @@
 {
-  "snapshot_id": "s_mhaemkxo153v6mr88b",
-  "message": "Your request is still in progress and cannot be retrieved in this call. Use the provided Snapshot ID to track progress via the Monitor Snapshot endpoint and download it once ready via the Download Snapshot endpoint. More information on https://docs.brightdata.com/api-reference/web-scraper-api/management-apis/monitor-progress"
+  "id": "sg0055",
+  "name": "Shivam Gupta",
+  "city": "Unnao, Uttar Pradesh, India",
+  "country_code": "IN",
+  "current_company": {
+    "link": "https://in.linkedin.com/company/bharat-electronics-limited?trk=public_profile_topcard-current-company",
+    "name": "Bharat Electronics Limited",
+    "company_id": "bharat-electronics-limited",
+    "location": null
+  },
+  "experience": null,
+  "url": "https://ua.linkedin.com/in/sg0055",
+  "people_also_viewed": [
+    {
+      "profile_link": "https://in.linkedin.com/in/puneet-jain-bits-21030",
+      "name": "Puneet Jain",
+      "about": null,
+      "location": "India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/dr-manikandan-poomalai-1666a635",
+      "name": "Dr.Manikandan Poomalai",
+      "about": null,
+      "location": "Namakkal"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/nagammai-sp-441337139",
+      "name": "Nagammai SP",
+      "about": null,
+      "location": "Coimbatore"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/amanagr",
+      "name": "Aman Agrawal",
+      "about": null,
+      "location": "North Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/tushar-verma-a59a4ba3",
+      "name": "Tushar Verma",
+      "about": null,
+      "location": "Chandigarh, India"
+    },
+    {
+      "profile_link": "https://ae.linkedin.com/in/tsugeeth",
+      "name": "Sugeeth Theendakkara",
+      "about": null,
+      "location": "Dubai, United Arab Emirates"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/khushboo-singh-a71b53122",
+      "name": "Khushboo Singh",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/rashmi-saxena-70316656",
+      "name": "Rashmi Saxena",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ayush-raj-baaa0967",
+      "name": "Dr. Ayush Raj",
+      "about": null,
+      "location": "Pune"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/eswaran-ran-819825140",
+      "name": "Eswaran Ran",
+      "about": null,
+      "location": "Chennai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/subhamcharan",
+      "name": "Subham Charan",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/madhusudhan-agarwal-781b4576",
+      "name": "Madhusudhan Agarwal",
+      "about": null,
+      "location": "Jaipur"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ashish-suhaney-9b232423",
+      "name": "Ashish Suhaney",
+      "about": null,
+      "location": "South Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/manoj-kumar-jhode-8b7b51ab",
+      "name": "Manoj Kumar Jhode",
+      "about": null,
+      "location": "Bhopal"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/anilgupta102",
+      "name": "Anil Gupta♾️",
+      "about": null,
+      "location": "Hyderabad"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/nishant-dhawan-74272b37",
+      "name": "Nishant Dhawan",
+      "about": null,
+      "location": "New Delhi"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/shashi-saurabh",
+      "name": "Shashi Saurabh",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/omi-padung",
+      "name": "Stephenie Omi Padung",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/parveen-saini-certified-from-serc-iosh-and-nsdc-345a7755",
+      "name": "Parveen Saini Certified from SERC, IOSH and NSDC",
+      "about": null,
+      "location": "Chandigarh, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/mayanka47",
+      "name": "Mayank Mittal",
+      "about": null,
+      "location": "India"
+    }
+  ],
+  "educations_details": "IIIT-Naya Raipur",
+  "education": [
+    {
+      "title": "IIIT-Naya Raipur",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
+      "start_year": "2017",
+      "end_year": "2021",
+      "description": null,
+      "description_html": null,
+      "institute_logo_url": null
+    }
+  ],
+  "avatar": "https://static.licdn.com/aero-v1/sc/h/9c8pery4andzj6ohjkjp54ma2",
+  "certifications": [
+    {
+      "subtitle": "-",
+      "title": "Injection Flaws",
+      "credential_url": null,
+      "credential_id": null
+    },
+    {
+      "subtitle": "-",
+      "title": "SQL INJECTION",
+      "credential_url": null,
+      "credential_id": null
+    }
+  ],
+  "followers": 78,
+  "connections": 77,
+  "current_company_company_id": "bharat-electronics-limited",
+  "current_company_name": "Bharat Electronics Limited",
+  "projects": [
+    {
+      "title": "Low Noise Amplifier Design For 60 GHz Application",
+      "start_date": "Jan 2021",
+      "description": "This project presents a high gain, linear, and two-stage cascoded Low Noise Amplifier (LNA) working at 60 GHz."
+    },
+    {
+      "title": "Path Loss Prediction Based on Machine Learning",
+      "start_date": "Aug 2019",
+      "description": "Path loss prediction is of great significance for the performance optimization of wireless networks. With the development and deployment of the 5G mobile communication systems, new path loss prediction methods with high accuracy and low complexity for such different models are proposed and after all experiment we introduced classical machine learning model to predict the loss path."
+    },
+    {
+      "title": "Magnetic Levitation using PID algorithm",
+      "start_date": "May 2019",
+      "description": "The concept behind magnetic suspension is to use the magnetic force generated by electromagnet to counteract the effect of gravity on the ball hence when these two forces are balanced, there is a point of equilibrium.A way to solve this control problem is to linearize the system around these equilibrium, oroperating points and use conventional linear control techniques."
+    },
+    {
+      "title": "Blockchain-voting"
+    },
+    {
+      "title": "PHP based Discussion Forum"
+    }
+  ],
+  "location": "Unnao",
+  "input_url": "https://in.linkedin.com/in/sg0055",
+  "linkedin_id": "sg0055",
+  "activity": [
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/rishi-sharma-278999152_bis-offerletter-psujob-activity-7390722270622552064-p_rZ",
+      "title": "📬 𝐁𝐈𝐒 𝐒𝐜𝐢𝐞𝐧𝐭𝐢𝐬𝐭-𝐁 𝗟𝗲𝘁𝘁𝗲𝗿 𝗯𝘆 𝗣𝗢𝗦𝗧 — Some Feelings Never Change! A few days ago, I received my 𝐁𝐈𝐒 𝐒𝐜𝐢𝐞𝐧𝐭𝐢𝐬𝐭-𝐁…",
+      "img": null,
+      "id": "7390722270622552064"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/vivek-gupta-3bba0014a_futureofwork-returntooffice-buttsinseats-activity-7368874966823464962-ByPI",
+      "title": "Nothing says modern workplace innovation quite like forcing people back to the office for two arbitrary days a week. Even better: if someone takes a…",
+      "img": null,
+      "id": "7368874966823464962"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/careexpand_careexpand-hyderabadlaunch-healthcareinnovation-activity-7348772010698698754-jHPS",
+      "title": "🚀 We’ve Landed in Hyderabad! 🇮🇳 We’re thrilled to announce the opening of CareExpand’s newest office in Hitech City, Hyderabad, effective July…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFmGnVDRrWeqQ/feedshare-shrink_800/B56ZfwVLIeHYAk-/0/1752083776064?e=2147483647&v=beta&t=RhYwuWNdY8UD0v-QUUBA7Lu7Q6JJvsiQcG62uf5vyYA",
+      "id": "7348772010698698754"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/durga-rani-venigalla-641615189_iitkharagpur-cs-nvidia-activity-7353254747341996032-brKK",
+      "title": "Academic & Career Milestones I’m thrilled to share that I have officially graduated from the Indian Institute of Technology, Kharagpur with a…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGB0dLGcy-btA/feedshare-shrink_2048_1536/B4DZgwCMPfG8Ao-/0/1753152545216?e=2147483647&v=beta&t=-ZOlGgTXYOeKQQ57EZm53io-DtOKWuTxIFdOMeeuxlc",
+      "id": "7353254747341996032"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/yamini-karadia-764689228_tesco-gdse-lifeattesco-activity-7355610953905852419-cGfT",
+      "title": "Hello Everyone , I am really excited to share that I have joined Tesco as a Graduate Software Development Engineer. The past week has been an…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQETx4hEsFBpXg/feedshare-shrink_2048_1536/B56ZhRhIbqHQA0-/0/1753714306472?e=2147483647&v=beta&t=nyFz6t6JhN347QGwdk0lT0WJ7JHDym7cw6iVSRyQSjs",
+      "id": "7355610953905852419"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/oorja-saxena_nptel-iitmadras-lifelonglearning-activity-7348739316744941568-PSj8",
+      "title": "✨ Grateful to share that I recently participated in the NPTEL Stars Technical Workshop at Indian Institute of Technology, Madras🌟 It was an…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGKW7VfpJqWsw/feedshare-shrink_2048_1536/B56Zfv3aH3H8As-/0/1752075969964?e=2147483647&v=beta&t=R9Mu4uDwP48CyJuXZT6e7VIXtnCAJBsriHqBP8edvhM",
+      "id": "7348739316744941568"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/susan-baby-b77a62200_proudmoment-kaizenaward-innovation-activity-7349456950322946048-pLRy",
+      "title": "✨ Excited to Share My Recent Achievement! ✨ I am honored to receive a Gold award from ALSTOM Transport India Limited for my contribution during the…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGxliCmlsOhTw/feedshare-shrink_2048_1536/B4DZf6EJtcGsAo-/0/1752247082505?e=2147483647&v=beta&t=4Au3Lgbibh0LzyZz8zIsY6CZhecmCf2M1-hgdG8kTB0",
+      "id": "7349456950322946048"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/susanna-k_35-years-countless-learnings-infinite-activity-7348223451817545729-Pn1s",
+      "title": "3.5 years. Countless learnings. Infinite gratitude ❤️ As I wrap up an incredible chapter at Koch Business Solutions India, I find myself reflecting…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEk4s-kabH6iw/feedshare-shrink_2048_1536/B4DZfoiMaCHAAs-/0/1751952992525?e=2147483647&v=beta&t=XshWLtErTyOifBKwTb8vLCfBDix9m5AGZ20BZ9XgLNw",
+      "id": "7348223451817545729"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/tum-chair-of-traffic-engineering-and-control_tristanxii-activity-7345425432051105792-PCkY",
+      "title": "We’re excited to share that our team member Elena Natterer presented her research at the 𝟭𝟮𝘁𝗵 𝗧𝗿𝗶𝗲𝗻𝗻𝗶𝗮𝗹 𝗦𝘆𝗺𝗽𝗼𝘀𝗶𝘂𝗺 𝗼𝗻…",
+      "img": "https://media.licdn.com/dms/image/v2/D4E22AQFLqXHmJ9LJdw/feedshare-shrink_2048_1536/B4EZfAxeRFHsAo-/0/1751285886908?e=2147483647&v=beta&t=fa-NQSoDqsqz9zDeIn6dDhvDleMp42cW0BDowcrDSM4",
+      "id": "7345425432051105792"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/bharat-electronics-limited_a-team-from-mitsubishi-electric-corporation-activity-7341352424508485632-EHrq",
+      "title": "A team from Mitsubishi Electric Corporation(MELCO), Japan, led by Mr Tomo Aoyama, GM, Defence and Space, visited BEL-Ghaziabad. The team was welcomed…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQElI91SjR41vQ/feedshare-shrink_800/B56ZeG5GA2HoAg-/0/1750314812383?e=2147483647&v=beta&t=HtsjTc0fywO5iCbpkbdCOUocWO87ClTOeXlVWgiSw0I",
+      "id": "7341352424508485632"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/kanika-salvaatore-35224512b_a-silent-suicide-behind-bureaucratic-apathy-activity-7341011399965360128-BNbl",
+      "title": "A Silent suicide Behind Bureaucratic Apathy 🥺 – NIC Scientist C aspirant SUICIDE on 14 June 2025 . Remembering Srimadhur N.S With a heavy…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQEzzo0KCptKYg/feedshare-shrink_800/B56ZeCC9jTHQAg-/0/1750233505214?e=2147483647&v=beta&t=-5jjGnNtQay43_-rfmzpqOyFjEK19aGI4-U4-B-I3Es",
+      "id": "7341011399965360128"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/mansi-rathod27_ai-upi-nims-activity-7255892721255501826-If8q",
+      "title": "Wrapping up an incredible experience at the NVIDIA AI Summit! This event wasn’t just about industry advances but truly about how AI is poised to…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQGED_Zg64o1Qw/feedshare-shrink_800/feedshare-shrink_800/0/1729939629931?e=2147483647&v=beta&t=EXAwK-n9qe1bZgLCUsvoVo-yIYDcNVGjU74sdWELVi8",
+      "id": "7255892721255501826"
+    },
+    {
+      "interaction": "Liked by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/varsha-yalal-585867253_microsoft-linkedin-activity-7183094989122420737-_roQ",
+      "title": "🛑 Stop paying for online courses ever again. Microsoft does offer Free online courses with certifications across various domains No Payment…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQFwwdMW1xK9xw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1712583299128?e=2147483647&v=beta&t=aeuhzB4Gds6i0cgbE05b_ZM9-C75eJkfgTMn_HL0L8E",
+      "id": "7183094989122420737"
+    },
+    {
+      "interaction": "Shared by Shivam Gupta",
+      "link": "https://www.linkedin.com/posts/sg0055_deeplearning-computervision-artificialintelligence-activity-7008586959270866944-VYkh",
+      "title": "The Stanford University Offers Machine Learning Systems Design(MLOps)🥇. 🏢 cs329s Official Page: https://lnkd.in/dTg5BuiD 📹 Video Lectures:…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7008586959270866944"
+    }
+  ],
+  "linkedin_num_id": "569018461",
+  "banner_image": "https://media.licdn.com/dms/image/v2/D5616AQG1wz-dQhWAQA/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1737038378293?e=2147483647&v=beta&t=Tu_N1PA7YMqAwtah2riUVwckCI1uX4VPjc2Q2uquugA",
+  "honors_and_awards": null,
+  "similar_profiles": [],
+  "default_avatar": true,
+  "memorialized_account": false,
+  "bio_links": [
+    {
+      "title": "Personal Website",
+      "link": "https://shivam-gupta.netlify.app/"
+    }
+  ],
+  "first_name": "Shivam",
+  "last_name": "Gupta",
+  "timestamp": "2025-12-11T22:28:14.878Z",
+  "input": {
+    "url": "https://in.linkedin.com/in/sg0055"
+  },
+  "batch": "2017-2021"
 }

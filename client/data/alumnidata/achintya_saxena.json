@@ -3,69 +3,25 @@
   "name": "Achintya Saxena",
   "city": "Bengaluru, Karnataka, India",
   "country_code": "IN",
-  "position": "Windows Server Administrator at Capgemini",
   "current_company": {
-    "link": "https://fr.linkedin.com/company/capgemini",
+    "link": "https://fr.linkedin.com/company/capgemini?trk=public_profile_topcard-current-company",
     "name": "Capgemini",
     "company_id": "capgemini",
-    "title": "Associate Consultant",
-    "location": "Bengaluru, Karnataka, India"
+    "location": null
   },
-  "experience": [
-    {
-      "title": "Capgemini",
-      "location": "Bengaluru, Karnataka, India",
-      "description_html": null,
-      "duration": "4 years 4 months",
-      "positions": [
-        {
-          "subtitle": "Capgemini",
-          "meta": "Apr 2023 - Present 2 years 7 months",
-          "start_date": "Apr 2023",
-          "end_date": "Present",
-          "title": "Associate Consultant",
-          "description_html": null,
-          "location": "Bengaluru, Karnataka, India"
-        },
-        {
-          "subtitle": "Capgemini",
-          "meta": "Jul 2021 - Mar 2023 1 year 9 months",
-          "start_date": "Jul 2021",
-          "end_date": "Mar 2023",
-          "title": "Senior Analyst",
-          "description_html": null,
-          "location": "India"
-        }
-      ],
-      "company": "Capgemini",
-      "company_id": "capgemini",
-      "url": "https://fr.linkedin.com/company/capgemini?trk=public_profile_experience-group-header",
-      "company_logo_url": null
-    },
-    {
-      "title": "Machine Learning Intern",
-      "location": "Bengaluru, Karnataka, India",
-      "description_html": null,
-      "start_date": "Jan 2021",
-      "end_date": "Jun 2021",
-      "company": "Utopia Global, Inc.",
-      "company_id": "utopia-inc",
-      "url": "https://www.linkedin.com/company/utopia-inc",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQH2nyLQLodbbg/company-logo_100_100/company-logo_100_100/0/1630644414960/utopia_inc_logo?e=2147483647&v=beta&t=CcpcXDIe3LthhLTz0U4MGh_up1elUWiPyEZEaWlAPTo"
-    }
-  ],
-  "url": "https://nl.linkedin.com/in/achintya-saxena-b693501a1",
+  "experience": null,
+  "url": "https://nz.linkedin.com/in/achintya-saxena-b693501a1",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/ashrock17",
       "name": "Ashwini Rathi",
-      "about": "AI Frameworks Engineer @Intel || 26k || INTEL AMBASSADOR || IIT DHANBAD || M.TECH (C.S.E) || AI || ML || Top LinkedIn AI Voice || Content writer || Mentor (crio do)",
+      "about": null,
       "location": "Bengaluru"
     },
     {
       "profile_link": "https://in.linkedin.com/in/khushiagrawal",
       "name": "Khushi Agrawal",
-      "about": "Software Engineer at Google",
+      "about": null,
       "location": "Varanasi"
     },
     {
@@ -77,13 +33,13 @@
     {
       "profile_link": "https://in.linkedin.com/in/adarsh-badagala",
       "name": "Adarsh Badagala",
-      "about": "SDE 2@Amazon",
+      "about": null,
       "location": "Hyderabad"
     },
     {
       "profile_link": "https://in.linkedin.com/in/rushikesh-wayal",
       "name": "Rushikesh Wayal",
-      "about": "Quant Trader & Researcher @Alphagrep | ECE+CSE(minor), IIT Kharagpur",
+      "about": null,
       "location": "Mumbai"
     },
     {
@@ -95,13 +51,13 @@
     {
       "profile_link": "https://in.linkedin.com/in/ping-smit",
       "name": "Smit Mandavia",
-      "about": "SWE at Rubrik | Former SWE III @Google | Competitive Programmer | Codeforces Master | Codechef 6 🌟",
+      "about": null,
       "location": "Bengaluru"
     },
     {
-      "profile_link": "https://in.linkedin.com/in/hamzamohdzubair",
+      "profile_link": "https://in.linkedin.com/in/hamzubair",
       "name": "Hamza Mohammed Zubair",
-      "about": "Data Scientist | IIT | Woolf",
+      "about": null,
       "location": "Bengaluru"
     },
     {
@@ -113,22 +69,80 @@
     {
       "profile_link": "https://in.linkedin.com/in/ssjrecognized",
       "name": "Shubham Joshi",
-      "about": "Software Engineer II @ Uber | Ex-Postman | React, JavaScript, Node.js, Golang",
+      "about": null,
       "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/aggarwalapurva",
+      "name": "Apurva Aggarwal",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://nl.linkedin.com/in/varsha38977",
+      "name": "Varsha Lalwani",
+      "about": null,
+      "location": "Amsterdam"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/ujjwal-chakraborty001",
+      "name": "Ujjwal Chakraborty",
+      "about": null,
+      "location": "Kolkata"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sanjal-magdum-03a12317b",
+      "name": "Sanjal Magdum",
+      "about": null,
+      "location": "Kolhapur"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sumitgaurav",
+      "name": "Sumit Gaurav",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sushant-kumar-sinha-013b1b6a",
+      "name": "Sushant Kumar Sinha",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/swethakrishn",
+      "name": "Swetha Krishnan",
+      "about": null,
+      "location": "Amherst, MA"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/chaudharisushmenkailasmeenakshi",
+      "name": "Sushmen Chaudhari",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/aditi-pandey777",
+      "name": "Aditi Pandey",
+      "about": null,
+      "location": "Bengaluru"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/aish25s",
+      "name": "Aishwarya Singh",
+      "about": null,
+      "location": "Seattle, WA"
     }
   ],
   "educations_details": "IIIT-Naya Raipur",
   "education": [
     {
       "title": "IIIT-Naya Raipur",
-      "degree": "Bachelor of Technology - BTech",
-      "field": "Electronics and Communications Engineering",
-      "url": "https://in.linkedin.com/school/iiitnrofficial/?trk=public_profile_school_profile-section-card_image-click",
+      "url": "https://in.linkedin.com/school/iiitnrofficial/",
       "start_year": "2017",
       "end_year": "2021",
       "description": null,
       "description_html": null,
-      "institute_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
+      "institute_logo_url": null
     }
   ],
   "avatar": "https://media.licdn.com/dms/image/v2/C5103AQGALIcwuc4ldA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1585554500744?e=2147483647&v=beta&t=wXQ-_j4lKG6ihuTBhqAXJR6kHj1-Sr0JgJQh1PHV1lU",
@@ -155,7 +169,7 @@
       "credential_id": null
     }
   ],
-  "followers": 732,
+  "followers": 738,
   "connections": 500,
   "current_company_company_id": "capgemini",
   "current_company_name": "Capgemini",
@@ -167,7 +181,7 @@
       "interaction": "Liked by Achintya Saxena",
       "link": "https://www.linkedin.com/posts/mahipal-reddy-jalapu_jobsearch-noticeperiod-corporatelife-activity-7373257108248702976-Wiy1",
       "title": "💡 The Notice Period Paradox As job seekers, we often face this contradiction: When we resign, companies expect a 3-month notice period. But when…",
-      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "img": null,
       "id": "7373257108248702976"
     },
     {
@@ -243,8 +257,9 @@
   "bio_links": [],
   "first_name": "Achintya",
   "last_name": "Saxena",
-  "timestamp": "2025-10-26T20:43:31.734Z",
+  "timestamp": "2025-12-11T22:18:35.641Z",
   "input": {
     "url": "https://in.linkedin.com/in/achintya-saxena-b693501a1"
-  }
+  },
+  "batch": "2017-2021"
 }

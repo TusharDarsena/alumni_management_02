@@ -24,42 +24,10 @@
       "end_year": "2019"
     }
   ],
-  "experience": [
-    {
-      "title": "Apra Labs.",
-      "company": "Apra Labs.",
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    },
-    {
-      "title": null,
-      "location": null,
-      "start_date": null,
-      "end_date": null
-    }
-  ],
+  "experience": [],
   "batch": "2017",
   "branch": null,
   "graduationYear": "2021",
-  "url": "https://vn.linkedin.com/in/Ankush-jain-22313a20",
+  "url": "https://pl.linkedin.com/in/Ankush-jain-22313a20",
   "linkedin_id": "ankush-jain-22313a20"
 }

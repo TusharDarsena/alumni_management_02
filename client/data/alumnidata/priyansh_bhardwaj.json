@@ -10,33 +10,8 @@
     "company_id": "stashfin",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Stashfin",
-      "description_html": null,
-      "company": "Stashfin",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQEyBjKMCOhmhg/company-logo_100_100/B4DZop_XQCH4AQ-/0/1761641068179/stashfin_logo?e=2147483647&v=beta&t=bF62Jqnbg34n8yA6x8Q0l3MUASxKWId7dlEO_jigfY8"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQHxbR20oGIx9g/company-logo_100_100/company-logo_100_100/0/1631384889565?e=2147483647&v=beta&t=IvLnpAnyFIczERQjMNRBpoFaN5THl_jY2vQFa0mZCYk"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    },
-    {
-      "description_html": null,
-      "duration": "2017 - 2021",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    },
-    {
-      "description_html": null,
-      "duration": "2015 - 2017",
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    }
-  ],
-  "url": "https://cz.linkedin.com/in/priyans619",
+  "experience": null,
+  "url": "https://bd.linkedin.com/in/priyans619",
   "people_also_viewed": [
     {
       "profile_link": "https://in.linkedin.com/in/deepakkumar-singh-943971127",
@@ -161,7 +136,7 @@
   "bio_links": [],
   "first_name": "Priyansh",
   "last_name": "Bhardwaj",
-  "timestamp": "2025-11-25T23:33:07.694Z",
+  "timestamp": "2025-12-11T22:02:16.552Z",
   "input": {
     "url": "https://in.linkedin.com/in/priyans619"
   },

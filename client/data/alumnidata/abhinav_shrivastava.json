@@ -1,7 +1,7 @@
 {
   "id": "abhinav-shrivastava-b6a293204",
   "name": "Abhinav Shrivastava",
-  "city": "Rajnandgaon, Chhattisgarh, India",
+  "city": "Greater Indore Area",
   "country_code": "IN",
   "about": "2nd-year DSAI student @ IIIT Naya Raipur, focused on the complete development…",
   "current_company": {
@@ -10,24 +10,8 @@
     "company_id": "club-dé-théâtre",
     "location": null
   },
-  "experience": [
-    {
-      "title": "Club Dé Théâtre, IIITNR",
-      "description_html": null,
-      "company": "Club Dé Théâtre, IIITNR",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQH7oFC9iIhUAA/company-logo_100_100/company-logo_100_100/0/1658517119599?e=2147483647&v=beta&t=OAE7nQpxEUEdjjRuQYH3msJNMZIpNHO723-47rNjEIM"
-    },
-    {
-      "description_html": null,
-      "duration": "2024 - Present",
-      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_100_100/company-logo_100_100/0/1631329668653?e=2147483647&v=beta&t=x6zVDV_ck-OcJQb6hxik2NPK2SqZXALPEnEvTqldw4E"
-    },
-    {
-      "description_html": null,
-      "company_logo_url": "https://static.licdn.com/aero-v1/sc/h/cs8pjfgyw96g44ln9r7tct85f"
-    }
-  ],
-  "url": "https://pe.linkedin.com/in/Abhinav-shrivastava-b6a293204",
+  "experience": null,
+  "url": "https://at.linkedin.com/in/abhinav-shrivastava-b6a293204",
   "people_also_viewed": [
     {
       "profile_link": "https://www.linkedin.com/in/enriquelores",
@@ -88,6 +72,66 @@
       "name": "Jasrita Dhir",
       "about": null,
       "location": "Gurugram"
+    },
+    {
+      "profile_link": "https://br.linkedin.com/in/ricardoaugustomartins",
+      "name": "Ricardo Augusto Martins, PhD, MSc, MBA",
+      "about": null,
+      "location": "São Paulo, SP"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/arobinda-mookherjee-58a4b621",
+      "name": "Arobinda Mookherjee",
+      "about": null,
+      "location": "Noida"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/sarabpreet-singh-bahra-56a51219",
+      "name": "Sarabpreet Singh Bahra",
+      "about": null,
+      "location": "Chandigarh, India"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/hrpriyajaiswal",
+      "name": "Priya Jaiswal",
+      "about": null,
+      "location": "Mumbai"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/lauraries",
+      "name": "Laura Ries",
+      "about": null,
+      "location": "Atlanta Metropolitan Area"
+    },
+    {
+      "profile_link": "https://in.linkedin.com/in/rupsa-das-5969b214",
+      "name": "Rupsa Das",
+      "about": null,
+      "location": "Kolkata"
+    },
+    {
+      "profile_link": "https://eg.linkedin.com/in/mohamed-sabry-fouad-hrd-mba-64057b22",
+      "name": "Mohamed Sabry Fouad - HRD , MBA",
+      "about": null,
+      "location": "Cairo, Egypt"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/biagranja",
+      "name": "Bia Granja",
+      "about": null,
+      "location": "Los Angeles, CA"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/jeancallahan-latinamericaexecutivesearch",
+      "name": "Jean Marie Callahan",
+      "about": null,
+      "location": "Miami, FL"
+    },
+    {
+      "profile_link": "https://www.linkedin.com/in/toryburch",
+      "name": "Tory Burch",
+      "about": null,
+      "location": "New York, NY"
     }
   ],
   "educations_details": "IIIT-Naya Raipur",
@@ -100,14 +144,35 @@
     }
   ],
   "avatar": "https://media.licdn.com/dms/image/v2/D4D03AQES2Aecq5DETw/profile-displayphoto-scale_200_200/B4DZqawojlIMAY-/0/1763533036486?e=2147483647&v=beta&t=e_DTgyX3uJqdMgI81QngVA4lxxeISs0qUafGKzH8i1Q",
-  "followers": 475,
-  "connections": 471,
+  "followers": 487,
+  "connections": 483,
   "current_company_company_id": "club-dé-théâtre",
   "current_company_name": "Club Dé Théâtre, IIITNR",
-  "location": "Rajnandgaon",
+  "location": null,
   "input_url": "https://in.linkedin.com/in/abhinav-shrivastava-b6a293204",
   "linkedin_id": "abhinav-shrivastava-b6a293204",
   "activity": [
+    {
+      "interaction": "Liked by Abhinav Shrivastava",
+      "link": "https://www.linkedin.com/posts/anwita-chakraborty-76aa59296_sre-intern-google-activity-7392101357664530433-qhnP",
+      "title": "I’m excited to share that I’ll be joining Google as a Site Reliability Engineering Intern in the Summer of 2026. This opportunity marks a major…",
+      "img": "https://media.licdn.com/dms/image/v2/D4D22AQGpyaBglhmAfw/feedshare-shrink_1280/B4DZpYFAyYHsAs-/0/1762414300814?e=2147483647&v=beta&t=VoP-cobZKVIYs-tPjJuhaen8CRIN6LEZX15QoKrvbrE",
+      "id": "7392101357664530433"
+    },
+    {
+      "interaction": "Liked by Abhinav Shrivastava",
+      "link": "https://www.linkedin.com/posts/yash-sisodia-1a443218b_the-man-who-changed-technology-without-activity-7398560603725824000-1rCW",
+      "title": "⭐ The Man Who Changed Technology Without Saying a Word — Linus Torvalds ⭐ In a world where every tech hero trends on social media, one man quietly…",
+      "img": "https://media.licdn.com/dms/image/v2/D5622AQEOU4mGzjNECA/feedshare-shrink_800/B56Zqz3pf7I8Ak-/0/1763954304259?e=2147483647&v=beta&t=42JAX9pb9gClnzV7CedlREzOvrdciidH9XJAv5ui4E4",
+      "id": "7398560603725824000"
+    },
+    {
+      "interaction": "Liked by Abhinav Shrivastava",
+      "link": "https://www.linkedin.com/posts/md-athar-sharif-ba90a630a_unity-web-player-pocket-cannons-activity-7398423181826494464-yC5P",
+      "title": "🚀 What can you build in a weekend? Here is Pocket Cannons! I spent this past weekend challenging myself to build and ship a complete game from…",
+      "img": "https://static.licdn.com/aero-v1/sc/h/53n89ecoxpr1qrki1do3alazb",
+      "id": "7398423181826494464"
+    },
     {
       "interaction": "Liked by Abhinav Shrivastava",
       "link": "https://www.linkedin.com/posts/shashank-verma-919490327_hackasol-hackathon-hackathonwinner-activity-7396623407452426241-Gh_z",
@@ -182,7 +247,7 @@
       "interaction": "Liked by Abhinav Shrivastava",
       "link": "https://www.linkedin.com/posts/reet-agrawal-b5a70032b_github-reetagrawal676hello-activity-7391466879674126336-7ysg",
       "title": "💫 My First Python Project – “HELLO” Voice Assistant! 💫 I’m excited to share my first project — a simple Voice Assistant built using Python! This…",
-      "img": "https://media.licdn.com/dms/image/sync/v2/D4E27AQGn7GKfHyKKog/articleshare-shrink_1280_800/B4EZpPDftFHMAQ-/0/1762262908390?e=2147483647&v=beta&t=X9v7fwJXOrf1zqN5-TSZlUR90fm1BKnJA90u0O-c5Yo",
+      "img": "https://media.licdn.com/dms/image/sync/v2/D4E27AQGn7GKfHyKKog/articleshare-shrink_1280_800/B4EZpPDftFHMAQ-/0/1764706733079?e=2147483647&v=beta&t=NKbZMHTPn77wvWiIUs5xM7tPpOFPez2ndYvNzcLF3BY",
       "id": "7391466879674126336"
     },
     {
@@ -205,13 +270,6 @@
       "title": "𝟱𝘁𝗵 𝗶𝗻𝘁𝗲𝗿𝗻𝘀𝗵𝗶𝗽. 𝟯𝗿𝗱 𝘀𝗲𝗺𝗲𝘀𝘁𝗲𝗿. 𝗛𝗶𝗴𝗵-𝗽𝗮𝘆𝗶𝗻𝗴 𝗔𝗜 𝗿𝗼𝗹𝗲 𝗮𝘁 𝗔𝘁𝗹𝗮𝗻. 𝗗𝗶𝗱𝗻’𝘁 𝗽𝗹𝗮𝗻 𝗶𝘁 𝘁𝗵𝗶𝘀 𝘄𝗮𝘆…",
       "img": "https://media.licdn.com/dms/image/v2/D5622AQED5x3G4bVpHA/feedshare-shrink_1280/B56Zopx5aFG0As-/0/1761637537989?e=2147483647&v=beta&t=gwqhUBj8U4ZWVcDLOlcuIXJKvANMsniuA1lpZ7YVQTI",
       "id": "7388843379981230080"
-    },
-    {
-      "interaction": "Liked by Abhinav Shrivastava",
-      "link": "https://www.linkedin.com/posts/anwita-chakraborty-76aa59296_codesscafe-womenintech-gratitude-activity-7384213829251010560-72bV",
-      "title": "I’m thrilled to share that I’ve been selected as a Mentee at Codess Cafe. Codess Cafe is an incredible initiative that empowers and supports women…",
-      "img": "https://media.licdn.com/dms/image/v2/D4D22AQEZCXDk_mHbog/feedshare-shrink_1280/B4DZnn_UePHwAs-/0/1760533765064?e=2147483647&v=beta&t=Ve9guQ2aK_2NHsD50MScJX-IVSAjIosk_YGY_rlkaic",
-      "id": "7384213829251010560"
     }
   ],
   "linkedin_num_id": "872598466",
@@ -223,8 +281,9 @@
   "bio_links": [],
   "first_name": "Abhinav",
   "last_name": "Shrivastava",
-  "timestamp": "2025-11-21T21:47:03.504Z",
+  "timestamp": "2025-12-12T05:20:11.768Z",
   "input": {
     "url": "https://in.linkedin.com/in/abhinav-shrivastava-b6a293204"
-  }
+  },
+  "batch": "2025-2029"
 }

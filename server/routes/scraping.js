@@ -13,7 +13,15 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 // --- CONFIGURATION ---
-const LINKEDIN_COLLECTOR_ENDPOINT = 'https://api.brightdata.com/datasets/v3/scrape?dataset_id=gd_l1viktl72bvl7bjuj0&notify=false&include_errors=true';
+const DATASET_ID = 'gd_l1viktl72bvl7bjuj0';
+const BRIGHTDATA_API_BASE = 'https://api.brightdata.com/datasets/v3';
+// 1. Trigger Endpoint
+const TRIGGER_ENDPOINT = `${BRIGHTDATA_API_BASE}/trigger?dataset_id=${DATASET_ID}&include_errors=true`;
+// 2. Progress Endpoint (from your docs)
+const PROGRESS_ENDPOINT = `${BRIGHTDATA_API_BASE}/progress`;
+// 3. Download Endpoint
+const SNAPSHOT_ENDPOINT = `${BRIGHTDATA_API_BASE}/snapshot`;
+
 const SERP_API_ENDPOINT = 'https://api.brightdata.com/request';
 const BRIGHTDATA_API_KEY = process.env.BRIGHTDATA_API_KEY;
 const AIRTOP_API_KEY = process.env.AIRTOP_API_KEY;
@@ -51,44 +59,121 @@ function editDistance(s1, s2) {
     return costs[s2.length];
 }
 
+// --- UTILITY: BRIGHT DATA POLLING HELPER (THE FIX) ---
+async function scrapeWithBrightData(url) {
+    console.log(`   📡 Triggering Bright Data Collector...`);
+    
+    // 1. Trigger the Job
+    const triggerResponse = await fetch(TRIGGER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([{ "url": url }]) // Sending as array is often safer for batch APIs
+    });
+
+    if (!triggerResponse.ok) {
+        throw new Error(`Bright Data Trigger Failed: ${triggerResponse.status}`);
+    }
+
+    const triggerData = await triggerResponse.json();
+    
+    // Check if we got a Snapshot ID (Asynchronous flow)
+    if (!triggerData.snapshot_id) {
+        // Rare case: Sync response (Direct data)
+        console.log("   ⚡ Received immediate data (Sync mode)");
+        return Array.isArray(triggerData) ? triggerData[0] : triggerData;
+    }
+
+    const snapshotId = triggerData.snapshot_id;
+    console.log(`   ⏳ Job Queued. Snapshot ID: ${snapshotId}`);
+
+    // 2. Poll for Progress
+    let isReady = false;
+    let attempts = 0;
+    
+    while (!isReady) {
+        // Wait 10 seconds between checks
+        await new Promise(resolve => setTimeout(resolve, 10000));
+        attempts++;
+
+        console.log(`   🔎 Checking status (${attempts * 10}s elapsed)...`);
+        
+        const progressResponse = await fetch(`${PROGRESS_ENDPOINT}/${snapshotId}`, {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${BRIGHTDATA_API_KEY}` }
+        });
+
+        if (!progressResponse.ok) {
+            console.log(`   ⚠️ Progress check failed (${progressResponse.status}). Retrying...`);
+            continue;
+        }
+
+        const progressData = await progressResponse.json();
+        const status = progressData.status; // 'running', 'ready', 'failed'
+
+        if (status === 'ready') {
+            console.log(`   ✅ Job Finished! Downloading data...`);
+            isReady = true;
+        } else if (status === 'failed') {
+            throw new Error("Bright Data reported the scraping job FAILED.");
+        } else {
+            console.log(`   ⏳ Status: ${status} (Still processing...)`);
+        }
+    }
+
+    // 3. Download the Result
+    const downloadResponse = await fetch(`${SNAPSHOT_ENDPOINT}/${snapshotId}?format=json`, {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${BRIGHTDATA_API_KEY}` }
+    });
+
+    if (!downloadResponse.ok) {
+        throw new Error(`Failed to download snapshot: ${downloadResponse.status}`);
+    }
+
+    const finalData = await downloadResponse.json();
+    
+    // Bright Data returns an array of results. We sent 1 URL, so we want the first item.
+    if (Array.isArray(finalData) && finalData.length > 0) {
+        return finalData[0];
+    } else if (Array.isArray(finalData) && finalData.length === 0) {
+        throw new Error("Bright Data finished but returned NO data (Empty Array).");
+    }
+
+    return finalData;
+}
+
 // --- GLOBAL JOB STATE ---
 let activeJob = {
     isRunning: false, total: 0, processed: 0, currentName: "",
     logs: [], queue: [], failedQueue: [], forceFallback: false, shouldStop: false
 };
 
-// --- HELPER 1: AIRTOP SEARCH (Updated) ---
+// --- HELPER 1: AIRTOP SEARCH ---
 async function findUrlWithAirtop(alumniName, batch) {
     console.log(`\n   [Primary] 🤖 Starting Airtop AI Search...`);
-    console.log(`   [Primary] 👤 Target: "${alumniName}"${batch ? ` | Batch: ${batch}` : ''}`);
     let session;
     try {
-        console.log(`   [Primary] 🔄 Creating Airtop session...`);
         session = await airtopClient.sessions.create();
         const sessionId = session.data.id;
-        console.log(`   [Primary] ✅ Session created: ${sessionId}`);
         
-        // FIX: Relaxed query - NO batch in search query to avoid missing results
-        // We search only for Name + College, let AI filter by batch if needed
         const searchQuery = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
         const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-        console.log(`   [Primary] 🔍 Search Query: ${searchQuery}`);
-        console.log(`   [Primary] 🌐 Google URL: ${googleUrl}`);
 
-        console.log(`   [Primary] 🪟 Opening browser window...`);
         const window = await airtopClient.windows.create(sessionId, { url: googleUrl });
         const windowId = window.data.windowId;
-        console.log(`   [Primary] ✅ Browser ready, querying AI...`);
 
         const result = await airtopClient.windows.pageQuery(sessionId, windowId, {
             prompt: `Find the LinkedIn Profile URL for "${alumniName}" from IIIT Naya Raipur.
-            ${batch ? `CONTEXT: The target user is likely from the batch/year "${batch}" (e.g., Class of ${batch}).` : ""}
+            ${batch ? `CONTEXT: The target user is likely from the batch/year "${batch}".` : ""}
 
             Rules:
-            1. Find the best matching LinkedIn profile for "${alumniName}".
-            2. ${batch ? `PRIORITY: If you see multiple people with this name, pick the one matching year "${batch}".` : ""}
-            3. ACCEPTANCE: If you find a matching Name + College but NO batch year is visible, ACCEPT IT (It is better to guess than to fail).
-            4. Return the URL string only. If nothing found, return empty string.`,
+            1. Find the best matching LinkedIn profile.
+            2. ${batch ? `PRIORITY: Pick the one matching year "${batch}".` : ""}
+            3. ACCEPTANCE: If matching Name + College found but NO batch visible, ACCEPT IT.
+            4. Return the URL string only.`,
             configuration: {
                 outputSchema: {
                     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -99,68 +184,44 @@ async function findUrlWithAirtop(alumniName, batch) {
             }
         });
 
-        console.log(`   [Primary] 🧹 Terminating session...`);
         await airtopClient.sessions.terminate(sessionId);
         session = null;
 
         const content = JSON.parse(result.data.modelResponse);
-        console.log(`   [Primary] 📦 AI Response:`, content);
-        
         if (content.url && content.url.includes('linkedin.com/in/')) {
-            console.log(`   [Primary] ✅ Valid LinkedIn URL found: ${content.url}`);
             return content.url;
         }
-        
-        console.log(`   [Primary] ❌ No valid URL in AI response`);
         return null;
 
     } catch (error) {
         console.log(`   [Primary] ❌ Airtop Error: ${error.message}`);
-        console.log(`   [Primary] 📊 Error Stack:`, error.stack);
-        if (session) {
-            console.log(`   [Primary] 🧹 Cleaning up failed session...`);
-            try { await airtopClient.sessions.terminate(session.data.id); } catch(e){}
-        }
+        if (session) try { await airtopClient.sessions.terminate(session.data.id); } catch(e){}
         return null;
     }
 }
 
-// --- HELPER 2: BRIGHTDATA SERP + AGGRESSIVE SEARCH (Fixed) ---
+// --- HELPER 2: BRIGHTDATA SERP ---
 async function findUrlWithBrightDataFallback(alumniName, batch) {
     console.log(`\n   [Fallback] 🔄 Switching to Bright Data SERP...`);
-    
-    // Query: Name + College
     const query = `"${alumniName}" AND ("IIIT-Naya Raipur" OR "IIITNR" OR "International Institute of Information Technology Naya Raipur") linkedin`;
     const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&gl=in`;
 
     try {
         const response = await fetch(SERP_API_ENDPOINT, {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "zone": "serp_api1",
-                "url": googleSearchUrl,
-                "format": "raw"
-            })
+            headers: { 'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "zone": "serp_api1", "url": googleSearchUrl, "format": "raw" })
         });
 
         if (!response.ok) throw new Error(`SERP API Error: ${response.status}`);
         
         const html = await response.text();
         const $ = cheerio.load(html);
-        
         let bestMatch = null;
         let highestScore = 0;
-
         const batchYears = batch ? batch.split(/[-/]/).map(y => y.trim()) : [];
-        const allLinks = $('a');
-        console.log(`   [Fallback] 🔎 Scanning ${allLinks.length} links for candidates...`);
 
-        let candidateCount = 0;
-        allLinks.each((i, el) => {
+        $('a').each((i, el) => {
             const link = $(el).attr('href');
             const title = $(el).find('h3').text() || $(el).text(); 
             const snippet = $(el).parent().text().toLowerCase();
@@ -169,66 +230,28 @@ async function findUrlWithBrightDataFallback(alumniName, batch) {
             if (!link.includes("linkedin.com/in/")) return;
             if (link.includes("/posts/") || link.includes("/jobs/") || link.includes("/company/")) return;
 
-            // --- SCORING LOGIC ---
             const cleanTitle = title.toLowerCase().replace("linkedin", "").replace(" - ", " ").trim();
             const cleanName = alumniName.toLowerCase().trim();
             const similarity = getSimilarity(cleanTitle, cleanName);
             const isNameInTitle = cleanTitle.includes(cleanName);
             
-            // Filter: Must have some name resemblance
             if (!isNameInTitle && similarity < 0.5) return;
 
-            candidateCount++;
-
-            // FIX: Start LOW (0.5). 
             let score = isNameInTitle ? 0.5 : 0.3; 
-            let baseScore = score;
-
-            // 1. College Boost
-            const hasCollege = snippet.includes("iiitnr") || 
-                               snippet.includes("naya raipur") || 
-                               snippet.includes("iiit-nr") ||
-                               snippet.includes("iiit - naya raipur");
-            
+            const hasCollege = snippet.includes("iiitnr") || snippet.includes("naya raipur") || snippet.includes("iiit-nr");
             if (hasCollege) score += 0.4; 
 
-            // 2. Batch Boost
-            let batchBonus = 0;
             if (batchYears.length > 0) {
-                batchYears.forEach(year => {
-                    if (snippet.includes(year)) batchBonus = 0.3; 
-                });
-                score += batchBonus; 
+                batchYears.forEach(year => { if (snippet.includes(year)) score += 0.3; });
             }
 
-            // Log good candidates for debugging
-            if (score >= 0.5) {
-                console.log(`\n      [${candidateCount}] 📋 Candidate: "${cleanTitle.substring(0, 40)}..."`);
-                console.log(`      [${candidateCount}] 🔗 Link: ${link.substring(0, 60)}...`);
-                console.log(`      [${candidateCount}] 🎯 Score: ${(score*100).toFixed(0)}% (Base:${(baseScore*100).toFixed(0)}% + College:${hasCollege?40:0}% + Batch:${(batchBonus*100).toFixed(0)}%)`);
-            }
-
-            // Save best
             if (score > highestScore) {
                 highestScore = score;
                 bestMatch = link;
             }
         });
 
-        console.log(`\n   [Fallback] 📊 Analysis Complete: ${candidateCount} candidates evaluated`);
-        
-        // --- CRITICAL UPDATE: LOWER THRESHOLD TO 0.45 ---
-        // This allows "Name Only" (0.5) to pass.
-        // We rely on the scraping step to validate the education.
-        if (bestMatch && highestScore >= 0.45) {
-            console.log(`   [Fallback] ✅ MATCH FOUND!`);
-            console.log(`   [Fallback] 🔗 URL: ${bestMatch}`);
-            console.log(`   [Fallback] 🎯 Confidence Score: ${(highestScore*100).toFixed(0)}%`);
-            return bestMatch;
-        }
-
-        console.log(`   [Fallback] ❌ No confident match found`);
-        console.log(`   [Fallback] 📉 Highest Score: ${(highestScore*100).toFixed(0)}% (Required: 45%)`);
+        if (bestMatch && highestScore >= 0.45) return bestMatch;
         return null;
 
     } catch (error) {
@@ -237,144 +260,78 @@ async function findUrlWithBrightDataFallback(alumniName, batch) {
     }
 }
 
-// --- MAIN PROCESSOR (Accepts Object with name and batch) ---
+// --- MAIN PROCESSOR ---
 async function processSingleProfile(profileData, forceFallback = false) {
-    // profileData can be a string (old way) or object {name, batch} (new way)
     const alumniName = typeof profileData === 'object' ? profileData.name : profileData;
     const batch = typeof profileData === 'object' ? profileData.batch : "";
+    const directUrl = typeof profileData === 'object' ? (profileData.url || profileData.linkedinUrl) : null;
 
     console.log(`\n${'='.repeat(80)}`);
-    console.log(`🚀 PROCESSING PROFILE`);
-    console.log(`   👤 Name: ${alumniName}`);
-    console.log(`   📅 Batch: ${batch || "Any"}`);
-    console.log(`   🔄 Mode: ${forceFallback ? 'FALLBACK (Bright Data)' : 'PRIMARY (Airtop AI)'}`);
-    console.log(`${'='.repeat(80)}`);
+    console.log(`🚀 PROCESSING PROFILE: ${alumniName}`);
     
     let foundUrl = null;
 
-    if (forceFallback) {
-        console.log(`\n🔄 STEP 1: URL Discovery (Fallback Mode)`);
+    // STEP 1: FIND URL
+    if (directUrl) {
+        console.log(`   🔗 Direct URL: ${directUrl}`);
+        foundUrl = directUrl;
+    } else if (forceFallback) {
         foundUrl = await findUrlWithBrightDataFallback(alumniName, batch);
-        if (!foundUrl) {
-            console.log(`\n❌ FAILED: Fallback could not find confident match`);
-            throw new Error("Fallback: No confident match found (College/Batch mismatch).");
-        }
+        if (!foundUrl) throw new Error("Fallback: No confident match found.");
     } else {
-        console.log(`\n🔄 STEP 1: URL Discovery (Primary Mode)`);
         foundUrl = await findUrlWithAirtop(alumniName, batch);
         if (!foundUrl) {
-            console.log(`\n❌ FAILED: Airtop could not find URL`);
             const err = new Error("Airtop could not find URL.");
             err.code = "AIRTOP_FAILED";
             throw err;
         }
     }
 
-    console.log(`\n✅ STEP 1 COMPLETE: Profile URL Found`);
-    console.log(`   🔗 ${foundUrl}`);
-
-    // STEP 2: SCRAPE DATA
-    console.log(`\n🔄 STEP 2: Scraping Full Profile Data from LinkedIn`);
-    console.log(`   📡 Calling Bright Data Collector API...`);
-    console.log(`   🔗 Target URL: ${foundUrl}`);
+    // STEP 2: SCRAPE DATA (WITH NEW POLLING)
+    console.log(`\n🔄 STEP 2: Scraping Full Profile (Async Mode)...`);
     
-    const linkedinResponse = await fetch(LINKEDIN_COLLECTOR_ENDPOINT, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${BRIGHTDATA_API_KEY}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "url": foundUrl })
-    });
-
-    if (!linkedinResponse.ok) {
-        console.log(`   ❌ Bright Data Collector Error: ${linkedinResponse.status}`);
-        throw new Error(`Bright Data Collector failed with status ${linkedinResponse.status}`);
-    }
-
-    console.log(`   ✅ Profile data received`);
-    const rawText = await linkedinResponse.text();
-    console.log(`   📦 Response size: ${rawText.length} characters`);
+    // Call the new helper function
+    const profileJson = await scrapeWithBrightData(foundUrl);
     
-    const profileJson = JSON.parse(rawText);
-    console.log(`   ✅ JSON parsed successfully`);
+    console.log(`   ✅ JSON received successfully`);
 
-    // ==================================================================
-    // 🚨 STEP 3: CONDITIONAL VALIDATION 🚨
-    // Fallback = STRICT (Must verify IIITNR)
-    // Airtop   = LENIENT (Trust the AI, even if Education is empty)
-    // ==================================================================
-    console.log(`\n🛡️ STEP 3: Validating University in Scraped Data...`);
-    
+    // STEP 3: VALIDATION
+    console.log(`\n🛡️ STEP 3: Validating...`);
     const educationList = profileJson.education || [];
     let isIIITNR = false;
     const validKeywords = ["iiitnr", "iiit - naya raipur", "international institute of information technology", "naya raipur", "iiit-nr"];
 
     educationList.forEach(edu => {
-        const schoolName = (
-            edu.school || 
-            edu.school_name || 
-            edu.name || 
-            edu.institute_name || 
-            edu.institution_name || 
-            edu.title || 
-            ""
-        ).toLowerCase();
-
-        const description = (edu.description || "").toLowerCase(); 
-        
-        if (validKeywords.some(key => schoolName.includes(key) || description.includes(key))) {
-            isIIITNR = true;
-            console.log(`   ✅ Verified Education: ${schoolName}`);
-        }
+        const schoolName = (edu.school || edu.school_name || edu.name || "").toLowerCase();
+        if (validKeywords.some(key => schoolName.includes(key))) isIIITNR = true;
     });
 
     if (!isIIITNR) {
-        console.log(`   ⚠️ VALIDATION FAILED: Profile scraped, but no IIITNR education found.`);
-        
+        console.log(`   ⚠️ VALIDATION WARNING: No IIITNR education found.`);
         if (forceFallback) {
-            // STRICT MODE: If we used Fallback (Regex), we MUST verify. 
-            // If verification fails, we assume it's a False Positive (like Saswat from OP Jindal).
-            console.log(`   ❌ BLOCKING SAVE: In Fallback mode, verification is mandatory.`);
             throw new Error("Validation Failed: Profile scraped, but user did not study at IIITNR.");
-        } else {
-            // LENIENT MODE: If we used Airtop (AI), we trust the search result.
-            // We save the profile even if the Education section is hidden/empty.
-            console.log(`   ⚠️ ALLOWING SAVE: In Airtop mode, we trust the AI match despite missing verification.`);
         }
     } else {
-        console.log(`   ✅ Validation Passed: User studied at IIITNR.`);
+        console.log(`   ✅ Validation Passed.`);
     }
-    // ==================================================================
 
-    // STEP 4: SAVE TO FILE
-    console.log(`\n🔄 STEP 4: Saving Profile Data`);
+    // STEP 4: SAVE
+    console.log(`\n🔄 STEP 4: Saving Data`);
     const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
-    if (!fs.existsSync(urlDirPath)) {
-        console.log(`   📁 Creating directory: ${urlDirPath}`);
-        fs.mkdirSync(urlDirPath, { recursive: true });
-    }
+    if (!fs.existsSync(urlDirPath)) fs.mkdirSync(urlDirPath, { recursive: true });
     
     const safeName = alumniName.toLowerCase().replace(/ /g, '_');
-    
-    // Save URL text
-    const urlFilePath = path.join(urlDirPath, `${safeName}_linkedin_url.txt`);
-    fs.writeFileSync(urlFilePath, foundUrl);
-    console.log(`   ✅ URL saved: ${urlFilePath}`);
-
-    // Save JSON (Add batch tag)
+    fs.writeFileSync(path.join(urlDirPath, `${safeName}_linkedin_url.txt`), foundUrl);
     if (batch) profileJson.batch = batch;
-    const jsonFilePath = path.join(urlDirPath, `${safeName}.json`);
-    fs.writeFileSync(jsonFilePath, JSON.stringify(profileJson, null, 2));
-    console.log(`   ✅ Profile saved: ${jsonFilePath}`);
     
-    console.log(`\n${'='.repeat(80)}`);
-    console.log(`🎉 SUCCESS: ${alumniName} - Profile fully scraped and saved!`);
-    console.log(`${'='.repeat(80)}\n`);
+    // Save JSON only when we actually have data
+    fs.writeFileSync(path.join(urlDirPath, `${safeName}.json`), JSON.stringify(profileJson, null, 2));
     
+    // Note: Database sync is now handled by the caller (batch or route handler)
+    // to avoid excessive DB writes during bulk operations.
+
     return "Success";
 }
-
 
 // --- ROUTES ---
 
@@ -407,6 +364,8 @@ router.post('/get-linkedin-profile', async (req, res) => {
 
     try {
         await processSingleProfile({ name: alumniName, batch }, forceFallback);
+        // Sync DB for single profile request
+        await seedUsers(true);
         return res.status(200).json({ success: true, message: `Scraped ${alumniName}` });
     } catch (error) {
         if (error.code === 'AIRTOP_FAILED') {
@@ -416,33 +375,42 @@ router.post('/get-linkedin-profile', async (req, res) => {
     }
 });
 
+router.post('/direct-profile', async (req, res) => {
+    const { linkedinUrl, name, batch } = req.body;
+    try {
+        const profileJson = await scrapeWithBrightData(linkedinUrl);
+        // Save logic repeated for direct
+        const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
+        if (!fs.existsSync(urlDirPath)) fs.mkdirSync(urlDirPath, { recursive: true });
+        const safeName = name.toLowerCase().replace(/ /g, '_');
+        if (batch) profileJson.batch = batch;
+        fs.writeFileSync(path.join(urlDirPath, `${safeName}.json`), JSON.stringify(profileJson, null, 2));
+        await seedUsers(true);
+        return res.status(200).json({ success: true, message: "Scraped" });
+    } catch (e) {
+        return res.status(500).json({ message: e.message });
+    }
+});
+
 async function runBackgroundJob() {
-    console.log(`🚀 Starting Parallel Batch (Limit: 3 concurrent tasks)...`);
-    console.log(`📊 Total profiles to process: ${activeJob.queue.length}`);
-    console.log(`🔄 Mode: ${activeJob.forceFallback ? 'FALLBACK (Bright Data)' : 'PRIMARY (Airtop AI)'}`);
+    // Dynamic Concurrency: 10 for Direct URLS, 3 for Search
+    const isDirectBatch = activeJob.queue.every(item => typeof item === 'object' && (item.url || item.linkedinUrl));
+    const concurrency = isDirectBatch ? 10 : 3;
     
-    // 1. Create a limiter that only allows 3 promises to run at once
-    // We choose 3 because Airtop Free/Starter allows max 3 sessions.
-    const limit = pLimit(3);
+    console.log(`🚀 Starting Parallel Batch (Concurrency: ${concurrency})`);
+    const limit = pLimit(concurrency);
     
-    // 2. Map every profile to a limited promise
     const tasks = activeJob.queue.map((item, index) => {
         return limit(async () => {
-            if (activeJob.shouldStop) {
-                console.log(`⏸️ Stop signal received, skipping remaining tasks...`);
-                return;
-            }
+            if (activeJob.shouldStop) return;
 
             const name = typeof item === 'object' ? item.name : item;
-            
-            // Update status (approximate since they run in parallel)
             activeJob.currentName = `Processing: ${name}`;
             
             try {
                 await processSingleProfile(item, activeJob.forceFallback);
                 activeJob.processed++;
                 activeJob.logs.unshift(`✅ Success: ${name}`);
-                console.log(`📊 Progress: ${activeJob.processed}/${activeJob.total} completed`);
             } catch (error) {
                 activeJob.processed++;
                 console.error(`❌ Error [${name}]:`, error.message);
@@ -452,21 +420,15 @@ async function runBackgroundJob() {
         });
     });
 
-    // 3. Wait for ALL of them to finish
-    console.log(`⏳ Waiting for all parallel tasks to complete...`);
     await Promise.all(tasks);
 
-    // 4. Sync Database ONCE at the end
+    // Final Sync
     if (activeJob.processed > 0) {
-        console.log(`\n🔄 Batch complete. Syncing ${activeJob.processed} profiles to Database...`);
         try {
-            activeJob.currentName = "Syncing Database...";
             await seedUsers(true);
-            activeJob.logs.unshift("💾 Database Synced Successfully.");
-            console.log(`✅ Database updated successfully with all profiles`);
+            activeJob.logs.unshift("💾 Database Synced.");
         } catch (error) {
-            console.error("❌ Database seeding error:", error.message);
-            activeJob.logs.unshift("⚠️ Data saved to JSON, but Database Sync failed.");
+            console.error("DB Sync Error:", error.message);
         }
     }
 
@@ -474,17 +436,10 @@ async function runBackgroundJob() {
     activeJob.currentName = "Completed";
     
     if (activeJob.failedQueue.length > 0) {
-        activeJob.logs.unshift(`🏁 Parallel Batch Done. ${activeJob.failedQueue.length} items failed.`);
+        activeJob.logs.unshift(`🏁 Done. ${activeJob.failedQueue.length} items failed.`);
     } else {
-        activeJob.logs.unshift("🎉 Parallel Batch Scraping Finished Successfully!");
+        activeJob.logs.unshift("🎉 Batch Finished Successfully!");
     }
-    
-    console.log(`\n${'='.repeat(80)}`);
-    console.log(`🎉 PARALLEL BATCH COMPLETE`);
-    console.log(`   ✅ Successful: ${activeJob.processed - activeJob.failedQueue.length}`);
-    console.log(`   ❌ Failed: ${activeJob.failedQueue.length}`);
-    console.log(`   📊 Total: ${activeJob.total}`);
-    console.log(`${'='.repeat(80)}\n`);
 }
 
 export default router;
