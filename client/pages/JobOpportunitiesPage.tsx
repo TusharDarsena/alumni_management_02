@@ -28,16 +28,25 @@ import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { JobListingSkeletonGrid } from "@/features/job-listing";
 import { useToast } from "@/hooks/use-toast";
+import PaginationControls from "@/components/PaginationControls";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner"; // ✅ Added LoadingSpinner
+
+const ITEMS_PER_PAGE = 12;
 
 export default function JobOpportunitiesPage() {
   const [listings, setListings] = useState<JobListing[] | null>(null);
+  const [page, setPage] = useState(1);
   const { form, getFilteredJobListings } = useJobListingFilterForm();
   const { user: authUser } = useAuth(); // ✅ Renamed to authUser
   const toast = useToast();
 
   // Watch form values to trigger re-render when filters change
   const formValues = form.watch();
+
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [formValues.type, formValues.experienceLevel, formValues.title, formValues.location, formValues.minimumSalary]);
 
   useEffect(() => {
     let mounted = true;
@@ -50,6 +59,13 @@ export default function JobOpportunitiesPage() {
   }, []);
 
   const filtered = getFilteredJobListings(listings || []);
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginatedJobs = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   async function handleCreate(values: any, close: () => void) {
     try {
@@ -94,7 +110,7 @@ export default function JobOpportunitiesPage() {
   const cancelClose = () => {
     setShowConfirmClose(false);
   };
-  
+
   // ✅ Create the user object for the layout
   const userForLayout: UserSummary = {
     name: authUser.username, // Map username to name
@@ -115,7 +131,7 @@ export default function JobOpportunitiesPage() {
             <Button variant="outline" asChild>
               <Link to="/jobs/applied">My Applications</Link>
             </Button>
-            
+
             {/* ✅ Added "My Job Listings" Button */}
             <Button variant="outline" asChild>
               <Link to="/jobs/my-listings">My Job Listings</Link>
@@ -126,7 +142,7 @@ export default function JobOpportunitiesPage() {
               <DialogTrigger asChild>
                 <Button>Create Job</Button>
               </DialogTrigger>
-              <DialogContent 
+              <DialogContent
                 className="max-w-5xl max-h-[90vh] overflow-y-auto"
                 onInteractOutside={(e) => {
                   // Prevent closing when clicking outside if there are unsaved changes
@@ -191,12 +207,26 @@ export default function JobOpportunitiesPage() {
       <div className="mt-6">
         {listings == null ? (
           <JobListingSkeletonGrid amount={6} />
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            <p>No job opportunities match your filters.</p>
+          </div>
         ) : (
-          <JobListingGrid>
-            {filtered.map((job) => (
-              <PublishedJobCard key={job.id} jobListing={job} />
-            ))}
-          </JobListingGrid>
+          <>
+            <p className="text-xs text-muted-foreground mb-4">
+              Showing {(page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(page * ITEMS_PER_PAGE, filtered.length)} of {filtered.length} jobs
+            </p>
+            <JobListingGrid>
+              {paginatedJobs.map((job) => (
+                <PublishedJobCard key={job.id} jobListing={job} />
+              ))}
+            </JobListingGrid>
+            <PaginationControls
+              currentPage={page}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </>
         )}
       </div>
     </div>

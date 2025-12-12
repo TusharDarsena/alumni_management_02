@@ -7,6 +7,7 @@ import path from "path";
 import { clerkMiddleware } from "@clerk/express";
 import { jobListingsRouter } from "./routes/jobListings.js";
 import { jobApplicationsRouter } from "./routes/jobApplications.js";
+import { dashboardRouter } from "./routes/dashboard.js";
 import adminRoutes from "./routes/admin.js";
 import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
@@ -106,6 +107,9 @@ export function createServer() {
 
   // Job applications (Prisma/SQLite)
   app.use('/api/job-applications', jobApplicationsRouter);
+
+  // Dashboard stats
+  app.use('/api/dashboard', dashboardRouter);
 
 
 

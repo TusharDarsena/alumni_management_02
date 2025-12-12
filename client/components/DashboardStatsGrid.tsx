@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Star, MessageSquare, Briefcase } from "lucide-react";
 
 export interface DashboardStats {
-  alumniConnections: number;
+  totalAlumni: number;
   favorite: number;
   messages?: number;
   opportunities?: number;
@@ -14,10 +14,10 @@ interface DashboardStatsGridProps {
 
 export default function DashboardStatsGrid({ stats }: DashboardStatsGridProps) {
   const items = [
-    { label: "Alumni Connections", value: stats.alumniConnections, icon: Users, color: "text-primary", bg: "bg-primary/10" },
+    { label: "Total Alumni", value: stats.totalAlumni, icon: Users, color: "text-primary", bg: "bg-primary/10" },
     { label: "Favorites", value: stats.favorite, icon: Star, color: "text-amber-500", bg: "bg-amber-500/10" },
     { label: "Messages", value: stats.messages ?? 0, icon: MessageSquare, color: "text-accent", bg: "bg-accent/10" },
-    { label: "Opportunities", value: stats.opportunities ?? 0, icon: Briefcase, color: "text-neon-pink", bg: "bg-neon-pink/10" },
+    { label: "Accepted Jobs", value: stats.opportunities ?? 0, icon: Briefcase, color: "text-neon-pink", bg: "bg-neon-pink/10" },
   ];
 
   return (

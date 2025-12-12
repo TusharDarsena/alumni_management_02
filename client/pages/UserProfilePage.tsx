@@ -277,125 +277,134 @@ export default function UserProfilePage() {
                 Details
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {isEditing ? (
-                <>
-                  <div className="space-y-2">
-                    <Label htmlFor="graduationYear">Graduation Year</Label>
-                    <Input
-                      id="graduationYear"
-                      value={formData.graduationYear}
-                      onChange={(e) => handleInputChange("graduationYear", e.target.value)}
-                      placeholder="2024"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="major">Major / Branch</Label>
-                    <Input
-                      id="major"
-                      value={formData.major}
-                      onChange={(e) => handleInputChange("major", e.target.value)}
-                      placeholder="Computer Science"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company</Label>
-                    <Input
-                      id="company"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange("company", e.target.value)}
-                      placeholder="Acme Corp"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="jobTitle">Job Title</Label>
-                    <Input
-                      id="jobTitle"
-                      value={formData.jobTitle}
-                      onChange={(e) => handleInputChange("jobTitle", e.target.value)}
-                      placeholder="Software Engineer"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input
-                      id="phone"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
-                      placeholder="+91 98765 43210"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="location">Location</Label>
-                    <Input
-                      id="location"
-                      value={formData.location}
-                      onChange={(e) => handleInputChange("location", e.target.value)}
-                      placeholder="Bangalore, India"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="linkedinUrl">LinkedIn URL</Label>
-                    <Input
-                      id="linkedinUrl"
-                      value={formData.linkedinUrl}
-                      onChange={(e) => handleInputChange("linkedinUrl", e.target.value)}
-                      placeholder="https://linkedin.com/in/username"
-                    />
-                  </div>
-                </>
-              ) : (
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Graduation Year:</span>
-                    <span className="font-medium">{user?.graduationYear || "Not set"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Major:</span>
-                    <span className="font-medium">{user?.major || user?.branch || "Not set"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Company:</span>
-                    <span className="font-medium">{user?.company || "Not set"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Briefcase className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Job Title:</span>
-                    <span className="font-medium">{user?.jobTitle || "Not set"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Phone:</span>
-                    <span className="font-medium">{user?.phone || "Not set"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Location:</span>
-                    <span className="font-medium">{user?.location || "Not set"}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Email:</span>
-                    <span className="font-medium">{user?.email || "Not set"}</span>
-                  </div>
-                  {user?.linkedinUrl && (
-                    <div className="flex items-center gap-2">
-                      <Linkedin className="w-4 h-4 text-muted-foreground" />
-                      <a
-                        href={user.linkedinUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline"
-                      >
-                        LinkedIn Profile
-                      </a>
-                    </div>
-                  )}
-                </div>
-              )}
+            <CardContent className="space-y-3 text-sm">
+              {/* Graduation Year */}
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Graduation Year:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.graduationYear}
+                    onChange={(e) => handleInputChange("graduationYear", e.target.value)}
+                    placeholder="2024"
+                    className="h-8 flex-1"
+                  />
+                ) : (
+                  <span className="font-medium">{user?.graduationYear || "Not set"}</span>
+                )}
+              </div>
+
+              {/* Major */}
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Major:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.major}
+                    onChange={(e) => handleInputChange("major", e.target.value)}
+                    placeholder="Computer Science"
+                    className="h-8 flex-1"
+                  />
+                ) : (
+                  <span className="font-medium">{user?.major || user?.branch || "Not set"}</span>
+                )}
+              </div>
+
+              {/* Company */}
+              <div className="flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Company:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.company}
+                    onChange={(e) => handleInputChange("company", e.target.value)}
+                    placeholder="Acme Corp"
+                    className="h-8 flex-1"
+                  />
+                ) : (
+                  <span className="font-medium">{user?.company || "Not set"}</span>
+                )}
+              </div>
+
+              {/* Job Title */}
+              <div className="flex items-center gap-2">
+                <Briefcase className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Job Title:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.jobTitle}
+                    onChange={(e) => handleInputChange("jobTitle", e.target.value)}
+                    placeholder="Software Engineer"
+                    className="h-8 flex-1"
+                  />
+                ) : (
+                  <span className="font-medium">{user?.jobTitle || "Not set"}</span>
+                )}
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Phone:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="h-8 flex-1"
+                  />
+                ) : (
+                  <span className="font-medium">{user?.phone || "Not set"}</span>
+                )}
+              </div>
+
+              {/* Location */}
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Location:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.location}
+                    onChange={(e) => handleInputChange("location", e.target.value)}
+                    placeholder="Bangalore, India"
+                    className="h-8 flex-1"
+                  />
+                ) : (
+                  <span className="font-medium">{user?.location || "Not set"}</span>
+                )}
+              </div>
+
+              {/* Email (read-only) */}
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">Email:</span>
+                <span className="font-medium">{user?.email || "Not set"}</span>
+              </div>
+
+              {/* LinkedIn URL */}
+              <div className="flex items-center gap-2">
+                <Linkedin className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-muted-foreground w-28 flex-shrink-0">LinkedIn:</span>
+                {isEditing ? (
+                  <Input
+                    value={formData.linkedinUrl}
+                    onChange={(e) => handleInputChange("linkedinUrl", e.target.value)}
+                    placeholder="https://linkedin.com/in/username"
+                    className="h-8 flex-1"
+                  />
+                ) : user?.linkedinUrl ? (
+                  <a
+                    href={user.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Profile Link
+                  </a>
+                ) : (
+                  <span className="font-medium">Not set</span>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>
