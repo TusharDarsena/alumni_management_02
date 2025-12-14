@@ -22,6 +22,12 @@ interface JobStatus {
     failedQueue: ScrapeProfile[];
 }
 
+interface SkippedProfile {
+    name: string;
+    linkedinUrl: string;
+    reason: string;
+}
+
 export default function ApifyBatchScraper() {
     // --- STATE ---
     const [isProcessing, setIsProcessing] = useState(false);
@@ -30,6 +36,7 @@ export default function ApifyBatchScraper() {
     const [failedQueue, setFailedQueue] = useState<ScrapeProfile[]>([]);
 
     const [pendingProfiles, setPendingProfiles] = useState<ScrapeProfile[]>([]);
+    const [skippedProfiles, setSkippedProfiles] = useState<SkippedProfile[]>([]);
     const [skippedCount, setSkippedCount] = useState(0);
     const [selectedBatch, setSelectedBatch] = useState("");
     const [concurrency, setConcurrency] = useState(3);
@@ -116,7 +123,7 @@ export default function ApifyBatchScraper() {
             const worksheet = workbook.Sheets[sheetName];
             const json = xlsx.utils.sheet_to_json<any>(worksheet);
 
-            let skipped = 0;
+            const skipped: SkippedProfile[] = [];
 
             const profiles: ScrapeProfile[] = json
                 .map((row) => {
@@ -129,15 +136,20 @@ export default function ApifyBatchScraper() {
                     const name = nameKey ? row[nameKey] : null;
                     const url = urlKey ? row[urlKey] : null;
 
-                    if (name && url && typeof name === 'string' && typeof url === 'string') {
-                        if (isValidLinkedInUrl(url)) {
+                    if (name && typeof name === 'string') {
+                        if (url && typeof url === 'string' && isValidLinkedInUrl(url)) {
                             return {
                                 name: name.trim(),
                                 batch: selectedBatch,
                                 linkedinUrl: url.trim()
                             } as ScrapeProfile;
                         } else {
-                            skipped++;
+                            // Track skipped profile
+                            skipped.push({
+                                name: name.trim(),
+                                linkedinUrl: url || '',
+                                reason: !url ? 'Empty LinkedIn URL' : 'Invalid LinkedIn URL format'
+                            });
                             return null;
                         }
                     }
@@ -145,10 +157,11 @@ export default function ApifyBatchScraper() {
                 })
                 .filter((p): p is ScrapeProfile => p !== null);
 
-            setSkippedCount(skipped);
+            setSkippedProfiles(skipped);
+            setSkippedCount(skipped.length);
 
             if (profiles.length === 0) {
-                toast({ title: "Invalid file", description: `No valid rows found. ${skipped > 0 ? `${skipped} rows had invalid URLs.` : ""} Ensure columns 'Name' and 'LinkedIn URL/Link' exist.`, variant: "destructive" });
+                toast({ title: "Invalid file", description: `No valid rows found. ${skipped.length > 0 ? `${skipped.length} rows had invalid URLs.` : ""} Ensure columns 'Name' and 'LinkedIn URL/Link' exist.`, variant: "destructive" });
                 if (fileInputRef.current) fileInputRef.current.value = "";
                 return;
             }
@@ -168,15 +181,24 @@ export default function ApifyBatchScraper() {
         }));
 
         try {
+            // Report skipped profiles to backend for logging
+            if (skippedProfiles.length > 0) {
+                await axios.post('/api/apify-scrape/report-skipped', {
+                    skippedProfiles,
+                    batch: selectedBatch
+                });
+            }
+
             await axios.post('/api/apify-scrape/start-batch', {
                 profiles: finalProfiles,
                 concurrency
             });
 
             setFailedQueue([]);
+            setSkippedProfiles([]);
             toast({
                 title: "Starting Apify Batch",
-                description: `Processing ${finalProfiles.length} profiles (concurrency: ${concurrency})...`
+                description: `Processing ${finalProfiles.length} profiles (concurrency: ${concurrency})...${skippedProfiles.length > 0 ? ` ${skippedProfiles.length} skipped profiles logged.` : ''}`
             });
 
             checkStatus();

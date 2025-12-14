@@ -115,7 +115,7 @@ export default function AlumniProfilePage() {
     const mapped: UserProfileData = {
       id: d.id,
       name: d.name,
-      email: undefined,
+      email: d.email || undefined,
       avatar: d.avatar || undefined,
       url: d.input_url || d.url || undefined,
       location: d.current_company?.location || d.location || undefined,

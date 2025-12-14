@@ -111,9 +111,9 @@ async function processSingleProfile(profileData) {
         source: 'apify'
     };
 
-    // STEP 3: SAVE TO FILE
+    // STEP 3: SAVE TO FILE (in separate apify_data folder)
     console.log(`\n🔄 STEP 2: Saving Data`);
-    const urlDirPath = path.join(__dirname, '../../client/data/alumnidata');
+    const urlDirPath = path.join(__dirname, '../../client/data/apify_data');
     if (!fs.existsSync(urlDirPath)) fs.mkdirSync(urlDirPath, { recursive: true });
 
     const safeName = alumniName.toLowerCase().replace(/ /g, '_').replace(/[^a-z0-9_]/g, '');
@@ -210,6 +210,40 @@ router.post('/stop-batch', (req, res) => {
     res.json({ success: true });
 });
 
+// Report skipped profiles (invalid URLs from frontend)
+router.post('/report-skipped', async (req, res) => {
+    const { skippedProfiles, batch } = req.body;
+
+    if (!skippedProfiles || !Array.isArray(skippedProfiles) || skippedProfiles.length === 0) {
+        return res.status(400).json({ message: "No skipped profiles to report" });
+    }
+
+    try {
+        const skippedDir = path.join(__dirname, '../../client/data/apify_data');
+        if (!fs.existsSync(skippedDir)) fs.mkdirSync(skippedDir, { recursive: true });
+
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+        const filename = `skipped_profiles_${timestamp}.json`;
+        const filePath = path.join(skippedDir, filename);
+
+        const record = {
+            generatedAt: new Date().toISOString(),
+            batch: batch || null,
+            reason: "Invalid or empty LinkedIn URL",
+            totalSkipped: skippedProfiles.length,
+            profiles: skippedProfiles
+        };
+
+        fs.writeFileSync(filePath, JSON.stringify(record, null, 2));
+        console.log(`📝 Skipped profiles saved to: ${filename}`);
+
+        return res.json({ success: true, filename });
+    } catch (error) {
+        console.error("Failed to save skipped profiles:", error);
+        return res.status(500).json({ message: error.message });
+    }
+});
+
 // Background job processor
 async function runBackgroundJob() {
     const concurrency = activeJob.concurrency || 3;
@@ -232,7 +266,11 @@ async function runBackgroundJob() {
             } catch (error) {
                 activeJob.processed++;
                 console.error(`❌ Error [${name}]:`, error.message);
-                activeJob.failedQueue.push(item);
+                activeJob.failedQueue.push({
+                    ...item,
+                    error: error.message,
+                    failedAt: new Date().toISOString()
+                });
                 activeJob.logs.unshift(`⚠ Failed: ${name} - ${error.message}`);
             }
         });
@@ -240,12 +278,17 @@ async function runBackgroundJob() {
 
     await Promise.all(tasks);
 
+    // Save failed profiles to JSON for tracking
+    if (activeJob.failedQueue.length > 0) {
+        await saveFailedProfiles(activeJob.failedQueue);
+    }
+
     // Mark job complete
     activeJob.isRunning = false;
     activeJob.currentName = "Completed";
 
     if (activeJob.failedQueue.length > 0) {
-        activeJob.logs.unshift(`🏁 Done. ${activeJob.failedQueue.length} items failed.`);
+        activeJob.logs.unshift(`🏁 Done. ${activeJob.failedQueue.length} items failed. See failed_profiles.json for details.`);
     } else {
         activeJob.logs.unshift("🎉 Batch Finished Successfully!");
     }
@@ -255,4 +298,30 @@ async function runBackgroundJob() {
     console.log(`   Total: ${activeJob.total} | Success: ${activeJob.processed - activeJob.failedQueue.length} | Failed: ${activeJob.failedQueue.length}`);
 }
 
+// --- UTILITY: SAVE FAILED PROFILES TO JSON ---
+async function saveFailedProfiles(failedQueue) {
+    const failedDir = path.join(__dirname, '../../client/data/apify_data');
+    if (!fs.existsSync(failedDir)) fs.mkdirSync(failedDir, { recursive: true });
+
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const filename = `failed_profiles_${timestamp}.json`;
+    const filePath = path.join(failedDir, filename);
+
+    const record = {
+        generatedAt: new Date().toISOString(),
+        totalFailed: failedQueue.length,
+        profiles: failedQueue.map(item => ({
+            name: item.name,
+            linkedinUrl: item.linkedinUrl || item.url,
+            batch: item.batch,
+            error: item.error,
+            failedAt: item.failedAt
+        }))
+    };
+
+    fs.writeFileSync(filePath, JSON.stringify(record, null, 2));
+    console.log(`   📝 Failed profiles saved to: ${filename}`);
+}
+
 export default router;
+

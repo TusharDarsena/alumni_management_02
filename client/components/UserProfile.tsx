@@ -10,7 +10,8 @@ import {
   Heart,
   MessageCircle,
   UserPlus,
-  Building2
+  Building2,
+  Mail
 } from "lucide-react";
 
 export interface UserProfileData {
@@ -259,6 +260,19 @@ export default function UserProfile({ data, isFavorite, onToggleFavorite }: User
                   <div className="flex items-center gap-2 text-sm text-muted-foreground pt-1">
                     <MapPin className="w-4 h-4 text-primary/70" />
                     <span>{data.location}</span>
+                  </div>
+                )}
+
+                {/* Email */}
+                {data.email && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground pt-1">
+                    <Mail className="w-4 h-4 text-emerald-500" />
+                    <a
+                      href={`mailto:${data.email}`}
+                      className="text-emerald-600 hover:text-emerald-700 hover:underline"
+                    >
+                      {data.email}
+                    </a>
                   </div>
                 )}
               </div>

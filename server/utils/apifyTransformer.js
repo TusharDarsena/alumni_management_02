@@ -159,6 +159,9 @@ export function transformApifyEntry(apifyData) {
 
         // LinkedIn-specific
         linkedin_num_id: basicInfo.urn || null,
+
+        // Email (from Apify with includeEmail: true)
+        email: basicInfo.email || null,
     };
 
     // Remove null/undefined values

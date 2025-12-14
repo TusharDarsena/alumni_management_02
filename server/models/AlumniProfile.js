@@ -78,6 +78,7 @@ const alumniProfileSchema = new mongoose.Schema(
     batch: { type: String },
     branch: { type: String },
     graduationYear: { type: String },
+    email: { type: String },  // Email from Apify scraper
     activity: {
       type: [
         {
