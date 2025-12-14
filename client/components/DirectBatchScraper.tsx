@@ -9,14 +9,14 @@ import { useScraping, ScrapeProfile } from "@/context/ScrapingContext";
 
 export default function DirectBatchScraper() {
   const { isProcessing, progress, logs, failedQueue, startScraping, cancelScraping } = useScraping();
-  
+
   // --- DYNAMIC BATCH GENERATOR ---
   const batches = React.useMemo(() => {
     const currentYear = new Date().getFullYear();
     const isAfterJune = new Date().getMonth() >= 6; // July or later
     const latestYear = isAfterJune ? currentYear : currentYear - 1;
     const startYear = 2015; // Your college start year
-    
+
     const list = [];
     for (let y = startYear; y <= latestYear; y++) {
       list.push(`${y}-${y + 4}`);
@@ -25,11 +25,19 @@ export default function DirectBatchScraper() {
   }, []);
 
   const [pendingProfiles, setPendingProfiles] = useState<ScrapeProfile[]>([]);
+  const [skippedCount, setSkippedCount] = useState(0);
   const [selectedBatch, setSelectedBatch] = useState(batches[0]);
+  const [concurrency, setConcurrency] = useState(3);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Helper: Validate LinkedIn URL (must contain "linkedin" and "https")
+  const isValidLinkedInUrl = (url: string): boolean => {
+    const lowerUrl = url.toLowerCase();
+    return lowerUrl.includes("linkedin") && lowerUrl.includes("https");
+  };
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -47,35 +55,45 @@ export default function DirectBatchScraper() {
       const worksheet = workbook.Sheets[sheetName];
       const json = xlsx.utils.sheet_to_json<any>(worksheet);
 
+      let skipped = 0;
+
       // Parse Name and LinkedIn URL
       const profiles: ScrapeProfile[] = json
         .map((row) => {
           // Find keys case-insensitively - Robust matching
           const nameKey = Object.keys(row).find((k) => k.trim().toLowerCase() === "name");
-          
-          // Look for various common headers for LinkedIn URL
+
+          // Look for various common headers for LinkedIn URL (now includes "link")
           const urlKey = Object.keys(row).find((k) => {
             const key = k.trim().toLowerCase();
-            return key === "linkedin" || key === "linkedin url" || key === "url" || key === "profile link" || key.includes("linkedin");
+            return key === "linkedin" || key === "linkedin url" || key === "url" || key === "link" || key === "profile link" || key.includes("linkedin");
           });
-          
+
           const name = nameKey ? row[nameKey] : null;
           const url = urlKey ? row[urlKey] : null;
 
-          // Relaxed validation: Just ensure we have strings
+          // Validate: must have name, url as strings, AND url must be a valid LinkedIn URL
           if (name && url && typeof name === 'string' && typeof url === 'string') {
-            return {
-              name: name.trim(),
-              batch: selectedBatch, // Will be updated with current selection
-              linkedinUrl: url.trim()
-            } as ScrapeProfile;
+            if (isValidLinkedInUrl(url)) {
+              return {
+                name: name.trim(),
+                batch: selectedBatch, // Will be updated with current selection
+                linkedinUrl: url.trim()
+              } as ScrapeProfile;
+            } else {
+              // Invalid URL - skip this row
+              skipped++;
+              return null;
+            }
           }
           return null;
         })
         .filter((p): p is ScrapeProfile => p !== null);
 
+      setSkippedCount(skipped);
+
       if (profiles.length === 0) {
-        toast({ title: "Invalid file", description: "No valid rows found. Ensure columns 'Name' and 'LinkedIn URL' exist.", variant: "destructive" });
+        toast({ title: "Invalid file", description: `No valid rows found. ${skipped > 0 ? `${skipped} rows had invalid URLs.` : ""} Ensure columns 'Name' and 'LinkedIn URL/Link' exist.`, variant: "destructive" });
         if (fileInputRef.current) fileInputRef.current.value = "";
         return;
       }
@@ -94,7 +112,7 @@ export default function DirectBatchScraper() {
       batch: selectedBatch
     }));
 
-    startScraping(finalProfiles, false);
+    startScraping(finalProfiles, false, concurrency);
     setShowConfirmModal(false);
     setPendingProfiles([]);
     if (fileInputRef.current) fileInputRef.current.value = "";
@@ -107,8 +125,8 @@ export default function DirectBatchScraper() {
   };
 
   // UI Logic
-  const percentage = progress.total > 0 
-    ? Math.round((progress.processed / progress.total) * 100) 
+  const percentage = progress.total > 0
+    ? Math.round((progress.processed / progress.total) * 100)
     : 0;
 
   return (
@@ -120,29 +138,40 @@ export default function DirectBatchScraper() {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        
+
         {/* 1. Upload Section */}
         {!isProcessing && (
           <div className="flex gap-3 items-end">
             <div className="flex-1 space-y-2">
               <label className="text-sm font-medium">Upload Excel (Name + LinkedIn URL)</label>
-              <Input 
+              <Input
                 ref={fileInputRef}
-                type="file" 
-                accept=".xlsx, .xls" 
+                type="file"
+                accept=".xlsx, .xls"
                 onChange={handleFileSelect}
                 className="cursor-pointer"
               />
             </div>
-            
+
             <div className="w-[140px] space-y-2">
               <label className="text-sm font-medium">Batch</label>
-              <select 
+              <select
                 value={selectedBatch}
                 onChange={(e) => setSelectedBatch(e.target.value)}
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 {batches.map(b => <option key={b} value={b}>{b}</option>)}
+              </select>
+            </div>
+
+            <div className="w-[100px] space-y-2">
+              <label className="text-sm font-medium">Concurrency</label>
+              <select
+                value={concurrency}
+                onChange={(e) => setConcurrency(parseInt(e.target.value))}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n}</option>)}
               </select>
             </div>
           </div>
@@ -160,15 +189,15 @@ export default function DirectBatchScraper() {
                 {progress.processed} / {progress.total}
               </span>
             </div>
-            
+
             {/* Progress Bar */}
             <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
-              <div 
+              <div
                 className="h-full bg-purple-600 transition-all duration-500 ease-out"
                 style={{ width: `${percentage}%` }}
               />
             </div>
-            
+
             <div className="text-xs text-slate-500 font-mono truncate">
               {progress.currentName || "Initializing..."}
             </div>
@@ -197,14 +226,19 @@ export default function DirectBatchScraper() {
               <h3 className="text-lg font-bold mb-2">Confirm Bulk Direct Scrape</h3>
               <p className="text-slate-600 mb-4">
                 Found <strong>{pendingProfiles.length}</strong> valid profiles with LinkedIn URLs.
+                {skippedCount > 0 && (
+                  <span className="text-amber-600 block mt-1">
+                    ⚠️ {skippedCount} row(s) skipped (invalid LinkedIn URLs)
+                  </span>
+                )}
                 <br />
                 Batch: <strong>{selectedBatch}</strong>
               </p>
-              
+
               <div className="max-h-40 overflow-y-auto bg-slate-50 p-2 rounded mb-4 text-xs border">
                 {pendingProfiles.slice(0, 10).map((p, i) => (
                   <div key={i} className="truncate border-b last:border-0 py-1">
-                    {i+1}. {p.name} - {p.linkedinUrl}
+                    {i + 1}. {p.name} - {p.linkedinUrl}
                   </div>
                 ))}
                 {pendingProfiles.length > 10 && <div className="text-center text-slate-400 mt-1">...and {pendingProfiles.length - 10} more</div>}

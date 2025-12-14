@@ -48,6 +48,7 @@ export default function AlumniFilterBar({ filters, onFilterChange }: AlumniFilte
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="any">Any</SelectItem>
+              <SelectItem value="2015">2015</SelectItem>
               <SelectItem value="2016">2016</SelectItem>
               <SelectItem value="2017">2017</SelectItem>
               <SelectItem value="2018">2018</SelectItem>

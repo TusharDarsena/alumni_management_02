@@ -15,7 +15,7 @@ interface ScrapingContextType {
   progress: { processed: number; total: number; currentName: string };
   logs: string[];
   failedQueue: ScrapeProfile[]; // Now stores objects
-  startScraping: (profiles: ScrapeProfile[], forceFallback?: boolean) => void;
+  startScraping: (profiles: ScrapeProfile[], forceFallback?: boolean, concurrency?: number) => void;
   cancelScraping: () => void;
 }
 
@@ -57,7 +57,7 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
   // On Load: Check if a job is already running (This fixes the F5 issue)
   useEffect(() => {
     checkStatus(); // Check immediately on mount/refresh
-    
+
     // Set up polling interval (every 2 seconds)
     intervalRef.current = setInterval(checkStatus, 2000);
 
@@ -66,18 +66,18 @@ export function ScrapingProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Update start function to accept profiles with batch info
-  const startScraping = async (profiles: ScrapeProfile[], forceFallback = false) => {
+  // Update start function to accept profiles with batch info and optional concurrency
+  const startScraping = async (profiles: ScrapeProfile[], forceFallback = false, concurrency?: number) => {
     try {
-      // Send "profiles" instead of "names"
-      await axios.post('/api/scrape/start-batch', { profiles, forceFallback });
-      
+      // Send "profiles" instead of "names", include concurrency if provided
+      await axios.post('/api/scrape/start-batch', { profiles, forceFallback, concurrency });
+
       setFailedQueue([]); // Clear old failures on new start
-      toast({ 
-        title: forceFallback ? "Starting Retry Batch" : "Starting Batch", 
-        description: `Processing ${profiles.length} profiles...` 
+      toast({
+        title: forceFallback ? "Starting Retry Batch" : "Starting Batch",
+        description: `Processing ${profiles.length} profiles${concurrency ? ` (concurrency: ${concurrency})` : ''}...`
       });
-      
+
       // Force an immediate check
       checkStatus();
     } catch (error: any) {

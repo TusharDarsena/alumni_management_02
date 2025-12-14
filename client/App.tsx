@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import JobOpportunitiesPage from "./pages/JobOpportunitiesPage";
 import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
+import SignUpPage from "./pages/SignupPage";
 import DashboardPage from "./pages/DashboardPage";
 import SearchAlumniPage from "./pages/SearchAlumniPage";
 import AdminControlsPage from "./pages/AdminControlsPage";

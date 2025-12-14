@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import ImportUpload from "@/components/ImportUpload";
 import SingleProfileScraper from "@/components/SingleProfileScraper";
 import DirectProfileScraper from "@/components/DirectProfileScraper";
-// import DirectBatchScraper from "@/components/DirectBatchScraper";
+import ApifyBatchScraper from "@/components/ApifyBatchScraper";
 import { useAuth } from "@/hooks/useClerkAuth";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
@@ -141,9 +141,9 @@ export default function AdminControlsPage() {
       <div className="mt-6 mb-8 space-y-6">
         <SingleProfileScraper />
         <DirectProfileScraper />
-        {/* <DirectBatchScraper /> */}
+        <ApifyBatchScraper />
       </div>
-      
+
       {/* --- Divider --- */}
       <div className="border-t my-6" />
 

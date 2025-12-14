@@ -1,0 +1,220 @@
+[{
+  "basic_info": {
+    "fullname": "Mohd Ehsaan  Danish",
+    "first_name": "Mohd Ehsaan ",
+    "last_name": "Danish",
+    "headline": "Senior Consultant @ ABC Consultants | Aerospace & Defence | Executive Search | Ex Korn Ferry & TPL",
+    "public_identifier": "medanish1998",
+    "profile_url": "https://linkedin.com/in/medanish1998",
+    "profile_picture_url": "https://media.licdn.com/dms/image/v2/D5603AQFkfaGaupNLhQ/profile-displayphoto-crop_800_800/B56Zo2sPRrKAAM-/0/1761854163563?e=1767225600&v=beta&t=ZzU7bBR1aXy5QVtHtYrt8nUDe7-PCQI3FUb2vY3JcAo",
+    "about": "As a Senior Consultant at ABC Consultants, I specialize in executive search and leadership hiring within the aerospace and defense sector. My work involves candidate assessment, industry research, and client engagement &amp; acquisition, supporting organizations in identifying and acquiring top talent to meet their strategic goals.  With an MBA in Human Resources from Panjab University and a BTech in Electronics and Communications Engineering from IIIT-Naya Raipur, I leverage my technical and analytical skills to align recruitment strategies with business objectives. My previous roles at Tata Projects and Korn Ferry have honed my abilities in technical recruitment, talent acquisition, and diversity hiring. Passionate about fostering collaborative and inclusive work environments, I aim to enable teams to achieve organizational excellence.",
+    "location": {
+      "country": "India",
+      "city": "Hyderabad, Telangana",
+      "full": "Hyderabad, Telangana, India",
+      "country_code": "IN"
+    },
+    "creator_hashtags": [],
+    "is_creator": false,
+    "is_influencer": false,
+    "is_premium": true,
+    "open_to_work": false,
+    "created_timestamp": 1598535556654,
+    "show_follower_count": false,
+    "background_picture_url": "https://media.licdn.com/dms/image/v2/D5616AQFjry7Y5hMzQA/profile-displaybackgroundimage-shrink_350_1400/B56ZpSzO8VI8AY-/0/1762325756876?e=1767225600&v=beta&t=WqAGEFsiZNZe2i5eaCDPIIaJEkpeZbNhQ-aXJ21d_y0",
+    "urn": "ACoAADIszLQBDI24QBZ4j_-XXr7zSCrDeihM0-U",
+    "follower_count": 11377,
+    "connection_count": 3644,
+    "current_company": "ABC Consultants",
+    "current_company_urn": "7840",
+    "current_company_url": "https://www.linkedin.com/company/abc-consultants",
+    "top_skills": [],
+    "email": null
+  },
+  "experience": [
+    {
+      "title": "Senior Consultant - Aerospace & Defence",
+      "company": "ABC Consultants",
+      "location": "Hyderabad, Telangana, India",
+      "duration": "Nov 2025 - Present · 2 mos",
+      "start_date": {
+        "year": 2025,
+        "month": "Nov"
+      },
+      "is_current": true,
+      "company_linkedin_url": "https://www.linkedin.com/company/7840/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQF17lFDmdaczw/company-logo_400_400/company-logo_400_400/0/1630525229661/abc_consultants_logo?e=1767225600&v=beta&t=1Zt1-j-H4UeoJjNFm8X-UgSQWaPcAc_maza15Eps8c8",
+      "employment_type": "Full-time",
+      "location_type": "Remote",
+      "company_id": "7840"
+    },
+    {
+      "title": "Talent Acquisition (Leadership Hiring)",
+      "company": "Tata Projects",
+      "location": "Hyderabad, Telangana, India",
+      "description": "Was part of Energy & Industrial Business Group of Tata Projects as a TA professional. Built the engineering leadership team for the Advanced Tech Facilities Business Unit which is involved in construction of India's first semiconductor manufacturing facility. Led the TA function for ATF Business Unit (semiconductor EPC).\n\nAlso hired for various leadership roles for Power & Metals projects; Oil, Gas & Hydrocarbons projects etc and was looking after manpower planning, deployment and movement.",
+      "duration": "Dec 2023 - Oct 2025 · 1 yr 11 mos",
+      "start_date": {
+        "year": 2023,
+        "month": "Dec"
+      },
+      "end_date": {
+        "year": 2025,
+        "month": "Oct"
+      },
+      "is_current": false,
+      "company_linkedin_url": "https://www.linkedin.com/company/155507/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQHt21G1RK72ZQ/company-logo_400_400/B4DZqBvJxkGkAY-/0/1763113213462/tata_projects_logo?e=1767225600&v=beta&t=szEMuMTnY9UzZVkLxWN8IfGJ1sWQLkmpjaqGaFQTN0s",
+      "employment_type": "Full-time",
+      "skills": [
+        "Recruiting",
+        "Technical Recruiting"
+      ],
+      "company_id": "155507",
+      "skills_url": "https://www.linkedin.com/in/medanish1998/overlay/urn:li:fsd_profilePosition:(ACoAADIszLQBDI24QBZ4j_-XXr7zSCrDeihM0-U,2300879828)/skill-associations-details?profileUrn=urn%3Ali%3Afsd_profile%3AACoAADIszLQBDI24QBZ4j_-XXr7zSCrDeihM0-U"
+    },
+    {
+      "title": "Research Analyst, Executive Search",
+      "company": "Korn Ferry",
+      "location": "Bengaluru, Karnataka, India",
+      "description": "Worked on Executive Search mandates.\n\nMy responsibilities included Candidate mapping, Candidate assessment, Industry research & analysis, Client management.\nLed succession projects and CXO searches and was also part of DE&I hiring initiative.",
+      "duration": "May 2022 - Nov 2023 · 1 yr 7 mos",
+      "start_date": {
+        "year": 2022,
+        "month": "May"
+      },
+      "end_date": {
+        "year": 2023,
+        "month": "Nov"
+      },
+      "is_current": false,
+      "company_linkedin_url": "https://www.linkedin.com/company/3741/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQHruq7Wq8U5Mw/company-logo_400_400/B56ZUpzb1UGoAY-/0/1740163104457/kornferry_logo?e=1767225600&v=beta&t=XyMgFQJSXqq_Y_ZtVEfi8FH6JiTZkjtpfB7A3A4DyF8",
+      "employment_type": "Full-time",
+      "location_type": "Remote",
+      "skills": [
+        "Human Resources (HR)",
+        "Recruiting"
+      ],
+      "company_id": "3741",
+      "skills_url": "https://www.linkedin.com/in/medanish1998/overlay/urn:li:fsd_profilePosition:(ACoAADIszLQBDI24QBZ4j_-XXr7zSCrDeihM0-U,1967446736)/skill-associations-details?profileUrn=urn%3Ali%3Afsd_profile%3AACoAADIszLQBDI24QBZ4j_-XXr7zSCrDeihM0-U"
+    },
+    {
+      "title": "Assistant System Engineer",
+      "company": "Tata Consultancy Services",
+      "location": "Hyderabad, Telangana, India",
+      "description": "Worked as a software developer for the development and maintenance of TCS Gems - A Human Resource Information (HRIS) portal to reward the employees of TCS for their contribution to the organisation and the clients.\n\nDeveloped a mobile application using Ionic Framework for TCS Employee Concern - A Human Resource Information (HRIS) portal where the grievances of employees are addressed.",
+      "duration": "Aug 2019 - Oct 2020 · 1 yr 3 mos",
+      "start_date": {
+        "year": 2019,
+        "month": "Aug"
+      },
+      "end_date": {
+        "year": 2020,
+        "month": "Oct"
+      },
+      "is_current": false,
+      "company_linkedin_url": "https://www.linkedin.com/company/1353/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQGsGR9p4ikS5w/company-logo_400_400/company-logo_400_400/0/1708946550425/tata_consultancy_services_logo?e=1767225600&v=beta&t=bYJtayMALnqtRCAS5XEvPYiV8mLE11J1NovwbnXigm4",
+      "employment_type": "Full-time",
+      "company_id": "1353"
+    },
+    {
+      "title": "Intern",
+      "company": "Defence Research and Development Organisation (DRDO)",
+      "location": "Hyderabad, Telangana, India",
+      "description": "RF Transceiver Subsystem simulation and Circuit Design,\nCharacterization for development of Radio Altimeter ( a device used to track the height of missile during its flight) system for missiles.",
+      "duration": "Dec 2018 - May 2019 · 6 mos",
+      "start_date": {
+        "year": 2018,
+        "month": "Dec"
+      },
+      "end_date": {
+        "year": 2019,
+        "month": "May"
+      },
+      "is_current": false,
+      "company_linkedin_url": "https://www.linkedin.com/company/14405503/",
+      "company_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQEKixvpP6uLPA/company-logo_400_400/company-logo_400_400/0/1631405104190/defence_research_and_development_organisation_drdo_logo?e=1767225600&v=beta&t=WgkCUp-QX34Dm0yr4N0Yd8bpJiBp6PzLoRawptRaAWI",
+      "employment_type": "Internship",
+      "company_id": "14405503"
+    }
+  ],
+  "education": [
+    {
+      "school": "University Business School, Panjab University",
+      "degree": "Master of Business Administration - MBA, Human Resources ",
+      "degree_name": "Master of Business Administration - MBA",
+      "field_of_study": "Human Resources",
+      "duration": "2020 - 2022",
+      "school_linkedin_url": "https://www.linkedin.com/company/13334359/",
+      "activities": "consulting club, Alumni Relations Cell, Environment Cell",
+      "school_logo_url": "https://media.licdn.com/dms/image/v2/C560BAQFVuRLPd4CFMQ/company-logo_400_400/company-logo_400_400/0/1631317535188?e=1767225600&v=beta&t=kN2eSuWKUQKRCvfYtCKwVghRx_IA02nb2jhs0RLk0z4",
+      "start_date": {
+        "year": 2020
+      },
+      "end_date": {
+        "year": 2022
+      },
+      "school_id": "13334359"
+    },
+    {
+      "school": "IIIT-Naya Raipur",
+      "degree": "Bachelor of Technology - BTech, Electronics and Communications Engineering",
+      "degree_name": "Bachelor of Technology - BTech",
+      "field_of_study": "Electronics and Communications Engineering",
+      "duration": "2015 - 2019",
+      "school_linkedin_url": "https://www.linkedin.com/company/13267953/",
+      "activities": "Electronics Club, Football team Captain",
+      "school_logo_url": "https://media.licdn.com/dms/image/v2/C4E0BAQGVjqELYAROQA/company-logo_400_400/company-logo_400_400/0/1631329668653?e=1767225600&v=beta&t=9IAQ1B-I3ceDNaXeBTmF05Uzr06xMiuOYiNd18B0E8Y",
+      "start_date": {
+        "year": 2015
+      },
+      "end_date": {
+        "year": 2019
+      },
+      "school_id": "13267953"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "ApHusys HRIS certified Professional ",
+      "issuer": "Husys - A People2.0 Company",
+      "issued_date": "Issued Nov 2020"
+    },
+    {
+      "name": "Business Analytics and Digital Marketing",
+      "issuer": "Indian School of Business",
+      "issued_date": "Issued Nov 2020"
+    }
+  ],
+  "featured": [
+    {
+      "type": "post",
+      "description": "Happy to share that I have started a new position at ABC Consultants as a Senior Consultant in the Aerospace and Defence vertical. \nLooking forward for a great learning experience!\n\nThanks to ILINA Chakravarty Pallavi Mohapatra Amol Gangaramany Murali Mohan for providing me this opportunity.",
+      "url": "https://www.linkedin.com/feed/update/urn:li:activity:7391170884704718849?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A7391170884704718849%29",
+      "social_counts": {
+        "likes": 116,
+        "comments": 62,
+        "reaction_counts": [
+          {
+            "type": "like",
+            "count": 112
+          },
+          {
+            "type": "empathy",
+            "count": 2
+          },
+          {
+            "type": "praise",
+            "count": 1
+          },
+          {
+            "type": "appreciation",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ]
+}]

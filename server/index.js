@@ -13,6 +13,7 @@ import portalRoutes from "./routes/portal.js";
 import alumniRoute from "./routes/alumni.js";
 import clerkWebhooks from "./routes/clerkWebhooks.js";
 import scrapingRoutes from './routes/scraping.js';
+import apifyScrapingRoutes from './routes/apifyscraping.js';
 import { seedInitialDomain } from "./utils/domainValidator.js";
 
 
@@ -101,6 +102,7 @@ export function createServer() {
 
   // Scraping routes
   app.use('/api/scrape', scrapingRoutes);
+  app.use('/api/apify-scrape', apifyScrapingRoutes);
 
   // Job listings (Prisma/SQLite)
   app.use('/api/job-listings', jobListingsRouter);

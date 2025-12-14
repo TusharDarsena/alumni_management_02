@@ -9,16 +9,17 @@ import { useScraping, ScrapeProfile } from "@/context/ScrapingContext";
 
 export default function ImportUpload() {
   const { isProcessing, progress, logs, failedQueue, startScraping } = useScraping();
-  
+
   // Changed state to store full profile objects, not just names
   const [pendingProfiles, setPendingProfiles] = useState<ScrapeProfile[]>([]);
   const [selectedBatch, setSelectedBatch] = useState("2021-2025");
+  const [concurrency, setConcurrency] = useState(3);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const batches = [
-    "2016-2020", "2017-2021", "2018-2022", "2019-2023", 
+    "2015-2019", "2016-2020", "2017-2021", "2018-2022", "2019-2023",
     "2020-2024", "2021-2025", "2022-2026", "2023-2027", "2024-2028"
   ];
 
@@ -32,29 +33,41 @@ export default function ImportUpload() {
       const sheetName = workbook.SheetNames[0];
       const json = xlsx.utils.sheet_to_json<any>(workbook.Sheets[sheetName]);
 
+      // Helper: Validate LinkedIn URL (must contain "linkedin" and "https")
+      const isValidLinkedInUrl = (url: string): boolean => {
+        if (!url || typeof url !== 'string') return false;
+        const lowerUrl = url.toLowerCase();
+        return lowerUrl.includes("linkedin") && lowerUrl.includes("https");
+      };
+
       // --- IMPROVED PARSING LOGIC ---
       const parsedProfiles: ScrapeProfile[] = json.map((row) => {
-          const keys = Object.keys(row);
-          
-          // 1. Find Name Column (Look for 'Name', 'Person Info', 'Student Name')
-          const nameKey = keys.find(k => {
-             const clean = k.trim().toLowerCase();
-             return clean === "name" || clean === "person info" || clean === "student name" || clean === "candidate name";
-          });
+        const keys = Object.keys(row);
 
-          // 2. Find URL Column (Look for 'LinkedIn URL', 'URL', 'Link')
-          const urlKey = keys.find(k => {
-             const clean = k.trim().toLowerCase();
-             return clean.includes("linkedin") || clean === "url" || clean === "profile link";
-          });
+        // 1. Find Name Column (Look for 'Name', 'Person Info', 'Student Name')
+        const nameKey = keys.find(k => {
+          const clean = k.trim().toLowerCase();
+          return clean === "name" || clean === "person info" || clean === "student name" || clean === "candidate name";
+        });
 
-          if (!nameKey || !row[nameKey]) return null;
+        // 2. Find URL Column (Look for 'LinkedIn URL', 'URL', 'Link') - now includes "link"
+        const urlKey = keys.find(k => {
+          const clean = k.trim().toLowerCase();
+          return clean.includes("linkedin") || clean === "url" || clean === "link" || clean === "profile link";
+        });
 
-          return {
-              name: row[nameKey],
-              batch: selectedBatch, // Will be updated on confirm
-              url: urlKey ? row[urlKey] : undefined
-          } as ScrapeProfile;
+        if (!nameKey || !row[nameKey]) return null;
+
+        // Get URL value and validate it
+        const rawUrl = urlKey ? row[urlKey] : undefined;
+        // If URL is invalid, set to undefined so Airtop search will be used
+        const validatedUrl = (rawUrl && isValidLinkedInUrl(rawUrl)) ? rawUrl.trim() : undefined;
+
+        return {
+          name: row[nameKey],
+          batch: selectedBatch, // Will be updated on confirm
+          url: validatedUrl
+        } as ScrapeProfile;
       }).filter((p): p is ScrapeProfile => p !== null);
 
       if (parsedProfiles.length === 0) {
@@ -73,18 +86,18 @@ export default function ImportUpload() {
   const handleStartConfirm = () => {
     // Update the batch for all profiles before sending
     const finalProfiles = pendingProfiles.map(p => ({
-        ...p,
-        batch: selectedBatch
+      ...p,
+      batch: selectedBatch
     }));
 
-    startScraping(finalProfiles, false);
+    startScraping(finalProfiles, false, concurrency);
     setShowConfirmModal(false);
     setPendingProfiles([]);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleRetryFailed = () => {
-    startScraping(failedQueue, true);
+    startScraping(failedQueue, true, concurrency);
   };
 
   const percentage = progress.total > 0 ? Math.round((progress.processed / progress.total) * 100) : 0;
@@ -101,14 +114,23 @@ export default function ImportUpload() {
                 Upload Excel. Supported columns: <strong>"Person Info"</strong> (Name) and <strong>"LinkedIn URL"</strong>.
               </p>
             </div>
-            
+
             <div className="flex gap-4">
-              <select 
+              <select
                 value={selectedBatch}
                 onChange={(e) => setSelectedBatch(e.target.value)}
                 className="h-10 px-3 rounded-md border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {batches.map(b => <option key={b} value={b}>{b}</option>)}
+              </select>
+
+              <select
+                value={concurrency}
+                onChange={(e) => setConcurrency(parseInt(e.target.value))}
+                className="h-10 w-20 px-2 rounded-md border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                title="Concurrency (1-10)"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => <option key={n} value={n}>{n}x</option>)}
               </select>
 
               <Input ref={fileInputRef} type="file" accept=".xlsx, .xls" onChange={handleFileSelect} disabled={isProcessing} className="flex-1" />
@@ -122,20 +144,25 @@ export default function ImportUpload() {
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-lg shadow-xl w-96 space-y-4 animate-in fade-in zoom-in">
-             <h3 className="font-bold text-lg text-blue-600">Confirm Bulk Scrape</h3>
-             <div className="space-y-1 text-sm text-gray-600">
-                <p>Found <strong>{pendingProfiles.length}</strong> profiles.</p>
-                {directUrlCount > 0 && (
-                    <p className="text-green-600 font-medium">
-                        ✨ {directUrlCount} contain direct LinkedIn URLs (Skipping Search).
-                    </p>
-                )}
-                <p>Applying Batch: <strong>{selectedBatch}</strong></p>
-             </div>
-             <div className="flex justify-end gap-3">
-                <Button variant="outline" onClick={() => setShowConfirmModal(false)}>Cancel</Button>
-                <Button onClick={handleStartConfirm}><Play className="h-4 w-4 mr-2" /> Start</Button>
-             </div>
+            <h3 className="font-bold text-lg text-blue-600">Confirm Bulk Scrape</h3>
+            <div className="space-y-1 text-sm text-gray-600">
+              <p>Found <strong>{pendingProfiles.length}</strong> profiles.</p>
+              {directUrlCount > 0 && (
+                <p className="text-green-600 font-medium">
+                  ✨ {directUrlCount} contain direct LinkedIn URLs (Skipping Search).
+                </p>
+              )}
+              {pendingProfiles.length - directUrlCount > 0 && (
+                <p className="text-amber-600 font-medium">
+                  🔍 {pendingProfiles.length - directUrlCount} will use Airtop search (no/invalid URL).
+                </p>
+              )}
+              <p>Applying Batch: <strong>{selectedBatch}</strong></p>
+            </div>
+            <div className="flex justify-end gap-3">
+              <Button variant="outline" onClick={() => setShowConfirmModal(false)}>Cancel</Button>
+              <Button onClick={handleStartConfirm}><Play className="h-4 w-4 mr-2" /> Start</Button>
+            </div>
           </div>
         </div>
       )}
@@ -146,7 +173,7 @@ export default function ImportUpload() {
           <CardContent className="pt-6 flex justify-between items-center">
             <div>
               <h4 className="font-bold text-amber-800 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5" /> 
+                <AlertTriangle className="h-5 w-5" />
                 {failedQueue.length} Profiles Failed
               </h4>
               <p className="text-sm text-amber-700 mt-1">Retry using BrightData Fallback?</p>
@@ -165,7 +192,7 @@ export default function ImportUpload() {
             <div className="flex justify-between items-end">
               <div>
                 <h4 className="font-bold text-gray-700 flex items-center gap-2">
-                  {isProcessing ? <Loader2 className="animate-spin text-blue-500" /> : <CheckCircle2 className="text-green-500" />} 
+                  {isProcessing ? <Loader2 className="animate-spin text-blue-500" /> : <CheckCircle2 className="text-green-500" />}
                   {isProcessing ? "Scraping..." : "Done"}
                 </h4>
                 <p className="text-sm text-gray-500 mt-1">
